@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^barcamp.png$ logo-colors.php
+#RewriteRule ^barcamp.png$ logo-colors.php
