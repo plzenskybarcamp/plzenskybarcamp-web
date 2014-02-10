@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^logo/?$ https://drive.google.com/folderview?id=0B7trDZc0CuxXWmxfUy13MV9Ydk0&usp=sharing [R=301,L]
