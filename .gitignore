@@ -1,0 +1,9 @@
+plzenskybarcamp.cz/log/*
+plzenskybarcamp.cz/temp/*
+plzenskybarcamp.cz/vendor/*
+plzenskybarcamp.cz/!vendor/others
+
+.DS_Store
+!.gitignore
+!.htaccess
+plzenskybarcamp.cz/app/config/config.local.neon
