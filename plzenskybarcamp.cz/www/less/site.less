@@ -1,0 +1,135 @@
+// SITE
+
+body,
+html {
+	padding: 0;
+	margin: 0;
+}
+
+.inner {
+	width: 900px;
+	margin: auto;
+	//background: orange;
+}
+
+.main-header {
+	display: block;
+	width: 100%;
+	height: 616px;
+	margin-top: -16px;
+	background: url(../images/barcamp.jpg) no-repeat 0 0;
+	.background-size(cover);
+
+	.inner.information {
+		position: relative;
+		top: 214px;
+		text-align: center;
+
+		.logo {
+			display: inline-block;
+			margin: auto;
+		}
+
+		h1 {
+			visibility: hidden;
+			height: 0em;
+			font-size: 0em;
+			line-height: 0em;
+		}
+
+		time {
+			display: inline-block;
+			margin-top: 60px;
+			font-size: 2.8em;
+			.boldOpen();
+		}
+
+		.venue {
+			color: @grayText;
+			font-size: 1.5em;
+			font-family: "open_sanslight";
+		}
+
+		.hashtag {
+			font-size: 2em;
+			font-family: "open_sanslight";
+		}
+	}
+}
+
+.main-navigation {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 110px;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-bottom: 1px solid rgba(255, 255, 255, .12);
+
+	.inner {
+		//background: orange;
+		position: relative;
+		top: 30px;
+	}
+	
+	.navigation,
+	.info-navigation {
+		display: inline-block;
+		overflow: hidden;
+		width: 70%;
+		padding: 0;
+		//background: red;
+	}
+	.info-navigation {
+		width: 29%;
+		text-align: right;
+
+		.language {
+			float: none;
+		}
+	}
+	
+	li {
+		float: left;
+		padding-right: 25px;
+		list-style: none;
+		text-transform: uppercase;
+
+		a {
+			overflow: hidden;
+			padding: 0 4px;
+			height: 1.2em;
+			position: relative;
+			display: inline-block;
+			outline: none;
+			font-size: 1.1em;
+			text-decoration: none;
+
+			span {
+				color: @grayText;
+				position: relative;
+				display: inline-block;
+				.transition(transform 0.3s);
+			}
+			span:before {
+				position: absolute;
+				top: 100%;
+				content: attr(data-hover);
+				.boldOpen();
+				.transform(translate3d(0,0,0));
+			}
+
+			&:hover span,
+			&:focus span {
+				color: @white;
+				.transform(translateY(-100%));
+			}
+		}
+	}
+	li.active a span {
+		color: @white;
+		.transform(translateY(-100%));
+	}
+}
+
