@@ -453,7 +453,7 @@ html {
   width: 100%;
   height: 616px;
   margin-top: -16px;
-  background: url(../images/barcamp.jpg) no-repeat 0 0;
+  background: url(../images/bg-header.jpg) no-repeat 0 0;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -570,4 +570,219 @@ html {
   -o-transform: translateY(-100%);
   -ms-transform: translateY(-100%);
   transform: translateY(-100%);
+}
+.main-footer .action-panel {
+  display: block;
+  width: 100%;
+  height: 328px;
+  background: url(../images/bg-footer.jpg) no-repeat 0 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  position: relative;
+}
+.main-footer .action-panel a {
+  overflow: hidden;
+  display: inline-block;
+  width: 380px;
+  height: 95px;
+  position: absolute;
+  left: 50%;
+  margin-left: -254px;
+  top: 50%;
+  margin-top: -49.5px;
+  outline: none;
+  font-size: 2em;
+  line-height: 95px;
+  text-decoration: none;
+  border: 4px solid #ffffff;
+  font-family: "open_sanslight";
+  padding: 0 60px;
+}
+.main-footer .action-panel a span {
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  -o-transition: -o-transform 0.5s;
+  transition: -webkit-transform 0.5s,-moz-transform 0.5s,-o-transform 0.5s,transform 0.5s;
+  -webkit-transition-timing-function: initial;
+  -moz-transition-timing-function: initial;
+  -o-transition-timing-function: initial;
+  transition-timing-function: initial;
+}
+.main-footer .action-panel a span strong {
+  font-weight: normal;
+  font-family: "open_sanssemibold";
+}
+.main-footer .action-panel a span:before {
+  position: absolute;
+  top: 100%;
+  font-size: .87em;
+  content: attr(data-hover);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.main-footer .action-panel a:hover span,
+.main-footer .action-panel a:focus span {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.main-footer .social-media {
+  overflow: hidden;
+}
+.main-footer .social-media ul {
+  padding: 0;
+  margin: 0;
+}
+.main-footer .social-media li {
+  display: block;
+  float: left;
+  width: 20%;
+  height: 150px;
+  list-style: none;
+}
+.main-footer .social-media li a {
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  text-decoration: none;
+  color: #ffffff;
+  line-height: 150px;
+  text-align: center;
+}
+.main-footer .social-media li a span {
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.45s;
+  -moz-transition: -moz-transform 0.45s;
+  -o-transition: -o-transform 0.45s;
+  transition: -webkit-transform 0.45s,-moz-transform 0.45s,-o-transform 0.45s,transform 0.45s;
+  -webkit-transition-timing-function: initial;
+  -moz-transition-timing-function: initial;
+  -o-transition-timing-function: initial;
+  transition-timing-function: initial;
+}
+.main-footer .social-media li a span:before {
+  position: absolute;
+  top: 100%;
+  font-size: 1.5em;
+  content: attr(data-hover);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: "open_sanssemibold";
+}
+.main-footer .social-media li a:hover span,
+.main-footer .social-media li a:focus span {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.main-footer .social-media li a i {
+  display: inline-block;
+  position: relative;
+  background: url(../images/soc-media-icons.png) no-repeat 0 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.main-footer .social-media .tw {
+  background-color: #63cdf1;
+}
+.main-footer .social-media .tw i {
+  width: 46px;
+  height: 37px;
+  top: 10px;
+}
+.main-footer .social-media .tw span:before {
+  left: -23px;
+}
+.main-footer .social-media .fb {
+  background-color: #507cbe;
+}
+.main-footer .social-media .fb i {
+  width: 18px;
+  height: 38px;
+  top: 10px;
+  background-position: -13px -37px;
+}
+.main-footer .social-media .fb span:before {
+  left: -47px;
+}
+.main-footer .social-media .gplus {
+  background-color: #4d4f54;
+}
+.main-footer .social-media .gplus i {
+  width: 45px;
+  height: 38px;
+  top: 10px;
+  background-position: 0 -75px;
+}
+.main-footer .social-media .gplus span:before {
+  left: -27px;
+}
+.main-footer .social-media .insta {
+  background-color: #c7c5b3;
+}
+.main-footer .social-media .insta i {
+  width: 40px;
+  height: 38px;
+  top: 10px;
+  background-position: -3px -113px;
+}
+.main-footer .social-media .insta span:before {
+  left: -42px;
+}
+.main-footer .social-media .yt {
+  background-color: #f16261;
+}
+.main-footer .social-media .yt i {
+  width: 32px;
+  height: 38px;
+  top: 10px;
+  background-position: -7px -151px;
+}
+.main-footer .social-media .yt span:before {
+  left: -30px;
+}
+.main-footer .main-navigation {
+  position: relative;
+  height: 150px;
+  background-color: #0f0f0f;
+}
+.main-footer .main-navigation .inner {
+  text-align: right;
+  position: relative;
+  top: 66px;
+}
+.main-footer .main-navigation ul {
+  width: 28%;
+  padding: 0;
+  margin: 0;
+}
+.main-footer .main-navigation ul li:last-child {
+  padding-right: 0;
+}
+.main-footer .main-navigation .info-navigation {
+  width: 71%;
+  text-align: left;
+}
+.main-footer .main-navigation .info-navigation p {
+  margin: 3px 0;
 }

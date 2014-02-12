@@ -17,7 +17,7 @@ html {
 	width: 100%;
 	height: 616px;
 	margin-top: -16px;
-	background: url(../images/barcamp.jpg) no-repeat 0 0;
+	background: url(../images/bg-header.jpg) no-repeat 0 0;
 	.background-size(cover);
 
 	.inner.information {
@@ -130,6 +130,221 @@ html {
 	li.active a span {
 		color: @white;
 		.transform(translateY(-100%));
+	}
+}
+
+.main-footer {
+
+	.action-panel {
+		display: block;
+		width: 100%;
+		height: 328px;
+		background: url(../images/bg-footer.jpg) no-repeat 0 0;
+		.background-size(cover);
+		position: relative;
+
+		a {
+			overflow: hidden;
+			display: inline-block;
+			width: 380px;
+			height: 95px;
+			position: absolute;
+			left: 50%;
+			margin-left: -254px;
+			top: 50%;
+			margin-top: -49.5px;
+			outline: none;
+			font-size: 2em;
+			line-height: 95px;
+			text-decoration: none;
+			border: 4px solid @white;
+			font-family: "open_sanslight";
+			padding: 0 60px;
+
+			span {
+				color: @white;
+				position: relative;
+				display: inline-block;
+				.transition(transform 0.5s);
+				.transition-timing-function(initial);
+
+				strong {
+					.boldOpen();
+				}
+			}
+			span:before {
+				position: absolute;
+				top: 100%;
+				//color: @black;
+				font-size: .87em;
+				content: attr(data-hover);
+				//.boldOpen();
+				.transform(translate3d(0,0,0));
+			}
+
+			&:hover span,
+			&:focus span {
+				.transform(translateY(-100%));
+			}
+		}
+	}
+
+	.social-media {
+		overflow: hidden;
+
+		ul {
+			padding: 0;
+			margin: 0;
+		}
+
+		li {
+			display: block;
+			float: left;
+			width: 20%;
+			height: 150px;
+			list-style: none;
+
+			a {
+				overflow: hidden;
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				outline: none;
+				text-decoration: none;
+				color: @white;
+				line-height: 150px;
+				text-align: center;
+
+				span {
+					color: @white;
+					position: relative;
+					display: inline-block;
+					.transition(transform 0.45s);
+					.transition-timing-function(initial);
+				}
+				span:before {
+					position: absolute;
+					top: 100%;
+					font-size: 1.5em;
+					content: attr(data-hover);
+					.transform(translate3d(0,0,0));	
+					text-transform: uppercase;
+					.boldOpen();			}
+
+				&:hover span,
+				&:focus span {
+					.transform(translateY(-100%));
+				}
+
+				i {
+					display: inline-block;
+					position: relative;
+					background: url(../images/soc-media-icons.png) no-repeat 0 0;
+					text-indent: -9999px;
+					overflow: hidden;
+				}
+			}
+		}
+		.tw {
+			background-color: @twitter;
+
+			i {
+				width: 46px;
+				height: 37px;
+				top: 10px;
+			}
+
+			span:before {
+				left: -23px;
+			}
+		}
+		.fb {
+			background-color: @facebook;
+
+			i {
+				width: 18px;
+				height: 38px;
+				top: 10px;
+				background-position: -13px -37px;
+			}
+
+			span:before {
+				left: -47px;
+			}
+		}
+		.gplus {
+			background-color: @gplus;
+
+			i {
+				width: 45px;
+				height: 38px;
+				top: 10px;
+				background-position: 0 -75px;
+			}
+
+			span:before {
+				left: -27px;
+			}	
+		}
+		.insta {
+			background-color: @instagram;
+
+			i {
+				width: 40px;
+				height: 38px;
+				top: 10px;
+				background-position: -3px -113px;
+			}
+
+			span:before {
+				left: -42px;
+			}	
+		}
+		.yt {
+			background-color: @youtube;
+
+			i {
+				width: 32px;
+				height: 38px;
+				top: 10px;
+				background-position: -7px -151px;
+			}
+
+			span:before {
+				left: -30px;
+			}	
+		}
+	}
+
+	.main-navigation {
+		position: relative;
+		height: 150px;
+		background-color: #0f0f0f;
+
+		.inner {
+			text-align: right;
+			position: relative;
+			top: 66px;
+		}
+
+		ul {
+			width: 28%;
+			padding: 0;
+			margin: 0;
+
+			li:last-child {
+				padding-right: 0;
+			}
+		}
+
+		.info-navigation {
+			width: 71%;
+			text-align: left;
+
+			p {
+				margin: 3px 0;
+			}
+		}
 	}
 }
 
