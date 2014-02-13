@@ -43,8 +43,10 @@
 			</span>
 			<h1>{block h1}Plzeňský Barcamp 2014{/block}</h1>
 			<time datetime="2014-04-12">12. dubna 2014</time>
-			<p class="venue"><a href="{link Homepage:default}#kdepa-to-bude">Vědeckotechnický park Plzeň</a></p>
-			<p class="hashtag"><a href="https://twitter.com/search?q=%23BarcampCZ" target="_blank">#BarcampCZ</a></p>
+			{ifCurrent Homepage:default}
+				<p class="venue"><a href="{link Homepage:default}#kdepa-to-bude">Vědeckotechnický park Plzeň</a></p>
+				<p class="hashtag"><a href="https://twitter.com/search?q=%23BarcampCZ" target="_blank">#BarcampCZ</a></p>
+			{/ifCurrent}
 		</div>
 	</header>
 
