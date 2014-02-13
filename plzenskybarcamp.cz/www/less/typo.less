@@ -7,6 +7,76 @@ body {
 	font-weight: normal;
 	font-style: normal;
 }
+a,
+a:hover,
+a:active,
+a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+.pilsen {
+	display: inline;
+	padding-bottom: 2px;
+	border-bottom: 2px dotted @green;
+	cursor: help;
+}
+
+.main-content {
+	.center {
+		text-align: center;
+	}
+
+	h2, h3, h4, h5, h6 {
+		color: #676767;
+		.boldOpen();
+		font-size: 2em;
+		line-height: 2em;
+		padding: 20px 0;
+		margin-bottom: -20px;
+	}
+	h2 {
+		color: @green;
+	}
+	h3 {
+		font-size: 1.5em;
+		line-height: 1.5em;
+		padding: 0;
+		margin-bottom: -20px;
+	}
+	p {
+		font-size: 1.11em;
+		line-height: 1.9em;
+		padding: 15px 0;
+	}
+	ul,
+	ol {
+		padding: 0 0 0 20px;
+		margin: 30px 0;
+
+		li {
+			padding: 10px 0;
+			color: #666;
+
+			span {
+				color: #000;
+			}
+		}
+
+	}
+	strong {
+		.boldOpen();
+	}
+	a {
+		color: #414141;
+		.boldOpen();
+		text-decoration: none;
+		border-bottom: 1px solid #e5e5e5;
+	}
+}
+
+
+
 
 .dark {
 	* {

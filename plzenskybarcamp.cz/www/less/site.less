@@ -28,6 +28,10 @@ html {
 		.logo {
 			display: inline-block;
 			margin: auto;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			margin-left: -268.5px;
 		}
 
 		h1 {
@@ -39,20 +43,28 @@ html {
 
 		time {
 			display: inline-block;
-			margin-top: 60px;
+			margin-top: 176px;
 			font-size: 2.8em;
 			.boldOpen();
 		}
 
-		.venue {
+		.venue a {
 			color: @grayText;
 			font-size: 1.5em;
 			font-family: "open_sanslight";
 		}
 
-		.hashtag {
+		.hashtag a {
 			font-size: 2em;
 			font-family: "open_sanslight";
+		}
+	}
+
+	.info-navigation li {
+		float: none;
+
+		a:hover:after {
+			display: none;
 		}
 	}
 }
@@ -68,7 +80,6 @@ html {
 	border-bottom: 1px solid rgba(255, 255, 255, .12);
 
 	.inner {
-		//background: orange;
 		position: relative;
 		top: 30px;
 	}
@@ -79,7 +90,6 @@ html {
 		overflow: hidden;
 		width: 70%;
 		padding: 0;
-		//background: red;
 	}
 	.info-navigation {
 		width: 29%;
@@ -97,39 +107,58 @@ html {
 		text-transform: uppercase;
 
 		a {
-			overflow: hidden;
-			padding: 0 4px;
-			height: 1.2em;
 			position: relative;
 			display: inline-block;
 			outline: none;
-			font-size: 1.1em;
+			margin: 0;
+			padding: 0;
+			margin-bottom: 10px;
+			color: @grayText;
 			text-decoration: none;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			text-shadow: 0 0 1px rgba(255,255,255,0.3);
+			font-size: 1.10em;
 
-			span {
-				color: @grayText;
-				position: relative;
-				display: inline-block;
-				.transition(transform 0.3s);
-			}
-			span:before {
-				position: absolute;
-				top: 100%;
-				content: attr(data-hover);
-				.boldOpen();
-				.transform(translate3d(0,0,0));
-			}
-
-			&:hover span,
-			&:focus span {
+			&:hover {
+				outline: none;
 				color: @white;
-				.transform(translateY(-100%));
+			}
+
+			&:hover:after {
+				.opacity(1);
+				.transform(translateY(2px));
 			}
 		}
+		a:after {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background: @grayText;
+			content: '';
+			.opacity(0);
+			.transition(opacity 0.3s, transform 0.3s);
+			.transform(translateY(10px));
+		}
 	}
-	li.active a span {
+	li.active a {
+		outline: none;
 		color: @white;
-		.transform(translateY(-100%));
+	}
+	li.active a:after {
+		.opacity(1);
+		.transform(translateY(2px));
+	}
+}
+
+.main-content {
+	padding-bottom: 30px;
+
+	.inner {
+		width: 620px;
+		padding: 0 140px;
 	}
 }
 
@@ -324,11 +353,11 @@ html {
 		.inner {
 			text-align: right;
 			position: relative;
-			top: 66px;
+			top: 58px;
 		}
 
 		ul {
-			width: 28%;
+			width: 20%;
 			padding: 0;
 			margin: 0;
 
@@ -338,11 +367,11 @@ html {
 		}
 
 		.info-navigation {
-			width: 71%;
+			width: 79%;
 			text-align: left;
 
 			p {
-				margin: 3px 0;
+				margin: 9px 0;
 			}
 		}
 	}
