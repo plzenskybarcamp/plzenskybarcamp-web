@@ -36,6 +36,7 @@ a:focus {
 		margin-bottom: -20px;
 	}
 	h2 {
+        text-align: center;
 		color: @green;
 	}
 	h3 {
@@ -49,6 +50,27 @@ a:focus {
 		line-height: 1.9em;
 		padding: 15px 0;
 	}
+    p.partners {
+       // margin-bottom: 50px;
+        text-align: center;
+
+        img {
+            display: inline-block;
+        }
+
+        a {
+            text-decoration: none;
+            outline: none;
+            border-bottom: 0;
+            padding: 0;
+            margin: 0;
+        }
+    }
+    p.partners.small {
+        img {
+            margin: 0 17px;
+        }
+    }
 	ul,
 	ol {
 		padding: 0 0 0 20px;
@@ -62,7 +84,6 @@ a:focus {
 				color: #000;
 			}
 		}
-
 	}
 	strong {
 		.boldOpen();

@@ -28,7 +28,7 @@
 		<nav class="main-navigation">
 			<div class="inner">
 				<ul class="navigation">
-					<li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a href="{link Homepage:default}" data-hover="Úvod">Úvod</a></li>
+					<li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a class="home" href="{link Homepage:default}" data-hover="Úvod">Úvod</a></li>
 					<li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
 					<li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
 				</ul>
@@ -81,6 +81,7 @@
 	{block scripts}
 	<script src="{$basePath}/js/jquery.js"></script>
 	<script src="{$basePath}/js/jquery.tooltipster.min.js"></script>
+	<script src="{$basePath}/js/lightbox-2.6.min.js"></script>
 	<script src="{$basePath}/js/netteForms.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
 	<script src="{$basePath}/js/sm-scroll.js"></script>
