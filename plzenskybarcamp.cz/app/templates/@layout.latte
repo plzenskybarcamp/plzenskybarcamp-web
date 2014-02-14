@@ -16,6 +16,13 @@
 
 	<title>{block title|striptags}Plzeňský Barcamp{/block}</title>
 
+	<meta property="og:title" content="{include title|striptags}">
+	<meta property="og:site_name" content="Plzeňský Barcamp">
+	<meta property="og:url" content="{link //this}">
+	<meta property="og:description" content="{include metaDescription}">
+	<meta property="og:locale" content="cs_CZ">
+	<meta property="og:image" content="{$baseUri}/images/barcamp-og.jpg">
+
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
 	{block head}{/block}
