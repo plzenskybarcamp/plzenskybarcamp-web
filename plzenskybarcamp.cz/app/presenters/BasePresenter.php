@@ -12,4 +12,8 @@ use Nette,
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
+	public function beforeRender() {
+		$this->template->host = $this->context->httpRequest->url->host;
+	}
+
 }
