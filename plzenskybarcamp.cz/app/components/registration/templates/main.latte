@@ -1,5 +1,6 @@
 <style type="text/css">
 	.required { color: red; }
+	.form { display: none; }
 </style>
 
 <div>
@@ -17,10 +18,10 @@
 			<p>Kapacita je vycerpana</p>
 		{else}
 			{if !$user->isLoggedIn()}
-				<button class = "button">Chci se zucasnit take</button>
+				<button class = "registration-button">Chci se zucasnit take</button>
 				<div>prihlase pres socialni sit</div>
 			{elseif !$user->isRegistered()}
-				<button class = "button">Chci se zucasnit take</button>
+				<button class = "registration-button">Chci se zucasnit take</button>
 				<div class="form">{control registration}</div>
 			{else}
 				<p>Zucasnim se Barcampu</p>
@@ -43,13 +44,13 @@
 		<p>Kapacita je vycerpana</p>
 	{else}
 		{if !$user->isLoggedIn()}
-			<button class = "button">Chci se prednaset take</button>
+			<button class = "registration-button">Chci se prednaset take</button>
 			<div>prihlase pres socialni sit</div>
 		{elseif !$user->isRegistered()}
-			<button class = "button">Chci se prednaset take</button>
+			<button class = "registration-button">Chci se prednaset take</button>
 			<div class="form">{control registration}</div>
 		{elseif !$user->isSpeaker()}
-			<button class = "button">Chci se prednaset take</button>
+			<button class = "registration-button">Chci se prednaset take</button>
 			<div class="form">{control speakerRegisteration}</div>
 		{else}
 			<p>Mam vypsanou prednasku</p>

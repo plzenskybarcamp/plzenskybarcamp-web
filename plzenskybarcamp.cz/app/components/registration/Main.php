@@ -3,6 +3,7 @@
 namespace App\Components\Registration;
 
 use Nette\Application\UI\Control;
+use  Nette\Application\Responses\JsonResponse;
 
 class Main extends Control {
 
@@ -16,11 +17,15 @@ class Main extends Control {
 	}
 	
 	public function render() {
+		$this->createControlTemplate()->render();
+	}
+
+	private function createControlTemplate() {
 		$this->template->setFile( __DIR__ . '/templates/main.latte');
-		$this->template->user = new FakeUser(true, true, false);
+		$this->template->user = new FakeUser(true, false, false);
 		$this->template->canBeRegistered = self::MAX_CAPACITY - 0;
 		$this->template->isRegistrationOpen = true;
-		$this->template->render();
+		return $this->template;
 	}
 
 	public function createComponentRegisteredUsers( $name ) {
@@ -47,13 +52,28 @@ class Main extends Control {
 
 	private function compliteRegistration( $registration ) {
 		$presenter = $this->getPresenter();
-		$registration['form']->onSuccess[] =
-			function() use ( $presenter ) { $presenter->redirect( 'default' ); };
+		$main = $this;
+		if ( $presenter->isAjax() ) {
+			$registration['form']->onSuccess[] = function() use ( $presenter, $main ) {
+				$data = array( 'redirect' => $main->link( 'toJSON!' ) );
+				$presenter->sendResponse( new JsonResponse( $data ) );
+			};
+		} else {
+			$registration['form']->onSuccess[] =
+				function() use ( $presenter ) { $presenter->redirect( 'default' ); };
+		}
 
 		$registration;
 	}
 
 	public function redirectToHome() {
 		$this->getPresenter()->redirect( 'default' );
+	}
+
+	public function handletoJSON() {
+		if( $this->getPresenter()->isAjax() ) {
+			$data = array( 'html' => $this->createControlTemplate()->__toString() );
+			$this->getPresenter()->sendResponse( new JsonResponse( $data ) );
+		}
 	}
 }
