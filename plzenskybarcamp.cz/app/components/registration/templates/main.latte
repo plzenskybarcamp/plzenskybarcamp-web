@@ -12,15 +12,15 @@
 {else}
 	<div id="user-regestration">
 
-		{control registeredUsers}
+		{control registeredUsers 'osobnosti se zucastni'}
 		{if !$user->isRegistered() && !$canBeRegistered}
 			<p>Kapacita je vycerpana</p>
 		{else}
 			{if !$user->isLoggedIn()}
-				<button>Chci se zucasnit take</button>
+				<button class = "button">Chci se zucasnit take</button>
 				<div>prihlase pres socialni sit</div>
 			{elseif !$user->isRegistered()}
-				<button>Chci se zucasnit take</button>
+				<button class = "button">Chci se zucasnit take</button>
 				<div class="form">{control registration}</div>
 			{else}
 				<p>Zucasnim se Barcampu</p>
@@ -38,18 +38,18 @@
 	<p>Registrace jiz brzy</p>
 {else}
 	<div id="speaker-regestration">
-	{control registeredSpeakers}
+	{control registeredSpeakers 'vypsanych prednasek'}
 	{if !$user->isRegistered() && !$canBeRegistered}
 		<p>Kapacita je vycerpana</p>
 	{else}
 		{if !$user->isLoggedIn()}
-			<button>Chci se prednaset take</button>
+			<button class = "button">Chci se prednaset take</button>
 			<div>prihlase pres socialni sit</div>
 		{elseif !$user->isRegistered()}
-			<button>Chci se prednaset take</button>
+			<button class = "button">Chci se prednaset take</button>
 			<div class="form">{control registration}</div>
 		{elseif !$user->isSpeaker()}
-			<button>Chci se prednaset take</button>
+			<button class = "button">Chci se prednaset take</button>
 			<div class="form">{control speakerRegisteration}</div>
 		{else}
 			<p>Mam vypsanou prednasku</p>

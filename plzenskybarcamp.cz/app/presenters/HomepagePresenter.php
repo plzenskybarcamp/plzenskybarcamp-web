@@ -13,13 +13,19 @@ use Nette,
 class HomepagePresenter extends BasePresenter
 {
 
+	private $registrationModel;
+
+	public function __construct( Model\Registration $registrationModel ) {
+		$this->registrationModel = $registrationModel;
+	}
+
 	public function renderDefault()
 	{
 
 	}
 
 	public function createComponentRegistration( $name ) {
-		return new Main( $this, $name );
+		return new Main( $this, $name, $this->registrationModel );
 	}
 
 }

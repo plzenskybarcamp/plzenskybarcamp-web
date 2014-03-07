@@ -5,6 +5,7 @@
 # http://nette.org/security-warning
 #
 parameters:
+	mongo: 'localhost:27017'
 
 
 php:
@@ -33,3 +34,4 @@ services:
 	- App\UserManager
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
+	registrationModel: App\Model\Registration(%mongo%)

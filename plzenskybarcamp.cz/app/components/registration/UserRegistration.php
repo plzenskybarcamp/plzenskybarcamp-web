@@ -9,6 +9,14 @@ class UserRegistration extends Control {
 
 	/** var Nette\Application\UI\Form **/
 	private $form;
+
+	/** App\Model\Registration **/
+	private $registrationModel;
+
+	public function __construct( $parent, $name, $registrationModel ) {
+		parent::__construct( $parent, $name );
+		$this->registrationModel = $registrationModel;
+	}
 	
 	public function render() {
 		$this->template->setFile( __DIR__ . '/templates/userRegistration.latte' );
@@ -31,7 +39,9 @@ class UserRegistration extends Control {
 		return $form;
 	}
 
-	public function processRegistration( From $form ) {
-		$values = $form->getValues();
+	public function processRegistration( Form $form ) {
+		$values = (array) $form->getValues();
+		$user = $this->getPresenter()->getUser();
+		$this->registrationModel->updateConferree( $user->getId(), $values );
 	}
 } 
