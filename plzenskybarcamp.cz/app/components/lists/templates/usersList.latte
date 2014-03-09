@@ -1,0 +1,13 @@
+<table id="talks-list" n:tag-if="!$isAjax" data-pages="{$pagesCount}">
+	<tr n:if="!$isAjax">
+		<th>Speaker</th>
+		<th>Title</th>
+		<th>description</th>
+	</tr>
+
+	<tr n:foreach="$talks as $talk">
+		<td>{$talk->name}</td>
+		<td>{$talk->talk->title}</td>
+		<td>{$talk->talk->description}</td>
+	</tr>
+</table>

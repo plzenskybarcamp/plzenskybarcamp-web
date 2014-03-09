@@ -56,7 +56,6 @@ class SpeakerRegistration extends Control {
 			$this->registrationModel->createTalk( $userId, $talk );
 		}
 		$this->registrationModel->updateConferree( $userId, $speaker );
-		// $this->getPresenter()->redirect( 'default' );
 	}
 
 	private function fetchSpeakerData( array $data ) {
