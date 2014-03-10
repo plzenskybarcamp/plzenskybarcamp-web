@@ -25,16 +25,8 @@ class SpeakerRegistration extends Control {
 
 	public function createComponentForm( $name ) {
 		$form = new Form( $this, $name );
-		$form->addText( 'title', 'Nazev prednasky' )
-			->addRule(Form::FILLED, 'Musi byt vyplneno');
-		$form->addTextArea( 'description', 'Popis prednasky' )
-			->addRule(Form::FILLED, 'Musi byt vyplneno');
-		$form->addTextArea( 'purpose', 'Komu je urceno?' )
-			->addRule(Form::FILLED, 'Musi byt vyplneno');
-
-		$form->addText( 'linked', 'linked in' );
-		$form->addText( 'web', 'Web' );
-		$form->addText( 'facebook', 'Facebook' );
+		$form = $this->addTalksFields( $form );
+		$form = $this->addUsersFields( $form );
 
 		$form->addSubmit( 'submit', 'Odeslat' );
 
@@ -45,7 +37,6 @@ class SpeakerRegistration extends Control {
 	public function processRegistration( Form $form ) {
 		$values = (array) $form->getValues();
 		$talk = $this->fetchTalkData( $values );
-
 		$speaker = $this->fetchSpeakerData( $values );
 		$user = $this->getPresenter()->getUser();
 		$userId = $user->getId();
@@ -56,6 +47,23 @@ class SpeakerRegistration extends Control {
 			$this->registrationModel->createTalk( $userId, $talk );
 		}
 		$this->registrationModel->updateConferree( $userId, $speaker );
+	}
+
+	public function addTalksFields( $container ) {
+		$container->addText( 'title', 'Nazev prednasky' )
+			->addRule(Form::FILLED, 'Musi byt vyplneno');
+		$container->addTextArea( 'description', 'Popis prednasky' )
+			->addRule(Form::FILLED, 'Musi byt vyplneno');
+		$container->addTextArea( 'purpose', 'Komu je urceno?' )
+			->addRule(Form::FILLED, 'Musi byt vyplneno');
+		return $container;
+	}
+
+	public function addUsersFields( $container ) {
+		$container->addText( 'linked', 'linked in' );
+		$container->addText( 'web', 'Web' );
+		$container->addText( 'facebook', 'Facebook' );
+		return $container;
 	}
 
 	private function fetchSpeakerData( array $data ) {

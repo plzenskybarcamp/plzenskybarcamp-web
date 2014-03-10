@@ -25,23 +25,27 @@ class UserRegistration extends Control {
 
 	public function createComponentForm( $name ) {
 		$form = new Form( $this, $name );
-		$form->addText( 'name', 'Jmeno' )
-			->addRule(Form::FILLED, 'Must byt vyplneno');
-		$form->addText( 'twitter', 'Twitter' );
-		$form->addText( 'email', 'E-mail')
-			->addRule(Form::FILLED, 'Must byt vyplneno');
-		$form->addTextArea( 'bio', 'Bio' )
-			->addRule(Form::FILLED, 'Must byt vyplneno');
+		$form = $this->addUsersFields( $form );
 		$form->addSubmit( 'submit', 'Odeslat' );
-
-
 		$form->onSubmit[] = array( $this, 'processRegistration' );
 		return $form;
+	}
+
+
+	public function addUsersFields( $container ) {
+		$container->addText( 'name', 'Jmeno' )
+			->addRule(Form::FILLED, 'Must byt vyplneno');
+		$container->addText( 'twitter', 'Twitter' );
+		$container->addText( 'email', 'E-mail')
+			->addRule(Form::FILLED, 'Must byt vyplneno');
+		$container->addTextArea( 'bio', 'Bio' )
+			->addRule(Form::FILLED, 'Must byt vyplneno');
+		return $container;
 	}
 
 	public function processRegistration( Form $form ) {
 		$values = (array) $form->getValues();
 		$user = $this->getPresenter()->getUser();
-		$this->registrationModel->updateConferree( $user->getId(), $values );
+		$this->registrationModel->updateConferree( $user->getId(), $values['user'] );
 	}
 } 

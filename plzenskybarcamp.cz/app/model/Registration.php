@@ -18,6 +18,11 @@ class Registration {
 		return $this->updateConferreeByCondition( array( 'user_id' => $userId ), $data );
 	}
 
+	public function findCoferree( $userId ) {
+		$data = $this->findCoferrees( array( 'user_id' => $userId ) );
+		return $data->getNext();
+	}
+
 	public function createTalk( $userId, array $data ) {
 		$data['speaker_id'] = $userId;
 		$data['talk_id'] = uniqid(); // may use talk ID as url key
@@ -28,12 +33,12 @@ class Registration {
 	public function updateTalk( $talkId, array $data ) {
 		$this->talkCollection->update( array( 'talk_id' => $talkId ),
 			array( '$set' => $data ), array( 'upsert' => true ) );
-		$talk = iterator_to_array( $this->findTalk( $talk ) );
+		$talk = $this->findTalk( $talkId );
 		$this->syncTalkWithSpeaker( $talk );
 	}
 
 	public function findTalk( $talkId ) {
-		return $this->talkCollection->find( array( 'talk_id' => $talkId ) );
+		return $this->talkCollection->find( array( 'talk_id' => $talkId ) )->getNext();
 	}
 
 	public function getSpeakers() {

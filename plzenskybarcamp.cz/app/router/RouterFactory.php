@@ -22,6 +22,8 @@ class RouterFactory
 		$router = new RouteList();
 		$router[] = new Route('partneri', 'Homepage:partners');
 		$router[] = new Route('kontakt', 'Homepage:contact');
+		$router[] = new Route('ja', 'UserDetail:default');
+		$router[] = new Route('edit', 'UserDetail:edit');
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
