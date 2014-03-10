@@ -33,6 +33,7 @@
 
 <body class="{block bodyClass}{/block}" itemscope itemtype="http://schema.org/Event">
 	<script> document.documentElement.className+=' js' </script>
+	<div id="fb-root"></div>
 
 	<header class="main-header dark">
 		<nav class="main-navigation">
@@ -44,6 +45,9 @@
 				</ul>
 				<ul class="info-navigation">
 					<li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
+					{if !$user->isLoggedIn()}<li><a href="{$fbLoginLink}" id="login-buton">Přihlásit</a></li>{/if}
+					{if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}
+
 				</ul>
 			</div>
 		</nav>
@@ -106,6 +110,14 @@
 
 		ga('create', 'UA-47473935-1', {$host});
 		ga('send', 'pageview');
+
+		(function(d){
+		var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		if (d.getElementById(id)) { return; }
+		js = d.createElement('script'); js.id = id; js.async = true;
+		js.src = "//connect.facebook.net/en_US/all.js";
+		ref.parentNode.insertBefore(js, ref);
+		}(document));
 	</script>
 	{/block}
 </body>

@@ -11,78 +11,48 @@ use Nette,
  */
 class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 {
-	const
-		TABLE_NAME = 'users',
-		COLUMN_ID = 'id',
-		COLUMN_NAME = 'username',
-		COLUMN_PASSWORD_HASH = 'password',
-		COLUMN_ROLE = 'role';
 
+	private $fb;
 
-	/** @var Nette\Database\Context */
-	private $database;
-
-
-	public function __construct(Nette\Database\Context $database)
+	public function __construct(\Facebook $fb)
 	{
-		$this->database = $database;
+		$this->fb = $fb;
 	}
 
 
-	/**
-	 * Performs an authentication.
-	 * @return Nette\Security\Identity
-	 * @throws Nette\Security\AuthenticationException
-	 */
 	public function authenticate(array $credentials)
 	{
-		list($username, $password) = $credentials;
-		$password = self::removeCapsLock($password);
-
-		$row = $this->database->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
-
-		if (!$row) {
-			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
-
-		} elseif (!Passwords::verify($password, $row[self::COLUMN_PASSWORD_HASH])) {
-			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
-
-		} elseif (Passwords::needsRehash($row[self::COLUMN_PASSWORD_HASH])) {
-			$row->update(array(
-				self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
-			));
+		list($platform) = $credentials;
+		if($platform == 'fb') {
+			$user_id = $this->fb->getUser();
+			if($user_id) {
+				$user_profile = $this->fb->api('/me','GET');
+				if( ! $user_profile) {
+					throw new Nette\Security\AuthenticationException('User info request failed');
+				}
+				$id = $user_profile['id'];
+				$name = $user_profile['name'];
+				$email = $user_profile['email'];
+			}
+			else {
+				throw new Nette\Security\AuthenticationException('No user identity');
+			}
+		}
+		else {
+			throw new Nette\Security\AuthenticationException('Unknown platform ' . $platform);
 		}
 
-		$arr = $row->toArray();
-		unset($arr[self::COLUMN_PASSWORD_HASH]);
-		return new Nette\Security\Identity($row[self::COLUMN_ID], $row[self::COLUMN_ROLE], $arr);
-	}
 
-
-	/**
-	 * Adds new user.
-	 * @param  string
-	 * @param  string
-	 * @return void
-	 */
-	public function add($username, $password)
-	{
-		$this->database->table(self::TABLE_NAME)->insert(array(
-			self::COLUMN_NAME => $username,
-			self::COLUMN_PASSWORD_HASH => Passwords::hash(self::removeCapsLock($password)),
-		));
-	}
-
-
-	/**
-	 * Fixes caps lock accidentally turned on.
-	 * @return string
-	 */
-	private static function removeCapsLock($password)
-	{
-		return $password === Strings::upper($password)
-			? Strings::lower($password)
-			: $password;
+		$profile = array(
+			'id' => $id,
+			'name' => $name,
+			'email' => $email,
+			'currentPlatform' => $platform,
+			'platforms' => array(
+				$platform => $user_profile,
+			)
+		);
+		return new Nette\Security\Identity($id, NULL, $profile);
 	}
 
 }

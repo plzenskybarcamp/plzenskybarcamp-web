@@ -6,6 +6,13 @@
 #
 parameters:
 	mongo: 'localhost:27017'
+	facebook:
+		app_config:
+			appId: '504432792996629'
+			secret: 'ed0af56bc4baabe2e821461e30e5435a'
+			fileUpload: false
+			allowSignedRequest: false
+
 
 
 php:
@@ -21,13 +28,6 @@ nette:
 
 	session:
 		expiration: 14 days
-
-	database:
-		dsn: 'mysql:host=127.0.0.1;dbname=test'
-		user:
-		password:
-		options:
-			lazy: yes
 
 
 services:

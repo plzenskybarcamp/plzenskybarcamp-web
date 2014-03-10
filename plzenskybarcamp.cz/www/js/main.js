@@ -42,3 +42,32 @@ $(document).ready(function() {
 	registerForm('#user-regestration', '#speaker-regestration');
 	registerAjaxRegistration($('#registration'));
 });
+
+// window.fbAsyncInit = function() {
+// 	FB.init({
+// 		appId: '504432792996629',
+// 		status: true,
+// 		cookie: true,
+// 		xfbml: true
+// 	});
+
+// 	FB.Event.subscribe('auth.authResponseChange', function(response) {
+// 		if (response.status === 'connected') {
+// 			console.log('Logged');
+// 		} else if (response.status === 'not_authorized') {
+// 			console.log('Not authorized');
+// 		} else {
+// 			console.log('Never logged');
+// 		}
+// 	});
+// }
+
+// function login() {
+// 	FB.login(function(response) {
+		
+// 	}, {scope: 'email'});
+// }
+
+// $(function(){$('#login-buton').click(function(){login();return false;});});
+
+
