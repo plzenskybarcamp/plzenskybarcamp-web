@@ -4,7 +4,7 @@
 	<tr n:foreach="$talks as $talk">
 		{var speaker = $talk['speaker']}
 
-		<td><img src="$talks['speaker']" title="{$speaker['name']}"/></td>
+		<td><img src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></td>
 		<td><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}">{$talk['title']}</a></td>
 		<td>{$talk['description']|truncate:30}</td>
 		<td><span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a></td>

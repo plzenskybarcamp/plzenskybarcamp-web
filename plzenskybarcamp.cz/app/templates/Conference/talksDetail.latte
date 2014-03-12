@@ -23,7 +23,7 @@
 
 		<div id="speaker-detail">
 			<h1>{$speaker['name']}</h1>
-			<img n:ifset="$speaker['thumbnail']" src="{$speaker['thumbnail']}" />
+			<img n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']}" />
 			<div>
 				<span n:ifset="$speaker['twitter']"><a href="http://twitter.com/{$speaker['twitter']}" target="_blank">TW</a></span>
 				<span n:ifset="$speaker['facebook']"><a href="{$speaker['facebook']}" target="_blank">FB</a></span>

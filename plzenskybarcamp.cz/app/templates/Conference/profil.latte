@@ -6,7 +6,7 @@
 <section class="main-content">
 	<div class="inner">
 		<h2>Ucastnik</h2>
-		<div><img src="{@$conferree['thumbnail']}" /></div>
+		<div><img src="{@$conferree['picture_url']}" /></div>
 
 		<div id="user-form">
 			<div id="messages"></div>
@@ -20,7 +20,8 @@
 			{/form}
 		</div>
 
-		<div id="talk-form" {if !$talk}stryle="display:none"{/if}>
+		<div id="talk-form" {if !$talk}style="display:none"{/if}>
+			<h2>Prednaska</h2>
 			{form talkForm}
 					<table>
 					{foreach $form['talk']->controls as $field}

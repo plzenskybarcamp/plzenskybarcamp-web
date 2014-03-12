@@ -26,6 +26,11 @@ class UserRegistration extends Control {
 	public function createComponentForm( $name ) {
 		$form = new Form( $this, $name );
 		$form = $this->addUsersFields( $form );
+		$identity = $this->getPresenter()->getUser()->getIdentity();
+		$form->setDefaults( array(
+			'name' => $identity->name,
+			'email' => $identity->email
+		) );
 		$form->addSubmit( 'submit', 'Odeslat' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 		return $form;
@@ -47,6 +52,7 @@ class UserRegistration extends Control {
 		$values = (array) $form->getValues();
 		$user = $this->getPresenter()->getUser();
 		$values['created_date'] = new \MongoDate( time() );
+		$values['picture_url'] = $user->getIdentity()->picture_url;
 		$this->registrationModel->updateConferree( $user->getId(), $values );
 	}
 } 

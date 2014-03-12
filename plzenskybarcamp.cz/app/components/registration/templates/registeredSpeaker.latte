@@ -1,6 +1,6 @@
 <div>
 	<h3>{$speakersCount} {$title}</h3>
 	<ul>
-		<li n:foreach="$speakers as $speaker"><img src="$speaker['thumbnail']"/></li>
+		<li n:foreach="$speakers as $speaker"><img src="{@$speaker['picture_url']}"/></li>
 	</ul>
 </div>

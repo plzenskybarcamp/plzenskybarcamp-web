@@ -44,11 +44,11 @@ ajaxPost = function(form) {
 }
 
 validateForms = function(forms) {
-	forms.forEach(function(form){
-		if(!Nette.validateForm(form.get(0))) {
-			throw null
+	for(index in forms) {
+		if(!Nette.validateForm(forms[index].get(0))) {
+			return $.Deferred().reject().promise();
 		}
-	});
+	}
 	return forms;
 }
 
@@ -71,19 +71,32 @@ showMessage = function(container, elmClass) {
 			container.html('').append(elm);
 			setTimeout(function(){
 				elm.hide();
-			}, 20000);
+			}, 5000);
 		}
 	}
 }
 
-registerAjaxProfileUpdate = function(actionButton, userContainer, talkContainer) {
+registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, talkContainer) {
+	talkOnButton.on('click', function(){
+		if(!talkContainer.is(':visible')) {
+			talkContainer.show();
+		} else {
+			talkContainer.hide();
+		}
+	})
 	actionButton.on('click', function(e) {
+		actionButton.get(0).disabled = true;
 		forms = [$('form', userContainer)]
 		if(talkContainer.is(":visible")) {
 			forms.push($('form', talkContainer));
 		}
+		unLockSave = function( msg ) {
+			actionButton.get(0).disabled = false;
+			return msg;
+		}
 		messageContainer = $('#messages', userContainer);
 		$.when(validateForms(forms)).then(commitForms)
+			.then(unLockSave, unLockSave)
 			.done(showMessage(messageContainer, 'success'))
 			.fail(showMessage(messageContainer, 'error'));
 	});
@@ -95,7 +108,7 @@ $(document).ready(function() {
 	registerForm('#speaker-regestration', '#user-regestration');
 	registerForm('#user-regestration', '#speaker-regestration');
 	registerAjaxRegistration($('#registration'));
-	registerAjaxProfileUpdate($('#profile-save'), $('#user-form'), $('#talk-form'));
+	registerAjaxProfileUpdate($('#talk-registration'), $('#profile-save'), $('#user-form'), $('#talk-form'));
 });
 // window.fbAsyncInit = function() {
 // 	FB.init({

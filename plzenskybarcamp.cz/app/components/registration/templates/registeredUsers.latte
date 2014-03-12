@@ -1,6 +1,6 @@
 <div>
 	<h3>{$usersCount} {$title}</h3>
 	<ul>
-		<li n:foreach="$users as $user"><img src="$user->thumbnail"/></li>
+		<li n:foreach="$users as $user"><img src="{@$user['picture_url']}"/></li>
 	</ul>
 </div>
