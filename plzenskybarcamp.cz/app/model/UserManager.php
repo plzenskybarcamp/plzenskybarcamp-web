@@ -33,6 +33,11 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 				$id = $user_profile['id'];
 				$name = $user_profile['name'];
 				$email = $user_profile['email'];
+
+				$picture = $this->fb->api('/me?fields=picture','GET');
+				$picture_url = @$picture['picture']['data']['url'];
+
+				$user_profile['picture'] = @$picture['picture'];
 			}
 			else {
 				throw new Nette\Security\AuthenticationException('No user identity');
@@ -47,6 +52,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 			'id' => $id,
 			'name' => $name,
 			'email' => $email,
+			'picture_url' => $picture_url,
 			'currentPlatform' => $platform,
 			'platforms' => array(
 				$platform => $user_profile,
