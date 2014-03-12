@@ -22,7 +22,8 @@ class Main extends Control {
 
 	private function createControlTemplate() {
 		$this->template->setFile( __DIR__ . '/templates/main.latte');
-		$this->template->user = new FakeUser(true, false, false);
+		$this->template->user = $this->getPresenter()->getUser();
+		$this->template->identity = $this->getPresenter()->getUser()->getIdentity();
 		$this->template->canBeRegistered = self::MAX_CAPACITY - 0;
 		$this->template->isRegistrationOpen = true;
 		return $this->template;

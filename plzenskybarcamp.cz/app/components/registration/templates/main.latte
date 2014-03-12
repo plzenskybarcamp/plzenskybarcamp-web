@@ -14,13 +14,13 @@
 	<div id="user-regestration">
 
 		{control registeredUsers 'osobnosti se zucastni'}
-		{if !$user->isRegistered() && !$canBeRegistered}
+		{if !$identity->isRegistered() && !$canBeRegistered}
 			<p>Kapacita je vycerpana</p>
 		{else}
 			{if !$user->isLoggedIn()}
 				<button class = "registration-button">Chci se zucasnit take</button>
 				<div>prihlase pres socialni sit</div>
-			{elseif !$user->isRegistered()}
+			{elseif !$identity->isRegistered()}
 				<button class = "registration-button">Chci se zucasnit take</button>
 				<div class="form">{control registration}</div>
 			{else}
@@ -40,16 +40,16 @@
 {else}
 	<div id="speaker-regestration">
 	{control registeredSpeakers 'vypsanych prednasek'}
-	{if !$user->isRegistered() && !$canBeRegistered}
+	{if !$identity->isRegistered() && !$canBeRegistered}
 		<p>Kapacita je vycerpana</p>
 	{else}
 		{if !$user->isLoggedIn()}
 			<button class = "registration-button">Chci se prednaset take</button>
 			<div>prihlase pres socialni sit</div>
-		{elseif !$user->isRegistered()}
+		{elseif !$identity->isRegistered()}
 			<button class = "registration-button">Chci se prednaset take</button>
 			<div class="form">{control registration}</div>
-		{elseif !$user->isSpeaker()}
+		{elseif !$identity->isSpeaker()}
 			<button class = "registration-button">Chci se prednaset take</button>
 			<div class="form">{control speakerRegisteration}</div>
 		{else}
