@@ -27,8 +27,12 @@ class ConferencePresenter extends BasePresenter
 		$this->registrationModel = $registrationModel;
 		$this->speakerForm = new SpeakerRegistration( $this, 'speaker', $registrationModel );
 		$this->userForm = new UserRegistration( $this, 'user', $registrationModel );
-		$userId = null;//$this->getPresenter()->getUser()->getId();
-		$this->conferree = $registrationModel->findCoferree( $userId );
+	}
+
+	public function startup() {
+		parent::startup();
+		$userId = $this->getUser()->getId();
+		$this->conferree = $this->registrationModel->findCoferree( $userId );
 	}
 
 	public function renderTalksDetail( $talkId ) {
@@ -43,16 +47,18 @@ class ConferencePresenter extends BasePresenter
 
 	public function renderProfil( $talkId ) {
 		$this->template->conferree = $this->conferree;
-		$this->template->talk = $this->conferree['talk'];
+		$this->template->talk = isset( $this->conferree['talk'] )? $this->conferree['talk'] : NULL;
 	}
 
 	public function createComponentTalkForm( $name ) {
 		$form = new Form( $this, $name );
 		$this->speakerForm->addTalksFields( $form->addContainer( 'talk') );
 
-		$form->setDefaults( array(
-			'talk' => $this->conferree['talk']
-		) );
+		if ( isset( $this->conferree['talk'] ) ) {
+			$form->setDefaults( array(
+				'talk' => $this->conferree['talk']
+			) );
+		}
 
 		$form->onSubmit[] = array( $this, 'processUpdate');
 		return $form;

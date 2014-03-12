@@ -46,7 +46,7 @@ class UserRegistration extends Control {
 	public function processRegistration( Form $form ) {
 		$values = (array) $form->getValues();
 		$user = $this->getPresenter()->getUser();
-		$values['created_date'] = \MongoDate( time() );
+		$values['created_date'] = new \MongoDate( time() );
 		$this->registrationModel->updateConferree( $user->getId(), $values );
 	}
 } 
