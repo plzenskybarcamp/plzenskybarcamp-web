@@ -2,13 +2,9 @@
 
 namespace App\Components\Registration;
 
-class FakeUser implements IIdentity {
+use Nette\Security as NS;
 
-	public function __construct( $isLogged, $isRegistered, $isSpeaker ) {
-		$this->isLogged = $isLogged;
-		$this->isRegistered = $isRegistered;
-		$this->isSpeaker = $isSpeaker;
-	}
+class Identity extends NS\Identity implements IIDentity, NS\IIdentity {
 
 	public function isLoggedIn() {
 		return $this->isLogged;

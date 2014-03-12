@@ -52,7 +52,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 				$platform => $user_profile,
 			)
 		);
-		return new Nette\Security\Identity($id, NULL, $profile);
+		return new \App\Components\Registration\Identity($id, NULL, $profile);
 	}
 
 }
