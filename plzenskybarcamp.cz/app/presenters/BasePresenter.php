@@ -15,7 +15,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public function beforeRender() {
 		$this->template->host = $this->context->httpRequest->url->host;
 
-		$fb = $this->getContext()->getService( 'facebookClient' );
+		$fb = $this->getContext()->getService( 'Facebook' );
 		$loginParams = array(
 			'scope' => 'email',
 			'redirect_uri' => $this->link('//login!', array('redirect_url'=>$this->link('//this'), 'platform'=>'fb'))
