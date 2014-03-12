@@ -1,14 +1,12 @@
-<h2>Talks</h2>
-<table id="talks-list">
-	<tr>
-		<th>Speaker</th>
-		<th>Title</th>
-		<th>description</th>
-	</tr>
+<h2>Prednasky</h2>
 
+<table id="talks-list" style="width:100%">
 	<tr n:foreach="$talks as $talk">
-		<td>{$talk['name']}</td>
-		<td>{$talk['talk']['title']}</td>
-		<td>{$talk['talk']['description']}</td>
+		{var speaker = $talk['speaker']}
+
+		<td><img src="$talks['speaker']" title="{$speaker['name']}"/></td>
+		<td><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}">{$talk['title']}</a></td>
+		<td>{$talk['description']|truncate:30}</td>
+		<td><span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a></td>
 	</tr>
 </table>

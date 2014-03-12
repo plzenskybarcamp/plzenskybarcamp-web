@@ -1,18 +1,10 @@
-<h2>Users</h2>
-<table>
-	<tr>
-		<th>User name</th>
-		<th>Twitter</th>
-		<th>Facebook</th>
-		<th>LinkedIn</th>
-		<th>Bio</th>
-	</tr>
+<h2>Ucastnici</h2>
 
-	<tr n:foreach="$users as $user">
-		<td>{$user['name']}</td>
-		<td>{$user['twitter']}</td>
-		<td>{$user['facebook']}</td>
-		<td>{$user['linked']}</td>
+<table style="width:100%">
+	<tr n:foreach="$users as $user" {if $currentUser->getId() == $user['user_id']}class="current-user"{/if}>
+		<td>{@$user['thumbnail']}</td>
+		<td><a n:tag-if="$currentUser->getId() == $user['user_id']" href="{plink Conference:profil}">{$user['name']}</a></td>
+		<td><a n:tag-if="$user['twitter']" href="http://twitter.com/{$user['twitter']}" target="_blank">{$user['twitter']}</a></td>
 		<td>{$user['bio']}</td>
 	</tr>
 </table>

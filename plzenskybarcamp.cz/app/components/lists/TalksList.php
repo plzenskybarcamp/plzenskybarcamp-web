@@ -14,8 +14,9 @@ class TalksList extends Control {
 
 	public function render() {
 		$this->template->setFile( __DIR__ . '/templates/talksList.latte');
-		$talks = $this->registrationModel->getSpeakers();
+		$talks = $this->registrationModel->getTalks();
 		$this->template->talks = $talks;
+		$this->template->currentUser = $this->getPresenter()->getUser();
 		$this->template->render();
 	}
 }

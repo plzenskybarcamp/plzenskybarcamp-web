@@ -22,8 +22,10 @@ class RouterFactory
 		$router = new RouteList();
 		$router[] = new Route('partneri', 'Homepage:partners');
 		$router[] = new Route('kontakt', 'Homepage:contact');
-		$router[] = new Route('ja', 'UserDetail:default');
-		$router[] = new Route('edit', 'UserDetail:edit');
+		$router[] = new Route('profil', 'Conference:profil');
+		$router[] = new Route('ucastnici', 'Conference:visitors');
+		$router[] = new Route('prednasky', 'Conference:talks');
+		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail');
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;

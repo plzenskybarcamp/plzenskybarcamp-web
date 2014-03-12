@@ -29,14 +29,4 @@ class HomepagePresenter extends BasePresenter
 	public function createComponentRegistration( $name ) {
 		return new Main( $this, $name, $this->registrationModel );
 	}
-
-	public function createComponentTalksList( $name ) {
-		return new TalksList( $this, $name, $this->registrationModel );
-	}
-
-	public function createComponentUsersList( $name ) {
-		return new UsersList( $this, $name, $this->registrationModel );
-	}
-
-
 }

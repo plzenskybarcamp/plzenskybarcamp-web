@@ -1,0 +1,49 @@
+{block title}{block h1}Profil{/block} - Plzeňský Barcamp{/block}
+{block content}
+
+<section class="main-content">
+	<div class="inner">
+		<div id="talk-detail">
+			<h1>{$talk['title']}</h1>
+			<p>{$talk['description']}</p>
+
+			<h3>Komu je prednaska je urcena?</h3>
+			<p>{$talk['purpose']}</p>
+
+			<a n:ifset="$talk['presentation_link']"
+				href="$talk['presentation_link']" target="_blank">
+					Prezntace ke stazeni
+			</a>
+
+			<div n:ifset="$talk['youtube_video']">
+				<h3>Zaznam prednasky</h3>
+				{=$talk['youtube_video']}
+			</div>
+		</div>
+
+		<div id="speaker-detail">
+			<h1>{$speaker['name']}</h1>
+			<img n:ifset="$speaker['thumbnail']" src="{$speaker['thumbnail']}" />
+			<div>
+				<span n:ifset="$speaker['twitter']"><a href="http://twitter.com/{$speaker['twitter']}" target="_blank">TW</a></span>
+				<span n:ifset="$speaker['facebook']"><a href="{$speaker['facebook']}" target="_blank">FB</a></span>
+				<span n:ifset="$speaker['linked']"><a href="{$speaker['linked']}" target="_blank">IN</a></span>
+			</div>
+			<p><strong>Bio:</strong>{$speaker['bio']}</p>
+			<div n:ifset="$talk['votes']">
+				<p><span id="votes-count">{$talk['votes_count']}</span> hlasu</p>
+				<p>
+					<label for="vote">Chci ucastnit</label>
+					<input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}chacked{/if}/> 
+				</p>
+			</div>
+
+			<div>
+				<p n:ifset="$talk['place']">{$talk['place']}</p>
+				<p n:ifset="$talk['time']">{$talk['time']}</p>
+			</div>
+		</div>
+
+		<div n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil">Upravit svoji prednasku</a></div>
+	</div>
+</section>

@@ -15,7 +15,11 @@ class Registration {
 	}
 
 	public function updateConferree( $userId, array $data ) {
-		return $this->updateConferreeByCondition( array( 'user_id' => $userId ), $data );
+		$this->updateConferreeByCondition( array( 'user_id' => $userId ), $data );
+		$conferee = $this->findCoferree( $userId );
+		if ( isset( $conferee['talk'] ) ) {
+			$this->syncSpeakerWithTalk( $conferee['talk']['talk_id'], $conferee );
+		}
 	}
 
 	public function findCoferree( $userId ) {
@@ -24,29 +28,34 @@ class Registration {
 	}
 
 	public function createTalk( $userId, array $data ) {
-		$data['speaker_id'] = $userId;
 		$data['talk_id'] = uniqid(); // may use talk ID as url key
+		$data['created_date'] = time();
+		$speaker = $this->findCoferree( $userId );
 		$this->talkCollection->insert( $data );
-		$this->syncTalkWithSpeaker( $data );
+		$this->syncTalkWithSpeaker( $userId, $data );
+		$this->syncSpeakerWithTalk( $data['talk']['talk_id'], $speaker );
 	}
 
 	public function updateTalk( $talkId, array $data ) {
-		$this->talkCollection->update( array( 'talk_id' => $talkId ),
-			array( '$set' => $data ), array( 'upsert' => true ) );
+		$this->updateTalkByCondition( array( 'talk_id' => $talkId ), $data );
 		$talk = $this->findTalk( $talkId );
-		$this->syncTalkWithSpeaker( $talk );
+		$this->syncTalkWithSpeaker( $talk['speaker']['user_id'], $talk );
 	}
 
 	public function findTalk( $talkId ) {
 		return $this->talkCollection->find( array( 'talk_id' => $talkId ) )->getNext();
 	}
 
+	public function getTalks() {
+		return $this->talkCollection->find()->sort( array('created_date') );
+	}
+
 	public function getSpeakers() {
-		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) );
+		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )->sort( array('created_date') );
 	}
 
 	public function getConferrees() {
-		return $this->findCoferrees();
+		return $this->findCoferrees()->sort( array('created_date') );
 	}
 
 	private function findCoferrees( $condition = array() ) {
@@ -58,10 +67,20 @@ class Registration {
 			array( '$set' => $data ), array( 'upsert' => true ) );
 	}
 
-	private function syncTalkWithSpeaker( array $data ) {
-		$speakerId = $data['speaker_id'];
-		unset( $data['speaker_id'] );
+	private function updateTalkByCondition( $condition, array $data ) {
+		return $this->talkCollection->update( $condition,
+			array( '$set' => $data ), array( 'upsert' => true ) );
+	}
+
+	private function syncTalkWithSpeaker( $speakerId, array $data ) {
+		unset( $data['speaker'] );
 		unset( $data['_id'] );
-		$this->updateConferree( $speakerId, array( 'talk' => $data ) );
+		$this->updateConferreeByCondition( array( 'user_id' => $speakerId ), array( 'talk' => $data ) );
+	}
+
+	private function syncSpeakerWithTalk( $talkId, array $data ) {
+		unset( $data['talk'] );
+		unset( $data['_id'] );
+		$this->updateTalkByCondition( array( 'talk_id' => $talkId ), array( 'speaker' => $data ) );
 	}
 }

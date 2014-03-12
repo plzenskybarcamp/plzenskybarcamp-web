@@ -30,7 +30,7 @@ class SpeakerRegistration extends Control {
 
 		$form->addSubmit( 'submit', 'Odeslat' );
 
-		$form->onSubmit[] = array( $this, 'processRegistration' );
+		$form->onSuccess[] = array( $this, 'processRegistration' );
 		return $form;
 	}
 

@@ -27,7 +27,7 @@ class UserRegistration extends Control {
 		$form = new Form( $this, $name );
 		$form = $this->addUsersFields( $form );
 		$form->addSubmit( 'submit', 'Odeslat' );
-		$form->onSubmit[] = array( $this, 'processRegistration' );
+		$form->onSuccess[] = array( $this, 'processRegistration' );
 		return $form;
 	}
 
@@ -46,6 +46,7 @@ class UserRegistration extends Control {
 	public function processRegistration( Form $form ) {
 		$values = (array) $form->getValues();
 		$user = $this->getPresenter()->getUser();
-		$this->registrationModel->updateConferree( $user->getId(), $values['user'] );
+		$values['created_date'] = \MongoDate( time() );
+		$this->registrationModel->updateConferree( $user->getId(), $values );
 	}
 } 
