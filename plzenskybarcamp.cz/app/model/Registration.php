@@ -47,15 +47,15 @@ class Registration {
 	}
 
 	public function getTalks() {
-		return $this->talkCollection->find()->sort( array('created_date') );
+		return $this->talkCollection->find()->sort( array('created_date' => -1 ) );
 	}
 
 	public function getSpeakers() {
-		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )->sort( array('created_date') );
+		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )->sort( array('created_date' => -1) );
 	}
 
 	public function getConferrees() {
-		return $this->findCoferrees()->sort( array('created_date') );
+		return $this->findCoferrees()->sort( array('created_date' => -1) );
 	}
 
 	private function findCoferrees( $condition = array() ) {
