@@ -29,7 +29,7 @@ class Registration {
 
 	public function createTalk( $userId, array $data ) {
 		$data['talk_id'] = uniqid(); // may use talk ID as url key
-		$data['created_date'] = time();
+		$data['created_date'] = new \MongoDate( time() );
 		$speaker = $this->findCoferree( $userId );
 		$this->talkCollection->insert( $data );
 		$this->syncTalkWithSpeaker( $userId, $data );
