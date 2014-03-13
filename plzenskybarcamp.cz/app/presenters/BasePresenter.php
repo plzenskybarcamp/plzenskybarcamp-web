@@ -15,13 +15,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public function beforeRender() {
 		$this->template->host = $this->context->httpRequest->url->host;
 
-		$fb = $this->getContext()->getService( 'Facebook' );
-		$loginParams = array(
-			'scope' => 'email',
-			'redirect_uri' => $this->link('//login!', array('redirect_url'=>$this->link('//this'), 'platform'=>'fb'))
-		);
-		$this->template->fbLoginLink = $fb->getLoginUrl($loginParams);
+		$this->template->fbLoginLink = $this->createFbLoginLink();
 
+		$fb = $this->getContext()->getService( 'Facebook' );
 		$logoutParams = array(
 			'next' => $this->link('//logout!', array('redirect_url'=>$this->link('//this')))
 		);
@@ -42,6 +38,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$user = $this->getUser();
 		$user->logout();
 		$this->redirectUrl($redirect_url);
+	}
+
+	protected function createFbLoginLink() {
+		$fb = $this->getContext()->getService( 'Facebook' );
+		$loginParams = array(
+			'scope' => 'email',
+			'redirect_uri' => $this->link('//login!', array('redirect_url'=>$this->link('//this'), 'platform'=>'fb'))
+		);
+		return $fb->getLoginUrl($loginParams);
 	}
 
 }

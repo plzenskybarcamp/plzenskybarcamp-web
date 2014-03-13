@@ -27,6 +27,6 @@ class HomepagePresenter extends BasePresenter
 	}
 
 	public function createComponentRegistration( $name ) {
-		return new Main( $this, $name, $this->registrationModel );
+		return new Main( $this, $name, $this->registrationModel, $this->createFbLoginLink() );
 	}
 }

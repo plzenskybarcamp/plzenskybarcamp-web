@@ -18,8 +18,7 @@
 			<p>Kapacita je vycerpana</p>
 		{else}
 			{if !$user->isLoggedIn()}
-				<button class = "registration-button">Chci se zucasnit take</button>
-				<div>prihlase pres socialni sit</div>
+				<a href="{$fbLoginLink}" id="login-buton">Chci se zucasnit take</a>
 			{elseif !$identity->isRegistered()}
 				<button class = "registration-button">Chci se zucasnit take</button>
 				<div class="form">{control registration}</div>
@@ -44,8 +43,7 @@
 		<p>Kapacita je vycerpana</p>
 	{else}
 		{if !$user->isLoggedIn()}
-			<button class = "registration-button">Chci se prednaset take</button>
-			<div>prihlase pres socialni sit</div>
+			<a href="{$fbLoginLink}" id="login-buton">Chci se zucasnit take</a>
 		{elseif !$identity->isRegistered()}
 			<button class = "registration-button">Chci se prednaset take</button>
 			<div class="form">{control registration}</div>

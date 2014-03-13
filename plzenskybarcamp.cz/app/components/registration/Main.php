@@ -11,9 +11,12 @@ class Main extends Control {
 
 	private $registrationModel;
 
-	public function __construct( $parent, $name, $registrationModel ) {
+	private $fbLoginLink;
+
+	public function __construct( $parent, $name, $registrationModel, $fbLoginLink ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
+		$this->fbLoginLink = $fbLoginLink;
 	}
 	
 	public function render() {
@@ -23,9 +26,10 @@ class Main extends Control {
 	private function createControlTemplate() {
 		$this->template->setFile( __DIR__ . '/templates/main.latte');
 		$this->template->user = $this->getPresenter()->getUser();
-		$this->template->identity = $this->getPresenter()->getUser()->getIdentity();
+		$this->template->identity = new FakeUser( $this->getPresenter()->getUser(), $this->registrationModel ); //$this->getPresenter()->getUser()->getIdentity();
 		$this->template->canBeRegistered = self::MAX_CAPACITY - 0;
 		$this->template->isRegistrationOpen = true;
+		$this->template->fbLoginLink = $this->fbLoginLink;
 		return $this->template;
 	}
 

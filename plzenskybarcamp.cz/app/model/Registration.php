@@ -33,7 +33,7 @@ class Registration {
 		$speaker = $this->findCoferree( $userId );
 		$this->talkCollection->insert( $data );
 		$this->syncTalkWithSpeaker( $userId, $data );
-		$this->syncSpeakerWithTalk( $data['talk']['talk_id'], $speaker );
+		$this->syncSpeakerWithTalk( $data['talk_id'], $speaker );
 	}
 
 	public function updateTalk( $talkId, array $data ) {
