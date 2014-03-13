@@ -28,7 +28,7 @@ class SpeakerRegistration extends Control {
 		$form = $this->addTalksFields( $form );
 		$form = $this->addUsersFields( $form );
 
-		$form->addSubmit( 'submit', 'Odeslat' );
+		$form->addSubmit( 'submit', 'Chci přednášet!' );
 
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 		return $form;
@@ -50,17 +50,17 @@ class SpeakerRegistration extends Control {
 	}
 
 	public function addTalksFields( $container ) {
-		$container->addText( 'title', 'Nazev prednasky' )
-			->addRule(Form::FILLED, 'Musi byt vyplneno');
-		$container->addTextArea( 'description', 'Popis prednasky' )
-			->addRule(Form::FILLED, 'Musi byt vyplneno');
-		$container->addTextArea( 'purpose', 'Komu je urceno?' )
-			->addRule(Form::FILLED, 'Musi byt vyplneno');
+		$container->addText( 'title', 'Název přednášky' )
+			->addRule(Form::FILLED, 'Název přednášky musí být vyplněn');
+		$container->addTextArea( 'description', 'Popis přednášky' )
+			->addRule(Form::FILLED, 'Popis přednášky musí být vyplněn');
+		$container->addTextArea( 'purpose', 'Komu je určená?' )
+			->addRule(Form::FILLED, 'Komu je přednáška určená musí být vyplněno');
 		return $container;
 	}
 
 	public function addUsersFields( $container ) {
-		$container->addText( 'linked', 'linked in' );
+		$container->addText( 'linked', 'LinkedIn' );
 		$container->addText( 'web', 'Web' );
 		$container->addText( 'facebook', 'Facebook' );
 		return $container;

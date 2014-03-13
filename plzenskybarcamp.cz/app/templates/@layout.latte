@@ -40,8 +40,8 @@
 			<div class="inner">
 				<ul class="navigation">
 					<li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a class="home" href="{link //Homepage:default}" data-hover="Úvod" itemprop="url" content="http://plzenskybarcamp.cz">Úvod</a></li>
-					<li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Partneří">Prednasky</a></li>
-					<li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Partneří">Ucastnici</a></li>
+					<li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Přednášky">Přednášky</a></li>
+					<li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastníci">Účastnící</a></li>
 					<li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
 					<li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
 				</ul>
@@ -89,6 +89,8 @@
 					<p>Plzeňský Barcamp <a href="{link Homepage:contact}#organizatori" class="tooltip pilsen" title="Organizují: Jiří „Kolda“ Kolařík, Denisa Wágnerojc, Veronika Grékojc">organizují KWG</a></p>
 				</ul>
 				<ul class="navigation">
+					<li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Přednášky">Přednášky</a></li>
+					<li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastnící">Účastnící</a></li>
 					<li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
 					<li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
 				</ul>

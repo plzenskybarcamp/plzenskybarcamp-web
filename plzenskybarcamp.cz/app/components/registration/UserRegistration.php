@@ -31,20 +31,20 @@ class UserRegistration extends Control {
 			'name' => $identity->name,
 			'email' => $identity->email
 		) );
-		$form->addSubmit( 'submit', 'Odeslat' );
+		$form->addSubmit( 'submit', 'Chci přijít!' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 		return $form;
 	}
 
 
 	public function addUsersFields( $container ) {
-		$container->addText( 'name', 'Jmeno' )
-			->addRule(Form::FILLED, 'Must byt vyplneno');
+		$container->addText( 'name', 'Jméno' )
+			->addRule(Form::FILLED, 'Jméno musí být vyplněno');
 		$container->addText( 'twitter', 'Twitter' );
 		$container->addText( 'email', 'E-mail')
-			->addRule(Form::FILLED, 'Must byt vyplneno');
+			->addRule(Form::FILLED, 'E-mail musí být vyplněn');
 		$container->addTextArea( 'bio', 'Bio' )
-			->addRule(Form::FILLED, 'Must byt vyplneno');
+			->addRule(Form::FILLED, 'Bio musí být vyplněno');
 		return $container;
 	}
 

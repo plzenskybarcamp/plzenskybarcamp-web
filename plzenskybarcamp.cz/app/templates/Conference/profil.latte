@@ -5,7 +5,7 @@
 </script>
 <section class="main-content">
 	<div class="inner">
-		<h2>Ucastnik</h2>
+		<h2>Já, účastník</h2>
 		<div><img src="{@$conferree['picture_url']}" /></div>
 
 		<div id="user-form">
@@ -21,7 +21,7 @@
 		</div>
 
 		<div id="talk-form" {if !$talk}style="display:none"{/if}>
-			<h2>Prednaska</h2>
+			<h2>Moje vypsaná přednáška</h2>
 			{form talkForm}
 					<table>
 					{foreach $form['talk']->controls as $field}
@@ -30,12 +30,12 @@
 					</table>
 				{/form}
 			<div n:if="$talk">
-				<p n:ifset="$talk['votes_count']"><strong>Pocet hlasu:</strong>{$talk['votes_count']}</p>
-				<p n:ifset="$talk['place']"><strong>Misto a cas prednasky:</strong>{$talk['place']}{ifset $talk['time']}, {$talk['time']}{/ifset}</p>
+				<p n:ifset="$talk['votes_count']"><strong>Počet hlasů:</strong>{$talk['votes_count']}</p>
+				<p n:ifset="$talk['place']"><strong>Místo a čas přednášky:</strong>{$talk['place']}{ifset $talk['time']}, {$talk['time']}{/ifset}</p>
 			</div>
 		</div>
 		
-		{if !$talk}<button id="talk-registration">Chci prednaset</button>{/if}
-		<button id="profile-save">Save</button>
+		{if !$talk}<button id="talk-registration">Chci přednášet!</button>{/if}
+		<button id="profile-save">Uložit změny</button>
 	</div>
 </section>

@@ -4,19 +4,19 @@
 <section class="main-content">
 	<div class="inner">
 		<div id="talk-detail">
-			<h1>{$talk['title']}</h1>
+			<h2>{$talk['title']}</h2>
 			<p>{$talk['description']}</p>
 
-			<h3>Komu je prednaska je urcena?</h3>
+			<h3>Komu je přednáška určena?</h3>
 			<p>{$talk['purpose']}</p>
 
 			<a n:ifset="$talk['presentation_link']"
 				href="$talk['presentation_link']" target="_blank">
-					Prezntace ke stazeni
+					Prezentace ke stažení
 			</a>
 
 			<div n:ifset="$talk['youtube_video']">
-				<h3>Zaznam prednasky</h3>
+				<h3>Záznam přednášky</h3>
 				{=$talk['youtube_video']}
 			</div>
 		</div>
@@ -29,11 +29,11 @@
 				<span n:ifset="$speaker['facebook']"><a href="{$speaker['facebook']}" target="_blank">FB</a></span>
 				<span n:ifset="$speaker['linked']"><a href="{$speaker['linked']}" target="_blank">IN</a></span>
 			</div>
-			<p><strong>Bio:</strong>{$speaker['bio']}</p>
+			<p><strong>Bio:</strong> {$speaker['bio']}</p>
 			<div n:ifset="$talk['votes']">
-				<p><span id="votes-count">{$talk['votes_count']}</span> hlasu</p>
+				<p><span id="votes-count">{$talk['votes_count']}</span> hlasů</p>
 				<p>
-					<label for="vote">Chci ucastnit</label>
+					<label for="vote">Chci slyšet</label>
 					<input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}chacked{/if}/> 
 				</p>
 			</div>
@@ -44,6 +44,6 @@
 			</div>
 		</div>
 
-		<div n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil">Upravit svoji prednasku</a></div>
+		<div n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil">Upravit svojí přednášku</a></div>
 	</div>
 </section>

@@ -4,54 +4,54 @@
 </style>
 
 <div>
-	<h2>Chci prijit na Barcamp</h2>
-	<p>Lorem ipsum</p>
+	<h2>Chci přijít na Plzeňský Barcamp</h2>
+	<p>Chci zažít něco nového, chci získat kontakty, chci potkat nové lidi, chci říci o svém projektu, ... Prostě chci na Plzeňský Barcamp :)</p>
 </div>
 
 {if !$isRegistrationOpen}
-	<p>Registrace jiz brzy</p>
+	<p>Registrace již brzy</p>
 {else}
 	<div id="user-regestration">
 
-		{control registeredUsers 'osobnosti se zucastni'}
+		{control registeredUsers 'osobností se zúčastní'}
 		{if !$identity->isRegistered() && !$canBeRegistered}
-			<p>Kapacita je vycerpana</p>
+			<p>Kapacita je vyčerpaná</p>
 		{else}
 			{if !$user->isLoggedIn()}
-				<a href="{$fbLoginLink}" id="login-buton">Chci se zucasnit take</a>
+				<a href="{$fbLoginLink}" id="login-buton">Chci přijít!</a>
 			{elseif !$identity->isRegistered()}
-				<button class = "registration-button">Chci se zucasnit take</button>
+				<button class = "registration-button">Chci přijít!</button>
 				<div class="form">{control registration}</div>
 			{else}
-				<p>Zucasnim se Barcampu</p>
+				<p>Zúčastním se Plzeňského Barcampu :)</p>
 			{/if}
 		{/if}
 	</div>
 {/if}
 
 <div>
-	<h2>Prednasky na Barcampu</h2>
-	<p>Lorem ipsum</p>
+	<h2>Přednášky na Plzeňském Barcampu</h2>
+	<p>Máš co říci ostatním? Děláš něco zajímavého? Mno, super! Vypiš si vlastní přednášku...</p>
 </div>
 
 {if !$isRegistrationOpen}
-	<p>Registrace jiz brzy</p>
+	<p>Registrace již brzy</p>
 {else}
 	<div id="speaker-regestration">
-	{control registeredSpeakers 'vypsanych prednasek'}
+	{control registeredSpeakers 'vypsaných přednášek'}
 	{if !$identity->isRegistered() && !$canBeRegistered}
-		<p>Kapacita je vycerpana</p>
+		<p>Kapacita je vyčerpaná</p>
 	{else}
 		{if !$user->isLoggedIn()}
-			<a href="{$fbLoginLink}" id="login-buton">Chci se zucasnit take</a>
+			<a href="{$fbLoginLink}" id="login-buton">Chci přednášet!</a>
 		{elseif !$identity->isRegistered()}
-			<button class = "registration-button">Chci se prednaset take</button>
+			<button class = "registration-button">Chci přednášet!</button>
 			<div class="form">{control registration}</div>
 		{elseif !$identity->isSpeaker()}
-			<button class = "registration-button">Chci se prednaset take</button>
+			<button class = "registration-button">Chci přednášet!</button>
 			<div class="form">{control speakerRegisteration}</div>
 		{else}
-			<p>Mam vypsanou prednasku</p>
+			<p>Mám vypsanou přednášku :)</p>
 		{/if}
 		</div>
 	{/if}
