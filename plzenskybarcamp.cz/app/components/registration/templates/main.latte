@@ -59,7 +59,7 @@
             <p>Kapacita je vyčerpaná</p>
         {else}
             {if !$user->isLoggedIn()}
-                <a href="{$fbLoginLink}" id="login-buton">Chci přednášet!</a>
+                <a href="{$fbLoginLink}" id="login-buton" class="button registration-button">Chci přednášet!</a>
             {elseif !$identity->isRegistered()}
                 <div class="form">{control registration}</div>
                 <a href="javascript:void(0)" class="button registration-button">Chci přednášet!</a>
