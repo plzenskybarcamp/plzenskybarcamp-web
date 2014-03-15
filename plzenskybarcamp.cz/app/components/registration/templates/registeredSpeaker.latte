@@ -1,5 +1,5 @@
 <div>
-	<h3>{$speakersCount} {$title}</h3>
+	<h3><a href="{plink Conference:talks}">{$speakersCount} {$title}</a></h3>
 	<ul class="list-inline">
 		<li n:foreach="$speakers as $speaker"><a href="javascript:void(0)"><img class="user-pic" src="{@$speaker['picture_url']}"/></a></li>
 	</ul>
