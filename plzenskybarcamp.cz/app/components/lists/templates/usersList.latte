@@ -1,6 +1,6 @@
 <h2>Účastnící Plzeňského Barcampu</h2>
 <p>Kdo na prvním Plzeňském Barcampu nebude chybět a zapíše se tak do historie?</p>
-
+<p class="user-list-user-count">Registrovaných účastníků: <strong>37</strong></p>
 <table class="table-list">
     <tr n:foreach="$users as $user" {if $currentUser->getId() == $user['user_id']}class="current-user"{/if}>
         <td class="first-td"><img class="user-pic" src="{@$user['picture_url']}"/></td>
