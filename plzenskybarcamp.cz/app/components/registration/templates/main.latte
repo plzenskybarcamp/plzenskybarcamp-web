@@ -1,58 +1,75 @@
 <style type="text/css">
-	.required { color: red; }
-	.form { display: none; }
+    .required { color: red; }
+    .form { display: none; }
 </style>
 
 <div>
-	<h2>Chci přijít na Plzeňský Barcamp</h2>
-	<p>Chci zažít něco nového, chci získat kontakty, chci potkat nové lidi, chci říci o svém projektu, ... Prostě chci na Plzeňský Barcamp :)</p>
+    <h2>Chci přijít na Plzeňský Barcamp</h2>
+    <p>Chci zažít něco nového, chci získat kontakty, chci potkat nové lidi, chci říci o svém projektu, ... Prostě chci na Plzeňský Barcamp :)</p>
 </div>
 
 {if !$isRegistrationOpen}
-	<p>Registrace již brzy</p>
+    <p>Registrace již brzy</p>
 {else}
-	<div id="user-regestration">
+    <div class="text-center" id="user-regestration">
 
-		{control registeredUsers 'osobností se zúčastní'}
-		{if !$identity->isRegistered() && !$canBeRegistered}
-			<p>Kapacita je vyčerpaná</p>
-		{else}
-			{if !$user->isLoggedIn()}
-				<a href="{$fbLoginLink}" id="login-buton">Chci přijít!</a>
-			{elseif !$identity->isRegistered()}
-				<button class = "registration-button">Chci přijít!</button>
-				<div class="form">{control registration}</div>
-			{else}
-				<p>Zúčastním se Plzeňského Barcampu :)</p>
-			{/if}
-		{/if}
-	</div>
+        {control registeredUsers 'osobností se zúčastní'}
+        {if !$identity->isRegistered() && !$canBeRegistered}
+            <p>Kapacita je vyčerpaná</p>
+        {else}
+            {if !$user->isLoggedIn()}
+                <a href="{$fbLoginLink}" id="login-buton" class="button">Chci přijít!</a>
+            {elseif !$identity->isRegistered()}
+                <div class="choose-network">
+                    <ul>
+
+                        <li class="gplus">
+                            <a href="javascript:void(0)"><i>Google+</i></a>
+                        </li>
+                        <li class="fb">
+                            <a href="javascript:void(0)"><i>Facebook</i></a>
+                        </li>
+                        <li class="tw">
+                            <a href="javascript:void(0)"><i>Twitter</i></a>
+                        </li>
+                        <li class="in">
+                            <a href="javascript:void(0)"><i>LinkedIn</i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form">{control registration}</div>
+                <a href="javascript:void(0)" class="button registration-button">Chci přijít!</a>
+            {else}
+                <p>Zúčastním se Plzeňského Barcampu :)</p>
+            {/if}
+        {/if}
+    </div>
 {/if}
 
 <div>
-	<h2>Přednášky na Plzeňském Barcampu</h2>
-	<p>Máš co říci ostatním? Děláš něco zajímavého? Mno, super! Vypiš si vlastní přednášku...</p>
+    <h2>Přednášky na Plzeňském Barcampu</h2>
+    <p>Máš co říci ostatním? Děláš něco zajímavého? Mno, super! Vypiš si vlastní přednášku...</p>
 </div>
 
 {if !$isRegistrationOpen}
-	<p>Registrace již brzy</p>
+    <p>Registrace již brzy</p>
 {else}
-	<div id="speaker-regestration">
-	{control registeredSpeakers 'vypsaných přednášek'}
-	{if !$identity->isRegistered() && !$canBeRegistered}
-		<p>Kapacita je vyčerpaná</p>
-	{else}
-		{if !$user->isLoggedIn()}
-			<a href="{$fbLoginLink}" id="login-buton">Chci přednášet!</a>
-		{elseif !$identity->isRegistered()}
-			<button class = "registration-button">Chci přednášet!</button>
-			<div class="form">{control registration}</div>
-		{elseif !$identity->isSpeaker()}
-			<button class = "registration-button">Chci přednášet!</button>
-			<div class="form">{control speakerRegisteration}</div>
-		{else}
-			<p>Mám vypsanou přednášku :)</p>
-		{/if}
-		</div>
-	{/if}
+    <div class="text-center" id="speaker-regestration">
+        {control registeredSpeakers 'vypsaných přednášek'}
+        {if !$identity->isRegistered() && !$canBeRegistered}
+            <p>Kapacita je vyčerpaná</p>
+        {else}
+            {if !$user->isLoggedIn()}
+                <a href="{$fbLoginLink}" id="login-buton">Chci přednášet!</a>
+            {elseif !$identity->isRegistered()}
+                <div class="form">{control registration}</div>
+                <a href="javascript:void(0)" class="button registration-button">Chci přednášet!</a>
+            {elseif !$identity->isSpeaker()}
+                <div class="form">{control speakerRegisteration}</div>
+                <a href="javascript:void(0)" class="button registration-button">Chci přednášet!</a>
+            {else}
+                <p>Mám vypsanou přednášku :)</p>
+            {/if}
+        </div>
+    {/if}
 {/if}

@@ -1,10 +1,27 @@
-{control form}
+{*control form*}
 
-{* {form form}
-<table>
-	<tr>
-		<th>{label 'users']['name' /}</th>
-		<td>{input 'users']['name' }</td>
-	</tr>
-<table>
-{/form} *}
+{form form}
+    <div class="inputs-wrap">
+        <label>Jméno a příjmení</label>
+        <input type="text" id="" required>
+    </div>
+    <div class="inputs-wrap">
+        <label>Twitter</label>
+        <input type="text" id="" class="required" placeholder="@" required>
+    </div>
+    <div class="inputs-wrap">
+        <label>Email</label>
+        <input type="text" id="" placeholder="@" required>
+        <span>Email nebude nikde zvěřejněn</span>
+    </div>
+    <div class="inputs-wrap">
+        <label>Bio</label>
+        <textarea></textarea>
+    </div>
+    {*<table>
+        <tr>
+            <th>{label 'users']['name' /}</th>
+            <td>{input 'users']['name' }</td>
+        </tr>
+    </table>*}
+{/form}
