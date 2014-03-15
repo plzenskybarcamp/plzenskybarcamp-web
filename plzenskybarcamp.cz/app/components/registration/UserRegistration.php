@@ -33,16 +33,29 @@ class UserRegistration extends Control {
 		) );
 		$form->addSubmit( 'submit', 'Chci přijít!' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
+
+		$renderer = $form->getRenderer();
+
+		$renderer->wrappers['controls']['container'] = NULL;
+		$renderer->wrappers['pair']['container'] = "div class='inputs-wrap'";
+		$renderer->wrappers['label']['container'] = NULL;
+		$renderer->wrappers['control']['container'] = NULL;
+		$renderer->wrappers['control']['description'] = 'span';
+
+		//print_r($renderer);die();
 		return $form;
 	}
 
 
 	public function addUsersFields( $container ) {
-		$container->addText( 'name', 'Jméno' )
+		$container->addText( 'name', 'Jméno a příjmení' )
 			->addRule(Form::FILLED, 'Jméno musí být vyplněno');
-		$container->addText( 'twitter', 'Twitter' );
+		$container->addText( 'twitter', 'Twitter' )
+			->setAttribute('placeholder', '@');
 		$container->addText( 'email', 'E-mail')
-			->addRule(Form::FILLED, 'E-mail musí být vyplněn');
+			->addRule(Form::FILLED, 'E-mail musí být vyplněn')
+			->setAttribute('placeholder', '@')
+			->setOption('description', 'Email nebude nikde zvěřejněn');
 		$container->addTextArea( 'bio', 'Bio' )
 			->addRule(Form::FILLED, 'Bio musí být vyplněno');
 		return $container;
