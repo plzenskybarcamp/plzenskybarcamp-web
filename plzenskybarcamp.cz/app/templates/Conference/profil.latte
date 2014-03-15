@@ -8,27 +8,15 @@
 		<h2>Já, účastník</h2>
 		<div><img src="{@$conferree['picture_url']}" /></div>
 
-		<div id="user-form">
+		<div id="user-form" class="form">
 			<div id="messages"></div>
-			{form userForm}
-				<table>
-				{foreach $form['user']->controls as $field}
-					<tr><th>{$field->getLabel()}</th><td>{$field->getControl()}</td></tr>
-				{/foreach}
-					<tr><th>Datum registrace</th><td>{@$conferree['created_date']->sec|date: '%d.%m.%Y'}</td></tr>
-				</table>
-			{/form}
+			{control userForm}
 		</div>
+		<p>Datum registrace: {@$conferree['created_date']->sec|date: '%d.%m.%Y'}</p>
 
-		<div id="talk-form" {if !$talk}style="display:none"{/if}>
+		<div id="talk-form" class="form" {if !$talk}style="display:none"{/if}>
 			<h2>Moje vypsaná přednáška</h2>
-			{form talkForm}
-					<table>
-					{foreach $form['talk']->controls as $field}
-						<tr><th>{$field->getLabel()}</th><td>{$field->getControl()}</td></tr>
-					{/foreach}
-					</table>
-				{/form}
+			{control talkForm}
 			<div n:if="$talk">
 				<p n:ifset="$talk['votes_count']"><strong>Počet hlasů:</strong>{$talk['votes_count']}</p>
 				<p n:ifset="$talk['place']"><strong>Místo a čas přednášky:</strong>{$talk['place']}{ifset $talk['time']}, {$talk['time']}{/ifset}</p>

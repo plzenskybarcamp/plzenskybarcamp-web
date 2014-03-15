@@ -52,6 +52,8 @@ class ConferencePresenter extends BasePresenter
 
 	public function createComponentTalkForm( $name ) {
 		$form = new Form( $this, $name );
+		$form->setRenderer( new \App\Components\CustomFormRenderer );
+
 		$this->speakerForm->addTalksFields( $form->addContainer( 'talk') );
 
 		if ( isset( $this->conferree['talk'] ) ) {
@@ -66,6 +68,7 @@ class ConferencePresenter extends BasePresenter
 
 	public function createComponentUserForm( $name ) {
 		$form = new Form( $this, $name );
+		$form->setRenderer( new \App\Components\CustomFormRenderer );
 		$usersContainer = $form->addContainer( 'user' );
 		$this->userForm->addUsersFields( $usersContainer );
 		$this->speakerForm->addUsersFields( $usersContainer );
