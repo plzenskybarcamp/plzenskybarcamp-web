@@ -5,6 +5,6 @@
 		<td><img src="{@$user['picture_url']}"/></td>
 		<td><a n:tag-if="$currentUser->getId() == $user['user_id']" href="{plink Conference:profil}">{$user['name']}</a></td>
 		<td><a n:tag-if="$user['twitter']" href="http://twitter.com/{$user['twitter']}" target="_blank">{$user['twitter']}</a></td>
-		<td>{$user['bio']}</td>
+		<td>BIO: {$user['bio']}</td>
 	</tr>
 </table>
