@@ -25,12 +25,17 @@ class SpeakerRegistration extends Control {
 
 	public function createComponentForm( $name ) {
 		$form = new Form( $this, $name );
+		$form->addGroup('Zapište svou přednášku');
 		$form = $this->addTalksFields( $form );
+		$form->addGroup('Doplňující info');
 		$form = $this->addUsersFields( $form );
 
-		$form->addSubmit( 'submit', 'Chci přednášet!' );
+		$form->addSubmit( 'submit', 'Odeslat přihlášku' );
 
 		$form->onSuccess[] = array( $this, 'processRegistration' );
+
+		$this->configRenderer( $form->getRenderer() );
+
 		return $form;
 	}
 
@@ -76,5 +81,15 @@ class SpeakerRegistration extends Control {
 
 	private function fetchTalkData( array $data ) {
 		return array_diff_assoc( $data, $this->fetchSpeakerData( $data ) );
+	}
+
+	private function configRenderer( $renderer ) {
+		$renderer->wrappers['controls']['container'] = NULL;
+		$renderer->wrappers['group']['container'] = NULL;
+		$renderer->wrappers['group']['label'] = 'h3';
+		$renderer->wrappers['pair']['container'] = "div class='inputs-wrap'";
+		$renderer->wrappers['label']['container'] = NULL;
+		$renderer->wrappers['control']['container'] = NULL;
+		$renderer->wrappers['control']['description'] = 'span';
 	}
 } 
