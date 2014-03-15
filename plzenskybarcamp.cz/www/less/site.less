@@ -199,13 +199,17 @@ html {
 				display: inline-block;
 			}
 		}
+		.choose-network {
+			width: 500px;
+			text-align: left;
+			margin: 45px auto;
+		}
 	}
 	.photos {
 		text-align: center;
 		margin: 0 -140px; padding: 40px 0;
 
 		img {
-			.border-radius(90px);
 			margin: 0 40px;
 		}
 	}
@@ -276,6 +280,19 @@ html {
 				text-overflow: clip;
 			}
 		}
+	}
+
+	.organizers {
+		overflow: hidden;
+		.organizer {
+			float: left;
+		}
+	}
+
+	.border-tb {
+		padding: 10px 0;
+		border-top: 1px solid @grayUnderline;
+		border-bottom: 1px solid @grayUnderline;
 	}
 }
 
@@ -375,142 +392,144 @@ html {
 					content: attr(data-hover);
 					.transform(translate3d(0,0,0));	
 					text-transform: uppercase;
-					.boldOpen();			}
-
-					&:hover span,
-					&:focus span {
-						.transform(translateY(-100%));
-					}
-
-					i {
-						display: inline-block;
-						position: relative;
-						background: url(../images/soc-media-icons.png) no-repeat 0 0;
-						text-indent: -9999px;
-						overflow: hidden;
-					}
+					.boldOpen();
 				}
-			}
-			.tw {
-				background-color: @twitter;
+
+				&:hover span,
+				&:focus span {
+					.transform(translateY(-100%));
+				}
 
 				i {
-					width: 46px;
-					height: 37px;
-					top: 10px;
+					display: inline-block;
+					position: relative;
+					background: url(../images/soc-media-icons.png) no-repeat 0 0;
+					text-indent: -9999px;
+					overflow: hidden;
 				}
-
-				span:before {
-					left: -23px;
-				}
-			}
-			.fb {
-				background-color: @facebook;
-
-				i {
-					width: 18px;
-					height: 38px;
-					top: 10px;
-					background-position: -13px -37px;
-				}
-
-				span:before {
-					left: -47px;
-				}
-			}
-			.gplus {
-				background-color: @gplus;
-
-				i {
-					width: 45px;
-					height: 38px;
-					top: 10px;
-					background-position: 0 -75px;
-				}
-
-				span:before {
-					left: -27px;
-				}	
-			}
-			.insta {
-				background-color: @instagram;
-
-				i {
-					width: 40px;
-					height: 38px;
-					top: 10px;
-					background-position: -3px -113px;
-				}
-
-				span:before {
-					left: -42px;
-				}	
-			}
-			.yt {
-				background-color: @youtube;
-
-				i {
-					width: 32px;
-					height: 38px;
-					top: 10px;
-					background-position: -7px -151px;
-				}
-
-				span:before {
-					left: -30px;
-				}	
 			}
 		}
+		.tw {
+			background-color: @twitter;
 
-		.main-navigation {
-			position: relative;
-			height: 150px;
-			background-color: #0f0f0f;
-
-			.inner {
-				text-align: right;
-				position: relative;
-				top: 58px;
+			i {
+				width: 46px;
+				height: 37px;
+				top: 10px;
 			}
 
-			ul {
-				width: 60%;
-				padding: 0;
-				margin: 0;
+			span:before {
+				left: -23px;
+			}
+		}
+		.fb {
+			background-color: @facebook;
 
-				li:last-child {
-					padding-right: 0;
-				}
+			i {
+				width: 18px;
+				height: 38px;
+				top: 10px;
+				background-position: -13px -37px;
 			}
 
-			.info-navigation {
-				width: 39%;
-				text-align: left;
+			span:before {
+				left: -47px;
+			}
+		}
+		.gplus {
+			background-color: @gplus;
 
-				p {
-					margin: 9px 0;
-				}
-
-				a.close {
-					padding-bottom: 2px;
-					border-bottom: 1px solid @white;
-
-					&:hover,
-					&:active {
-						border-width: 2px;
-					}
-				}
+			i {
+				width: 45px;
+				height: 38px;
+				top: 10px;
+				background-position: 0 -75px;
 			}
 
-			.navigation li {
-				padding-left: 25px;
-				padding-right: 0;
-				float: right;
+			span:before {
+				left: -27px;
+			}	
+		}
+		.insta {
+			background-color: @instagram;
+
+			i {
+				width: 40px;
+				height: 38px;
+				top: 10px;
+				background-position: -3px -113px;
 			}
+
+			span:before {
+				left: -42px;
+			}	
+		}
+		.yt {
+			background-color: @youtube;
+
+			i {
+				width: 32px;
+				height: 38px;
+				top: 10px;
+				background-position: -7px -151px;
+			}
+
+			span:before {
+				left: -30px;
+			}	
 		}
 	}
 
-	.main-content .button {
+	.main-navigation {
+		position: relative;
+		height: 150px;
+		background-color: #0f0f0f;
+
+		.inner {
+			text-align: right;
+			position: relative;
+			top: 58px;
+		}
+
+		ul {
+			width: 60%;
+			padding: 0;
+			margin: 0;
+
+			li:last-child {
+				padding-right: 0;
+			}
+		}
+
+		.info-navigation {
+			width: 39%;
+			text-align: left;
+
+			p {
+				margin: 9px 0;
+			}
+
+			a.close {
+				padding-bottom: 2px;
+				border-bottom: 1px solid @white;
+
+				&:hover,
+				&:active {
+					border-width: 2px;
+				}
+			}
+		}
+
+		.navigation li {
+			padding-left: 25px;
+			padding-right: 0;
+			float: right;
+		}
+	}
+}
+
+.main-content {
+	.button {
 		background-color: @colorButton;
 		width: 380px; height: 95px;
 		font-size: 1.8em; font-family: "open_sanslight"; color: @white;
@@ -520,8 +539,8 @@ html {
 		padding: 0 60px;
 
 		display: inline-block;
-	}
 
+	}
 	.form {
 		width: 500px;
 		text-align: left;
@@ -568,85 +587,76 @@ html {
 		}
 	}
 
-	.main-content .fake-label {
+	.fake-label {
 		font-family: "open_sansbold"; font-size: 1.3em; color: @grayForm;
 		margin-bottom: 25px; 
 	}
 
-	.choose-network {
-		width: 500px;
-		text-align: left;
-		margin: 45px auto;
-		overflow: hidden;
+	ul.networks {
+		vertical-align: middle;
+		margin: 0; padding: 0;
+		display: inline-block;
 
-		ul {
-			vertical-align: middle;
-			margin: 0; padding: 0;
-			display: inline-block;
+		li {
+			list-style: none;
+			margin: 0 0 0 40px; padding: 0;
+			float: left;
+			display: block;
 
-			li {
-				list-style: none;
-				margin: 0 0 0 40px; padding: 0;
-				float: left;
-				display: block;
+			a {
+				position: relative;
+				.size(50px);
+				.border-radius(25px);
+				display: inline-block;
+			}
 
-				a {
-					position: relative;
-					.size(50px);
-					.border-radius(25px);
-					display: inline-block;
-				}
+			&.fb a {
+				background-color: @facebook;
+			}
+			&.tw a {
+				background-color: @twitter;
+			}
+			&.ln a {
+				background-color: @linkedin;
+			}
+			&.gplus a {
+				background-color: @gplus;
+			}
 
-				&.fb a {
-					background-color: @facebook;
-				}
-				&.tw a {
-					background-color: @twitter;
-				}
-				&.ln a {
-					background-color: @linkedin;
-				}
-				&.gplus a {
-					background-color: @gplus;
-				}
-
-				i {
-					background: transparent url(../images/choose-network.png) -9999px -9999px no-repeat;
-					position: absolute; top: 50%; left: 50%;
-					text-align: left; text-indent: -9999px;
-					display: inline-block;
-				}
-				&.fb i {
-					background-position: -1px -1px;
-					.size(12px, 25px);
-					margin: -12px 0 0 -6px;
-				}
-				&.tw i {
-					background-position: -15px -1px;;
-					.size(24px, 20px);
-					margin: -10px 0 0 -12px;
-				}
-				&.ln i {
-					background-position: -41px -1px;
-					.size(24px, 22px);
-					margin: -12px 0 0 -11px;
-				}
-				&.gplus i {
-					background-position: -67px -1px;
-					.size(28px, 24px);
-					margin: -12px 0 0 -14px;
-				}
+			i {
+				background: transparent url(../images/choose-network.png) -9999px -9999px no-repeat;
+				position: absolute; top: 50%; left: 50%;
+				text-align: left; text-indent: -9999px;
+				display: inline-block;
+			}
+			&.fb i {
+				background-position: -1px -1px;
+				.size(12px, 25px);
+				margin: -12px 0 0 -6px;
+			}
+			&.tw i {
+				background-position: -15px -1px;;
+				.size(24px, 20px);
+				margin: -10px 0 0 -12px;
+			}
+			&.ln i {
+				background-position: -41px -1px;
+				.size(24px, 22px);
+				margin: -12px 0 0 -11px;
+			}
+			&.gplus i {
+				background-position: -67px -1px;
+				.size(28px, 24px);
+				margin: -12px 0 0 -14px;
 			}
 		}
 	}
-
 	.user-pic {
 		.size(50,50);
 		.border-radius(90px);
 	}
-
-
-	/*DELETE IT*/
-	.form {
-		display: block!important;
+	.photo-pic {
+		.size(180,180);
+		.border-radius(90px);
 	}
+}

@@ -21,7 +21,7 @@
             {elseif !$identity->isRegistered()}
                 <div class="choose-network">
                     <span class="fake-label">Vyber si síť:</span>
-                    <ul>
+                    <ul class="networks">
                         <li class="gplus">
                             <a href="javascript:void(0)"><i>Google+</i></a>
                         </li>
@@ -39,7 +39,7 @@
                 <div class="form">{control registration}</div>
                 <a href="javascript:void(0)" class="button registration-button">Chci přijít!</a>
             {else}
-                <p>Zúčastním se Plzeňského Barcampu :)</p>
+                <p class="border-tb">Zúčastním se Plzeňského Barcampu :)</p>
             {/if}
         {/if}
     </div>
@@ -67,7 +67,7 @@
                 <div class="form">{control speakerRegisteration}</div>
                 <a href="javascript:void(0)" class="button registration-button">Chci přednášet!</a>
             {else}
-                <p>Mám vypsanou přednášku :)</p>
+                <p class="border-tb">Mám vypsanou přednášku :)</p>
             {/if}
         </div>
     {/if}
