@@ -176,18 +176,17 @@ html {
 	}
 }
 
+.main-content.inner {
+	width: 620px;
+	padding: 0 140px;
+}
+.wide .main-content .inner {
+	width: 900px;
+	padding-left: 0; padding-right: 0;
+}
+
 .main-content {
 	padding-bottom: 30px;
-
-	.inner {
-		width: 620px;
-		padding: 0 140px;
-	}
-
-	&.main-content-width .inner {
-		width: 900px;
-		padding-left: 0; padding-right: 0;
-	}
 
 	#registration {
 		.text-center {
@@ -250,7 +249,6 @@ html {
 
 		.first-td {
 			width: 50px;
-			padding-left: 15px;
 
 			a {
 				border-bottom: 0;
@@ -258,6 +256,7 @@ html {
 		}
 		.second-td {
 			width: 18%;
+			padding-left: 0;
 		}
 		.third-td {
 			width: 25%;
@@ -278,6 +277,56 @@ html {
 			&.more {
 				white-space: normal;
 				text-overflow: clip;
+			}
+		}
+
+		&#talks-list {
+			.second-td {
+				width: auto;
+			}
+			.third-td {
+				width: 50%;
+			}
+			.fourth-td {
+				width: 20px;
+				text-align: center;
+
+				span {
+					display: block;
+
+					em {
+						font-size: 150%; font-style: normal; font-weight: bold; color: @green;
+						display: block;
+					}
+				}
+			}
+			.table-list-sub-wrap {
+				background-color: #EDFFF3;
+			}
+			.table-list-sub {
+				.first-td {
+					width: 120px;
+					vertical-align: top;
+					padding-left: 0;
+					padding-right: 40px;
+
+					span {
+						text-align: center;
+						margin-top: 10px;
+						display: block;
+					}
+				}
+				.fourth-td {
+					width: 80px;
+					padding-right: 0;
+				}
+			}
+			.talks-detail {
+				display: none;
+			}
+			.talks-detail .user-pic {
+				.size(120,120);
+				.border-radius(60px);
 			}
 		}
 	}
@@ -653,7 +702,7 @@ html {
 	}
 	.user-pic {
 		.size(50,50);
-		.border-radius(90px);
+		.border-radius(25px);
 	}
 	.photo-pic {
 		.size(180,180);

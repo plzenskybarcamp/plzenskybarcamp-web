@@ -149,4 +149,31 @@ $(document).ready(function() {
             _$this.addClass('active').find('.crop').addClass('more');
         }
     });
+
+    var $listTableTalks = $('.table-list#talks-list tr');
+    $listTableTalks.on('click touchstart', function() {
+        var
+                _$this = $(this),
+                _id = _$this.attr('data-id'),
+                _$detailTrHead = $listTableTalks.parent().find('.talks-head'),
+                _$detailTr = $listTableTalks.parent().find('.talks-detail'),
+                _$detailTrHeadCurrent = $listTableTalks.parent().find('.talks-head[data-id="' + _id + '"]'),
+                _$detailTrCurrent = $listTableTalks.parent().find('.talks-detail[data-id="' + _id + '"]');
+
+        _$detailTr.hide();
+        _$detailTrHead.show();
+
+        if (_$this.hasClass('active-detail-head')) {
+            _$detailTrHeadCurrent.show();
+            _$detailTrCurrent.hide();
+        } else {
+            _$detailTrHeadCurrent.hide();
+            _$detailTrCurrent.addClass('active-detail').show();
+        }
+
+        if (_$this.hasClass('active-detail')) {
+            _$detailTrCurrent.hide();
+            _$detailTrHeadCurrent.show();
+        }
+    });
 });
