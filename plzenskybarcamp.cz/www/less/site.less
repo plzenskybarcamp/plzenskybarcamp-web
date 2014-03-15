@@ -12,6 +12,25 @@ html {
 	//background: orange;
 }
 
+.cleaner {
+	clear: both;
+	line-height: 0;
+	height: 1%;
+	font-size: 1%;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+
 .main-header {
 	display: block;
 	width: 100%;
@@ -66,6 +85,11 @@ html {
 
 		a:hover:after {
 			display: none;
+		}
+
+		.user-pic {
+			position: relative; top: 7px;
+			margin-right: 10px;
 		}
 	}
 }
@@ -176,7 +200,7 @@ html {
 	}
 }
 
-.main-content.inner {
+.main-content .inner {
 	width: 620px;
 	padding: 0 140px;
 }
@@ -188,20 +212,24 @@ html {
 .main-content {
 	padding-bottom: 30px;
 
-	#registration {
-		.text-center {
-			text-align: center;
+	#registration {		
 
-			h3 {
-				border-bottom: 1px solid @grayUnderline;
-				border-bottom: 0;
-				display: inline-block;
-			}
+		h3 {
+			border-bottom: 1px solid @grayUnderline;
+			border-bottom: 0;
+			display: inline-block;
 		}
+		
 		.choose-network {
 			width: 500px;
 			text-align: left;
 			margin: 45px auto;
+
+			.networks {
+				li {
+					margin: 0 0 0 40px; 
+				}
+			}
 		}
 	}
 	.photos {
@@ -331,6 +359,34 @@ html {
 		}
 	}
 
+	#talk-detail {
+		margin-bottom: 40px;
+		float: left;
+	}
+
+	#speaker-detail {
+		width: 300px;
+		text-align: center;
+		margin: 0 0 40px 40px;
+		overflow: hidden;
+		float: right;		
+
+
+		.user-pic {
+			margin-bottom: 15px;
+		}
+
+		.networks {
+			li {
+				margin: 0 10px;
+			}
+		}
+
+		.bio {
+			text-align: left;
+		}
+	}
+
 	.organizers {
 		overflow: hidden;
 		.organizer {
@@ -349,6 +405,10 @@ html {
 		strong {
 			font-size: 150%; color: @green;
 		}
+	}
+
+	.text-center {
+		text-align: center;
 	}
 }
 
@@ -588,15 +648,20 @@ html {
 	.button {
 		background-color: @colorButton;
 		width: 380px; height: 95px;
-		font-size: 1.8em; font-family: "open_sanslight"; color: @white;
+		font-size: 1.8em; font-family: "open_sanslight"; color: @white; text-align: center;
 		line-height: 95px;
 
 		border-bottom: 0;
 		padding: 0 60px;
 
 		display: inline-block;
-
 	}
+
+	button.button {
+		width: 500px;
+		border: 0;
+	}
+
 	.form {
 		width: 500px;
 		text-align: left;
@@ -612,8 +677,8 @@ html {
 		}
 
 		label {
-			font-family: "open_sansbold"; font-size: 1.3em; color: @grayForm;
-			margin-bottom: 25px; 
+			font-family: "open_sanssemibold"; font-size: 1.1em; color: @grayForm;
+			margin-bottom: 15px; 
 			display: block;
 		}
 		input[type="text"], textarea {
@@ -651,11 +716,12 @@ html {
 	ul.networks {
 		vertical-align: middle;
 		margin: 0; padding: 0;
+		overflow: hidden;
 		display: inline-block;
 
 		li {
 			list-style: none;
-			margin: 0 0 0 40px; padding: 0;
+			margin: 0; padding: 0;
 			float: left;
 			display: block;
 
@@ -691,7 +757,7 @@ html {
 				margin: -12px 0 0 -6px;
 			}
 			&.tw i {
-				background-position: -15px -1px;;
+				background-position: -15px -1px;
 				.size(24px, 20px);
 				margin: -10px 0 0 -12px;
 			}
@@ -707,12 +773,22 @@ html {
 			}
 		}
 	}
-	.user-pic {
-		.size(50,50);
-		.border-radius(25px);
+}
+.user-pic {
+	.size(50,50);
+	.border-radius(25px);
+
+	&.user-pic-s25{
+		.size(26,26);
+		.border-radius(13px);
 	}
-	.photo-pic {
+
+	&.user-pic-s180 {
 		.size(180,180);
 		.border-radius(90px);
 	}
+}
+.photo-pic {
+	.size(180,180);
+	.border-radius(90px);
 }

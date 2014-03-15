@@ -48,8 +48,8 @@
                     </ul>
                     <ul class="info-navigation">
                         {if !$user->isLoggedIn()}<li><a href="{$fbLoginLink}" id="login-buton">Přihlásit</a></li>{/if}
-                        {if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}
-
+                        {*{if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}*}
+                        {if $user->isLoggedIn()}<li><img class="user-pic user-pic-s25" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t1/p160x160/562360_656430911035575_1808349019_n.jpg"><a href="javascript:void(0)" id="logout-buton">Username</a></li>{/if}
                     </ul>
                 </div>
             </nav>

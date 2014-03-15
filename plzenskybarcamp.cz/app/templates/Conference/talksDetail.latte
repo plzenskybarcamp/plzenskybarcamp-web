@@ -6,48 +6,68 @@ hranic{/block}
 {block content}
 
 <section class="main-content">
-	<div class="inner">
-		<div id="talk-detail">
-			<h2>{$talk['title']}</h2>
-			<p>{$talk['description']}</p>
+    <div class="inner">
+        <h2>{$talk['title']}</h2>
+        <div id="talk-detail" class="clearfix">
+            <p>{$talk['description']}</p>
 
-			<h3>Komu je přednáška určena?</h3>
-			<p>{$talk['purpose']}</p>
+            <h3>Komu je přednáška určena?</h3>
+            <p>{$talk['purpose']}</p>
 
-			<a n:ifset="$talk['presentation_link']"
-				href="$talk['presentation_link']" target="_blank">
-					Prezentace ke stažení
-			</a>
+            <a n:ifset="$talk['presentation_link']"
+               href="$talk['presentation_link']" target="_blank">
+                Prezentace ke stažení
+            </a>
 
-			<div n:ifset="$talk['youtube_video']">
-				<h3>Záznam přednášky</h3>
-				{=$talk['youtube_video']}
-			</div>
-		</div>
+            <div n:ifset="$talk['youtube_video']">
+                <h3>Záznam přednášky</h3>
+                {=$talk['youtube_video']}
+            </div>
+        </div>
 
-		<div id="speaker-detail">
-			<h1>{$speaker['name']}</h1>
-			<img n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']}" />
-			<div>
-				<span n:ifset="$speaker['twitter']"><a href="http://twitter.com/{$speaker['twitter']}" target="_blank">TW</a></span>
-				<span n:ifset="$speaker['facebook']"><a href="{$speaker['facebook']}" target="_blank">FB</a></span>
-				<span n:ifset="$speaker['linked']"><a href="{$speaker['linked']}" target="_blank">IN</a></span>
-			</div>
-			<p><strong>Bio:</strong> {$speaker['bio']}</p>
-			<div n:ifset="$talk['votes']">
-				<p><span id="votes-count">{$talk['votes_count']}</span> hlasů</p>
-				<p>
-					<label for="vote">Chci slyšet</label>
-					<input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}chacked{/if}/> 
-				</p>
-			</div>
+        <div id="speaker-detail" class="clearfix">
+            <p><strong>{$speaker['name']}</strong></p>
+            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']}" />
 
-			<div>
-				<p n:ifset="$talk['place']">{$talk['place']}</p>
-				<p n:ifset="$talk['time']">{$talk['time']}</p>
-			</div>
-		</div>
+            <div>
+                <ul class="networks">
+                    {*<li class="gplus">
+                        <a href="javascript:void(0)"><i>Google+</i></a>
+                    </li>*}
+                    <li n:ifset="$speaker['facebook']" class="fb">
+                        <a href="{$speaker['facebook']}" target="_blank"><i>Facebook</i></a>
+                    </li>
+                    <li n:ifset="$speaker['twitter']" class="tw">
+                        <a href="http://twitter.com/{$speaker['twitter']}" target="_blank"><i>Twitter</i></a>
+                    </li>
+                    <li n:ifset="$speaker['linked']" class="ln">
+                        <a href="{$speaker['linked']}" target="_blank"><i>LinkedIn</i></a>
+                    </li>
+                </ul>
+            </div>
 
-		<div n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil">Upravit svojí přednášku</a></div>
-	</div>
+            {*<div>
+                <span n:ifset="$speaker['twitter']"><a href="http://twitter.com/{$speaker['twitter']}" target="_blank">TW</a></span>
+                <span n:ifset="$speaker['facebook']"><a href="{$speaker['facebook']}" target="_blank">FB</a></span>
+                <span n:ifset="$speaker['linked']"><a href="{$speaker['linked']}" target="_blank">IN</a></span>
+            </div>*}
+            <p class="bio"><strong>Bio:</strong> {$speaker['bio']}</p>
+
+            <div n:ifset="$talk['votes']">
+                <p><span id="votes-count">{$talk['votes_count']}</span> hlasů</p>
+                <p>
+                    <label for="vote">Chci slyšet</label>
+                    <input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}chacked{/if}/> 
+                </p>
+            </div>
+
+            <div>
+                <p n:ifset="$talk['place']">{$talk['place']}</p>
+                <p n:ifset="$talk['time']">{$talk['time']}</p>
+            </div>
+        </div>
+        <div class="cleaner"></div>
+
+        <div class="text-center" n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil" class="button">Upravit mojí přednášku</a></div>
+    </div>
 </section>

@@ -1,29 +1,34 @@
 {block title}{block h1}Profil{/block} - Plzeňský Barcamp{/block}
 {block content}
 <script type="text/javascript">
-	
+
 </script>
 <section class="main-content">
-	<div class="inner">
-		<h2>Já, účastník</h2>
-		<div><img src="{@$conferree['picture_url']}" /></div>
+    <div class="inner">
+        <h2>Já, účastník</h2>
+        <div class="text-center">
+            <img class="user-pic user-pic-s180" src="{@$conferree['picture_url']}" />
+            <p>Datum registrace: {@$conferree['created_date']->sec|date: '%d.%m.%Y'}</p>
+        </div>
 
-		<div id="user-form" class="form">
-			<div id="messages"></div>
-			{control userForm}
-		</div>
-		<p>Datum registrace: {@$conferree['created_date']->sec|date: '%d.%m.%Y'}</p>
+        <div id="user-form" class="form">
+            <div id="messages"></div>
+            {control userForm}
+        </div>
 
-		<div id="talk-form" class="form" {if !$talk}style="display:none"{/if}>
-			<h2>Moje vypsaná přednáška</h2>
-			{control talkForm}
-			<div n:if="$talk">
-				<p n:ifset="$talk['votes_count']"><strong>Počet hlasů:</strong>{$talk['votes_count']}</p>
-				<p n:ifset="$talk['place']"><strong>Místo a čas přednášky:</strong>{$talk['place']}{ifset $talk['time']}, {$talk['time']}{/ifset}</p>
-			</div>
-		</div>
-		
-		{if !$talk}<button id="talk-registration">Chci přednášet!</button>{/if}
-		<button id="profile-save">Uložit změny</button>
-	</div>
+        <div id="talk-form" class="form" {if !$talk}style="display:none"{/if}>
+            <h2>Moje vypsaná přednáška</h2>
+            {control talkForm}
+            <div n:if="$talk">
+                <p n:ifset="$talk['votes_count']"><strong>Počet hlasů:</strong>{$talk['votes_count']}</p>
+                <p n:ifset="$talk['place']"><strong>Místo a čas přednášky:</strong>{$talk['place']}{ifset $talk['time']}, {$talk['time']}{/ifset}</p>
+            </div>
+        </div>
+
+        <p class="text-center"><button class="button" id="profile-save">Uložit změny</button></p>
+        {if !$talk}
+            <h2>Moje přednášky</h2>
+            <p class="text-center"><button class="button" id="talk-registration">Chci přednášet!</button></p>
+        {/if}
+    </div>
 </section>
