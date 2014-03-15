@@ -31,21 +31,13 @@ class UserRegistration extends Control {
 			'name' => $identity->name,
 			'email' => $identity->email
 		) );
-		$form->addSubmit( 'submit', 'Chci přijít!' );
+		$form->addSubmit( 'submit', 'Odeslat registraci!' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 
-		$renderer = $form->getRenderer();
+		$this->configRenderer( $form->getRenderer() );
 
-		$renderer->wrappers['controls']['container'] = NULL;
-		$renderer->wrappers['pair']['container'] = "div class='inputs-wrap'";
-		$renderer->wrappers['label']['container'] = NULL;
-		$renderer->wrappers['control']['container'] = NULL;
-		$renderer->wrappers['control']['description'] = 'span';
-
-		//print_r($renderer);die();
 		return $form;
 	}
-
 
 	public function addUsersFields( $container ) {
 		$container->addText( 'name', 'Jméno a příjmení' )
@@ -68,4 +60,12 @@ class UserRegistration extends Control {
 		$values['picture_url'] = $user->getIdentity()->picture_url;
 		$this->registrationModel->updateConferree( $user->getId(), $values );
 	}
-} 
+
+	private function configRenderer( $renderer ) {
+		$renderer->wrappers['controls']['container'] = NULL;
+		$renderer->wrappers['pair']['container'] = "div class='inputs-wrap'";
+		$renderer->wrappers['label']['container'] = NULL;
+		$renderer->wrappers['control']['container'] = NULL;
+		$renderer->wrappers['control']['description'] = 'span';
+	}
+}
