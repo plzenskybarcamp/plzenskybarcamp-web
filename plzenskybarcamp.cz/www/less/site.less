@@ -195,6 +195,7 @@ html {
 
 			h3 {
 				border-bottom: 1px solid @grayUnderline;
+				border-bottom: 0;
 				display: inline-block;
 			}
 		}
@@ -529,7 +530,7 @@ html {
 		.inputs-wrap {
 			margin-bottom: 45px;
 			span {
-				font-style: italic;
+				font-style: italic; color: #c8c8c8;
 				padding-top: 5px;
 				display: block;
 			}
@@ -559,6 +560,11 @@ html {
 		input:required, input.required,
 		textarea:required, textarea.required {
 			background: transparent url(../images/required-star.png) 480px 7px no-repeat;
+		}
+
+		input[type="submit"].button {
+			width: 500px;
+			border: 0;
 		}
 	}
 
