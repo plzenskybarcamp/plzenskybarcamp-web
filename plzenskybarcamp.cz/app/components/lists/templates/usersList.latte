@@ -1,10 +1,10 @@
 <h2>Účastnící Plzeňského Barcampu</h2>
 
-<table style="width:100%">
-	<tr n:foreach="$users as $user" {if $currentUser->getId() == $user['user_id']}class="current-user"{/if}>
-		<td><img src="{@$user['picture_url']}"/></td>
-		<td><a n:tag-if="$currentUser->getId() == $user['user_id']" href="{plink Conference:profil}">{$user['name']}</a></td>
-		<td><a n:tag-if="$user['twitter']" href="http://twitter.com/{$user['twitter']}" target="_blank">{$user['twitter']}</a></td>
-		<td>BIO: {$user['bio']}</td>
-	</tr>
+<table class="table-list">
+    <tr n:foreach="$users as $user" {if $currentUser->getId() == $user['user_id']}class="current-user"{/if}>
+        <td class="first-td"><img class="user-pic" src="{@$user['picture_url']}"/></td>
+        <td class="second-td"><a n:tag-if="$currentUser->getId() == $user['user_id']" href="{plink Conference:profil}">{$user['name']}</a></td>
+        <td class="third-td"><a n:tag-if="$user['twitter']" href="http://twitter.com/{$user['twitter']}" target="_blank">{$user['twitter']}</a></td>
+        <td class="fourth-td"><span class="crop">BIO: {$user['bio']}</span></td>
+    </tr>
 </table>

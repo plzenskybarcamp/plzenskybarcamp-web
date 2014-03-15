@@ -1,13 +1,13 @@
 <h2>Přednášky Plzeňského Barcampu</h2>
 <p>Sleduj seznam zapsaných přednášek. V týdnu mezi 24. - 30. březnem otevřeme hlasování a ty se budeš moci podílet na náplni prvního Plzeňského Barcampu! A jestli ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma.</p>
 
-<table id="talks-list" style="width:100%">
-	<tr n:foreach="$talks as $talk">
-		{var speaker = $talk['speaker']}
+<table class="table-list" id="talks-list">
+    <tr n:foreach="$talks as $talk">
+        {var speaker = $talk['speaker']}
 
-		<td><img src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></td>
-		<td><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}">{$talk['title']}</a></td>
-		<td>{$talk['description']|truncate:30}</td>
-		<td><span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a></td>
-	</tr>
+        <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></a></td>
+        <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}">{$talk['title']}</a></td>
+        <td class="third-td">{$talk['description']|truncate:30}</td>
+        <td class="fourth-td"><span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a></td>
+    </tr>
 </table>

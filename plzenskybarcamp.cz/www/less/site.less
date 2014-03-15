@@ -223,9 +223,56 @@ html {
 			a {
 				text-decoration: none;
 				border-bottom: 0;
-				img {
-					.border-radius(25px);
-				}
+			}
+		}
+	}
+	.table-list {
+		width: 100%;
+
+		tr.active {
+			background-color: #EDFFF3;
+		}
+		tr:hover {
+			cursor: pointer;
+			td {
+				background-color: #EDFFF3;
+			}
+		}
+
+		td {
+			padding: 15px;
+		}
+
+		.first-td {
+			width: 50px;
+			padding-left: 15px;
+
+			a {
+				border-bottom: 0;
+			}
+		}
+		.second-td {
+			width: 18%;
+		}
+		.third-td {
+			width: 25%;
+		}
+		.fourth-td {
+			padding-right: 15px;
+		}
+
+		.crop {
+			width: 420px;
+			white-space: nowrap;
+			text-overflow: ellipsis; overflow: hidden;
+			display: block;
+
+			-webkit-transition: all 2s;
+			transition: all 2s;
+
+			&.more {
+				white-space: normal;
+				text-overflow: clip;
 			}
 		}
 	}
@@ -453,6 +500,12 @@ html {
 					}
 				}
 			}
+
+			.navigation li {
+				padding-left: 25px;
+				padding-right: 0;
+				float: right;
+			}
 		}
 	}
 
@@ -579,6 +632,11 @@ html {
 				}
 			}
 		}
+	}
+
+	.user-pic {
+		.size(50,50);
+		.border-radius(90px);
 	}
 
 
