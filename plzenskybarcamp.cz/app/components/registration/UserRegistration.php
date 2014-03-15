@@ -25,16 +25,15 @@ class UserRegistration extends Control {
 
 	public function createComponentForm( $name ) {
 		$form = new Form( $this, $name );
+		$form->setRenderer( new \App\Components\CustomFormRenderer );
 		$form = $this->addUsersFields( $form );
 		$identity = $this->getPresenter()->getUser()->getIdentity();
 		$form->setDefaults( array(
 			'name' => $identity->name,
 			'email' => $identity->email
 		) );
-		$form->addSubmit( 'submit', 'Odeslat registraci!' );
+		$form->addSubmit( 'submit', 'Odeslat registraci' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
-
-		$this->configRenderer( $form->getRenderer() );
 
 		return $form;
 	}
@@ -61,11 +60,4 @@ class UserRegistration extends Control {
 		$this->registrationModel->updateConferree( $user->getId(), $values );
 	}
 
-	private function configRenderer( $renderer ) {
-		$renderer->wrappers['controls']['container'] = NULL;
-		$renderer->wrappers['pair']['container'] = "div class='inputs-wrap'";
-		$renderer->wrappers['label']['container'] = NULL;
-		$renderer->wrappers['control']['container'] = NULL;
-		$renderer->wrappers['control']['description'] = 'span';
-	}
 }
