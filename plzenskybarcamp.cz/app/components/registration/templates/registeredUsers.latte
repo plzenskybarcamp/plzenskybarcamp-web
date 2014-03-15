@@ -1,6 +1,6 @@
 <div>
 	<h3>{$usersCount} {$title}</h3>
-	<ul>
-		<li n:foreach="$users as $user"><img src="{@$user['picture_url']}"/></li>
+	<ul class="list-inline">
+		<li n:foreach="$users as $user"><a href="javascript:void(0)"><img src="{@$user['picture_url']}"/></a></li>
 	</ul>
 </div>

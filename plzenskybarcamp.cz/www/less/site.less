@@ -184,6 +184,11 @@ html {
 		padding: 0 140px;
 	}
 
+	&.main-content-width .inner {
+		width: 900px;
+		padding-left: 0; padding-right: 0;
+	}
+
 	#registration {
 		.text-center {
 			text-align: center;
@@ -194,6 +199,36 @@ html {
 			}
 		}
 	}
+	.photos {
+		text-align: center;
+		margin: 0 -140px; padding: 40px 0;
+
+		img {
+			.border-radius(90px);
+			margin: 0 40px;
+		}
+	}
+	.list-inline {
+		width: 500px;
+		margin: 0 auto; padding: 0;
+		overflow: hidden;
+		display: block;
+
+		li {
+			list-style: none;
+			margin: 15px; padding: 0;
+			float: left;
+			display: block;
+
+			a {
+				text-decoration: none;
+				border-bottom: 0;
+				img {
+					.border-radius(25px);
+				}
+			}
+		}
+	}
 }
 
 .main-footer {
@@ -201,7 +236,7 @@ html {
 	.action-panel {
 		display: block;
 		width: 100%;
-		height: 328px;
+		height: 150px;
 		background: url(../images/bg-footer.jpg) no-repeat 0 0;
 		.background-size(cover);
 		position: relative;
@@ -391,7 +426,7 @@ html {
 			}
 
 			ul {
-				width: 20%;
+				width: 60%;
 				padding: 0;
 				margin: 0;
 
@@ -401,7 +436,7 @@ html {
 			}
 
 			.info-navigation {
-				width: 79%;
+				width: 39%;
 				text-align: left;
 
 				p {
@@ -424,7 +459,7 @@ html {
 	.main-content .button {
 		background-color: @colorButton;
 		width: 380px; height: 95px;
-		font-size: 1.5em; font-family: "open_sanslight"; color: @white;
+		font-size: 1.8em; font-family: "open_sanslight"; color: @white;
 		line-height: 95px;
 
 		border-bottom: 0;
@@ -441,6 +476,7 @@ html {
 		.inputs-wrap {
 			margin-bottom: 45px;
 			span {
+				font-style: italic;
 				padding-top: 5px;
 				display: block;
 			}
@@ -448,7 +484,6 @@ html {
 
 		label {
 			font-family: "open_sansbold"; font-size: 1.3em; color: @grayForm;
-
 			margin-bottom: 25px; 
 			display: block;
 		}
@@ -470,30 +505,80 @@ html {
 
 		input:required, input.required,
 		textarea:required, textarea.required {
-			background: transparent url(../images/required-star.png) 485px 5px no-repeat;
+			background: transparent url(../images/required-star.png) 480px 7px no-repeat;
 		}
 	}
 
-	.choose-network {}
-	.choose-network li i {
-		background: transparent url(../images/choose-network.png) -9999px -9999px no-repeat;
-		display: block;
+	.main-content .fake-label {
+		font-family: "open_sansbold"; font-size: 1.3em; color: @grayForm;
+		margin-bottom: 25px; 
 	}
-	.choose-network li.fb i {
-		background-position: -1px -1px;
-		width: 12px; height: 25px;
-	}
-	.choose-network li.tw i {
-		background-position: -15px -1px;
-		width: 24px; height: 20px;
-	}
-	.choose-network li.ln i {
-		background-position: -41px -1px;
-		width: 24px; height: 22px;
-	}
-	.choose-network li.gplus i {
-		background-position: -67px -1px;
-		width: 24px; height: 21px;
+
+	.choose-network {
+		width: 500px;
+		text-align: left;
+		margin: 0 auto 45px auto;
+		overflow: hidden;
+
+		ul {
+			vertical-align: middle;
+			margin: 0; padding: 0;
+			display: inline-block;
+
+			li {
+				list-style: none;
+				margin: 0 0 0 40px; padding: 0;
+				float: left;
+				display: block;
+
+				a {
+					position: relative;
+					.size(50px);
+					.border-radius(25px);
+					display: inline-block;
+				}
+
+				&.fb a {
+					background-color: @facebook;
+				}
+				&.tw a {
+					background-color: @twitter;
+				}
+				&.ln a {
+					background-color: @linkedin;
+				}
+				&.gplus a {
+					background-color: @gplus;
+				}
+
+				i {
+					background: transparent url(../images/choose-network.png) -9999px -9999px no-repeat;
+					position: absolute; top: 50%; left: 50%;
+					text-align: left; text-indent: -9999px;
+					display: inline-block;
+				}
+				&.fb i {
+					background-position: -1px -1px;
+					.size(12px, 25px);
+					margin: -12px 0 0 -6px;
+				}
+				&.tw i {
+					background-position: -15px -1px;;
+					.size(24px, 20px);
+					margin: -10px 0 0 -12px;
+				}
+				&.ln i {
+					background-position: -41px -1px;
+					.size(24px, 22px);
+					margin: -12px 0 0 -11px;
+				}
+				&.gplus i {
+					background-position: -67px -1px;
+					.size(28px, 24px);
+					margin: -12px 0 0 -14px;
+				}
+			}
+		}
 	}
 
 

@@ -12,7 +12,6 @@
     <p>Registrace již brzy</p>
 {else}
     <div class="text-center" id="user-regestration">
-
         {control registeredUsers 'osobností se zúčastní'}
         {if !$identity->isRegistered() && !$canBeRegistered}
             <p>Kapacita je vyčerpaná</p>
@@ -21,8 +20,8 @@
                 <a href="{$fbLoginLink}" id="login-buton" class="button">Chci přijít!</a>
             {elseif !$identity->isRegistered()}
                 <div class="choose-network">
+                    <span class="fake-label">Vyber si síť:</span>
                     <ul>
-
                         <li class="gplus">
                             <a href="javascript:void(0)"><i>Google+</i></a>
                         </li>
@@ -32,7 +31,7 @@
                         <li class="tw">
                             <a href="javascript:void(0)"><i>Twitter</i></a>
                         </li>
-                        <li class="in">
+                        <li class="ln">
                             <a href="javascript:void(0)"><i>LinkedIn</i></a>
                         </li>
                     </ul>
