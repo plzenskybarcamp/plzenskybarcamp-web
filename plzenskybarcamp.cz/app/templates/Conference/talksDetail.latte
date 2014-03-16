@@ -34,13 +34,13 @@ hranic{/block}
                     {*<li class="gplus">
                         <a href="javascript:void(0)"><i>Google+</i></a>
                     </li>*}
-                    <li n:ifset="$speaker['facebook']" class="fb">
+                    <li n:if="@$speaker['facebook']" class="fb">
                         <a href="{$speaker['facebook']}" target="_blank"><i>Facebook</i></a>
                     </li>
-                    <li n:ifset="$speaker['twitter']" class="tw">
+                    <li n:if="@$speaker['twitter']" class="tw">
                         <a href="http://twitter.com/{$speaker['twitter']}" target="_blank"><i>Twitter</i></a>
                     </li>
-                    <li n:ifset="$speaker['linked']" class="ln">
+                    <li n:if="@$speaker['linked']" class="ln">
                         <a href="{$speaker['linked']}" target="_blank"><i>LinkedIn</i></a>
                     </li>
                 </ul>
@@ -68,6 +68,6 @@ hranic{/block}
         </div>
         <div class="cleaner"></div>
 
-        <div class="text-center" n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil" class="button">Upravit mojí přednášku</a></div>
+        <div class="text-center" n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil#talk-form" class="button">Upravit mojí přednášku</a></div>
     </div>
 </section>

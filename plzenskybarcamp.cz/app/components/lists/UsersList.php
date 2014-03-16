@@ -16,6 +16,7 @@ class UsersList extends Control {
 		$this->template->setFile( __DIR__ . '/templates/usersList.latte');
 		$users = $this->registrationModel->getConferrees();
 		$this->template->users = $users;
+		$this->template->usersCount = $users->count();
 		$this->template->currentUser = $this->getPresenter()->getUser();
 		$this->template->render();
 	}
