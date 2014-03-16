@@ -7,7 +7,7 @@ use  Nette\Application\Responses\JsonResponse;
 
 class Main extends Control {
 
-	const MAX_CAPACITY = 100;
+	const MAX_CAPACITY = 300;
 
 	private $registrationModel;
 
@@ -27,7 +27,7 @@ class Main extends Control {
 		$this->template->setFile( __DIR__ . '/templates/main.latte');
 		$this->template->user = $this->getPresenter()->getUser();
 		$this->template->identity = new FakeUser( $this->getPresenter()->getUser(), $this->registrationModel ); //$this->getPresenter()->getUser()->getIdentity();
-		$this->template->canBeRegistered = self::MAX_CAPACITY - 0;
+		$this->template->canBeRegistered = self::MAX_CAPACITY - $this->registrationModel->getConferrees()->count();
 		$this->template->isRegistrationOpen = true;
 		$this->template->fbLoginLink = $this->fbLoginLink;
 		return $this->template;
