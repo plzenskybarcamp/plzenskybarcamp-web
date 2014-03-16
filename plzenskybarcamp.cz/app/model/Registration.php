@@ -58,6 +58,37 @@ class Registration {
 		return $this->findCoferrees()->sort( array('created_date' => -1) );
 	}
 
+	public function getVotesCount( $talkId ) {
+		$talk = $this->findTalk( $talkId );
+		return isset( $talk['votes_count'] ) ? $talk[ 'votes_count' ] : 0;
+	}
+
+	public function addVote( $talkId, $userId ) {
+		$this->talkCollection->update(
+			array( 'talk_id' => $talkId ),
+			array(
+				'$push' => array( 'votes' => $userId ),
+				'$inc' => array( 'votes_count' => 1 )
+			),
+			array( 'upsert' => TRUE )
+		);
+	}
+
+	public function removeVote( $talkId, $userId ) {
+		$this->talkCollection->update(
+			array( 'talk_id' => $talkId ),
+			array(
+				'$pull' => array( 'votes' => $userId ),
+				'$inc' => array( 'votes_count' => -1 )
+			),
+			array( 'upsert' => TRUE )
+		);
+	}
+
+	public function hasTalk( $talkId ) {
+		return $this->talkCollection->find( array( 'talk_id' => $talkId ) )->hasNext();
+	}
+
 	private function findCoferrees( $condition = array() ) {
 		return $this->confereeCollection->find( $condition );
 	}

@@ -106,6 +106,39 @@ registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, 
     });
 }
 
+registerVotes = function(container) {
+    actionAdd = container.data( 'actionAdd' );
+    actionRemove = container.data( 'actionRemove' );
+    processSubmit = function(doAdded, talkId) {
+        action = doAdded ? actionAdd : actionRemove;
+        return $.ajax({
+            type: 'GET',
+            url: action,
+            data: 'talkId=' + talkId
+        }).promise().then(function(res){
+            if ( res.votes_count >= 0 ) {
+                return res.votes_count;
+            }
+            return $.Deferred().reject().promise();
+        })
+    }
+    $('tr.talks-detail', container).each(function(index, elem){
+        elem = $(elem);
+        talkId = elem.data('id');
+        $('.vote', elem).click((function(talkId){
+            return function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                box = this;
+                processSubmit(box.checked, talkId).done(function(count){
+                    $('.votes_count', elem).html(count);
+                    box.checked = !box.checked;
+                })
+            }
+        })(talkId));
+    })
+}
+
 $(document).ready(function() {
     $('.tooltip').tooltipster();
     $('a').smoothScroll();
@@ -113,6 +146,7 @@ $(document).ready(function() {
     registerForm('#user-regestration', '#speaker-regestration');
     registerAjaxRegistration($('#registration'));
     registerAjaxProfileUpdate($('#talk-registration'), $('#profile-save'), $('#user-form'), $('#talk-form'));
+    registerVotes($('#talks-list'));
 });
 // window.fbAsyncInit = function() {
 // 	FB.init({
