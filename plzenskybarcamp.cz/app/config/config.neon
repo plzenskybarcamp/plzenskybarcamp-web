@@ -35,4 +35,5 @@ services:
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	registrationModel: App\Model\Registration(%mongo%)
+	configModel: App\Model\Config(%mongo%)
 	Facebook: Facebook(%facebook.app_config%)
