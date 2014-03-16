@@ -106,6 +106,8 @@ class Registration {
 	private function syncTalkWithSpeaker( $speakerId, array $data ) {
 		unset( $data['speaker'] );
 		unset( $data['_id'] );
+		unset( $data['votes'] );
+		unset( $data['votes_count'] );
 		$this->updateConferreeByCondition( array( 'user_id' => $speakerId ), array( 'talk' => $data ) );
 	}
 
