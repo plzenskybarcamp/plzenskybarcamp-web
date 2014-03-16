@@ -1,9 +1,11 @@
 registerForm = function(container, nextContainer) {
     $('#registration').on('click', container + ' .registration-button', function(e) {
+        e.preventDefault();
         form = $('.form', container);
         nextForm = $('.form', nextContainer);
         if (form.is(':visible')) {
             form.hide();
+            $.scrollTo(container);
         } else {
             nextForm.hide();
             form.show();
@@ -29,6 +31,7 @@ registerAjaxRegistration = function(container) {
                 }).done(function(data) {
                     $('body').css('cursor', 'auto');
                     container.html(data.html);
+                    $.scrollTo(container);
                 });
             }
         })
@@ -56,9 +59,9 @@ commitForms = function(forms) {
     commitForm = function(form) {
         return ajaxPost(form).then(function(res) {
             if (!res.updated) {
-                return $.Deferred().reject('Behem ulozeni doslo k hybe').promise();
+                return $.Deferred().reject('Během uloženi došlo k chybě').promise();
             }
-            return 'Zmeny byli uspesneulozine';
+            return 'Změny byly úspěšně uloženy';
         });
     }
     return $.when.apply($, forms.map(commitForm));
@@ -69,6 +72,7 @@ showMessage = function(container, elmClass) {
         if (message) {
             elm = $('<p class="' + elmClass + '">' + message + '</p>');
             container.html('').append(elm);
+            $.scrollTo(container);
             setTimeout(function() {
                 elm.hide();
             }, 5000);
