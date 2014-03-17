@@ -1,10 +1,12 @@
 <h2>Přednášky Plzeňského Barcampu</h2>
 <p>Sleduj seznam zapsaných přednášek. V týdnu mezi 24. - 30. březnem otevřeme hlasování a ty se budeš moci podílet na náplni prvního Plzeňského Barcampu! A jestli ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma.</p>
 
+<p class="user-list-user-count">Registrovaných přednášek: <strong>{$talksCount}</strong></p>
+
 <table class="table-list" id="talks-list" data-action-add="{link addVote!}" data-action-remove="{link removeVote!}">
 <tbody>
 {foreach $talks as $talk}
-    {var speaker = $talk['speaker']}
+    {var $speaker = $talk['speaker']}
     <tr class="talks-head" data-id="{$talk['_id']}">
 
         <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></a></td>
@@ -14,14 +16,13 @@
     </tr>
 
     <tr class="talks-detail" data-id="{$talk['_id']}">
-        {var speaker = $talk['speaker']}
 
         <td colspan="4" class="table-list-sub-wrap">
             <table class="table-list table-list-sub">
                 <tr>
                     <td class="first-td">
                         <a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"></a>
-                        <span>{$talk['title']}</span>
+                        <span>{$speaker['name']}</span>
                     </td>
                     <td colspan="1" class="second-td">
                         <a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a>

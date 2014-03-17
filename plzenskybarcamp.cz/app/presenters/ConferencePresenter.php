@@ -44,8 +44,13 @@ class ConferencePresenter extends BasePresenter
 			throw new Nette\Application\BadRequestException( 'Talks not found', '404');
 		}
 
+		$this->template->registerHelper('twitterize', array($this, 'twitterize'));
 		$this->template->talk = $talk;
 		$this->template->speaker = $talk['speaker'];
+	}
+
+	public function twitterize( $url, $prefix ) {
+		return preg_replace('~^(((https?:)?//)?(.*\.?twitter.com/|@?))~i', $prefix, $url );
 	}
 
 	public function renderProfil( $talkId ) {

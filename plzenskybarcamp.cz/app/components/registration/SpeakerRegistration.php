@@ -70,11 +70,14 @@ class SpeakerRegistration extends Control {
 
 	public function addUsersFields( $container ) {
 		$container->addText( 'linked', 'LinkedIn' )
-			->setAttribute('placeholder', 'http://www.linkedin.com/in/grudl');
+			->setAttribute('placeholder', 'http://www.linkedin.com/in/grudl')
+			->addRule(Form::URL);
 		$container->addText( 'web', 'Web' )
-			->setAttribute('placeholder', 'http://davidgrudl.com');
+			->setAttribute('placeholder', 'http://davidgrudl.com')
+			->addRule(Form::URL);
 		$container->addText( 'facebook', 'Facebook' )
-			->setAttribute('placeholder', 'http://www.facebook.com/davidgrudl');
+			->setAttribute('placeholder', 'http://www.facebook.com/davidgrudl')
+			->addRule(Form::URL);
 		return $container;
 	}
 

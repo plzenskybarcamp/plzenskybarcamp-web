@@ -17,6 +17,7 @@ class TalksList extends Control {
 		$this->template->setFile( __DIR__ . '/templates/talksList.latte');
 		$talks = $this->registrationModel->getTalks();
 		$this->template->talks = $talks;
+		$this->template->talksCount = $talks->count();
 		$this->template->currentUser = $this->getPresenter()->getUser();
 		$this->template->render();
 	}

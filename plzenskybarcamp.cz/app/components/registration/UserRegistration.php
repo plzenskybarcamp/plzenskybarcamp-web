@@ -44,7 +44,8 @@ class UserRegistration extends Control {
 		$container->addText( 'twitter', 'Twitter' )
 			->setAttribute('placeholder', '@DavidGrudl');
 		$container->addText( 'email', 'E-mail')
-			->addRule(Form::FILLED, 'E-mail musí být vyplněn')
+			->addRule(Form::EMAIL, 'Tenhle e-mail nevypadá jako e-mail, zkuste se na to podívat')
+			->setRequired( 'E-mail musí být vyplněn' )
 			->setAttribute('placeholder', 'grudl@gmail.com')
 			->setOption('description', 'Email nebude nikde zvěřejněn');
 		$container->addTextArea( 'bio', 'Bio' )

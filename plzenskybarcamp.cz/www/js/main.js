@@ -1,14 +1,16 @@
     registerForm = function(container, nextContainer) {
     $('#registration').on('click', container + ' .registration-button', function(e) {
         e.preventDefault();
-        form = $('.form', container);
-        nextForm = $('.form', nextContainer);
+        $(this).hide();
+        var form = $('.form', container);
+        var nextForm = $('.form', nextContainer);
         if (form.is(':visible')) {
             form.hide();
             $.scrollTo(container);
         } else {
             nextForm.hide();
             form.show();
+            $.scrollTo(container, 500);
         }
     })
 }
@@ -173,7 +175,16 @@ $(document).ready(function() {
 // 	}, {scope: 'email'});
 // }
 
-// $(function(){$('#login-buton').click(function(){login();return false;});});
+
+$(document).ready(function() {
+    var $show_login_panel_hp = $('.show-login-panel-hp');
+    $show_login_panel_hp.click(function( e ){
+        $show_login_panel_hp.hide();
+        var $login_choose_network = $('#login-choose-network').show();
+        $.scrollTo($login_choose_network, 500);
+        e.preventDefault();
+    });
+});
 
 
 $(document).ready(function() {

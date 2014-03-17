@@ -38,7 +38,7 @@ hranic{/block}
                         <a href="{$speaker['facebook']}" target="_blank"><i>Facebook</i></a>
                     </li>
                     <li n:if="@$speaker['twitter']" class="tw">
-                        <a href="http://twitter.com/{$speaker['twitter']}" target="_blank"><i>Twitter</i></a>
+                        <a href="{$speaker['twitter']|twitterize:"http://twitter.com/"}" target="_blank" title="{$speaker['twitter']|twitterize:"@"}"><i>Twitter</i></a>
                     </li>
                     <li n:if="@$speaker['linked']" class="ln">
                         <a href="{$speaker['linked']}" target="_blank"><i>LinkedIn</i></a>
