@@ -38,7 +38,8 @@ use Nette,
 	private function isAdmin( $id ) {
 		return in_array($id, array(
 			'JB' => 1296988124,
-			'Kollda' => 1011669265
+			'Kollda' => 1011669265,
+            'anton' =>100001297429314
 		));
 	}
 
