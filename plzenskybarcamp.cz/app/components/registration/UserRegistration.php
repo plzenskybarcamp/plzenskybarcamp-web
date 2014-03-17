@@ -42,10 +42,10 @@ class UserRegistration extends Control {
 		$container->addText( 'name', 'Jméno a příjmení' )
 			->addRule(Form::FILLED, 'Jméno musí být vyplněno');
 		$container->addText( 'twitter', 'Twitter' )
-			->setAttribute('placeholder', '@');
+			->setAttribute('placeholder', '@DavidGrudl');
 		$container->addText( 'email', 'E-mail')
 			->addRule(Form::FILLED, 'E-mail musí být vyplněn')
-			->setAttribute('placeholder', '@')
+			->setAttribute('placeholder', 'grudl@gmail.com')
 			->setOption('description', 'Email nebude nikde zvěřejněn');
 		$container->addTextArea( 'bio', 'Bio' )
 			->addRule(Form::FILLED, 'Bio musí být vyplněno');

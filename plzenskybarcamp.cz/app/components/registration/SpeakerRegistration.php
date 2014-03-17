@@ -59,7 +59,8 @@ class SpeakerRegistration extends Control {
 
 	public function addTalksFields( $container ) {
 		$container->addText( 'title', 'Název přednášky' )
-			->addRule(Form::FILLED, 'Název přednášky musí být vyplněn');
+			->addRule(Form::FILLED, 'Název přednášky musí být vyplněn')
+			->setAttribute('placeholder', 'Zadejte název přednášky');
 		$container->addTextArea( 'description', 'Popis přednášky' )
 			->addRule(Form::FILLED, 'Popis přednášky musí být vyplněn');
 		$container->addTextArea( 'purpose', 'Komu je určená?' )
@@ -68,9 +69,12 @@ class SpeakerRegistration extends Control {
 	}
 
 	public function addUsersFields( $container ) {
-		$container->addText( 'linked', 'LinkedIn' );
-		$container->addText( 'web', 'Web' );
-		$container->addText( 'facebook', 'Facebook' );
+		$container->addText( 'linked', 'LinkedIn' )
+			->setAttribute('placeholder', 'http://www.linkedin.com/in/grudl');
+		$container->addText( 'web', 'Web' )
+			->setAttribute('placeholder', 'http://davidgrudl.com');
+		$container->addText( 'facebook', 'Facebook' )
+			->setAttribute('placeholder', 'http://www.facebook.com/davidgrudl');
 		return $container;
 	}
 
