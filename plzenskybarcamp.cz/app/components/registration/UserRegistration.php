@@ -47,7 +47,7 @@ class UserRegistration extends Control {
 			->addRule(Form::EMAIL, 'Tenhle e-mail nevypadá jako e-mail, zkuste se na to podívat')
 			->setRequired( 'E-mail musí být vyplněn' )
 			->setAttribute('placeholder', 'grudl@gmail.com')
-			->setOption('description', 'Email nebude nikde zvěřejněn');
+			->setOption('description', 'Email nebude nikde zveřejněn');
 		$container->addTextArea( 'bio', 'Bio' )
 			->addRule(Form::FILLED, 'Bio musí být vyplněno');
 		return $container;

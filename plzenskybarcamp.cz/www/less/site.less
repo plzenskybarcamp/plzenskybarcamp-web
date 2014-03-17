@@ -31,7 +31,7 @@ html {
 	*zoom: 1;
 }
 
-div.flash {
+.flash {
 	position: absolute;
 	top: 110px;
 	left: 0;
@@ -44,15 +44,24 @@ div.flash {
 	font-weight: bold;
 	font-size: 1.5em;
 }
-div.flash.error{
+.flash.error{
 	background-color: rgba(255,1,1,0.75);
 	border-bottom: 1px solid rgba(255,1,1,1);
 }
-div.flash.success{
+.flash.success{
 	background-color: rgba(42,130,42,0.75);
 	border-bottom: 1px solid rgba(42,130,42,1);
 	color: white;
 }
+
+.main-content .js-message{
+	font-weight: bold;
+	font-size: 1.3em;
+}
+.main-content .js-message.success{
+	color: #008000;
+}
+
 
 .main-header {
 	display: block;
