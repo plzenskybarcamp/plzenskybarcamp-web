@@ -5,34 +5,34 @@
 <tbody>
 {foreach $talks as $talk}
     {var speaker = $talk['speaker']}
-    <tr class="talks-head" data-id="{$talk['talk_id']}">
+    <tr class="talks-head" data-id="{$talk['_id']}">
 
-        <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></a></td>
-        <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['talk_id']}">{$talk['title']}</a></td>
+        <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></a></td>
+        <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
         <td class="third-td">{$talk['description']|truncate:30}</td>
         <td class="fourth-td">{* <span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a> *}</td>
     </tr>
 
-    <tr class="talks-detail" data-id="{$talk['talk_id']}">
+    <tr class="talks-detail" data-id="{$talk['_id']}">
         {var speaker = $talk['speaker']}
 
         <td colspan="4" class="table-list-sub-wrap">
             <table class="table-list table-list-sub">
                 <tr>
                     <td class="first-td">
-                        <a href="{plink Conference:talksDetail talkId => $talk['talk_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"></a>
+                        <a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"></a>
                         <span>{$talk['title']}</span>
                     </td>
                     <td colspan="1" class="second-td">
-                        <a href="{plink Conference:talksDetail talkId => $talk['talk_id']}">{$talk['title']}</a>
+                        <a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a>
                         <p>{$talk['description']}</p>
                         <p><strong>Komu je přednáška určena?</strong><br>
                             {$talk['purpose']}
                         </p>
                     </td>
                     <td class="fourth-td">
-                        <input class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
-                        <span><em class="votes_count">{@$talk['votes_count']}</em>hlasů<span></td>
+                        {*<input class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                        <span><em class="votes_count">{@$talk['votes_count']}</em>hlasů<span></td>*}
                 </tr>
             </table>
         </td>

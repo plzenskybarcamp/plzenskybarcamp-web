@@ -2,9 +2,9 @@
 <p>Kdo na prvním Plzeňském Barcampu nebude chybět a zapíše se tak do historie?</p>
 <p class="user-list-user-count">Registrovaných účastníků: <strong>{$usersCount}</strong></p>
 <table class="table-list">
-    <tr n:foreach="$users as $user" {if $currentUser->getId() == $user['user_id']}class="current-user"{/if}>
+    <tr n:foreach="$users as $user" {if $currentUser->getId() == $user['_id']}class="current-user"{/if}>
         <td class="first-td"><img class="user-pic" src="{@$user['picture_url']}"/></td>
-        <td class="second-td"><a n:tag-if="$currentUser->getId() == $user['user_id']" href="{plink Conference:profil}">{$user['name']}</a></td>
+        <td class="second-td"><a n:tag-if="$currentUser->getId() == $user['_id']" href="{plink Conference:profil}">{$user['name']}</a></td>
         <td class="third-td"><a n:tag-if="$user['twitter']" href="http://twitter.com/{$user['twitter']}" target="_blank">{$user['twitter']}</a></td>
         <td class="fourth-td"><span class="crop">BIO: {$user['bio']}</span></td>
     </tr>
