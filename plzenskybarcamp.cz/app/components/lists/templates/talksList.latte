@@ -11,7 +11,7 @@
 
         <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']}" title="{$speaker['name']}"/></a></td>
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
-        <td class="third-td">{$talk['description']|truncate:30}</td>
+        <td class="third-td"><span class="crop">{$talk['description']}</span></td>
         <td class="fourth-td">{* <span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a> *}</td>
     </tr>
 
