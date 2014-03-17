@@ -126,6 +126,7 @@ class Registration {
 
 	private function syncSpeakerWithTalk( $talkId, array $data ) {
 		unset( $data['talk'] );
+		unset( $data['identity']);
 		$this->updateTalkByCondition( array( '_id' => $talkId ), array( 'speaker' => $data ) );
 	}
 }
