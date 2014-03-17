@@ -84,8 +84,8 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 			throw new Nette\Security\AuthenticationException('User info request failed');
 		}
 		$id = hash("crc32b", uniqid("fb", TRUE));
-		$name = $platform_profile['name'];
-		$email = $platform_profile['email'];
+		$name = @$platform_profile['name'];
+		$email = @$platform_profile['email'];
 
 		$picture = $this->fb->api(
 			"/me/picture",
