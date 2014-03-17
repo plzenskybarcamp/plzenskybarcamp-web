@@ -68,6 +68,6 @@ hranic{/block}
         </div>
         <div class="cleaner"></div>
 
-        <div class="text-center" n:if="isset($speaker['user_id']) && $user->getId() == $speaker['user_id']"><a n:href="profil#talk-form" class="button">Upravit mojí přednášku</a></div>
+        <div class="text-center" n:if="isset($speaker['_id']) && $user->getId() == $speaker['_id']"><a n:href="profil#talk-form" class="button">Upravit mojí přednášku</a></div>
     </div>
 </section>
