@@ -1,6 +1,28 @@
 {block content}
-<h1 n:block=title>Sign in</h1>
+<section class="main-content">
+	<div class="inner">
+		<div id="registration">
+			<h2 n:block=title>Přihlášení</h2>
 
-{control signInForm}
-
-{* or use {include '../components/form.latte', form => signInForm} *}
+			<div class="text-center" >
+			    <div class="choose-network">
+			        <span class="fake-label">Vyber si síť:</span>
+			        <ul class="networks">
+			            {*<li class="gplus">
+			                <a href="javascript:void(0)"><i>Google+</i></a>
+			            </li>*}
+			            <li class="fb">
+			                <a href="{link inFb}"><i>Facebook</i></a>
+			            </li>
+			            <li class="tw">
+			                <a href="{link inTw}"><i>Twitter</i></a>
+			            </li>
+			            {*<li class="ln">
+			                <a href="javascript:void(0)"><i>LinkedIn</i></a>
+			            </li>*}
+			        </ul>
+			    </div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -47,7 +47,7 @@
                         <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
                     </ul>
                     <ul class="info-navigation">
-                        {if !$user->isLoggedIn()}<li><a href="{$fbLoginLink}" id="login-buton">Přihlásit</a></li>{/if}
+                        {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-buton">Přihlásit</a></li>{/if}
                         {*{if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}*}
                         {if $user->isLoggedIn()}
                             <li>
@@ -97,6 +97,7 @@
                         <p>Plzeňský Barcamp <a href="{link Homepage:contact}#organizatori" class="tooltip pilsen" title="Organizují: Jiří „Kolda“ Kolařík, Denisa Wágnerojc, Veronika Grékojc">organizují KWG</a></p>
                     </ul>
                     <ul class="navigation">					
+                        <li n:if="$user->isLoggedIn()"><a href="{link Sign:out}" data-hover="Odhlásit">Odhlásit</a></li>
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         <li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
                         <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastnící">Účastnící</a></li>

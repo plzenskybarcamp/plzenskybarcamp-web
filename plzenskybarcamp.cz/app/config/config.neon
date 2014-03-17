@@ -12,8 +12,10 @@ parameters:
 			secret: 'ed0af56bc4baabe2e821461e30e5435a'
 			fileUpload: false
 			allowSignedRequest: false
-
-
+	twitter:
+		app_config:
+			key: "soXP3BhRN7zaKmaMNgKG1w"
+			secret: "cTr6trEjVlWzj7P3OLuMu22BdwUINaERZHD3dca8"
 
 php:
 	date.timezone: Europe/Prague
@@ -32,9 +34,10 @@ nette:
 
 
 services:
-	- App\UserManager
+	- App\Authenticator
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)
 	Facebook: Facebook(%facebook.app_config%)
+	twitterOAuth: TwitterOAuth(%twitter.app_config.key%, %twitter.app_config.secret%)

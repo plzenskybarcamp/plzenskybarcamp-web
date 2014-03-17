@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "62c9161cd96a67e71dd6f42ec6b20dfa",
+    "hash": "39de2da3949dbaf52182306a9281e37b",
     "packages": [
         {
             "name": "facebook/php-sdk",
@@ -50,6 +50,33 @@
                 "sdk"
             ],
             "time": "2013-11-19 23:11:14"
+        },
+        {
+            "name": "kertz/twitteroauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kertz/twitteroauth.git",
+                "reference": "97b677ca030e7de7dcade797aabb4af8a3aa463f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kertz/twitteroauth/zipball/97b677ca030e7de7dcade797aabb4af8a3aa463f",
+                "reference": "97b677ca030e7de7dcade797aabb4af8a3aa463f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "twitteroauth"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2014-02-23 11:27:58"
         },
         {
             "name": "nette/nette",
@@ -176,9 +203,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "kertz/twitteroauth": 20
+    },
     "platform": {
         "php": "~5.5"
     },

@@ -28,6 +28,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 
 	public function authenticate(array $credentials)
 	{
+		die("tady to nemělo být!");
 		list($platform) = $credentials;
 		if($platform == self::PLATFORM_FACEBOOK) {
 			$user_id = $this->fb->getUser();
