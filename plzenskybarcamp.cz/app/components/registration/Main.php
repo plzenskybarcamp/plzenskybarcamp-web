@@ -7,15 +7,16 @@ use  Nette\Application\Responses\JsonResponse;
 
 class Main extends Control {
 
-	const MAX_CAPACITY = 300;
-
 	private $registrationModel;
+
+	private $configModel;
 
 	private $fbLoginLink;
 
-	public function __construct( $parent, $name, $registrationModel, $fbLoginLink ) {
+	public function __construct( $parent, $name, $registrationModel, $configModel, $fbLoginLink ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
+		$this->configModel = $configModel;
 		$this->fbLoginLink = $fbLoginLink;
 	}
 	
@@ -24,11 +25,15 @@ class Main extends Control {
 	}
 
 	private function createControlTemplate() {
+		$registrationCapatity = $this->configModel->getConfig( 'registrationCapatity', 0 );
+		$registreredUsers = $this->registrationModel->getConferrees()->count();
+
+
 		$this->template->setFile( __DIR__ . '/templates/main.latte');
 		$this->template->user = $this->getPresenter()->getUser();
-		$this->template->identity = new FakeUser( $this->getPresenter()->getUser(), $this->registrationModel ); //$this->getPresenter()->getUser()->getIdentity();
-		$this->template->canBeRegistered = self::MAX_CAPACITY - $this->registrationModel->getConferrees()->count();
-		$this->template->isRegistrationOpen = true;
+		$this->template->identity = $this->getPresenter()->getUser()->getIdentity();
+		$this->template->canBeRegistered = ( $registrationCapatity - $registreredUsers ) > 0;
+		$this->template->isRegistrationOpen = $this->configModel->getConfig( 'isRegistrationOpen', FALSE );
 		$this->template->fbLoginLink = $this->fbLoginLink;
 		return $this->template;
 	}

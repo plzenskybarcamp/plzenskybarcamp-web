@@ -72,7 +72,7 @@ showMessage = function(container, elmClass) {
         if (message) {
             elm = $('<p class="' + elmClass + '">' + message + '</p>');
             container.html('').append(elm);
-            $.scrollTo(container);
+            $.scrollTo(container, 500);
             setTimeout(function() {
                 elm.hide();
             }, 5000);
@@ -80,13 +80,10 @@ showMessage = function(container, elmClass) {
     }
 }
 
-registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, talkContainer) {
+registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, talkContainer, talkButtonContainer) {
     talkOnButton.on('click', function() {
-        if (!talkContainer.is(':visible')) {
-            talkContainer.show();
-        } else {
-            talkContainer.hide();
-        }
+        talkContainer.show();
+        talkButtonContainer.hide();
     })
     actionButton.on('click', function(e) {
         actionButton.get(0).disabled = true;
@@ -140,12 +137,15 @@ registerVotes = function(container) {
 }
 
 $(document).ready(function() {
+    setTimeout(function() {$('.flash.success').fadeOut(2000);}, 3000);
+});
+$(document).ready(function() {
     $('.tooltip').tooltipster();
     $('a').smoothScroll();
     registerForm('#speaker-regestration', '#user-regestration');
     registerForm('#user-regestration', '#speaker-regestration');
     registerAjaxRegistration($('#registration'));
-    registerAjaxProfileUpdate($('#talk-registration'), $('#profile-save'), $('#user-form'), $('#talk-form'));
+    registerAjaxProfileUpdate($('#talk-registration'), $('#profile-save'), $('#user-form'), $('#talk-form'), $('#talk-button'));
     registerVotes($('#talks-list'));
 });
 // window.fbAsyncInit = function() {

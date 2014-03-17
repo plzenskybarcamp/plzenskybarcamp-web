@@ -29,7 +29,7 @@ use Nette,
 
         $identity = $this->user->getIdentity();
 
-        if ( ! isset( $identity->data['id'] ) || ! $this->isAdmin( $identity->data['id'] ) ) {
+        if ( ! isset( $identity->data['platforms']['fb']['id'] ) || ! $this->isAdmin( $identity->data['platforms']['fb']['id'] ) ) {
             $this->flashMessage( 'You\'re not allowed here', 'error' );
             $this->redirect( '//Homepage:default' );
         }

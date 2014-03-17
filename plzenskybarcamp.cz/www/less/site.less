@@ -31,6 +31,29 @@ html {
 	*zoom: 1;
 }
 
+div.flash {
+	position: absolute;
+	top: 110px;
+	left: 0;
+	width: 100%;
+	background-color: rgba(255,228,1,0.75);
+	border-bottom: 1px solid rgba(255,228,1,1);
+	padding: 1em;
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+div.flash.error{
+	background-color: rgba(255,1,1,0.75);
+	border-bottom: 1px solid rgba(255,1,1,1);
+}
+div.flash.success{
+	background-color: rgba(42,130,42,0.75);
+	border-bottom: 1px solid rgba(42,130,42,1);
+	color: white;
+}
+
 .main-header {
 	display: block;
 	width: 100%;

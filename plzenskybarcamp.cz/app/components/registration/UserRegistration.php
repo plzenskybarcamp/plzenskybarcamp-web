@@ -57,7 +57,11 @@ class UserRegistration extends Control {
 		$user = $this->getPresenter()->getUser();
 		$values['created_date'] = new \MongoDate( time() );
 		$values['picture_url'] = $user->getIdentity()->picture_url;
+		$values['identity'] = $user->getIdentity()->data;
 		$this->registrationModel->updateConferree( $user->getId(), $values );
+
+		$conferee = $this->registrationModel->findCoferree( $user->getId() );
+		$user->getIdentity()->conferee = $conferee;
 	}
 
 }

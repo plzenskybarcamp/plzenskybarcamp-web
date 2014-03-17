@@ -16,9 +16,11 @@ class HomepagePresenter extends BasePresenter
 {
 
 	private $registrationModel;
+	private $configModel;
 
-	public function __construct( Model\Registration $registrationModel ) {
+	public function __construct( Model\Registration $registrationModel, Model\Config $configModel ) {
 		$this->registrationModel = $registrationModel;
+		$this->configModel = $configModel;
 	}
 
 	public function renderDefault()
@@ -27,6 +29,6 @@ class HomepagePresenter extends BasePresenter
 	}
 
 	public function createComponentRegistration( $name ) {
-		return new Main( $this, $name, $this->registrationModel, $this->createFbLoginLink() );
+		return new Main( $this, $name, $this->registrationModel, $this->configModel, $this->createFbLoginLink() );
 	}
 }

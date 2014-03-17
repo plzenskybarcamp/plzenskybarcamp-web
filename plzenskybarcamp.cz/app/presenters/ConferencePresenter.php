@@ -32,7 +32,10 @@ class ConferencePresenter extends BasePresenter
 	public function startup() {
 		parent::startup();
 		$userId = $this->getUser()->getId();
-		$this->conferree = $this->registrationModel->findCoferree( $userId );
+
+		if($userId) {
+			$this->conferree = $this->registrationModel->findCoferree( $userId );
+		}
 	}
 
 	public function renderTalksDetail( $talkId ) {
@@ -46,6 +49,10 @@ class ConferencePresenter extends BasePresenter
 	}
 
 	public function renderProfil( $talkId ) {
+		if( ! $this->conferree ) {
+			$this->flashMessage('Omlouváme se, ale profil návštěvníka je dostupný až po registraci', 'error');
+			$this->redirect('Homepage:default');
+		}
 		$this->template->conferree = $this->conferree;
 		$this->template->talk = isset( $this->conferree['talk'] )? $this->conferree['talk'] : NULL;
 	}
@@ -62,7 +69,7 @@ class ConferencePresenter extends BasePresenter
 			) );
 		}
 
-		$form->onSubmit[] = array( $this, 'processUpdate');
+		$form->onSuccess[] = array( $this, 'processUpdate');
 		return $form;
 	}
 
@@ -77,7 +84,7 @@ class ConferencePresenter extends BasePresenter
 			'user' => $this->conferree
 		) );
 
-		$form->onSubmit[] = array( $this, 'processUpdate');
+		$form->onSuccess[] = array( $this, 'processUpdate');
 		return $form;
 	}
 
@@ -86,12 +93,14 @@ class ConferencePresenter extends BasePresenter
 		$user = $this->getUser();
 
 		if ( isset( $values['user'] ) ) {
-			$this->registrationModel->updateConferree( $this->conferree['user_id'], (array) $values['user'] );
-		} else if ( isset( $values['talk'] ) && isset( $this->conferree['talk']['talk_id'] ) ) {
-			$this->registrationModel->updateTalk( $this->conferree['talk']['talk_id'], (array) $values['talk'] );
+			$this->registrationModel->updateConferree( $this->conferree['_id'], (array) $values['user'] );
+		} else if ( isset( $values['talk'] ) && isset( $this->conferree['talk']['_id'] ) ) {
+			$this->registrationModel->updateTalk( $this->conferree['talk']['_id'], (array) $values['talk'] );
 		} else if ( isset( $values['talk'] ) ) {
 			$this->registrationModel->createTalk( $user->getId(), (array) $values['talk'] );
 		}
+
+		$this->updateUserIdentity();
 		$this->getPresenter()->sendResponse( new JsonResponse( array( 'updated' => true ) ) );
 	}
 
@@ -101,6 +110,18 @@ class ConferencePresenter extends BasePresenter
 
 	public function createComponentUsers( $name ) {
 		return new UsersList( $this, $name, $this->registrationModel );
+	}
+
+	private function updateUserIdentity() {
+		$userId = $this->getUser()->id;
+		$identity = $this->getUser()->identity;
+
+		$conferee = $this->registrationModel->findCoferree( $userId );
+		$identity->conferee = $conferee;
+
+		if( isset( $conferee['talk'] ) ) {
+			$identity->talk = $conferee['talk'];
+		}
 	}
 
 }

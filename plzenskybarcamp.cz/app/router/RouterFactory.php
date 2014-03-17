@@ -27,6 +27,7 @@ class RouterFactory
 		$router[] = new Route('prednasky', 'Conference:talks');
 		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail');
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
+		$router[] = new Route('admin/', 'Admin:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}

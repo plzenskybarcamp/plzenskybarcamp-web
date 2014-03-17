@@ -51,6 +51,10 @@ class SpeakerRegistration extends Control {
 			$this->registrationModel->createTalk( $userId, $talk );
 		}
 		$this->registrationModel->updateConferree( $userId, $speaker );
+
+		$conferee = $this->registrationModel->findCoferree( $user->getId() );
+		$user->getIdentity()->talk = $conferee['talk'];
+
 	}
 
 	public function addTalksFields( $container ) {

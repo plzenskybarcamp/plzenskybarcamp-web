@@ -5,16 +5,16 @@
 
 <div>
     <h2>Chci přijít na Plzeňský Barcamp</h2>
-    <p>Chci zažít něco nového, chci získat kontakty, chci potkat nové lidi, chci říci o svém projektu, ... Prostě chci na Plzeňský Barcamp :)</p>
+    <p>Chci zažít něco nového, chci získat kontakty, chci potkat nové lidi, chci říci o svém projektu, … Prostě chci na Plzeňský Barcamp :)</p>
 </div>
 
 {if !$isRegistrationOpen}
-    <p>Registrace již brzy</p>
+    <p><strong>Registrace bude již brzy.</strong></p>
 {else}
     <div class="text-center" id="user-regestration">
         {control registeredUsers 'osobností se zúčastní'}
-        {if !$identity->isRegistered() && !$canBeRegistered}
-            <p>Kapacita je vyčerpaná</p>
+        {if !$canBeRegistered && ( !$user->isLoggedIn() || !$identity->isRegistered() ) }
+            <p><strong>Omlouváme se, ale kapacita registrací je již vyčerpána.</strong></p>
         {else}
             {if !$user->isLoggedIn()}
                 <a href="{$fbLoginLink}" id="login-buton" class="button">Chci přijít!</a>
@@ -51,12 +51,12 @@
 </div>
 
 {if !$isRegistrationOpen}
-    <p>Registrace již brzy</p>
+    <p><strong>Registrace bude již brzy.</strong></p>
 {else}
     <div class="text-center" id="speaker-regestration">
         {control registeredSpeakers 'vypsaných přednášek'}
-        {if !$identity->isRegistered() && !$canBeRegistered}
-            <p>Kapacita je vyčerpaná</p>
+        {if !$canBeRegistered && ( !$user->isLoggedIn() || !$identity->isRegistered() ) }
+            <p><strong>Omlouváme se, ale kapacita registrací je již vyčerpána.</strong></p>
         {else}
             {if !$user->isLoggedIn()}
                 <a href="{$fbLoginLink}" id="login-buton" class="button registration-button">Chci přednášet!</a>

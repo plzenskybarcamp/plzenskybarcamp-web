@@ -7,8 +7,8 @@ use Nette\Security as NS;
 class Identity extends NS\Identity implements IIDentity, NS\IIdentity {
 
 	private $id;
-	private $isRegistered = FALSE;
-	private $isSpeaker = FALSE;
+	private $conferee;
+	private $talk;
 
 	/**
 	* Overriding Nette method (we need string of id)
@@ -27,27 +27,27 @@ class Identity extends NS\Identity implements IIDentity, NS\IIdentity {
 		return $this->id;
 	}
 
-	/**
-	* Temporary method for testing
-	**/
-	public function setRegistered( $value ) {
-		$this->isRegistered = $value;
-		return $this;
+	public function setConferee( $conferee ) {
+		$this->conferee = $conferee;
 	}
 
-	/**
-	* Temporary method for testing
-	**/
-	public function setSpeaker( $value ) {
-		$this->isSpeaker = $value;
-		return $this;
+	public function getConferee() {
+		return $this->conferee;
 	}
 
 	public function isRegistered() {
-		return $this->isRegistered;
+		return (bool) $this->conferee;
+	}
+
+	public function setTalk( $talk ) {
+		$this->talk = $talk;
+	}
+
+	public function getTalk() {
+		return $this->talk;
 	}
 
 	public function isSpeaker() {
-		return $this->isSpeaker;
+		return (bool) $this->talk;
 	}
 }

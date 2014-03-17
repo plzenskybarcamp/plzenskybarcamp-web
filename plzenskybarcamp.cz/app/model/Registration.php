@@ -15,35 +15,45 @@ class Registration {
 	}
 
 	public function updateConferree( $userId, array $data ) {
-		$this->updateConferreeByCondition( array( 'user_id' => $userId ), $data );
+		$this->updateConferreeByCondition( array( '_id' => $userId ), $data );
 		$conferee = $this->findCoferree( $userId );
 		if ( isset( $conferee['talk'] ) ) {
-			$this->syncSpeakerWithTalk( $conferee['talk']['talk_id'], $conferee );
+			$this->syncSpeakerWithTalk( $conferee['talk']['_id'], $conferee );
 		}
 	}
 
 	public function findCoferree( $userId ) {
-		$data = $this->findCoferrees( array( 'user_id' => $userId ) );
+		$data = $this->findCoferrees( array( '_id' => $userId ) );
+		return $data->getNext();
+	}
+
+	public function findCoferreeByPlatform( $platform, $userId ) {
+		if(!preg_match('/^[a-z]+$/Di', $platform)) {
+			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid platform parameter.");
+		}
+
+		$path = "identity.platforms.$platform.id";
+		$data = $this->findCoferrees( array( $path => $userId ) );
 		return $data->getNext();
 	}
 
 	public function createTalk( $userId, array $data ) {
-		$data['talk_id'] = uniqid(); // may use talk ID as url key
+		$data['_id'] = hash("crc32b", uniqid("talk", TRUE));
 		$data['created_date'] = new \MongoDate( time() );
 		$speaker = $this->findCoferree( $userId );
 		$this->talkCollection->insert( $data );
 		$this->syncTalkWithSpeaker( $userId, $data );
-		$this->syncSpeakerWithTalk( $data['talk_id'], $speaker );
+		$this->syncSpeakerWithTalk( $data['_id'], $speaker );
 	}
 
 	public function updateTalk( $talkId, array $data ) {
-		$this->updateTalkByCondition( array( 'talk_id' => $talkId ), $data );
+		$this->updateTalkByCondition( array( '_id' => $talkId ), $data );
 		$talk = $this->findTalk( $talkId );
-		$this->syncTalkWithSpeaker( $talk['speaker']['user_id'], $talk );
+		$this->syncTalkWithSpeaker( $talk['speaker']['_id'], $talk );
 	}
 
 	public function findTalk( $talkId ) {
-		return $this->talkCollection->find( array( 'talk_id' => $talkId ) )->getNext();
+		return $this->talkCollection->find( array( '_id' => $talkId ) )->getNext();
 	}
 
 	public function getTalks() {
@@ -65,7 +75,7 @@ class Registration {
 
 	public function addVote( $talkId, $userId ) {
 		$this->talkCollection->update(
-			array( 'talk_id' => $talkId ),
+			array( '_id' => $talkId ),
 			array(
 				'$push' => array( 'votes' => $userId ),
 				'$inc' => array( 'votes_count' => 1 )
@@ -76,7 +86,7 @@ class Registration {
 
 	public function removeVote( $talkId, $userId ) {
 		$this->talkCollection->update(
-			array( 'talk_id' => $talkId ),
+			array( '_id' => $talkId ),
 			array(
 				'$pull' => array( 'votes' => $userId ),
 				'$inc' => array( 'votes_count' => -1 )
@@ -86,7 +96,7 @@ class Registration {
 	}
 
 	public function hasTalk( $talkId ) {
-		return $this->talkCollection->find( array( 'talk_id' => $talkId ) )->hasNext();
+		return $this->talkCollection->find( array( '_id' => $talkId ) )->hasNext();
 	}
 
 	private function findCoferrees( $condition = array() ) {
@@ -105,15 +115,13 @@ class Registration {
 
 	private function syncTalkWithSpeaker( $speakerId, array $data ) {
 		unset( $data['speaker'] );
-		unset( $data['_id'] );
 		unset( $data['votes'] );
 		unset( $data['votes_count'] );
-		$this->updateConferreeByCondition( array( 'user_id' => $speakerId ), array( 'talk' => $data ) );
+		$this->updateConferreeByCondition( array( '_id' => $speakerId ), array( 'talk' => $data ) );
 	}
 
 	private function syncSpeakerWithTalk( $talkId, array $data ) {
 		unset( $data['talk'] );
-		unset( $data['_id'] );
-		$this->updateTalkByCondition( array( 'talk_id' => $talkId ), array( 'speaker' => $data ) );
+		$this->updateTalkByCondition( array( '_id' => $talkId ), array( 'speaker' => $data ) );
 	}
 }
