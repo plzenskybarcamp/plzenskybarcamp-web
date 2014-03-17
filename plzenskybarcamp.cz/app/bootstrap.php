@@ -10,6 +10,7 @@ $configurator = new Nette\Configurator;
 $configurator->enableDebugger(__DIR__ . '/../log');
 
 $configurator->setTempDirectory(__DIR__ . '/../temp');
+if(!file_exists(__DIR__ . '/../temp/sessions')) mkdir(__DIR__ . '/../temp/sessions');
 
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)

@@ -1,5 +1,7 @@
 plzenskybarcamp.cz/log/*
 plzenskybarcamp.cz/temp/*
+!plzenskybarcamp.cz/temp/sessions/.gitignore
+!plzenskybarcamp.cz/temp/.htaccess
 plzenskybarcamp.cz/vendor/*
 !plzenskybarcamp.cz/vendor/others
 
