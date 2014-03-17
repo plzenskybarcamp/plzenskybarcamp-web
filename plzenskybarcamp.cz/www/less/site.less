@@ -31,7 +31,7 @@ html {
 	*zoom: 1;
 }
 
-div.flash {
+.flash {
 	position: absolute;
 	top: 110px;
 	left: 0;
@@ -44,15 +44,24 @@ div.flash {
 	font-weight: bold;
 	font-size: 1.5em;
 }
-div.flash.error{
+.flash.error{
 	background-color: rgba(255,1,1,0.75);
 	border-bottom: 1px solid rgba(255,1,1,1);
 }
-div.flash.success{
+.flash.success{
 	background-color: rgba(42,130,42,0.75);
 	border-bottom: 1px solid rgba(42,130,42,1);
 	color: white;
 }
+
+.main-content .js-message{
+	font-weight: bold;
+	font-size: 1.3em;
+}
+.main-content .js-message.success{
+	color: #008000;
+}
+
 
 .main-header {
 	display: block;
@@ -782,7 +791,7 @@ div.flash.success{
 				background-color: @gplus;
 			}
 			&.email a {
-				background-color: @gplus;
+				background-color: @mail;
 			}
 
 			i {
@@ -813,8 +822,8 @@ div.flash.success{
 			}
 			&.email i {
 				background-position: -97px -1px;
-				.size(23px, 17px);
-				margin: -13px 0 0 -11px;
+				.size(24px, 18px);
+				margin: -8px 0 0 -11px;
 			}
 		}
 	}

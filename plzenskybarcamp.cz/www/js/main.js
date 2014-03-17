@@ -72,7 +72,7 @@ commitForms = function(forms) {
 showMessage = function(container, elmClass) {
     return function(message) {
         if (message) {
-            elm = $('<p class="' + elmClass + '">' + message + '</p>');
+            elm = $('<p class="js-message text-center ' + elmClass + '">' + message + '</p>');
             container.html('').append(elm);
             $.scrollTo(container, 500);
             setTimeout(function() {
