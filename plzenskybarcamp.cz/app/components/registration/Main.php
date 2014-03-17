@@ -39,13 +39,11 @@ class Main extends Control {
 	}
 
 	public function createComponentRegisteredUsers( $name ) {
-		$cursor = $this->registrationModel->getConferrees();
-		return new RegisteredUsers( $this, $name, $cursor );
+		return new RegisteredUsers( $this, $name, $this->registrationModel );
 	}
 
 	public function createComponentRegisteredSpeakers( $name ) {
-		$cursor = $this->registrationModel->getSpeakers();
-		return new RegisteredUsers( $this, $name, $cursor );
+		return new RegisteredSpeakers( $this, $name, $this->registrationModel );
 	}
 
 	public function createComponentRegistration( $name ) {

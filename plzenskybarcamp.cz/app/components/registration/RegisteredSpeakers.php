@@ -6,7 +6,7 @@ use Nette\Application\UI\Control,
 	Nette\Application\UI\Form,
 	App\Model\Registration;
 
-class RegisteredUsers extends Control {
+class RegisteredSpeakers extends Control {
 
 	/** var \Nette\Application\UI\Form **/
 	private $form;
@@ -19,9 +19,9 @@ class RegisteredUsers extends Control {
 	}
 	
 	public function render( $title ) {
-		$this->template->setFile( __DIR__ . '/templates/registeredUsers.latte');
-		$this->template->users = $this->registrationModel->getConferrees();
-		$this->template->usersCount = $this->template->users->count();
+		$this->template->setFile( __DIR__ . '/templates/registeredSpeaker.latte');
+		$this->template->speakers = $this->registrationModel->getSpeakers();
+		$this->template->speakersCount = $this->template->speakers->count();
 		$this->template->title = $title;
 		$this->template->render();
 	}
