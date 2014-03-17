@@ -39,7 +39,8 @@ use Nette,
 		return in_array($id, array(
 			'JB' => 1296988124,
 			'Kollda' => 1011669265,
-            'anton' =>100001297429314
+            'anton' =>100001297429314,
+            'MARUSKA' =>1551789255
 		));
 	}
 
