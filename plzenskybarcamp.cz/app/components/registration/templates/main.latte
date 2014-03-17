@@ -67,7 +67,10 @@
                 <div class="form">{control speakerRegisteration}</div>
                 <a href="javascript:void(0)" class="button registration-button">Chci přednášet!</a>
             {else}
-                <p class="border-tb">Mám vypsanou přednášku :)</p>
+                <p class="border-tb">
+                    Mám vypsanou přednášku :)<br>
+                    <a href="{plink Conference:talksDetail talkId=>$identity->talk['_id']}">{$identity->talk['title']}</a>
+                </p>
             {/if}
         </div>
     {/if}

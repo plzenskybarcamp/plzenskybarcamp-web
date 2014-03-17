@@ -1,4 +1,4 @@
-registerForm = function(container, nextContainer) {
+    registerForm = function(container, nextContainer) {
     $('#registration').on('click', container + ' .registration-button', function(e) {
         e.preventDefault();
         form = $('.form', container);
@@ -189,7 +189,7 @@ $(document).ready(function() {
     });
 
     var $listTableTalks = $('.table-list#talks-list tr');
-    $listTableTalks.on('click touchstart', function() {
+    $listTableTalks.on('click touchstart', function( event ) {
         var
                 _$this = $(this),
                 _id = _$this.attr('data-id'),
@@ -197,6 +197,11 @@ $(document).ready(function() {
                 _$detailTr = $listTableTalks.parent().find('.talks-detail'),
                 _$detailTrHeadCurrent = $listTableTalks.parent().find('.talks-head[data-id="' + _id + '"]'),
                 _$detailTrCurrent = $listTableTalks.parent().find('.talks-detail[data-id="' + _id + '"]');
+
+        //Disable expand/collapse when click to link
+        if( $( event.target ).is('a, a img')) {
+            return;
+        }
 
         _$detailTr.hide();
         _$detailTrHead.show();
