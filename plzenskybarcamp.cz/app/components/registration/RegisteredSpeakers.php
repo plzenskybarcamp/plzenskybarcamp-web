@@ -21,7 +21,7 @@ class RegisteredSpeakers extends Control {
 	public function render( $title ) {
 		$this->template->setFile( __DIR__ . '/templates/registeredSpeaker.latte');
 		$this->template->speakers = $this->registrationModel->getSpeakers();
-		$this->template->speakersCount = $this->template->speakers->count();
+		$this->template->speakersCount = $this->template->speakers->count(12);
 		$this->template->title = $title;
 		$this->template->render();
 	}

@@ -60,12 +60,16 @@ class Registration {
 		return $this->talkCollection->find()->sort( array('created_date' => -1 ) );
 	}
 
-	public function getSpeakers() {
-		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )->sort( array('created_date' => -1) );
+	public function getSpeakers( $limit = 0 ) {
+		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )
+			->sort( array('created_date' => -1) )
+			->limit( $limit );
 	}
 
-	public function getConferrees() {
-		return $this->findCoferrees()->sort( array('created_date' => -1) );
+	public function getConferrees( $limit = 0 ) {
+		return $this->findCoferrees()
+			->sort( array('created_date' => -1) )
+			->limit( $limit );
 	}
 
 	public function getVotesCount( $talkId ) {
