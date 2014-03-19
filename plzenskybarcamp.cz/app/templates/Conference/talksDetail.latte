@@ -27,7 +27,7 @@ hranic{/block}
 
         <div id="speaker-detail" class="clearfix">
             <p><strong>{$speaker['name']}</strong></p>
-            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']}" />
+            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']|biggerTwitterPicture}" />
 
             <div>
                 <ul class="networks">

@@ -14,6 +14,8 @@ class TalksList extends Control {
 	}
 
 	public function render() {
+		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
+		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
 		$this->template->setFile( __DIR__ . '/templates/talksList.latte');
 		$talks = $this->registrationModel->getTalks();
 		$this->template->talks = $talks;
