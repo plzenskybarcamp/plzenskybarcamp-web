@@ -28,9 +28,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$user = $this->getUser();
 		try {
 			$user->login( $platform );
-			$this->flashMessage ("Jste přihlášen", 'success');
+			$this->flashMessage ("Jsi přihlášen", 'success');
 		} catch( \Nette\Security\AuthenticationException $exception ) {
-			$this->flashMessage ("Vaše přihlášení selhalo, omlouváme se.", 'error');
+			$this->flashMessage ("Tvoje přihlášení selhalo, omlouváme se.", 'error');
 		}
 		if($redirect_url) {
 			$this->redirectUrl($redirect_url);
@@ -43,7 +43,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public function handleLogout( $platform, $redirect_url ) {
 		$user = $this->getUser();
 		$user->logout();
-		$this->flashMessage ("Jste odhlášen", 'success');
+		$this->flashMessage ("Jsi odhlášen", 'success');
 		if($redirect_url) {
 			$this->redirectUrl($redirect_url);
 		}

@@ -60,7 +60,7 @@ class SpeakerRegistration extends Control {
 	public function addTalksFields( $container ) {
 		$container->addText( 'title', 'Název přednášky' )
 			->addRule(Form::FILLED, 'Název přednášky musí být vyplněn')
-			->setAttribute('placeholder', 'Zadejte název přednášky');
+			->setAttribute('placeholder', 'Zadej název přednášky');
 		$container->addTextArea( 'description', 'Popis přednášky' )
 			->addRule(Form::FILLED, 'Popis přednášky musí být vyplněn');
 		$container->addTextArea( 'purpose', 'Komu je určená?' )
@@ -70,14 +70,18 @@ class SpeakerRegistration extends Control {
 
 	public function addUsersFields( $container ) {
 		$container->addText( 'linked', 'LinkedIn' )
-			->setAttribute('placeholder', 'http://www.linkedin.com/in/grudl');
-			//->addRule(Form::URL);
+			->setAttribute('placeholder', 'http://www.linkedin.com/in/grudl')
+			->addCondition(Form::FILLED)
+				->addRule(Form::URL, "Adresa v LinkedIn nevypadá jako webová adresa, překontroluj to, prosím");
 		$container->addText( 'web', 'Web' )
-			->setAttribute('placeholder', 'http://davidgrudl.com');
-			//->addRule(Form::URL);
+			->setAttribute('placeholder', 'http://davidgrudl.com')
+			->addCondition(Form::FILLED)
+				->addRule(Form::URL, "Adresa v poli Web nevypadá jako webová adresa, překontroluj to, prosím");
 		$container->addText( 'facebook', 'Facebook' )
-			->setAttribute('placeholder', 'http://www.facebook.com/davidgrudl');
-			//->addRule(Form::URL);
+			->setAttribute('placeholder', 'http://www.facebook.com/davidgrudl')
+			->addCondition(Form::FILLED)
+				->addRule(Form::URL, "Adresa pro Facebook nevypadá jako webová adresa, překontroluj to, prosím");
+
 		return $container;
 	}
 
