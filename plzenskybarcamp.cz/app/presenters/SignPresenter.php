@@ -74,7 +74,7 @@ class SignPresenter extends BasePresenter
 				$platform_profile
 			);
 		}
-		$this->user->login(array('id'=>$id, 'data'=>$profile));
+		$this->user->login(array('id'=>$profile['id'], 'data'=>$profile));
 
 		if( $conferee ) {
 			$identity = $this->user->identity;
