@@ -80,9 +80,12 @@ class SignPresenter extends BasePresenter
 			$identity = $this->user->identity;
 			$identity->conferee = $conferee;
 			$identity->talk = $this->getUserTalk( $conferee );
+			$this->flashMessage("Vítej zpět, ty jsi už registrovaný, tešíme se na Tebe v Plzni", "success");
+		}
+		else {
+			$this->flashMessage("Povedlo se, pro účast se nezapomeň ještě registrovat tlačítkem „Chci přijít“", "success");
 		}
 
-		$this->flashMessage("Byl jsi přihlášen pomocí Facebooku", "success");
 		$this->redirect("Homepage:default");
 	}
 
@@ -183,10 +186,13 @@ class SignPresenter extends BasePresenter
 			$identity = $this->user->identity;
 			$identity->conferee = $conferee;
 			$identity->talk = $this->getUserTalk( $conferee );
+			$this->flashMessage("Vítej zpět, ty jsi už registrovaný, tešíme se na Tebe v Plzni :)", "success");
+
+		}
+		else {
+			$this->flashMessage("Povedlo se, pro účast se nezapomeň ještě registrovat tlačítkem „Chci přijít“", "success");
 		}
 
-
-		$this->flashMessage("Byl jsi přihlášen pomocí Twitteru", "success");
 		$this->redirect("Homepage:default");
 	}
 
