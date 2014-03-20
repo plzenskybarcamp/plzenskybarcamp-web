@@ -62,7 +62,7 @@ class Registration {
 
 	public function getSpeakers( $limit = 0 ) {
 		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )
-			->sort( array('created_date' => -1) )
+			->sort( array('talk.created_date' => -1) )
 			->limit( $limit );
 	}
 
