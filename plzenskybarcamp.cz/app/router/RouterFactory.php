@@ -33,8 +33,12 @@ class RouterFactory
 		$router[] = new Route('login/twitter', 'Sign:inTw');
 		$router[] = new Route('login/process/facebook', 'Sign:processFb');
 		$router[] = new Route('login/process/twitter', 'Sign:processTw');
-		$router[] = new Route('admin', 'Admin:default');
-		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+
+		$adminRouter = new RouteList('Admin');
+		$adminRouter[] = new Route('admin/<presenter>/<action>', 'Dashboard:default');
+		$router[] = $adminRouter;
+
+		$router[] = new Route('<presenter>/<action>', 'Homepage:default');
 		return $router;
 	}
 
