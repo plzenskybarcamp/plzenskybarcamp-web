@@ -13,9 +13,12 @@ class UserRegistration extends Control {
 	/** App\Model\Registration **/
 	private $registrationModel;
 
-	public function __construct( $parent, $name, $registrationModel ) {
+	private $token;
+
+	public function __construct( $parent, $name, $registrationModel, $token = NULL ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
+		$this->token = $token;
 	}
 	
 	public function render() {
@@ -55,11 +58,30 @@ class UserRegistration extends Control {
 
 	public function processRegistration( Form $form ) {
 		$values = (array) $form->getValues();
+		$token = $this->token;
+
+		if($token) {
+			try {
+				$this->registrationModel->validateVipToken( $token );
+			}
+			catch (\App\Model\InvalidTokenException $e) {
+				$form->addError("Váš VIP token je neplatný, požádejte si o nový.");
+				return;
+			}
+		}
+
+
 		$user = $this->getPresenter()->getUser();
 		$values['created_date'] = new \MongoDate( time() );
 		$values['picture_url'] = $user->getIdentity()->picture_url;
 		$values['identity'] = $user->getIdentity()->data;
+		$values['vip_token'] = $this->token;
 		$this->registrationModel->updateConferree( $user->getId(), $values );
+
+		if($this->token) {
+			$this->registrationModel->invalideVipToken($token);
+			$session = $this->getPresenter()->getContext()->getService("session")->getSection("vip")->remove();
+		}
 
 		$conferee = $this->registrationModel->findCoferree( $user->getId() );
 		$user->getIdentity()->conferee = $conferee;

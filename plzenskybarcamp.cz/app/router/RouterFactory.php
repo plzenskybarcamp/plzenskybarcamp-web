@@ -33,8 +33,12 @@ class RouterFactory
 		$router[] = new Route('login/twitter', 'Sign:inTw');
 		$router[] = new Route('login/process/facebook', 'Sign:processFb');
 		$router[] = new Route('login/process/twitter', 'Sign:processTw');
+		$router[] = new Route('/vip/<token>', 'Vip:useToken');
 
 		$adminRouter = new RouteList('Admin');
+		$adminRouter[] = new Route('admin/vip/token/new', 'Vip:new');
+		$adminRouter[] = new Route('admin/vip/token/invalidate/<token>', 'Vip:invalidate');
+		$adminRouter[] = new Route('admin/vip[/token/<token>]', 'Vip:list');
 		$adminRouter[] = new Route('admin/<presenter>/<action>', 'Dashboard:default');
 		$router[] = $adminRouter;
 

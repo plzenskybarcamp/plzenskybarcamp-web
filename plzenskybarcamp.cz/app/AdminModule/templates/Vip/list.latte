@@ -1,0 +1,43 @@
+{block title}{block h1}VIP tokeny{/block} - Plzeňský Barcamp{/block}
+{block content}
+
+{if $currentToken}
+	<h2>Token na jméno: {$currentToken['name']}</h2>
+	<div class="well well-lg">
+		<div class="row">
+			<div n:class="$currentToken['invalidity'] ? 'has-error', 'col-md-9'">
+				<input type="text" class="form-control input-lg" id="copydata" value="{link //:Vip:useToken token=>$currentToken['_id']}" autofocus>
+			</div>
+			<div class="col-md-3">
+				<button type="button" class="btn  input-lg btn-block" id="copy" disabled><span class="glyphicon glyphicon-link"></span> Copy</button>
+			</div>
+		</div>
+	</div>
+{/if}
+
+<div class="row">
+	<div class="col-sm-2 col-sm-push-10 text-right">
+		<a href="{link new}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Vytvořit</a>
+	</div>
+	<div class="col-sm-10 col-sm-pull-2">
+		<h2>Seznam vystavených tokenů</h2>
+	</div>
+</div>
+<table class="table table-striped">
+	<tr>
+		<th>Jméno</th>
+		<th>Token</th>
+		<th>Platnost</th>
+		<th>Vytvořen</th>
+		<th>Expiruje</th>
+		<th></th>
+	</tr>
+	<tr n:foreach="$tokens as $token" n:class="$token['invalidity'] ? 'danger'">
+		<td>{$token['name']}</td>
+		<td><a href="{link this token=>$token['_id']}">{$token['_id']|truncate:16}</a></td>
+		<td><strong n:tag-if="$token['invalidity']">{$token['validation']}</strong></td>
+		<td>{$token['created_date']->sec|date:"d. m. Y H:i:s"}</td>
+		<td>{ifset $token['expired_date']}{$token['expired_date']->sec|date:"d. m. Y H:i:s"}{else}-{/ifset}</td>
+		<td>{if !$token['invalidity']}<a href="{link invalidate token=>$token['_id']}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Zneplatnit</a>{/if}</td>
+	</tr>
+</table>

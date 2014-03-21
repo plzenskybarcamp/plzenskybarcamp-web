@@ -13,9 +13,11 @@ use Nette,
 
 
     private $configModel;
+    private $registrationModel;
 
-    public function __construct( Model\Config $configModel ) {
+    public function __construct( Model\Config $configModel, Model\Registration $registrationModel ) {
         $this->configModel = $configModel;
+        $this->registrationModel = $registrationModel;
     }
 
     public function createComponentSwitchesForm() {
@@ -45,7 +47,7 @@ use Nette,
         $this->setConfig( 'isRegistrationOpen', $values['isRegistrationOpen'] );
         $this->setConfig( 'registrationCapatity', $values['registrationCapatity'] );
 
-        $this->flashMessage('OK, sucessfull saved.');
+        $this->flashMessage('OK, sucessfull saved.', 'success');
         $this->redirect( 'this' );
 
     }

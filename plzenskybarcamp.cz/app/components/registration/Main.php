@@ -12,12 +12,16 @@ class Main extends Control {
 	private $configModel;
 
 	private $fbLoginLink;
+	
+	private $token;
 
-	public function __construct( $parent, $name, $registrationModel, $configModel, $fbLoginLink ) {
+
+	public function __construct( $parent, $name, $registrationModel, $configModel, $fbLoginLink, $token ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
 		$this->configModel = $configModel;
 		$this->fbLoginLink = $fbLoginLink;
+		$this->token = $token;
 	}
 	
 	public function render() {
@@ -28,11 +32,21 @@ class Main extends Control {
 		$registrationCapatity = $this->configModel->getConfig( 'registrationCapatity', 0 );
 		$registreredUsers = $this->registrationModel->getConferrees()->count();
 
+		$canBeRegistered = ( $registrationCapatity - $registreredUsers ) > 0;
+		if( ! $canBeRegistered && $this->token ) {
+			try{
+				$this->registrationModel->validateVipToken( $this->token );
+				$canBeRegistered = TRUE;
+			}
+			catch (\App\Model\InvalidTokenException $e) {
+				//void
+			}
+		}
 
 		$this->template->setFile( __DIR__ . '/templates/main.latte');
 		$this->template->user = $this->getPresenter()->getUser();
 		$this->template->identity = $this->getPresenter()->getUser()->getIdentity();
-		$this->template->canBeRegistered = ( $registrationCapatity - $registreredUsers ) > 0;
+		$this->template->canBeRegistered = $canBeRegistered;
 		$this->template->isRegistrationOpen = $this->configModel->getConfig( 'isRegistrationOpen', FALSE );
 		$this->template->fbLoginLink = $this->fbLoginLink;
 		return $this->template;
@@ -48,7 +62,7 @@ class Main extends Control {
 
 	public function createComponentRegistration( $name ) {
 		return $this->compliteRegistration(
-			new UserRegistration( $this, $name, $this->registrationModel )
+			new UserRegistration( $this, $name, $this->registrationModel, $this->token )
 		);
 	}
 
