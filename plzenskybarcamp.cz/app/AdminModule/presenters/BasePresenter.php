@@ -35,7 +35,9 @@ abstract class BasePresenter extends \App\Presenters\BasePresenter
 			'JB' => 1296988124,
 			'Kollda' => 1011669265,
             'anton' =>100001297429314,
-            'MARUSKA' =>1551789255
+            'MARUSKA' =>1551789255,
+            'endis' => 100000241892661,
+            'verča' => 1271843661
 		));
 	}
 
