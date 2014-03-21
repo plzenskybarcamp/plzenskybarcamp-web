@@ -1,0 +1,26 @@
+{block title}{block h1}Registrovaní návštěvníci{/block} - Plzeňský Barcamp{/block}
+{block content}
+
+<div class="row">
+	<div class="col-md-12 text-right">
+		<a href="{link csv}" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> CSV</a>
+	</div>
+</div>
+<table class="table table-striped">
+	<tr>
+		<th>Jméno</th>
+		<th>E-mail</th>
+		<th class="text-right"><abbr title="Metoda přihlášení">Auth</abbr></th>
+		<th>Datum registrace</th>
+	</tr>
+	<tr n:foreach="$users as $user">
+		<td>{$user['name']}</td>
+		<td><a href="mailto:{@$user['email']}">{@$user['email']}</a></td>
+		<td class="text-right">
+			{ifset $user[identity][platforms][fb][link]}<a href="{$user[identity][platforms][fb][link]}" title="Prihlášen Facebookem"><span class="label label-default"><span class="fa fa-facebook"></span></span></a>{/ifset}
+			{ifset $user[identity][platforms][tw][screen_name]}<a href="http://twitter.com/{$user[identity][platforms][tw][screen_name]}" title="Prihlášen Twitterem"><span class="label label-default"><span class="fa fa-twitter"></span></span></a>{/ifset}
+			{ifset $user[vip_token]}<a href="{link Vip:list token=>$user[vip_token]}" title="VIP token"><span class="label label-default"><span class="fa fa-external-link"></span></span></a>{/ifset}
+		</td>
+		<td>{@$user['created_date']->sec|date:"d. m. Y H:i:s"}</td>
+	</tr>
+</table>
