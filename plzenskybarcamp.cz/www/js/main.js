@@ -105,10 +105,10 @@ registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, 
     });
 }
 
-registerVotes = function(container) {
+processVote = function(container) {
     actionAdd = container.data( 'actionAdd' );
     actionRemove = container.data( 'actionRemove' );
-    processSubmit = function(doAdded, talkId) {
+    return function(doAdded, talkId) {
         action = doAdded ? actionAdd : actionRemove;
         return $.ajax({
             type: 'GET',
@@ -121,21 +121,61 @@ registerVotes = function(container) {
             return $.Deferred().reject().promise();
         })
     }
+}
+
+registerVotes = function(container) {
+    checkins = {}
+    processSubmit = processVote(container);
     $('tr.talks-detail', container).each(function(index, elem){
         elem = $(elem);
         talkId = elem.data('id');
-        $('.vote', elem).click((function(talkId){
-            return function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                box = this;
-                processSubmit(box.checked, talkId).done(function(count){
-                    $('.votes_count', elem).html(count);
-                    box.checked = !box.checked;
-                })
+        checkins[talkId] = $('.vote', elem).data('checked');
+        boxs = [$('.vote', elem),  $('.vote', elem.prev())];
+        $.each(boxs, function(index, box){
+            box.prop('checked', checkins[talkId]);
+            $(box).click((function(talkId, boxs, voteCount){
+                return function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    processSubmit(!checkins[talkId], talkId).done(function(count){
+                        voteCount.html(count);
+                        checkins[talkId] = !checkins[talkId]
+                        $.each(boxs, function(index, box){
+                            box.prop('checked', checkins[talkId]);
+                        });
+                    });
+                }
+            })(talkId, boxs, $('.votes_count', elem)));
+        });
+    });
+}
+
+
+registerVotesDetail = function(container) {
+    if (!container.get(0)) {
+        return;
+    }
+    checkins = {}
+    processSubmit = processVote(container);
+
+    box = $(".vote-detail", container);
+    voteCount = $("#votes-count", container);
+    talkId = container.data("id");
+    isChecked = box.data('checked');
+    box.prop('checked', isChecked);
+    voted = $(".voted", container);
+    box.click(function(e) {
+        processSubmit(!isChecked, talkId).done(function(count){
+            voteCount.html(count);
+            isChecked = !isChecked
+            box.prop('checked', isChecked);
+            if (isChecked) {
+                voted.show()
+            } else {
+                voted.hide()
             }
-        })(talkId));
-    })
+        });
+    });
 }
 
 $(document).ready(function() {
@@ -149,6 +189,7 @@ $(document).ready(function() {
     registerAjaxRegistration($('#registration'));
     registerAjaxProfileUpdate($('#talk-registration'), $('#profile-save'), $('#user-form'), $('#talk-form'), $('#talk-button'));
     registerVotes($('#talks-list'));
+    registerVotesDetail($("#speaker-detail .voting-detail"));
 });
 // window.fbAsyncInit = function() {
 // 	FB.init({

@@ -40,8 +40,8 @@
                         </p>
                     </td>
                     <td class="fourth-td">
-                        <input class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
-                        <span><em class="votes_count">30{@$talk['votes_count']}</em>hlasů<span></td>
+                        <input class='vote' type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                        <span><em class="votes_count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</em>hlasů<span></td>
                 </tr>
             </table>
         </td>
