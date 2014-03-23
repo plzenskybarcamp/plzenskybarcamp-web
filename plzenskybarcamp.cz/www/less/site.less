@@ -355,8 +355,9 @@ html {
 					display: block;
 
 					em {
-						font-size: 150%; font-style: normal; font-weight: bold; color: @green;
+						font-size: 150%; font-style: normal; font-weight: normal; color: @green; font-family: "open_sanssemibold";
 						display: block;
+						margin-top: 30px;
 					}
 				}
 			}
@@ -418,6 +419,23 @@ html {
 		.bio {
 			text-align: left;
 		}
+		.voting-detail {
+			text-align: center;
+			padding: 20px;
+			.border-tb {
+				display: block;
+				margin-top: 20px;
+				text-align: center;
+			}
+			p {
+				padding-top: 0;
+				span {
+					font-family: "open_sanssemibold";
+					color: @green;
+					font-size: 200%;
+				}
+			}
+		}
 	}
 
 	.organizers {
@@ -435,9 +453,21 @@ html {
 		}
 	}
 
-	.dekujeme-list {
-		text-align: center;
-		list-style: none;
+	.assistants {
+		overflow: hidden;
+		padding-bottom: 10px;
+		.assistant {
+			float: left;
+			text-align: center;
+			width: 150px;
+			margin-top: 30px;
+			.photo-pic {
+				width: 70px;
+				height: 70px;
+				display: block;
+				margin: 0 40px 20px 40px;
+			}
+		}
 	}
 
 	.border-tb {

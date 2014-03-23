@@ -1,8 +1,14 @@
 <h2>Přednášky Plzeňského Barcampu</h2>
 <p>Sleduj seznam zapsaných přednášek. V týdnu mezi 24. - 30. březnem otevřeme hlasování a ty se budeš moci podílet na náplni prvního Plzeňského Barcampu! A jestli ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma.</p>
 
-<p class="user-list-user-count">Registrovaných přednášek: <strong>{$talksCount}</strong></p>
+<div class="center">
+    <p><a href="/" class="button registration-button">Chci přednášet!</a></p>
 
+<h2>Hlasování pro přednášky je spuštěno.</h2>
+</div>
+<p>Hlasování bude ukončeno o půlnoci v pátek 4. dubna 2014. Hlasovat můžeš zaškrtnutím přednášky. Počet přednášek, kterým můžeš dát hlas není omezen. Své hlasování můžeš až do uzavření hlasování kdykoliv změnit.</p>
+
+<p class="user-list-user-count">Registrovaných přednášek: <strong>{$talksCount}</strong></p>
 <table class="table-list" id="talks-list" data-action-add="{link addVote!}" data-action-remove="{link removeVote!}">
 <tbody>
 {foreach $talks as $talk}
@@ -12,7 +18,11 @@
         <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']|biggerTwitterPicture:"_bigger"}" title="{$speaker['name']}"/></a></td>
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
         <td class="third-td"><span class="crop">{$talk['description']}</span></td>
-        <td class="fourth-td">{* <span>{@$talk['votes_count']} likes</span> <a n:if="$currentUser->isLoggedIn()" href="#">like</a> *}</td>
+        <td class="fourth-td">
+            {* <span>{@$talk['votes_count']} likes</span>
+            <a n:if="$currentUser->isLoggedIn()" href="#">like</a>*}
+            <input class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+        </td>
     </tr>
 
     <tr class="talks-detail" data-id="{$talk['_id']}">
@@ -32,8 +42,8 @@
                         </p>
                     </td>
                     <td class="fourth-td">
-                        {*<input class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
-                        <span><em class="votes_count">{@$talk['votes_count']}</em>hlasů<span></td>*}
+                        <input class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                        <span><em class="votes_count">30{@$talk['votes_count']}</em>hlasů<span></td>
                 </tr>
             </table>
         </td>

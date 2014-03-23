@@ -53,11 +53,18 @@ hranic{/block}
             </div>*}
             <p class="bio"><strong>Bio:</strong> {$speaker['bio']}</p>
 
+            <div class="voting-detail">
+                <p>Stav hlasování: <span id="votes-count">30</span> hlasů</p>
+                <label for="vote">Hlasuj: </label>
+                <input type="checkbox" name="vote" id="vote"/>
+                <span class="border-tb">Dal jsi svůj hlas</span>{* // Stav pro zaškrtnutý checkbox - zahlasováno *}
+            </div>
+
             <div n:ifset="$talk['votes']">
                 <p><span id="votes-count">{$talk['votes_count']}</span> hlasů</p>
                 <p>
                     <label for="vote">Chci slyšet</label>
-                    <input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}chacked{/if}/> 
+                    <input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}checked{/if}/> 
                 </p>
             </div>
 
