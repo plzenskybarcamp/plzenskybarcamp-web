@@ -17,7 +17,18 @@
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
         <td class="third-td"><span class="crop">{$talk['description']}</span></td>
         <td class="fourth-td">
-            <input n:if="$user->isLoggedIn()" class='vote' type="checkbox" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+            {block #vote}
+                {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
+                    <input class="vote"
+                    data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}"
+                    type="checkbox"
+                    {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                {elseif $user->isLoggedIn()}
+                    <p>Hlasovat mohou bohužel jen registrovaní</p>
+                {else}
+                    <p>Pro hlasování se <a href="/login">přihlaš</a></p>
+                {/if}
+            {/block}
         </td>
     </tr>
 
@@ -38,7 +49,7 @@
                         </p>
                     </td>
                     <td class="fourth-td">
-                        <input n:if="$user->isLoggedIn()" class='vote' type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                        {include #vote}
                         <span><em class="votes_count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</em>hlasů<span></td>
                 </tr>
             </table>

@@ -59,8 +59,14 @@ hranic{/block}
                 data-action-remove="/prednasky?do=talks-removeVote">
 
                 <p>Stav hlasování: <span id="votes-count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</span> hlasů</p>
-                <label n:if="$user->isLoggedIn()" for="vote">Hlasuj: </label>
-                <input n:if="$user->isLoggedIn()" class="vote-detail" id="vote" type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
+                    <label for="vote">Hlasuj: </label>
+                    <input class="vote-detail" id="vote" type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                {elseif $user->isLoggedIn()}
+                    <p>Hlasovat mohou bohužel jen registrovaní</p>
+                {else}
+                    <p>Pro hlasování se <a href="/login">přihlaš</a></p>
+                {/if}
                 <span {if !@in_array($user->getId(), $talk['votes'])}style="display:none"{/if} class="border-tb voted">Dal jsi svůj hlas</span>{* // Stav pro zaškrtnutý checkbox - zahlasováno *}
             </div>
 

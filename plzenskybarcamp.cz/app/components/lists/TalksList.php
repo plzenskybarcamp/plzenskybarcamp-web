@@ -10,6 +10,7 @@ class TalksList extends Control {
 	private $registrationModel;
 
 	public function __construct( $parent, $name, $registrationModel ) {
+		parent::__construct($parent, $name);
 		$this->registrationModel = $registrationModel;
 	}
 
@@ -43,7 +44,7 @@ class TalksList extends Control {
 	}
 
 	private function validRequest( $talkId ) {
-		if ( !$this->getPresenter()->isAjax() || !$this->registrationModel->hasTalk( $talkId ) ) {
+		if ( $this->getPresenter()->getUser()->isLoggedIn() && !$this->getPresenter()->isAjax() || !$this->registrationModel->hasTalk( $talkId ) ) {
 			throw new \Nette\Application\BadRequestException( 'Not valid request', '404');
 		}
 	}
