@@ -1,8 +1,9 @@
 <h2>Přednášky Plzeňského Barcampu</h2>
 <p><strong>Hlasování je spuštěno.</strong> Sleduj seznam zapsaných přednášek a podílej se na programu prvního Plzeňského Barcampu. Svým hlasem budeš rozhodovat, které přednášky se uskuteční.</p>
-<p>Hlasovat můžeš zaškrtnutím přednášky do půlnoci v pátek 4. dubna 2014. Počet přednášek, kterým můžeš dát svůj hlas není omezen. Své hlasy můžeš až do uzavření hasování kdykoliv změnit. A pokud ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma. </p> {* ''''Pokud mám vypsanou přednášku, následující větu neuvidím*}
+{var $isSpeaker = $user->isLoggedIn() && $user->getIdentity()->isSpeaker()}
+<p n:if="!$isSpeaker">Hlasovat můžeš zaškrtnutím přednášky do půlnoci v pátek 4. dubna 2014. Počet přednášek, kterým můžeš dát svůj hlas není omezen. Své hlasy můžeš až do uzavření hasování kdykoliv změnit. A pokud ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma. </p> {* ''''Pokud mám vypsanou přednášku, následující větu neuvidím*}
 
-<div class="center">
+<div n:if="!$isSpeaker" class="center">
     <p><a href="/" class="button registration-button">Chci přednášet!</a></p>
 </div>
 
