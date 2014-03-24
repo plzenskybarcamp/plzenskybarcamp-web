@@ -53,19 +53,15 @@ hranic{/block}
             </div>*}
             <p class="bio"><strong>Bio:</strong> {$speaker['bio']}</p>
 
-            <div class="voting-detail">
-                <p>Stav hlasování: <span id="votes-count">30</span> hlasů</p>
-                <label for="vote">Hlasuj: </label>
-                <input type="checkbox" name="vote" id="vote"/>
-                <span class="border-tb">Dal jsi svůj hlas</span>{* // Stav pro zaškrtnutý checkbox - zahlasováno *}
-            </div>
+            <div class="voting-detail"
+                data-id="{$talk['_id']}"
+                data-action-add="/prednasky?do=talks-addVote"
+                data-action-remove="/prednasky?do=talks-removeVote">
 
-            <div n:ifset="$talk['votes']">
-                <p><span id="votes-count">{$talk['votes_count']}</span> hlasů</p>
-                <p>
-                    <label for="vote">Chci slyšet</label>
-                    <input type="checkbox" name="vote" id="vote" {if in_array($user->getId(), $talk['votes'])}checked{/if}/> 
-                </p>
+                <p>Stav hlasování: <span id="votes-count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</span> hlasů</p>
+                <label for="vote">Hlasuj: </label>
+                <input class="vote-detail" id="vote" type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                <span {if !@in_array($user->getId(), $talk['votes'])}style="display:none"{/if} class="border-tb voted">Dal jsi svůj hlas</span>{* // Stav pro zaškrtnutý checkbox - zahlasováno *}
             </div>
 
             <div>

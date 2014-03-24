@@ -25,8 +25,6 @@ class TalksList extends Control {
 	}
 
 	public function handleaddVote() {
-		throw new \Nette\NotImplementedException('Security issue: Method is not available now');
-
 		$talkId = $this->getPresenter()->getParameter( 'talkId' );
 		$this->validRequest( $talkId );
 		$this->registrationModel->addVote( $talkId, $this->getPresenter()->getUser()->getId() );
@@ -34,8 +32,6 @@ class TalksList extends Control {
 	}
 
 	public function handleremoveVote() {
-		throw new \Nette\NotImplementedException('Security issue: Method is not available now');
-		
 		$talkId = $this->getPresenter()->getParameter( 'talkId' );
 		$this->validRequest( $talkId );
 		$this->registrationModel->removeVote( $talkId, $this->getPresenter()->getUser()->getId() );
