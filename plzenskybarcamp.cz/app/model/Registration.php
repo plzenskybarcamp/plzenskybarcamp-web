@@ -88,8 +88,7 @@ class Registration {
 			array(
 				'$push' => array( 'votes' => $userId ),
 				'$inc' => array( 'votes_count' => 1 )
-			),
-			array( 'upsert' => TRUE )
+			)
 		);
 	}
 
@@ -99,8 +98,7 @@ class Registration {
 			array(
 				'$pull' => array( 'votes' => $userId ),
 				'$inc' => array( 'votes_count' => -1 )
-			),
-			array( 'upsert' => TRUE )
+			)
 		);
 	}
 
