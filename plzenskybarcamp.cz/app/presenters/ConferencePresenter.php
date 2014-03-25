@@ -55,6 +55,7 @@ class ConferencePresenter extends BasePresenter
 			$this->flashMessage('Omlouváme se, ale profil návštěvníka je dostupný až po registraci', 'error');
 			$this->redirect('Homepage:default');
 		}
+		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
 		$this->template->conferree = $this->conferree;
 		$this->template->talk = isset( $this->conferree['talk'] )? $this->conferree['talk'] : NULL;
 	}
