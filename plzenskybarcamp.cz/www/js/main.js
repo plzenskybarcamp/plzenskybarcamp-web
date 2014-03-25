@@ -133,7 +133,7 @@ registerVotes = function(container) {
         boxs = [$('.vote', elem),  $('.vote', elem.prev())];
         $.each(boxs, function(index, box){
             box.prop('checked', checkins[talkId]);
-            $(box).click((function(talkId, boxs, voteCount){
+            $(box).click((function(talkId, boxs, voteCount, trHeadElement){
                 return function(e) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -143,9 +143,14 @@ registerVotes = function(container) {
                         $.each(boxs, function(index, box){
                             box.prop('checked', checkins[talkId]);
                         });
+                        if (checkins[talkId]) {
+                            trHeadElement.addClass('voted-for')
+                        } else {
+                            trHeadElement.removeClass('voted-for')
+                        }
                     });
                 }
-            })(talkId, boxs, $('.votes_count', elem)));
+            })(talkId, boxs, $('.votes_count', elem), elem.prev()));
         });
     });
 }
