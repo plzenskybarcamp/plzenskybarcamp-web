@@ -1,18 +1,18 @@
 <h2>Přednášky Plzeňského Barcampu</h2>
 <p><strong>Hlasování je spuštěno.</strong> Sleduj seznam zapsaných přednášek a podílej se na programu prvního Plzeňského Barcampu. Svým hlasem budeš rozhodovat, které přednášky se uskuteční.</p>
 {var $isSpeaker = $user->isLoggedIn() && $user->getIdentity()->isSpeaker()}
-<p n:if="!$isSpeaker">Hlasovat můžeš zaškrtnutím přednášky do půlnoci v pátek 4. dubna 2014. Počet přednášek, kterým můžeš dát svůj hlas není omezen. Své hlasy můžeš až do uzavření hasování kdykoliv změnit. A pokud ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma. </p> {* ''''Pokud mám vypsanou přednášku, následující větu neuvidím*}
+<p>Hlasovat můžeš zaškrtnutím přednášky do půlnoci v pátek 4. dubna 2014. Počet přednášek, kterým můžeš dát svůj hlas není omezen. Své hlasy můžeš až do uzavření hasování kdykoliv změnit. <span n:if="!$isSpeaker">A pokud ti tu něco chybí, zapiš si vlastní přednášku a přines nový pohled na oblíbené téma. </span></p>
 
-<div n:if="!$isSpeaker" class="center">
+{*<div n:if="!$isSpeaker" class="center">
     <p><a href="/" class="button registration-button">Chci přednášet!</a></p>
-</div>
+</div> // Je třeba dodělat mechaniku pro tento button - zobrazovat jen registrovaným a zároveň nespeakerům. Na kliknutí navázat zobrazení formuláře, stejně jako na homepage *} 
 
 <p class="user-list-user-count">Registrovaných přednášek: <strong>{$talksCount}</strong></p>
 <table class="table-list" id="talks-list" data-action-add="{link addVote!}" data-action-remove="{link removeVote!}">
 <tbody>
 {foreach $talks as $talk}
     {var $speaker = $talk['speaker']}
-    <tr class="talks-head" data-id="{$talk['_id']}">
+    <tr class="talks-head {if @in_array($user->getId(), $talk['votes'])}voted-for{/if}" data-id="{$talk['_id']}">
 
         <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']|biggerTwitterPicture:"_bigger"}" title="{$speaker['name']}"/></a></td>
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
@@ -25,9 +25,9 @@
                     type="checkbox"
                     {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
                 {elseif $user->isLoggedIn()}
-                    <p>Hlasovat mohou bohužel jen registrovaní</p>
+                    <p>Hlasovat mohou jen registrovaní</p>
                 {else}
-                    <p>Pro hlasování se <a href="/login">přihlaš</a></p>
+                    <p><a href="/login">Přihlaš se</a> a&nbsp;hlasuj!</p>
                 {/if}
             {/block}
         </td>

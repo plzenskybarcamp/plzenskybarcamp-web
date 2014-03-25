@@ -63,9 +63,9 @@ hranic{/block}
                     <label for="vote">Hlasuj: </label>
                     <input class="vote-detail" id="vote" type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
                 {elseif $user->isLoggedIn()}
-                    <p>Hlasovat mohou bohužel jen registrovaní</p>
+                    <p>Hlasovat mohou jen registrovaní</p>
                 {else}
-                    <p>Pro hlasování se <a href="/login">přihlaš</a></p>
+                    <p><a href="/login">Přihlaš se</a> a&nbsp;hlasuj!</p>
                 {/if}
                 <span {if !@in_array($user->getId(), $talk['votes'])}style="display:none"{/if} class="border-tb voted">Dal jsi svůj hlas</span>{* // Stav pro zaškrtnutý checkbox - zahlasováno *}
             </div>
