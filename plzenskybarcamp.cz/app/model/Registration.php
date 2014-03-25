@@ -11,9 +11,9 @@ class Registration {
 	const TOKEN_EXCEPTION_INVALID = 1001;
 	const TOKEN_EXCEPTION_EXPIRED = 1002;
 
-	public function __construct( $host ) {
-		$client = new \MongoClient( $host );
-		$database = $client->barcamp;
+	public function __construct( $mongoConfig ) {
+		$client = new \MongoClient( $mongoConfig['host'] );
+		$database = $client->$mongoConfig['db'];
 		$this->confereeCollection = $database->conferee;
 		$this->talkCollection = $database->talk;
 		$this->tokenCollection = $database->token;

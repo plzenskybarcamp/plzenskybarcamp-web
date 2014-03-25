@@ -5,7 +5,11 @@
 # http://nette.org/security-warning
 #
 parameters:
-	mongo: 'localhost:27017'
+	app:
+		is_develop: false
+	mongo:
+		host: 'localhost:27017'
+		db: 'barcamp'
 	facebook:
 		app_config:
 			appId: '504432792996629'
@@ -42,3 +46,4 @@ services:
 	configModel: App\Model\Config(%mongo%)
 	Facebook: Facebook(%facebook.app_config%)
 	twitterOAuth: TwitterOAuth(%twitter.app_config.key%, %twitter.app_config.secret%)
+	developFlag: App\Components\DevelopFlag(%app.is_develop%)

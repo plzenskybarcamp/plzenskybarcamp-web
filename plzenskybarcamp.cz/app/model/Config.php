@@ -7,9 +7,9 @@ class Config {
 	private $configCollection;
 	private $configs;
 
-	public function __construct( $host ) {
-		$client = new \MongoClient( $host );
-		$database = $client->barcamp;
+	public function __construct( $mongoConfig ) {
+		$client = new \MongoClient( $mongoConfig['host'] );
+		$database = $client->$mongoConfig['db'];
 		$this->configCollection = $database->config;
 	}
 

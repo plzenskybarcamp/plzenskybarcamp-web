@@ -8,4 +8,3 @@ plzenskybarcamp.cz/vendor/*
 .DS_Store
 !.gitignore
 !.htaccess
-plzenskybarcamp.cz/app/config/config.local.neon

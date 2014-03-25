@@ -33,7 +33,7 @@
 
     <body class="{block bodyClass}{/block}" itemscope itemtype="http://schema.org/Event">
         <script> document.documentElement.className += ' js'</script>
-        <div id="fb-root"></div>
+        {if $isDevelop}<div id="is_debug_flag"></div>{/if}
 
         <header class="main-header dark">
             <nav class="main-navigation">
