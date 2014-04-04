@@ -9,10 +9,10 @@ hranic{/block}
     <div class="inner">
         <h2>{$talk['title']}</h2>
         <div id="talk-detail" class="clearfix">
-            <p>{$talk['description']}</p>
+            <p>{!$talk['description']|escape|nl2br}</p>
 
             <h3>Komu je přednáška určena?</h3>
-            <p>{$talk['purpose']}</p>
+            <p>{!$talk['purpose']|escape|nl2br}</p>
 
             <h3>Kdy a kde se přednáška koná?</h3>
             {ifset $talk['place']}

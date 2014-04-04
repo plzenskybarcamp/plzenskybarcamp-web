@@ -29,9 +29,9 @@
                     </td>
                     <td colspan="1" class="second-td">
                         <a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a>
-                        <p>{$talk['description']}</p>
+                        <p>{!$talk['description']|escape|nl2br}</p>
                         <p><strong>Komu je přednáška určena?</strong><br>
-                            {$talk['purpose']}
+                            {!$talk['purpose']|escape|nl2br}
                         </p>
                     </td>
                     <td class="fourth-td">
