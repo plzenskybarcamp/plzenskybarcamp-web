@@ -11,6 +11,7 @@
 	# RewriteBase /
 
 	RewriteRule ^logo/?$ https://drive.google.com/folderview?id=0B7trDZc0CuxXWmxfUy13MV9Ydk0&usp=sharing [R=301,L]
+	RewriteRule ^cheermeter/?$ http://cheermeter.socialbakers.com/plzenskybarcamp/ [R=301,L]
 
 	# prevents files starting with dot to be viewed by browser
 	RewriteRule /\.|^\. - [F]
