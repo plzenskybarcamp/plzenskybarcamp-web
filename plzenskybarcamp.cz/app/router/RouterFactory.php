@@ -27,6 +27,7 @@ class RouterFactory
 		$router[] = new Route('prednasky', 'Conference:talks');
 		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail');
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
+		$router[] = new Route('program', 'Program:list');
 		$router[] = new Route('login', 'Sign:in');
 		$router[] = new Route('logout', 'Sign:out');
 		$router[] = new Route('login/facebook', 'Sign:inFb');
