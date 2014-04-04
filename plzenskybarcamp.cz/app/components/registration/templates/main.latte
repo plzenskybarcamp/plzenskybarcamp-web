@@ -49,31 +49,13 @@
 <div>
     <h2>Přednášky na Plzeňském Barcampu</h2>
     <p>Máš co říci ostatním? Děláš něco zajímavého? Mno, super! Vypiš si vlastní přednášku...</p>
-    <h3 class="voting-enabled">Hlasování je spuštěno!</h3>
 </div>
 
-{if !$isRegistrationOpen}
-    <p class="text-center"><strong>Registrace bude již brzy</strong></p>
-{else}
-    <div class="text-center" id="speaker-regestration">
-        {control registeredSpeakers 'vypsaných přednášek'}
-        {if !$canBeRegistered && ( !$user->isLoggedIn() || !$identity->isRegistered() ) }
-            {*<p><strong>Omlouváme se, ale kapacita registrací je již vyčerpána</strong></p*}
-        {else}
-            {if !$user->isLoggedIn()}
-                <a href="{$fbLoginLink}" id="show-login-choose-talk-regstration" class="button show-login-panel-hp">Chci přednášet!</a>
-            {elseif !$identity->isRegistered()}
-                <div class="form">{control registration}</div>
-                <a href="{link this}" class="button registration-button">Chci přednášet!</a>
-            {elseif !$identity->isSpeaker()}
-                <div class="form">{control speakerRegisteration}</div>
-                <a href="{link this}" class="button registration-button">Chci přednášet!</a>
-            {else}
-                <p class="border-tb">
-                    Mám vypsanou přednášku :)<br>
-                    <a href="{plink Conference:talksDetail talkId=>$identity->talk['_id']}">{$identity->talk['title']}</a>
-                </p>
-            {/if}
-        </div>
+<div class="text-center" id="speaker-regestration">
+    {control registeredSpeakers 'vypsaných přednášek'}
+    {if $user->isLoggedIn() && $identity->isSpeaker()}
+            Mám vypsanou přednášku :)<br>
+            <a href="{plink Conference:talksDetail talkId=>$identity->talk['_id']}">{$identity->talk['title']}</a>
+        </p>
     {/if}
-{/if}
+</div>
