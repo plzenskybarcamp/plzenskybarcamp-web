@@ -14,6 +14,16 @@ hranic{/block}
             <h3>Komu je přednáška určena?</h3>
             <p>{$talk['purpose']}</p>
 
+            <h3>Kdy a kde se přednáška koná?</h3>
+            {ifset $talk['place']}
+                <p>
+                    V místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.
+                    Podívej se na kompletní <a n:href="Program:list">program</a>.
+                </p>
+            {else}
+                <p><strong>Nekoná se</strong>, bohužel nezískala dostatečný počet hlasů.</p>
+            {/ifset}
+
             <a n:ifset="$talk['presentation_link']"
                href="$talk['presentation_link']" target="_blank">
                 Prezentace ke stažení
@@ -62,10 +72,6 @@ hranic{/block}
                 {if @in_array($user->getId(), $talk['votes'])}<span class="border-tb voted">Dal jsi svůj hlas</span>{/if}
             </div>
 
-            <div>
-                <p n:ifset="$talk['place']">{$talk['place']}</p>
-                <p n:ifset="$talk['time']">{$talk['time']}</p>
-            </div>
         </div>
         <div class="cleaner"></div>
 
