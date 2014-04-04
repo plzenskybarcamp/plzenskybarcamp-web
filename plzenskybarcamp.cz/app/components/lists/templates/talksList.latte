@@ -12,7 +12,7 @@
 <tbody>
 {foreach $talks as $talk}
     {var $speaker = $talk['speaker']}
-    <tr class="talks-head {if @in_array($user->getId(), $talk['votes'])}voted-for{/if}" data-id="{$talk['_id']}">
+    <tr class="talks-head {if @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $iterator->getCounter() == 24} last-in{/if}{if $iterator->getCounter() > 24} under-line{/if}" data-id="{$talk['_id']}">
 
         <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']|biggerTwitterPicture:"_bigger"}" title="{$speaker['name']}"/></a></td>
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
@@ -22,7 +22,7 @@
         </td>
     </tr>
 
-    <tr class="talks-detail" data-id="{$talk['_id']}">
+    <tr class="talks-detail {if $iterator->getCounter() == 24} last-in{/if}{if $iterator->getCounter() > 24} under-line{/if}" data-id="{$talk['_id']}">
 
         <td colspan="4" class="table-list-sub-wrap">
             <table class="table-list table-list-sub">
