@@ -62,7 +62,7 @@ class Registration {
 	}
 
 	public function getTalks() {
-		return $this->talkCollection->find()->sort( array('created_date' => -1 ) );
+		return $this->talkCollection->find()->sort( array('votes_count' => -1 ) );
 	}
 
 	public function getSpeakers( $limit = 0 ) {
