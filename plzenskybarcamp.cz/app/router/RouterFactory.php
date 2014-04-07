@@ -41,6 +41,7 @@ class RouterFactory
 		$adminRouter[] = new Route('admin/vip/token/invalidate/<token>', 'Vip:invalidate');
 		$adminRouter[] = new Route('admin/vip[/token/<token>]', 'Vip:list');
 		$adminRouter[] = new Route('admin/users', 'Users:list');
+		$adminRouter[] = new Route('admin/talks', 'Talks:list');
 		$adminRouter[] = new Route('admin/<presenter>/<action>', 'Dashboard:default');
 		$router[] = $adminRouter;
 

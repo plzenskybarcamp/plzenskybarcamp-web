@@ -30,6 +30,10 @@ abstract class BasePresenter extends \App\Presenters\BasePresenter
         }
 	}
 
+    public function beforeRender() {
+        $this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
+    }
+
 	private function isAdmin( $id ) {
 		return in_array($id, array(
 			'JB' => 1296988124,
