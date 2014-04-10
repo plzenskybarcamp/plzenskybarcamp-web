@@ -22,6 +22,7 @@ class RouterFactory
 		$router = new RouteList();
 		$router[] = new Route('partneri', 'Homepage:partners');
 		$router[] = new Route('kudy-kam', 'Homepage:location');
+		$router[] = new Route('informace', 'Homepage:info');
 		$router[] = new Route('kontakt', 'Homepage:contact');
 		$router[] = new Route('profil', 'Conference:profil');
 		$router[] = new Route('ucastnici', 'Conference:visitors');
