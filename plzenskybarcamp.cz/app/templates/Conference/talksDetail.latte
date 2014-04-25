@@ -14,25 +14,37 @@ hranic{/block}
             <h3>Komu je přednáška určena?</h3>
             <p>{!$talk['purpose']|escape|nl2br}</p>
 
-            <h3>Kdy a kde se přednáška koná?</h3>
+
+            {if $publicPresentations}
+            <h3>Podklady k přednášce</h3>
+            <ul>
+                <li n:foreach="$publicPresentations as $prezentation">
+                    <a href="{$prezentation['url']}" target="_blank">
+                        {$prezentation['title']}
+                    </a>
+                </li>
+            </ul>
+            {/if}
+
+            {if $publicMovies}
+            <h3>Záznam přednášky</h3>
+            <ul>
+                <li n:foreach="$publicMovies as $movie">
+                    <a href="{$movie['url']}" target="_blank">
+                        {$movie['title']}
+                    </a>
+                </li>
+            </ul>
+            {/if}
+
             {ifset $talk['place']}
                 <p>
-                    V místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.
+                    Přednáška se konala místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.
                     Podívej se na kompletní <a n:href="Program:list">program</a>.
                 </p>
             {else}
-                <p><strong>Nekoná se</strong>, bohužel nezískala dostatečný počet hlasů.</p>
+                <p><strong>Přednáška se nekonala</strong>.</p>
             {/ifset}
-
-            <a n:ifset="$talk['presentation_link']"
-               href="$talk['presentation_link']" target="_blank">
-                Prezentace ke stažení
-            </a>
-
-            <div n:ifset="$talk['youtube_video']">
-                <h3>Záznam přednášky</h3>
-                {=$talk['youtube_video']}
-            </div>
         </div>
 
         <div id="speaker-detail" class="clearfix">

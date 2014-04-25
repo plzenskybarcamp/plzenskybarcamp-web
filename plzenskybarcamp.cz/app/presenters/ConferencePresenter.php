@@ -38,10 +38,24 @@ class ConferencePresenter extends BasePresenter
 		}
 	}
 
+	private function isPublicLink( $link ) {
+		return (bool) $link[ 'is_public' ];
+	}
+
 	public function renderTalksDetail( $talkId ) {
 		$talk = $this->registrationModel->findTalk( $talkId );
 		if ( ! $talk ) {
 			throw new Nette\Application\BadRequestException( 'Talks not found', '404');
+		}
+
+		$this->template->publicPresentations = array();
+		if( isset( $talk['presentations'] ) ) {
+			$this->template->publicPresentations = array_filter( $talk['presentations'], array( $this, 'isPublicLink') );
+		}
+
+		$this->template->publicMovies = array();
+		if( isset( $talk['movies'] ) ) {
+			$this->template->publicMovies = array_filter( $talk['movies'], array( $this, 'isPublicLink') );
 		}
 
 		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));

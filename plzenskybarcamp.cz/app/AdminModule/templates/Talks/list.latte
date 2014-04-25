@@ -10,7 +10,9 @@
 		<th>Přednáška</th>
 	</tr>
 	<tr n:foreach="$talks as $talk">
-		<td><img src="{$talk['speaker']['picture_url']}" width="20" height="20"> {$talk['title']}</td>
+		<td><img src="{$talk['speaker']['picture_url']}" width="20" height="20"> 
+			<a n:href="detail 'talkId'=>$talk['_id']">{$talk['title']}</a>
+		</td>
 		<td>{$talk['speaker']['name']}</td>
 		<td><a href="mailto:{$talk['speaker']['email']}">{$talk['speaker']['email']}</a></td>
 		<td><a n:if="$talk['speaker']['twitter']" href="{@$talk['speaker']['twitter']|twitterize:"https://twitter.com/"}">{$talk['speaker']['twitter']|twitterize:"@"}</a></td>
