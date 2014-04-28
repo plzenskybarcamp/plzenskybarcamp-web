@@ -42,6 +42,14 @@ class ConferencePresenter extends BasePresenter
 		return (bool) $link[ 'is_public' ];
 	}
 
+	private function youtubizeLink( $link ) {
+		$matches = NULL;
+		if( preg_match( '~youtu\\.?be(?:\\.com)?/(?:watch\\?v=)?([-_a-z0-9]{8,15})~i', $link[ 'url' ], $matches )) {
+			$link[ 'embed' ] = "//www.youtube.com/embed/$matches[1]";
+		}
+		return $link;
+	}
+
 	public function renderTalksDetail( $talkId ) {
 		$talk = $this->registrationModel->findTalk( $talkId );
 		if ( ! $talk ) {
@@ -50,12 +58,21 @@ class ConferencePresenter extends BasePresenter
 
 		$this->template->publicPresentations = array();
 		if( isset( $talk['presentations'] ) ) {
-			$this->template->publicPresentations = array_filter( $talk['presentations'], array( $this, 'isPublicLink') );
+			$this->template->publicPresentations = array_filter(
+				$talk['presentations'],
+				array( $this, 'isPublicLink')
+			);
 		}
 
 		$this->template->publicMovies = array();
 		if( isset( $talk['movies'] ) ) {
-			$this->template->publicMovies = array_filter( $talk['movies'], array( $this, 'isPublicLink') );
+			$this->template->publicMovies = array_map(
+				array( $this, 'youtubizeLink'),
+				array_filter(
+					$talk['movies'],
+					array( $this, 'isPublicLink')
+				)
+			);
 		}
 
 		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));

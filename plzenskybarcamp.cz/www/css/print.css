@@ -400,6 +400,13 @@ a:focus {
   padding-top: 20px;
   margin-bottom: 10px;
 }
+.main-content h4 {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  padding: 0;
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
 .main-content p {
   font-size: 1em;
   line-height: 1.9em;
@@ -1021,6 +1028,26 @@ html {
 }
 .main-content .side-map a {
   border: none;
+}
+.main-content ul.movies {
+  list-style-type: none;
+}
+.main-content ul.movies h4 {
+  margin-top: 0px;
+}
+.main-content ul.movies a.yt-link {
+  display: block;
+  font-size: 0.9em;
+  font-style: italic;
+  text-align: right;
+  text-decoration: underline;
+  border: none;
+  font-weight: normal;
+  font-family: open_sanslight;
+  color: #888;
+}
+.main-content ul.movies a.yt-link:hover {
+  color: black;
 }
 .main-content .text-center {
   text-align: center;
