@@ -42,12 +42,27 @@ class ConferencePresenter extends BasePresenter
 		return (bool) $link[ 'is_public' ];
 	}
 
-	private function youtubizeLink( $link ) {
+	private function youtubizeLink( $link, $campainId ) {
 		$matches = NULL;
 		if( preg_match( '~youtu\\.?be(?:\\.com)?/(?:watch\\?v=)?([-_a-z0-9]{8,15})~i', $link[ 'url' ], $matches )) {
-			$link[ 'embed' ] = "//www.youtube.com/embed/$matches[1]";
+			$link[ 'embed' ] = $this->buildCampainUrl(
+				"//www.youtube.com/embed/$matches[1]",
+				'yt-video-embed',
+				$campainId
+			);
+			$link[ 'url' ] = $this->buildCampainUrl(
+				$link[ 'url' ],
+				'yt-video-youtube',
+				$campainId
+			);
 		}
+
 		return $link;
+	}
+
+	private function buildCampainUrl( $url, $medium, $campainId ) {
+		$postfix = "utm_source=pbc-web&utm_medium=$medium&utm_content=$campainId&utm_campaign=talk-detail";
+		return $url . ( strpos( $url, '?' ) !== false ? '&' : '?' ) . $postfix;
 	}
 
 	public function renderTalksDetail( $talkId ) {
@@ -66,13 +81,13 @@ class ConferencePresenter extends BasePresenter
 
 		$this->template->publicMovies = array();
 		if( isset( $talk['movies'] ) ) {
-			$this->template->publicMovies = array_map(
-				array( $this, 'youtubizeLink'),
-				array_filter(
-					$talk['movies'],
-					array( $this, 'isPublicLink')
-				)
-			);
+			foreach( $talk['movies'] as $movieId => $movie ) {
+				if( ! $this->isPublicLink( $movie ) ) {
+					continue;
+				}
+
+				$this->template->publicMovies[ $movieId ] = $this->youtubizeLink( $movie, $movieId );
+			}
 		}
 
 		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
