@@ -14,25 +14,45 @@ hranic{/block}
             <h3>Komu je přednáška určena?</h3>
             <p>{!$talk['purpose']|escape|nl2br}</p>
 
-            <h3>Kdy a kde se přednáška koná?</h3>
             {ifset $talk['place']}
                 <p>
-                    V místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.
+                    Přednáška se konala místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.
                     Podívej se na kompletní <a n:href="Program:list">program</a>.
                 </p>
             {else}
-                <p><strong>Nekoná se</strong>, bohužel nezískala dostatečný počet hlasů.</p>
+                <p><strong>Přednáška se nekonala</strong>.</p>
             {/ifset}
 
-            <a n:ifset="$talk['presentation_link']"
-               href="$talk['presentation_link']" target="_blank">
-                Prezentace ke stažení
-            </a>
+            {if $publicPresentations}
+            <h3>Podklady k přednášce</h3>
+            <ul>
+                <li n:foreach="$publicPresentations as $prezentation">
+                    <a href="{$prezentation['url']}" target="_blank">
+                        {$prezentation['title']}
+                    </a>
+                </li>
+            </ul>
+            {/if}
 
-            <div n:ifset="$talk['youtube_video']">
-                <h3>Záznam přednášky</h3>
-                {=$talk['youtube_video']}
-            </div>
+            {if $publicMovies}
+            <h3>Záznam přednášky</h3>
+            <ul class="movies">
+                <li n:foreach="$publicMovies as $movie">
+                    {ifset $movie[ 'embed' ]}
+                        <h4>{$movie['title']}</h4>
+                        <iframe width="540" height="304" src="{$movie['embed']}" frameborder="0" allowfullscreen></iframe>
+                        <a href="{$movie['url']}" target="_blank" class="yt-link">
+                            Zobrazit na YouTube
+                        </a>
+                    {else}
+                        <a href="{$movie['url']}" target="_blank">
+                            {$movie['title']}
+                        </a>
+                    {/ifset}
+                </li>
+            </ul>
+            {/if}
+
         </div>
 
         <div id="speaker-detail" class="clearfix">

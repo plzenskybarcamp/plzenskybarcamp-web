@@ -51,8 +51,8 @@ class Registration {
 		$this->syncSpeakerWithTalk( $data['_id'], $speaker );
 	}
 
-	public function updateTalk( $talkId, array $data ) {
-		$this->updateTalkByCondition( array( '_id' => $talkId ), $data );
+	public function updateTalk( $talkId, array $data, $updateModifier = '$set' ) {
+		$this->updateTalkByCondition( array( '_id' => $talkId ), $data, $updateModifier );
 		$talk = $this->findTalk( $talkId );
 		$this->syncTalkWithSpeaker( $talk['speaker']['_id'], $talk );
 	}
@@ -63,6 +63,45 @@ class Registration {
 
 	public function getTalks() {
 		return $this->talkCollection->find()->sort( array('votes_count' => -1 ) );
+	}
+
+	public function addLinkToTalk( $talkId, $groupField, array $data ) {
+		$linkId = hash("crc32b", uniqid("link", TRUE));
+		$data['created_date'] = new \MongoDate( time() );
+
+		if( ! preg_match( '/^[_a-z0-9]+$/iD', $groupField )) {
+			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid mongo groupField parameter.");
+		}
+
+
+		$this->updateTalk( $talkId, array( "$groupField.$linkId" => $data ) );
+
+		return $linkId;
+	}
+
+	public function editLinkToTalk( $talkId, $groupField, $linkId, array $data ) {
+		if( ! preg_match( '/^[_a-z0-9]+$/iD', $groupField )) {
+			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid mongo groupField parameter.");
+		}
+		if( ! preg_match( '/^[a-z0-9]+$/iD', $linkId )) {
+			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid mongo linkId parameter.");
+		}
+
+
+		$this->updateTalk( $talkId, array( "$groupField.$linkId" => $data ) );
+
+		return $linkId;
+	}
+
+	public function removeLinkFromTalk( $talkId, $groupField, $linkId ) {
+		if( ! preg_match( '/^[_a-z0-9]+$/iD', $groupField )) {
+			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid mongo groupField parameter.");
+		}
+		if( ! preg_match( '/^[a-z0-9]+$/iD', $linkId )) {
+			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid mongo linkId parameter.");
+		}
+
+		$this->updateTalk( $talkId, array( "$groupField.$linkId" => "" ) , '$unset' );
 	}
 
 	public function getSpeakers( $limit = 0 ) {
@@ -163,9 +202,9 @@ class Registration {
 			array( '$set' => $data ), array( 'upsert' => true ) );
 	}
 
-	private function updateTalkByCondition( $condition, array $data ) {
+	private function updateTalkByCondition( $condition, array $data, $updateModifier = '$set' ) {
 		return $this->talkCollection->update( $condition,
-			array( '$set' => $data ), array( 'upsert' => true ) );
+			array( $updateModifier => $data ), array( 'upsert' => true ) );
 	}
 
 	private function syncTalkWithSpeaker( $speakerId, array $data ) {

@@ -1,0 +1,63 @@
+{block title}{block h1}Přednáška {$talk['title']}{/block} - Plzeňský Barcamp{/block}
+{block content}
+
+<div class="row">
+	<div class="col-sm-4 col-sm-push-8 text-right">
+		<a href="{link :Conference:talksDetail 'talkId' => $talkId}" class="btn btn-primary" target="_blank"><span class="glyphicon glyphicon-globe"></span> Zobrazit web</a>
+		<a href="{link addLink 'type'=>'presentations', 'talkId' => $talkId}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Přidat prezentaci</a>
+	</div>
+	<div class="col-sm-8 col-sm-pull-4">
+		<h2>Prezentace</h2>
+	</div>
+</div>
+<table class="table table-striped">
+	<tr>
+		<th>Název</th>
+		<th>Publikováno</th>
+		<th></th>
+	</tr>
+	{if isset($talk['presentations']) && $talk['presentations']}
+	<tr n:foreach="$talk['presentations'] as $linkId => $presentation">
+		<td>
+			<a href="{$presentation['url']}">{$presentation['title']}</a>
+		</td>
+		<td>
+			{$presentation['is_public'] ? "Ano" : "Ne"}
+		</td>
+		<td>
+			<a href="{link editLink 'type'=>'presentations', 'talkId' => $talkId, 'linkId' => $linkId}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
+			<a href="{link removeLink 'type'=>'presentations', 'talkId' => $talkId, 'linkId' => $linkId}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Smazat</a>
+		</td>
+	</tr>
+	{/if}
+</table>
+
+<div class="row">
+	<div class="col-sm-2 col-sm-push-10 text-right">
+		<a href="{link addLink, 'type'=>'movies', 'talkId' => $talkId}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Přidat video</a>
+	</div>
+	<div class="col-sm-10 col-sm-pull-2">
+		<h2>Videa</h2>
+	</div>
+</div>
+<table class="table table-striped">
+	<tr>
+		<th>Název</th>
+		<th>Publikováno</th>
+		<th></th>
+	</tr>
+	{if isset($talk['movies']) && $talk['movies']}
+	<tr n:foreach="$talk['movies'] as $linkId => $movie">
+		<td>
+			<a href="{$movie['url']}">{$movie['title']}</a>
+		</td>
+		<td>
+			{$movie['is_public'] ? "Ano" : "Ne"}
+		</td>
+		<td>
+			<a href="{link editLink 'type'=>'movies', 'talkId' => $talkId, 'linkId'=>$linkId}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
+			<a href="{link removeLink 'type'=>'movies', 'talkId' => $talkId, 'linkId'=>$linkId}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Smazat</a>
+		</td>
+	</tr>
+	{/if}
+</table>
