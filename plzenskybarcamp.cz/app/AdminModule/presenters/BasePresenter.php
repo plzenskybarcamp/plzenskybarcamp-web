@@ -28,6 +28,9 @@ abstract class BasePresenter extends \App\Presenters\BasePresenter
             $this->flashMessage( 'You\'re not allowed here', 'error' );
             $this->redirect( ':Homepage:default' );
         }
+
+        $this->flashMessage( 'Sorry, mám archivaci in-progress a teď se mi nemůžeš hrabat v administraci. Kuba.', 'error' );
+        $this->redirect( ':Homepage:default' );
 	}
 
     public function beforeRender() {
