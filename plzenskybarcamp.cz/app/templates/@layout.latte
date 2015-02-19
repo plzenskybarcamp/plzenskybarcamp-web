@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="cs" dir="ltr">
         <meta charset="utf-8">
-        <meta name="description" content="{block metaDescription}Plzeňský Barcamp, 12. 4. 2014, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
+        <meta name="description" content="{block metaDescription}Plzeňský Barcamp, 28. 3. 2015, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
         <meta name="keywords" content="{block metaKeywords}{/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
 
@@ -51,17 +51,17 @@
                 <div class="inner">
                     <ul class="navigation">
                         <li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a class="home" href="{link //Homepage:default}" data-hover="Úvod" itemprop="url" content="http://plzenskybarcamp.cz">Úvod</a></li>
-                        {*<li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>
+                        {*<li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>*}
                         <li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Přednášky">Přednášky</a></li>
-                        <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastníci">Účastnící</a></li>*}
+                        <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastníci">Účastnící</a></li>
                         <li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
-                        <li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="2014">2014</a></li>
+                        {*<li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="2014">2014</a></li>*}
                         <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
                     </ul>
                     <ul class="info-navigation">
-                        {*{if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-buton">Přihlásit</a></li>{/if}*}
-                        {*{if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}*}
+                        {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-buton">Přihlásit</a></li>{/if}
+                        {* {if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}*}
                         {if $user->isLoggedIn()}
                             <li>
                                 <img n:ifset="$user->identity->picture_url" class="user-pic user-pic-s25" src="{$user->identity->picture_url}">
@@ -80,7 +80,7 @@
                 <span class="logo">
                     <a href="{link //Homepage:default}"><img src="{$baseUri}/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp 2014"></a>
                 </span>
-                <h1>{block h1}<meta itemprop="name" content="Plzeňský Barcamp 2014">Plzeňský Barcamp 2014{/block}</h1>
+                <h1>{block h1}<meta itemprop="name" content="Plzeňský Barcamp 2015">Plzeňský Barcamp 2015{/block}</h1>
                 <time datetime="2015-03-28" itemprop="startDate" content="2015-03-28">28. března 2015</time>
                     {ifCurrent Homepage:default}
                     <p class="venue"><a href="{link Homepage:default}#kdepa-to-bude">Vědeckotechnický park Plzeň</a></p>
@@ -113,9 +113,9 @@
                         <li n:if="$user->isLoggedIn()"><a href="{link Sign:out}" data-hover="Odhlásit">Odhlásit</a></li>
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         <li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
-                        {*<li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastnící">Účastnící</a></li>
+                        <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastnící">Účastnící</a></li>
                         <li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Přednášky">Přednášky</a></li>
-                        <li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>*}
+                        {*<li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>*}
                     </ul>
                 </div>
             </div>

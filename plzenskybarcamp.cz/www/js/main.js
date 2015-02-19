@@ -1,4 +1,4 @@
-    registerForm = function(container, nextContainer) {
+registerForm = function(container, nextContainer) {
     $('#registration').on('click', container + ' .registration-button', function(e) {
         e.preventDefault();
         $(this).hide();
@@ -184,7 +184,7 @@ registerVotesDetail = function(container) {
 }
 
 $(document).ready(function() {
-    setTimeout(function() {$('.flash.success').fadeOut(2000);}, 3000);
+    setTimeout(function() {$('.flash.success').fadeOut(2000);}, 6000);
 });
 $(document).ready(function() {
     $('.tooltip').tooltipster();

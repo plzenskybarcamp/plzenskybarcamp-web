@@ -52,7 +52,9 @@ class UserRegistration extends Control {
 			->setAttribute('placeholder', 'grudl@gmail.com')
 			->setOption('description', 'Email nebude nikde zveřejněn');
 		$container->addTextArea( 'bio', 'Bio' )
-			->addRule(Form::FILLED, 'Bio musí být vyplněno');
+			->setOption('description', 'Můžete doplnit také později ve svém profilu');
+		$container->addCheckbox( 'lunch', 'Mám mimo drobného občerstvení zájem také o oběd (cca 100Kč)' );
+		$container->addCheckbox( 'afterparty', 'Zúčastním se afterparty v centru Plzně' );
 		return $container;
 	}
 

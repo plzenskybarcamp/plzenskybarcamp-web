@@ -1,18 +1,3 @@
-<div>
-    <h2 id="to-dulezite">Ohlédnutí za 1. Plzeňským Barcampem</h2>
-    <p>Co by vás mohlo zajímat po uplynulém Barcampu?</p>
-
-    <ul>
-        <li><strong>Ohlasy, recenze i fotky</strong> průběžně doplňujeme do sekce <a href="{plink Homepage:written}">Napsali o nás</a></li>
-        <li><strong>Záznamy z přednášek</strong> najdete na našem <a href="https://www.youtube.com/playlist?list=PLHS7zFMwVxI0IegbpmYNGP4GqYMJBCUBt">YouTube kanále</a></li>
-    </ul>
-</div>
-
-<div>
-    <h2 id="poprve-na-zapade">Plzeňský Barcamp poprvé na západě</h2>
-    <p>Téměř 300 účastníků navštíví první Plzeňský Barcamp. Otevíráme nový prostor pro získávání kontaktů a poznatků. Více než 20 řečníků představí své téma. Nebudou chybět soutěže, workshopy a cvičení. Vše završí after party v prostorách Vědeckotechnického parku.</p>
-</div>
-
 {if !$isRegistrationOpen}
     <p class="text-center"><strong>Registrace bude již brzy</strong></p>
 {else}
@@ -43,7 +28,7 @@
             {elseif !$identity->isRegistered()}
                 <p><strong>Děkujeme za přihlášení. Nyní se, prosíme, registruj</strong></p>
                 <a href="{link this}" class="button registration-button">Potvrzuji svou účast</a>
-                <div class="form">{control registration}</div>
+                <div class="form prehidden">{control registration}</div>
             {else}
                 <p class="border-tb">Zúčastním se Plzeňského Barcampu :)</p>
             {/if}
@@ -51,6 +36,7 @@
     </div>
 {/if}
 
+{if $isRegistrationOpen}
 <div>
     <h2 id="prednasky">Přednášky na Plzeňském Barcampu</h2>
     <p>První ročník bude pestrý! Sešly se nám skvělé návrhy z rozmanitých oborů. Návštěvníci si odhlasovali, které přednášky se uskuteční a přednášející už pilují svůj výstup.</p>
@@ -58,9 +44,17 @@
 
 <div class="text-center" id="speaker-regestration">
     {control registeredSpeakers 'vypsaných přednášek'}
-    {if $user->isLoggedIn() && $identity->isSpeaker()}
-            Mám vypsanou přednášku :)<br>
-            <a href="{plink Conference:talksDetail talkId=>$identity->talk['_id']}">{$identity->talk['title']}</a>
-        </p>
+    {if $user->isLoggedIn() && $identity->isRegistered() }
+        {if $identity->isSpeaker() }
+            <p>
+                Mám vypsanou přednášku :)<br>
+                <a href="{plink Conference:talksDetail talkId=>$identity->talk['_id']}">{$identity->talk['title']}</a>
+            </p>
+        {else}
+            <p><strong>Chceš mít přednášku?</strong></p>
+            <a href="{link this}" class="button registration-button">Chci přenášet</a>
+            <div class="form prehidden">{control speakerRegisteration}</div>
+        {/if}
     {/if}
 </div>
+{/if}
