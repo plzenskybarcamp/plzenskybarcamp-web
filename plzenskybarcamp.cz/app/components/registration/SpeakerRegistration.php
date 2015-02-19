@@ -31,7 +31,7 @@ class SpeakerRegistration extends Control {
 		$form->addGroup('Doplňující info');
 		$form = $this->addUsersFields( $form );
 
-		$form->addSubmit( 'submit', 'Odeslat přihlášku' );
+		$form->addSubmit( 'submit', 'Odeslat přednášku' );
 
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 

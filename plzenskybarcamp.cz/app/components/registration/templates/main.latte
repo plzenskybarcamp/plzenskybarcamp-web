@@ -39,7 +39,7 @@
 {if $isRegistrationOpen}
 <div>
     <h2 id="prednasky">Přednášky na Plzeňském Barcampu</h2>
-    <p>První ročník bude pestrý! Sešly se nám skvělé návrhy z rozmanitých oborů. Návštěvníci si odhlasovali, které přednášky se uskuteční a přednášející už pilují svůj výstup.</p>
+    <p>Témata přednášek na Barcampu jsou velmi pestrá a je jen na účastnících, které přednášky si odhlasují. Vypiš si i Ty svoji přednášku na téma, ve kterém se cítíš silný. Nebo naopak! Vypiš přednášku, která pro tebe bude výzvou!</p>
 </div>
 
 <div class="text-center" id="speaker-regestration">
@@ -51,7 +51,7 @@
                 <a href="{plink Conference:talksDetail talkId=>$identity->talk['_id']}">{$identity->talk['title']}</a>
             </p>
         {else}
-            <p><strong>Chceš mít přednášku?</strong></p>
+            <p><strong>Vystup z davu a ukaž, že máš co říct!</strong></p>
             <a href="{link this}" class="button registration-button">Chci přenášet</a>
             <div class="form prehidden">{control speakerRegisteration}</div>
         {/if}
