@@ -32,7 +32,7 @@ class UserRegistration extends Control {
 		$form = $this->addUsersFields( $form );
 
 		$identity = $this->getPresenter()->getUser()->getIdentity();
-		$form->setDefaults( array(
+		$dafaultValues = array(
 			'name' => $identity->name,
 			'email' => $identity->email
 		));
