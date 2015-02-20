@@ -30,11 +30,17 @@ class UserRegistration extends Control {
 		$form = new Form( $this, $name );
 		$form->setRenderer( new \App\Components\CustomFormRenderer );
 		$form = $this->addUsersFields( $form );
+
 		$identity = $this->getPresenter()->getUser()->getIdentity();
 		$form->setDefaults( array(
 			'name' => $identity->name,
 			'email' => $identity->email
-		) );
+		));
+		if( $identity->current_platform == 'tw' ) {
+			$dafaultValues['twitter'] = '@'.$identity->platforms['tw']->screen_name;
+		}
+		$form->setDefaults( $dafaultValues );
+
 		$form->addSubmit( 'submit', 'Odeslat registraci' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 
