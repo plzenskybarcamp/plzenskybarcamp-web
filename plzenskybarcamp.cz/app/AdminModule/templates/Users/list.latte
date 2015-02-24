@@ -12,6 +12,7 @@
 		<th>E-mail</th>
 		<th class="text-right"><abbr title="Metoda přihlášení">Auth</abbr></th>
 		<th>Datum registrace</th>
+		<th>Pozn.</th>
 	</tr>
 	<tr n:foreach="$users as $user">
 		<td>{$user['name']}</td>
@@ -22,5 +23,9 @@
 			{ifset $user[vip_token]}<a href="{link Vip:list token=>$user[vip_token]}" title="VIP token"><span class="label label-default"><span class="fa fa-external-link"></span></span></a>{/ifset}
 		</td>
 		<td>{@$user['created_date']->sec|date:"d. m. Y H:i:s"}</td>
+		<td>
+			{if $user[lunch]}<span class="label label-default" title="Dá si oběd"><span class="fa fa-foursquare"></span></span>{/if}
+			{if $user[afterparty]}<span class="label label-default" title="Účastní se afterparty"><span class="fa fa-beer"></span></span>{/if}
+		</td>
 	</tr>
 </table>
