@@ -35,7 +35,7 @@ class UserRegistration extends Control {
 		$dafaultValues = array(
 			'name' => $identity->name,
 			'email' => $identity->email
-		));
+		);
 		if( $identity->current_platform == 'tw' ) {
 			$dafaultValues['twitter'] = '@'.$identity->platforms['tw']->screen_name;
 		}
