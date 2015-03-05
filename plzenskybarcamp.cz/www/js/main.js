@@ -139,13 +139,18 @@ var registerVotes = function(container) {
         var talkId = elem.data('id');
         checkins[talkId] = $('.vote', elem).data('checked');
         var boxs = [$('.vote', elem),  $('.vote', elem.prev())];
+        var elems = elem.add(elem.prev());
+        var statuses = $('.status-box', elems);
         $.each(boxs, function(index, box){
             box.prop('checked', checkins[talkId]);
             $(box).click((function(talkId, boxs, voteCount, trHeadElement){
                 return function(e) {
                     e.preventDefault();
                     e.stopPropagation();
+                    statuses.text('Ukládám…').addClass('show');
                     processSubmit(!checkins[talkId], talkId).done(function(count){
+                        statuses.text('Uloženo')
+                        setTimeout(function(){statuses.removeClass('show');}, 1000);
                         voteCount.html(count);
                         checkins[talkId] = !checkins[talkId]
                         $.each(boxs, function(index, box){

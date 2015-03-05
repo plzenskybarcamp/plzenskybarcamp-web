@@ -395,6 +395,24 @@ iframe[seamless]{
 			.table-list-sub-wrap {
 				background-color: #EDFFF3;
 			}
+			.vote-out {
+				position: relative;
+				.status-box {
+					position: absolute;
+					top: 30px;
+					left: 60px;
+					border-radius: 5px; 
+					background: #4c4c4c;
+					color: #fff;
+					padding: 8px 10px;
+					opacity: 0;
+					transition: opacity 0.3s, top 0.4s;
+					&.show {
+						opacity: 1;
+						top: -10px;
+					}
+				}
+			}
 			.table-list-sub {
 				.first-td {
 					width: 120px;
