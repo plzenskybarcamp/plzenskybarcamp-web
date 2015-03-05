@@ -51,3 +51,7 @@ FileETag None
 	ExpiresByType application/x-font-ttf "access plus 1 month"
 	ExpiresByType application/font-woff "access plus 1 month"
 </IfModule>
+
+<IfModule mod_headers.c>
+Header set X-XSS-Protection: "1; mode=block; report=/api/log/xss"
+</IfModule>

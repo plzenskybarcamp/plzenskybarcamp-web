@@ -48,7 +48,7 @@ class RouterFactory
 		$router[] = new Route('2014/<id>[/<subid>]', 'Homepage:year2014');
 
 		$apiRouter = new RouteList('Api');
-		$apiRouter[] = new Route('api/log/js-error', 'Log:jsError');
+		$apiRouter[] = new Route('api/log/<action>', 'Log:');
 		$router[] = $apiRouter;
 
 		$adminRouter = new RouteList('Admin');
