@@ -26,9 +26,13 @@
         <meta property="og:image:height" content="300">
         <meta name="google-site-verification" content="X6TDzyeXmaAgvKo48Ce7DVYd3zyyPBrmE-p2wqX-m1Y" />
 
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?v1425480329">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?v1425480329">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?v1425563608">
+        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?v1425563608">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+
+        {block scripts}
+        <script src="{$basePath}/js/main.min.js?v1425563608" async></script>
+        {/block}
         {block head}{/block}
     </head>
 
@@ -119,15 +123,5 @@
             </div>
         </footer>
 
-        {block scripts}
-        <script src="{$basePath}/js/jquery.js"></script>
-        <script src="{$basePath}/js/jquery.tooltipster.min.js"></script>
-        <script src="{$basePath}/js/lightbox-2.6.min.js"></script>
-        <script src="{$basePath}/js/netteForms.min.js"></script>
-        <script src="{$basePath}/js/main.min.js?v1425480329"></script>
-        <script src="{$basePath}/js/sm-scroll.min.js"></script>
-        <script src="{$basePath}/js/jquery.scrollTo.min.js"></script>
-        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        {/block}
     </body>
 </html>

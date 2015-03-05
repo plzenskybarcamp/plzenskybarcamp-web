@@ -1,4 +1,12 @@
-registerForm = function(container, nextContainer) {
+//@koala-prepend "libs/jquery-2.1.3.js"
+//@koala-prepend "libs/jquery.scrollTo-1.4.14.js"
+//@koala-prepend "libs/jquery.smooth-scroll-1.5.5.js"
+//@koala-prepend "libs/jquery.tooltipster-3.3.0.js"
+//@koala-prepend "libs/lightbox-2.7.1.js"
+//@koala-prepend "libs/netteForms.js"
+
+(function() {
+var registerForm = function(container, nextContainer) {
     $('#registration').on('click', container + ' .registration-button', function(e) {
         e.preventDefault();
         $(this).hide();
@@ -15,11 +23,11 @@ registerForm = function(container, nextContainer) {
     })
 }
 
-registerAjaxRegistration = function(container) {
+var registerAjaxRegistration = function(container) {
     $(container).on('submit', 'form', function(e) {
-        form = this;
+        var form = this;
         e.preventDefault();
-        action = this.action;
+        var action = this.action;
         $('body').css('cursor', 'wait');
         $.ajax({
             type: 'POST',
@@ -40,7 +48,7 @@ registerAjaxRegistration = function(container) {
     })
 }
 
-ajaxPost = function(form) {
+var ajaxPost = function(form) {
     return $.ajax({
         type: 'POST',
         url: form.get(0).action,
@@ -48,7 +56,7 @@ ajaxPost = function(form) {
     }).promise();
 }
 
-validateForms = function(forms) {
+var validateForms = function(forms) {
     for (index in forms) {
         if (!Nette.validateForm(forms[index].get(0))) {
             return $.Deferred().reject().promise();
@@ -57,8 +65,8 @@ validateForms = function(forms) {
     return forms;
 }
 
-commitForms = function(forms) {
-    commitForm = function(form) {
+var commitForms = function(forms) {
+    var commitForm = function(form) {
         return ajaxPost(form).then(function(res) {
             if (!res.updated) {
                 return $.Deferred().reject('Během uloženi došlo k chybě').promise();
@@ -69,10 +77,10 @@ commitForms = function(forms) {
     return $.when.apply($, forms.map(commitForm));
 }
 
-showMessage = function(container, elmClass) {
+var showMessage = function(container, elmClass) {
     return function(message) {
         if (message) {
-            elm = $('<p class="js-message text-center ' + elmClass + '">' + message + '</p>');
+            var elm = $('<p class="js-message text-center ' + elmClass + '">' + message + '</p>');
             container.html('').append(elm);
             $.scrollTo(container, 500);
             setTimeout(function() {
@@ -82,18 +90,18 @@ showMessage = function(container, elmClass) {
     }
 }
 
-registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, talkContainer, talkButtonContainer) {
+var registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, talkContainer, talkButtonContainer) {
     talkOnButton.on('click', function() {
         talkContainer.show();
         talkButtonContainer.hide();
     })
     actionButton.on('click', function(e) {
         actionButton.get(0).disabled = true;
-        forms = [$('form', userContainer)]
+        var forms = [$('form', userContainer)]
         if (talkContainer.is(":visible")) {
             forms.push($('form', talkContainer));
         }
-        unLockSave = function(msg) {
+        var unLockSave = function(msg) {
             actionButton.get(0).disabled = false;
             return msg;
         }
@@ -105,11 +113,11 @@ registerAjaxProfileUpdate = function(talkOnButton, actionButton, userContainer, 
     });
 }
 
-processVote = function(container) {
-    actionAdd = container.data( 'actionAdd' );
-    actionRemove = container.data( 'actionRemove' );
+var processVote = function(container) {
+    var actionAdd = container.data( 'actionAdd' );
+    var actionRemove = container.data( 'actionRemove' );
     return function(doAdded, talkId) {
-        action = doAdded ? actionAdd : actionRemove;
+        var action = doAdded ? actionAdd : actionRemove;
         return $.ajax({
             type: 'GET',
             url: action,
@@ -123,14 +131,14 @@ processVote = function(container) {
     }
 }
 
-registerVotes = function(container) {
-    checkins = {}
-    processSubmit = processVote(container);
+var registerVotes = function(container) {
+    var checkins = {};
+    var processSubmit = processVote(container);
     $('tr.talks-detail', container).each(function(index, elem){
-        elem = $(elem);
-        talkId = elem.data('id');
+        var elem = $(elem);
+        var talkId = elem.data('id');
         checkins[talkId] = $('.vote', elem).data('checked');
-        boxs = [$('.vote', elem),  $('.vote', elem.prev())];
+        var boxs = [$('.vote', elem),  $('.vote', elem.prev())];
         $.each(boxs, function(index, box){
             box.prop('checked', checkins[talkId]);
             $(box).click((function(talkId, boxs, voteCount, trHeadElement){
@@ -156,19 +164,19 @@ registerVotes = function(container) {
 }
 
 
-registerVotesDetail = function(container) {
+var registerVotesDetail = function(container) {
     if (!container.get(0)) {
         return;
     }
-    checkins = {}
-    processSubmit = processVote(container);
+    var checkins = {};
+    var processSubmit = processVote(container);
 
-    box = $(".vote-detail", container);
-    voteCount = $("#votes-count", container);
-    talkId = container.data("id");
-    isChecked = box.data('checked');
+    var box = $(".vote-detail", container);
+    var voteCount = $("#votes-count", container);
+    var talkId = container.data("id");
+    var isChecked = box.data('checked');
     box.prop('checked', isChecked);
-    voted = $(".voted", container);
+    var voted = $(".voted", container);
     box.click(function(e) {
         processSubmit(!isChecked, talkId).done(function(count){
             voteCount.html(count);
@@ -185,8 +193,7 @@ registerVotesDetail = function(container) {
 
 $(document).ready(function() {
     setTimeout(function() {$('.flash.success').fadeOut(2000);}, 6000);
-});
-$(document).ready(function() {
+
     $('.tooltip').tooltipster();
     $('a').smoothScroll();
     registerForm('#speaker-regestration', '#user-regestration');
@@ -196,31 +203,6 @@ $(document).ready(function() {
     registerVotes($('#talks-list'));
     registerVotesDetail($("#speaker-detail .voting-detail"));
 });
-// window.fbAsyncInit = function() {
-// 	FB.init({
-// 		appId: '504432792996629',
-// 		status: true,
-// 		cookie: true,
-// 		xfbml: true
-// 	});
-
-// 	FB.Event.subscribe('auth.authResponseChange', function(response) {
-// 		if (response.status === 'connected') {
-// 			console.log('Logged');
-// 		} else if (response.status === 'not_authorized') {
-// 			console.log('Not authorized');
-// 		} else {
-// 			console.log('Never logged');
-// 		}
-// 	});
-// }
-
-// function login() {
-// 	FB.login(function(response) {
-
-// 	}, {scope: 'email'});
-// }
-
 
 $(document).ready(function() {
     var $show_login_panel_hp = $('.show-login-panel-hp');
@@ -278,3 +260,4 @@ $(document).ready(function() {
         $(location.hash).click();
     }
 });
+})();
