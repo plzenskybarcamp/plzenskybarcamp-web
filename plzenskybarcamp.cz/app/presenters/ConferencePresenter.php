@@ -65,6 +65,21 @@ class ConferencePresenter extends BasePresenter
 		return $url . ( strpos( $url, '?' ) !== false ? '&' : '?' ) . $postfix;
 	}
 
+	public function renderTalks(  ) {
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$ua = $_SERVER['HTTP_USER_AGENT'];
+		$force = isset($_GET['force']);
+		if( !$force && ( ( $ip == '91.239.201.4' && $ua == "PHP") || $_GET['try']=="block") ) {
+			$output = array(
+				'error'=>true,
+				'message'=>"Prosím, nepoužívejte roboty pro zobrazení přednášek. Záměrně nechceme ovlivňovat hlasující řazením dle dosavadního úspěchu.",
+				'tip'=>"Pokud ale máte tip na vylepšení webu (kromě \"Máte všechno úplně blbě\"), budeme rádi, když nám napíšete tip. Díky, Jakub Bouček <pan@jakubboucek.cz> @JakubBoucek",
+				'hotfix'=>array("message"=>"Přesto pokud trváte na tom, že chcete přenášky parsovat i přes náš nesouhlas, změňte prosím adresu na: https://plzenskybarcamp.cz/prednasky?force=1 ",
+				'url'=>"https://plzenskybarcamp.cz/prednasky?force=1",),
+				);
+			$this->getPresenter()->sendResponse( new JsonResponse( $output ) );
+		}
+	}
 	public function renderTalksDetail( $talkId ) {
 		$talk = $this->registrationModel->findTalk( $talkId );
 		if ( ! $talk ) {
