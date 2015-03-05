@@ -24,7 +24,7 @@
                         data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}"
                         type="checkbox"
                         {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
-                        <div class="status-box">Lorem ipsum</div>
+                        <div class="status-box"></div>
                     </div>
                 {elseif $user->isLoggedIn()}
                     <p>Hlasovat mohou jen registrovaní</p>

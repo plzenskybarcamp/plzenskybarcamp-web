@@ -69,7 +69,8 @@ class ConferencePresenter extends BasePresenter
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$ua = $_SERVER['HTTP_USER_AGENT'];
 		$force = isset($_GET['force']);
-		if( !$force && ( ( $ip == '91.239.201.4' && $ua == "PHP") || $_GET['try']=="block") ) {
+		$try = isset($_GET['try']) && ($_GET['try']=="block");
+		if( !$force && ( ( $ip == '91.239.201.4' && $ua == "PHP") || $try) ) {
 			$output = array(
 				'error'=>true,
 				'message'=>"Prosím, nepoužívejte roboty pro zobrazení přednášek. Záměrně nechceme ovlivňovat hlasující řazením dle dosavadního úspěchu.",
