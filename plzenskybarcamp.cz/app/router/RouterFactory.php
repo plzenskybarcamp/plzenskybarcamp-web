@@ -47,6 +47,10 @@ class RouterFactory
 
 		$router[] = new Route('2014/<id>[/<subid>]', 'Homepage:year2014');
 
+		$apiRouter = new RouteList('Api');
+		$apiRouter[] = new Route('api/log/js-error', 'Log:jsError');
+		$router[] = $apiRouter;
+
 		$adminRouter = new RouteList('Admin');
 		$adminRouter[] = new Route('admin/vip/token/new', 'Vip:new');
 		$adminRouter[] = new Route('admin/vip/token/invalidate/<token>', 'Vip:invalidate');

@@ -266,3 +266,16 @@ $(document).ready(function() {
     }
 });
 })();
+
+function logError(details) {
+  $.ajax({
+    type: 'POST',
+    url: 'https://' + location.host + '/api/log/js-error',
+    data: {
+        context: navigator.userAgent,
+        details: details,
+        referer: location.href,
+    },
+//    contentType: 'application/json; charset=utf-8'
+  });
+};
