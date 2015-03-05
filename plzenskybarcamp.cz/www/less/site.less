@@ -34,6 +34,12 @@ html {
 	*zoom: 1;
 }
 
+iframe[seamless]{
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+}
+
 #is_debug_flag {
 	position: fixed;
 	top: 0;
@@ -259,6 +265,10 @@ html {
 
 .main-content {
 	padding-bottom: 30px;
+
+	h2, h3 {
+		clear: both;
+	}
 
 	#registration {
 
@@ -549,6 +559,11 @@ html {
 
 	.text-center {
 		text-align: center;
+	}
+
+	.ilust.left {
+		float: left;
+		margin-right: 30px;
 	}
 }
 
