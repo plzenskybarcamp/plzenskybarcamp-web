@@ -234,7 +234,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    var $listTableTr = $('.table-list tr');
+    var $listTableTr = $('.table-list#users-list tr');
     $listTableTr.on('click touchstart', function() {
         var _$this = $(this);
         if (_$this.hasClass('active')) {
@@ -245,8 +245,8 @@ $(document).ready(function() {
         }
     });
 
-    var $listTableTalks = $('.table-list#talks-list tr');
-    $listTableTalks.on('click touchstart', function( event ) {
+    var $listTableTalks = $('.table-list#talks-list tr').not('.table-list-sub tr');
+    $listTableTalks.on('click', function( e ) {
         var
                 _$this = $(this),
                 _id = _$this.attr('data-id'),
@@ -256,24 +256,25 @@ $(document).ready(function() {
                 _$detailTrCurrent = $listTableTalks.parent().find('.talks-detail[data-id="' + _id + '"]');
 
         //Disable expand/collapse when click to link
-        if( $( event.target ).is('a, a img')) {
+        if( $( e.target ).is('a, a img')) {
+            history.replaceState({}, document.title, "#talk_" + _id);
             return;
         }
 
         _$detailTr.hide();
         _$detailTrHead.show();
 
-        if (_$this.hasClass('active-detail-head')) {
+        if (_$this.hasClass('active-detail')) {
             _$detailTrHeadCurrent.show();
             _$detailTrCurrent.hide();
+            history.replaceState({}, document.title, location.href.replace(/#.*/, ''));
         } else {
             _$detailTrHeadCurrent.hide();
             _$detailTrCurrent.addClass('active-detail').show();
-        }
-
-        if (_$this.hasClass('active-detail')) {
-            _$detailTrCurrent.hide();
-            _$detailTrHeadCurrent.show();
+            history.replaceState({}, document.title, "#talk_" + _id);
         }
     });
+    if( location.hash.match(/^#talk_[0-9a-f]+$/) && $(location.hash).length == 1 ) {
+        $(location.hash).click();
+    }
 });
