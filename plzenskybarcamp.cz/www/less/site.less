@@ -366,8 +366,10 @@ iframe[seamless]{
 		}
 
 		&#talks-list {
-			tr:hover {
-				cursor: pointer;
+			&.not-ranking {
+				tr:hover {
+					cursor: pointer;
+				}
 			}
 			.second-td {
 				width: auto;
@@ -388,6 +390,9 @@ iframe[seamless]{
 						margin-top: 30px;
 					}
 				}
+			}
+			&.ranking .fourth-td span em {
+				margin-top: 0;
 			}
 			.voted-for {
 				background-color: #FFFBE0;
@@ -538,9 +543,18 @@ iframe[seamless]{
 	}
 
 	.user-list-user-count {
-		text-align: right;
+		float: right;
 		strong {
 			font-size: 150%; color: @green;
+		}
+	}
+
+	.talk-list-ranging-switcher {
+		float: left;
+		a.active {
+			font-size: 150%; color: @green;
+			text-decoration: none;
+			border: none;
 		}
 	}
 

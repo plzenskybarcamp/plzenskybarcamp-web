@@ -7,34 +7,47 @@
 
 
 <p class="user-list-user-count">Registrovaných přednášek: <strong>{$talksCount}</strong></p>
-<table class="table-list" id="talks-list" data-action-add="{link addVote!}" data-action-remove="{link removeVote!}">
+<p class="talk-list-ranging-switcher">
+    <a href="{plink Conference:talks}" n:class="!$ranking ? 'active'">Hlasování</a>
+    /
+    <a href="{plink Conference:talksRanking}" n:class="$ranking ? 'active'">Průběžné výsledky</a>
+</p>
+<table class="table-list {if !$ranking}not-{/if}ranking" id="talks-list" data-action-add="{link addVote!}" data-action-remove="{link removeVote!}">
 <tbody>
 {foreach $talks as $talk}
     {var $speaker = $talk['speaker']}
-    <tr class="talks-head {if @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $iterator->getCounter() == 24} last-in{/if}{if $iterator->getCounter() > 24} under-line{/if}" id="talk_{$talk['_id']}" data-id="{$talk['_id']}">
+    <tr class="talks-head {if !$ranking && @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $iterator->getCounter() == 24} last-in{/if}{if $iterator->getCounter() > 24} under-line{/if}" id="talk_{$talk['_id']}" data-id="{$talk['_id']}">
 
         <td class="first-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}"><img class="user-pic" src="{@$speaker['picture_url']|biggerTwitterPicture}" title="{$speaker['name']}"/></a></td>
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
         <td class="third-td"><span class="crop">{$talk['description']}</span></td>
         <td class="fourth-td">
-            {block #vote}
-                {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
-                    <div class="vote-out">
-                        <input class="vote"
-                        data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}"
-                        type="checkbox"
-                        {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
-                        <div class="status-box"></div>
-                    </div>
-                {elseif $user->isLoggedIn()}
-                    <p>Hlasovat mohou jen registrovaní</p>
-                {else}
-                    <p><a href="/login">Přihlaš se</a> a&nbsp;hlasuj!</p>
-                {/if}
-            {/block}
+            {if !$ranking}
+                {block #vote}
+                    {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
+                        <div class="vote-out">
+                            <input class="vote"
+                            data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}"
+                            type="checkbox"
+                            {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                            <div class="status-box"></div>
+                        </div>
+                    {elseif $user->isLoggedIn()}
+                        <p>Hlasovat mohou jen registrovaní</p>
+                    {else}
+                        <p><a href="/login">Přihlaš se</a> a&nbsp;hlasuj!</p>
+                    {/if}
+                {/block}
+            {else}
+                {block #votes_count}
+                    <span>
+                        <em class="votes_count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</em>hlasů
+                    <span>
+                {/block}
+            {/if}
         </td>
     </tr>
-
+    {if !$ranking}
     <tr class="talks-detail {if $iterator->getCounter() == 24} last-in{/if}{if $iterator->getCounter() > 24} under-line{/if}" data-id="{$talk['_id']}">
 
         <td colspan="4" class="table-list-sub-wrap">
@@ -53,11 +66,12 @@
                     </td>
                     <td class="fourth-td">
                         {include #vote}
-                        <span><em class="votes_count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</em>hlasů<span></td>
+                        {include #votes_count}
                 </tr>
             </table>
         </td>
     </tr>
+    {/if}
 {/foreach}
 </tbody>
 </table>

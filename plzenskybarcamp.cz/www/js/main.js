@@ -232,7 +232,7 @@ $(document).ready(function() {
         }
     });
 
-    var $listTableTalks = $('.table-list#talks-list tr').not('.table-list-sub tr');
+    var $listTableTalks = $('.table-list.not-ranking#talks-list tr').not('.table-list-sub tr');
     $listTableTalks.on('click', function( e ) {
         var
                 _$this = $(this),

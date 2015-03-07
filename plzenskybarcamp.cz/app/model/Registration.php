@@ -61,8 +61,11 @@ class Registration {
 		return $this->talkCollection->find( array( '_id' => $talkId ) )->getNext();
 	}
 
-	public function getTalks() {
-		return $this->talkCollection->find()->sort( array('created_date' => 1 ) );
+	public function getTalks( $sort ) {
+		if(!is_array($sort)) {
+			$sort = array('created_date' => 1 );
+		}
+		return $this->talkCollection->find()->sort( $sort );
 	}
 
 	public function addLinkToTalk( $talkId, $groupField, array $data ) {

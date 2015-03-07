@@ -14,11 +14,17 @@ class TalksList extends Control {
 		$this->registrationModel = $registrationModel;
 	}
 
-	public function render() {
+	public function render( $ranking ) {
 		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
 		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
 		$this->template->setFile( __DIR__ . '/templates/talksList.latte');
-		$talks = $this->registrationModel->getTalks();
+
+		$sort = NULL;
+		if( $ranking ) {
+			$sort = array( 'votes_count' => -1 );
+		}
+		$talks = $this->registrationModel->getTalks( $sort );
+		$this->template->ranking = $ranking;
 		$this->template->talks = $talks;
 		$this->template->talksCount = $talks->count();
 		$this->template->currentUser = $this->getPresenter()->getUser();
