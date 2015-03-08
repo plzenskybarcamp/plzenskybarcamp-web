@@ -31,6 +31,6 @@ class HomepagePresenter extends BasePresenter
 	public function createComponentRegistration( $name ) {
 		$session = $this->getContext()->getService("session")->getSection("vip");
 		$token = $session->token;
-		return new Main( $this, $name, $this->registrationModel, $this->configModel, $this->createFbLoginLink(), $token );
+		return new Main( $this, $name, $this->registrationModel, $this->configModel, $token );
 	}
 }

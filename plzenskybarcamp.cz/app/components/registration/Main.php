@@ -11,16 +11,13 @@ class Main extends Control {
 
 	private $configModel;
 
-	private $fbLoginLink;
-	
 	private $token;
 
 
-	public function __construct( $parent, $name, $registrationModel, $configModel, $fbLoginLink, $token ) {
+	public function __construct( $parent, $name, $registrationModel, $configModel, $token ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
 		$this->configModel = $configModel;
-		$this->fbLoginLink = $fbLoginLink;
 		$this->token = $token;
 	}
 	
@@ -48,7 +45,6 @@ class Main extends Control {
 		$this->template->identity = $this->getPresenter()->getUser()->getIdentity();
 		$this->template->canBeRegistered = $canBeRegistered;
 		$this->template->isRegistrationOpen = $this->configModel->getConfig( 'isRegistrationOpen', FALSE );
-		$this->template->fbLoginLink = $this->fbLoginLink;
 		return $this->template;
 	}
 
