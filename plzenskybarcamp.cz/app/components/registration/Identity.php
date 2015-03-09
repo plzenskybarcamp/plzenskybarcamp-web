@@ -4,7 +4,7 @@ namespace App\Components\Registration;
 
 use Nette\Security as NS;
 
-class Identity extends NS\Identity implements IIDentity, NS\IIdentity {
+class Identity extends NS\Identity implements IIdentity, NS\IIdentity {
 
 	private $id;
 	private $conferee;

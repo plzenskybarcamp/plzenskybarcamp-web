@@ -21,8 +21,8 @@
 	"require": {
 		"php": "~5.5",
 		"nette/nette": "~2.1.0",
-		"facebook/php-sdk": "*",
-		"kertz/twitteroauth": "dev-master"
+		"kertz/twitteroauth": "dev-master",
+		"facebook/php-sdk-v4": "~4.0"
 	},
 	"require-dev": {
 		"nette/tester": "~1.0.0"

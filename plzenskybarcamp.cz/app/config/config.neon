@@ -11,13 +11,13 @@ parameters:
 		host: 'localhost:27017'
 		db: 'barcamp'
 	facebook:
-		app_config:
+		appConfig:
 			appId: '504432792996629'
 			secret: 'ed0af56bc4baabe2e821461e30e5435a'
 			fileUpload: false
 			allowSignedRequest: false
 	twitter:
-		app_config:
+		appConfig:
 			key: "soXP3BhRN7zaKmaMNgKG1w"
 			secret: "cTr6trEjVlWzj7P3OLuMu22BdwUINaERZHD3dca8"
 
@@ -33,7 +33,7 @@ nette:
 			*: App\*Module\Presenters\*Presenter
 
 	session:
-		autoStart: true
+		autoStart: smart
 		expiration: 14 days
 		save_path: %tempDir%/sessions
 
@@ -41,9 +41,10 @@ nette:
 services:
 	- App\Authenticator
 	- App\RouterFactory
+	- App\SessionStarter
 	router: @App\RouterFactory::createRouter
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)
-	Facebook: Facebook(%facebook.app_config%)
-	twitterOAuth: TwitterOAuth(%twitter.app_config.key%, %twitter.app_config.secret%)
+	FacebookLogin: App\Facebook\OAuth(%facebook.appConfig%)
+	twitterOAuth: TwitterOAuth(%twitter.appConfig.key%, %twitter.appConfig.secret%)
 	developFlag: App\Components\DevelopFlag(%app.is_develop%)

@@ -4,7 +4,10 @@ namespace App\Presenters;
 
 use Nette,
 	App\Model,
-	App\Model\Registration;
+	App\Model\Registration,
+	App\Components\Registration\Identity,
+	App\Facebook\OAuth as Facebook,
+	App\OAuth\AuthenticationException;
 
 
 /**
@@ -17,64 +20,42 @@ class SignPresenter extends BasePresenter
 	private $twitter;
 	private $registration;
 
-	public function __construct( \Facebook $facebook, \TwitterOAuth $twitter, Registration $registration ){
+	public function __construct( Facebook $facebook, \TwitterOAuth $twitter, Registration $registration ){
 		$this->facebook = $facebook;
 		$this->twitter = $twitter;
 		$this->registration = $registration;
 	}
 
-	public function actionInFb( $redirect_url = NULL ) {
-		$loginParams = array(
-			'scope' => 'email',
-			'redirect_uri' => $this->link( '//processFb', array('redirect_url'=>$redirect_url ) ),
-		);
-
-		$this->redirectUrl( $this->facebook->getLoginUrl( $loginParams ) );
+	public function actionInFb( $redirect = NULL ) {
+		$redirectUrl = $this->link("//processFb", array( 'redirect'=> $redirect ) );
+		$this->redirectUrl( $this->facebook->getAuthUrl( $redirectUrl, array( 'email' ) ) );
 	}
 
-	public function actionProcessFb(  ) {
-		$id = $this->facebook->getUser();
-		if( ! $id) {
-			$this->flashMessage("Athentication error: no user identity", "error");
+	public function actionProcessFb( $redirect = NULL ) {
+		$redirectUrl = $this->link("//processFb", array( 'redirect'=> $redirect ) );
+
+		try {
+			$oAuthIdentity = $this->facebook->getIdentity( $redirectUrl );
+		} catch ( AuthenticationException $e ) {
+			$this->flashMessage("Omlouváme se, ale tvoje přihlášení se nepovedlo. Zkus to znovu, nebo nám dej vědět.", "error");
 			$this->redirect("in");
 		}
 
-		$conferee = $this->getUserRegistration( 'fb', $id );
+		$conferee = $this->getUserRegistration( 'fb', $oAuthIdentity->plartformId );
 		$profile = $this->getUserIdentity( $conferee );
 
 		if( ! $profile ) {
-			$platform_profile = $this->facebook->api('/me','GET');
-			if( ! $platform_profile) {
-				$this->flashMessage("Facebook: User info request failed", "error");
-				$this->redirect("in");
-			}
 			$id = hash("crc32b", uniqid("fb", TRUE));
-			$name = @$platform_profile['name'];
-			$email = @$platform_profile['email'];
+			$name = $oAuthIdentity->name;
+			$email = $oAuthIdentity->email;
+			$picture_url = $oAuthIdentity->getPictureUrl();
 
-			$picture = $this->facebook->api(
-				"/me/picture",
-				"GET",
-				array (
-					'redirect' => false,
-					'height' => '180',
-					'type' => 'normal',
-					'width' => '180',
-				)
-			);
-			$picture_url = @$picture['data']['url'];
-			$platform_profile['picture'] = $picture;
-
-			$profile = $this->buildProfile(
-				$id,
-				$name,
-				$email,
-				$picture_url,
-				'fb',
-				$platform_profile
-			);
+			$profile = $oAuthIdentity->toArray();
+			$profile['id'] = $id;
 		}
-		$this->user->login(array('id'=>$profile['id'], 'data'=>$profile));
+
+		$identity = new Identity( $profile['id'], NULL, $profile );
+		$this->user->login( $identity );
 
 		if( $conferee ) {
 			$identity = $this->user->identity;
@@ -128,8 +109,8 @@ class SignPresenter extends BasePresenter
 		/* Create TwitteroAuth object with app key/secret
 		* and token key/secret from default phase */
 		$twitter = new \TwitterOAuth(
-			$params["twitter"]["app_config"]["key"],
-			$params["twitter"]["app_config"]["secret"],
+			$params["twitter"]["appConfig"]["key"],
+			$params["twitter"]["appConfig"]["secret"],
 			$session->oauth_token,
 			$session->oauth_token_secret
 		);
