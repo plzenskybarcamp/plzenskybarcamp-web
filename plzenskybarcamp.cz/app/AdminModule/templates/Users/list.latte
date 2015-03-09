@@ -19,7 +19,7 @@
 		<td><a href="mailto:{@$user['email']}">{@$user['email']}</a></td>
 		<td class="text-right">
 			{ifset $user[identity][platforms][fb][link]}<a href="{$user[identity][platforms][fb][link]}" title="Prihlášen Facebookem"><span class="label label-default"><span class="fa fa-facebook"></span></span></a>{/ifset}
-			{ifset $user[identity][platforms][tw][screen_name]}<a href="http://twitter.com/{$user[identity][platforms][tw][screen_name]}" title="Prihlášen Twitterem"><span class="label label-default"><span class="fa fa-twitter"></span></span></a>{/ifset}
+			{ifset $user[identity][platforms][tw][screen_name]}<a href="https://twitter.com/{$user[identity][platforms][tw][screen_name]}" title="Prihlášen Twitterem"><span class="label label-default"><span class="fa fa-twitter"></span></span></a>{/ifset}
 			{ifset $user[vip_token]}<a href="{link Vip:list token=>$user[vip_token]}" title="VIP token"><span class="label label-default"><span class="fa fa-external-link"></span></span></a>{/ifset}
 		</td>
 		<td>{@$user['created_date']->sec|date:"d. m. Y H:i:s"}</td>

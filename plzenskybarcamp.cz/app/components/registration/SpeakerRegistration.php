@@ -70,15 +70,15 @@ class SpeakerRegistration extends Control {
 
 	public function addUsersFields( $container ) {
 		$container->addText( 'linked', 'LinkedIn' )
-			->setAttribute('placeholder', 'http://www.linkedin.com/in/grudl')
+			->setAttribute('placeholder', 'https://www.linkedin.com/in/grudl')
 			->addCondition(Form::FILLED)
 				->addRule(Form::URL, "Adresa v LinkedIn nevypadá jako webová adresa, překontroluj to, prosím");
 		$container->addText( 'web', 'Web' )
-			->setAttribute('placeholder', 'http://davidgrudl.com')
+			->setAttribute('placeholder', 'https://davidgrudl.com')
 			->addCondition(Form::FILLED)
 				->addRule(Form::URL, "Adresa v poli Web nevypadá jako webová adresa, překontroluj to, prosím");
 		$container->addText( 'facebook', 'Facebook' )
-			->setAttribute('placeholder', 'http://www.facebook.com/davidgrudl')
+			->setAttribute('placeholder', 'https://www.facebook.com/davidgrudl')
 			->addCondition(Form::FILLED)
 				->addRule(Form::URL, "Adresa pro Facebook nevypadá jako webová adresa, překontroluj to, prosím");
 

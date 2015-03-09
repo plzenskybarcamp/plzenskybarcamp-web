@@ -61,7 +61,7 @@ class Registration {
 		return $this->talkCollection->find( array( '_id' => $talkId ) )->getNext();
 	}
 
-	public function getTalks( $sort ) {
+	public function getTalks( $sort = NULL ) {
 		if(!is_array($sort)) {
 			$sort = array('created_date' => 1 );
 		}

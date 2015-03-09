@@ -57,7 +57,7 @@ hranic{/block}
 
         <div id="speaker-detail" class="clearfix">
             <p><strong>{$speaker['name']}</strong></p>
-            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']|biggerTwitterPicture}" />
+            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']|biggerTwitterPicture}" alt="{$speaker['name']}">
 
             <div>
                 <ul class="networks">
@@ -68,7 +68,7 @@ hranic{/block}
                         <a href="{$speaker['facebook']}" target="_blank"><i>Facebook</i></a>
                     </li>
                     <li n:if="@$speaker['twitter']" class="tw">
-                        <a href="{$speaker['twitter']|twitterize:"http://twitter.com/"}" target="_blank" title="{$speaker['twitter']|twitterize:"@"}"><i>Twitter</i></a>
+                        <a href="{$speaker['twitter']|twitterize:"https://twitter.com/"}" target="_blank" title="{$speaker['twitter']|twitterize:"@"}"><i>Twitter</i></a>
                     </li>
                     <li n:if="@$speaker['linked']" class="ln">
                         <a href="{$speaker['linked']}" target="_blank"><i>LinkedIn</i></a>
@@ -77,7 +77,7 @@ hranic{/block}
             </div>
 
             {*<div>
-                <span n:ifset="$speaker['twitter']"><a href="http://twitter.com/{$speaker['twitter']}" target="_blank">TW</a></span>
+                <span n:ifset="$speaker['twitter']"><a href="https://twitter.com/{$speaker['twitter']}" target="_blank">TW</a></span>
                 <span n:ifset="$speaker['facebook']"><a href="{$speaker['facebook']}" target="_blank">FB</a></span>
                 <span n:ifset="$speaker['linked']"><a href="{$speaker['linked']}" target="_blank">IN</a></span>
             </div>*}
