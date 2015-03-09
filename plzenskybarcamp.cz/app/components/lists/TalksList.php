@@ -19,8 +19,6 @@ class TalksList extends Control {
 		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
 		$this->template->setFile( __DIR__ . '/templates/talksList.latte');
 
-		$this->template->robot = (($_SERVER['REMOTE_ADDR'] == '31.170.164.27') || isset($_GET['try']));
-
 		$sort = NULL;
 		if( $ranking ) {
 			$sort = array( 'votes_count' => -1 );
