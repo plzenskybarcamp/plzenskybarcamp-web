@@ -30,7 +30,12 @@ class HomepagePresenter extends BasePresenter
 
 	public function createComponentRegistration( $name ) {
 		$session = $this->getContext()->getService("session")->getSection("vip");
-		$token = $session->token;
+
+		$token = NULL;
+		if( isset( $session->token ) ){
+			$token = $session->token;
+		}
+
 		return new Main( $this, $name, $this->registrationModel, $this->configModel, $token );
 	}
 }
