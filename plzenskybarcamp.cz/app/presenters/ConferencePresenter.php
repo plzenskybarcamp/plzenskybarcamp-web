@@ -66,7 +66,7 @@ class ConferencePresenter extends BasePresenter
 	}
 
 	public function renderTalks() {
-		$this->template->ranking=FALSE;
+		$this->template->ranking=TRUE;
 	}
 
 	public function renderTalksRanking() {

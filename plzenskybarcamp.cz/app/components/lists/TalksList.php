@@ -32,6 +32,8 @@ class TalksList extends Control {
 	}
 
 	public function handleaddVote() {
+		$this->sendAjaxResponse( array( 'error' => 'Sorry, hlasování skončilo.' ) );
+
 		$talkId = $this->getPresenter()->getParameter( 'talkId' );
 		$this->validRequest( $talkId );
 		$this->registrationModel->addVote( $talkId, $this->getPresenter()->getUser()->getId() );
@@ -39,6 +41,8 @@ class TalksList extends Control {
 	}
 
 	public function handleremoveVote() {
+		$this->sendAjaxResponse( array( 'error' => 'Sorry, hlasování skončilo.' ) );
+
 		$talkId = $this->getPresenter()->getParameter( 'talkId' );
 		$this->validRequest( $talkId );
 		$this->registrationModel->removeVote( $talkId, $this->getPresenter()->getUser()->getId() );
