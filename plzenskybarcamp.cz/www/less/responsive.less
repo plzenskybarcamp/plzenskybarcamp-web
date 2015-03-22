@@ -1,5 +1,101 @@
 // MEDIA QUERIES
 
-@media screen and (max-width: 320px){
-  
+@-ms-viewport {
+    width: device-width
+}
+.visible-xs,
+.visible-xs-inline-block,
+.visible-sm,
+.visible-md,
+.visible-lg {
+    display: none!important
+}
+@media screen and (max-width: 767px) {
+    .inner {
+        width: auto!important;
+    }
+    .visible-xs {
+        display: block!important
+    }
+    .visible-xs-inline-block {
+        display: inline-block!important
+    }
+    table.visible-xs {
+        display: table
+    }
+    tr.visible-xs {
+        display: table-row!important
+    }
+    th.visible-xs,
+    td.visible-xs {
+        display: table-cell!important
+    }
+    td, th, tr, thead, tbody, tfoot, table {
+        display: block;
+    } 
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .visible-sm {
+        display: block!important
+    }
+    table.visible-sm {
+        display: table
+    }
+    tr.visible-sm {
+        display: table-row!important
+    }
+    th.visible-sm,
+    td.visible-sm {
+        display: table-cell!important
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .visible-md {
+        display: block!important
+    }
+    table.visible-md {
+        display: table
+    }
+    tr.visible-md {
+        display: table-row!important
+    }
+    th.visible-md,
+    td.visible-md {
+        display: table-cell!important
+    }
+}
+@media screen and (min-width: 1200px) {
+    .visible-lg {
+        display: block!important
+    }
+    table.visible-lg {
+        display: table
+    }
+    tr.visible-lg {
+        display: table-row!important
+    }
+    th.visible-lg,
+    td.visible-lg {
+        display: table-cell!important
+    }
+}
+@media screen and (max-width: 767px) {
+    .hidden-xs {
+        display: none!important
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .hidden-sm {
+        display: none!important
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .hidden-md {
+        display: none!important
+    }
+}
+@media screen and (min-width: 1200px) {
+    .hidden-lg {
+        display: none!important
+    }
 }
