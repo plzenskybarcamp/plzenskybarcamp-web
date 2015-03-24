@@ -22,6 +22,44 @@ use Nette,
         $this->template->talks = $this->registrationModel->getTalks();
     }
 
+    public function actionCsv( ) {
+        $talks = $this->registrationModel->getTalks();;
+
+        ob_start();
+        $df = fopen("php://output", 'w');
+        fputcsv($df, array("ID", "Název", "Speaker", "E-mail", "Popis", "Pro koho je určena"), ",", '"');
+        foreach ($talks as $talk) {
+            @fputcsv($df, array(
+                $talk['_id'],
+                $talk['title'],
+                $talk['speaker']['name'],
+                $talk['speaker']['email'],
+                $talk['description'],
+                $talk['purpose'],
+            ), ",", '"');
+        }
+        fclose($df);
+        $csv = ob_get_clean();
+
+        $now = gmdate("D, d M Y H:i:s");
+        $fileDatePostfix = gmdate("Ymd.his");
+        header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+        header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
+        header("Last-Modified: {$now} GMT");
+
+        // force download
+        header("Content-Type: application/force-download", TRUE);
+        header("Content-Type: application/octet-stream", FALSE);
+        header("Content-Type: application/download", FALSE);
+        header("Content-Length: " . strlen($csv));
+
+        // disposition / encoding on response body
+        header("Content-Disposition: attachment;filename=talks-$fileDatePostfix.csv");
+        header("Content-Transfer-Encoding: binary");
+        echo $csv;
+        $this->terminate();
+    }
+
     public function renderDetail( $talkId ) {
         $talk = $this->registrationModel->findTalk( $talkId );
 
