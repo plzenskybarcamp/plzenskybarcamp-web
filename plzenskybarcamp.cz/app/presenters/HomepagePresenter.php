@@ -23,11 +23,6 @@ class HomepagePresenter extends BasePresenter
 		$this->configModel = $configModel;
 	}
 
-	public function renderDefault()
-	{
-
-	}
-
 	public function createComponentRegistration( $name ) {
 		$session = $this->getContext()->getService("session")->getSection("vip");
 

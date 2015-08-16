@@ -33,6 +33,8 @@ class RouterFactory
 		$router[] = new Route('2015/prednasky/<talkId>', 'Conference:talksDetail');
 		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail', Route::ONE_WAY);
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
+		$router[] = new Route('privacy-policy', 'Homepage:privacyPolicy');
+		$router[] = new Route('terms', 'Homepage:terms');
 		$router[] = new Route('2015/program[/<action>]', 'Program:list');
 		$router[] = new Route('program[/<action>]', 'Program:list', Route::ONE_WAY);
 		$router[] = new Route('login', 'Sign:in');
