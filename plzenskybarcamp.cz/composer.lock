@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "7a00a86e97c497b43a15cd60d0ff3c99",
     "packages": [
         {
             "name": "facebook/php-sdk-v4",
-            "version": "4.0.20",
+            "version": "4.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "0c8ea23d81e09cc7e2c38b1d7f663fd5006dce84"
+                "reference": "c82611e05596622c9bd7abfa1cea1512d885c95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/0c8ea23d81e09cc7e2c38b1d7f663fd5006dce84",
-                "reference": "0c8ea23d81e09cc7e2c38b1d7f663fd5006dce84",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/c82611e05596622c9bd7abfa1cea1512d885c95e",
+                "reference": "c82611e05596622c9bd7abfa1cea1512d885c95e",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2015-03-03 00:03:54"
+            "time": "2015-04-03 20:31:47"
         },
         {
             "name": "kertz/twitteroauth",
@@ -84,16 +84,16 @@
         },
         {
             "name": "nette/nette",
-            "version": "v2.1.9",
+            "version": "v2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "1fa4d477c855d38751be15b2e7e4eb352f114220"
+                "reference": "d9bba819f1ac09a4bc5bc330eb83c17bf2926b9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/1fa4d477c855d38751be15b2e7e4eb352f114220",
-                "reference": "1fa4d477c855d38751be15b2e7e4eb352f114220",
+                "url": "https://api.github.com/repos/nette/nette/zipball/d9bba819f1ac09a4bc5bc330eb83c17bf2926b9a",
+                "reference": "d9bba819f1ac09a4bc5bc330eb83c17bf2926b9a",
                 "shasum": ""
             },
             "require": {
@@ -168,7 +168,7 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2015-01-06 21:16:30"
+            "time": "2015-08-15 09:59:47"
         }
     ],
     "packages-dev": [
