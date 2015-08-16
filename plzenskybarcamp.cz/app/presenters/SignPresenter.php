@@ -6,7 +6,9 @@ use Nette,
 	App\Model,
 	App\Model\Registration,
 	App\Components\Registration\Identity,
-	App\Facebook\OAuth as Facebook,
+	App\OAuth\Facebook,
+	App\OAuth\Twitter,
+	App\OAuth\Exception as OAuthException,
 	App\OAuth\AuthenticationException;
 
 
@@ -20,22 +22,22 @@ class SignPresenter extends BasePresenter
 	private $twitter;
 	private $registration;
 
-	public function __construct( Facebook $facebook, \TwitterOAuth $twitter, Registration $registration ){
+	public function __construct( Facebook $facebook, Twitter $twitter, Registration $registration ){
 		$this->facebook = $facebook;
 		$this->twitter = $twitter;
 		$this->registration = $registration;
 	}
 
 	public function actionInFb( $redirect = NULL ) {
-		$redirectUrl = $this->link("//processFb", array( 'redirect'=> $redirect ) );
+		$redirectUrl = $this->link("//processFb" );
 		$this->redirectUrl( $this->facebook->getAuthUrl( $redirectUrl, array( 'email' ) ) );
 	}
 
-	public function actionProcessFb( $redirect = NULL ) {
-		$redirectUrl = $this->link("//processFb", array( 'redirect'=> $redirect ) );
+	public function actionProcessFb( ) {
+		$redirectUrl = $this->link("//processFb");
 
 		try {
-			$oAuthIdentity = $this->facebook->getIdentity( $redirectUrl );
+			$oAuthIdentity = $this->facebook->getIdentity( );
 		} catch ( AuthenticationException $e ) {
 			$this->flashMessage("Omlouváme se, ale tvoje přihlášení se nepovedlo. Zkus to znovu, nebo nám dej vědět.", "error");
 			$this->redirect("in");
@@ -71,97 +73,36 @@ class SignPresenter extends BasePresenter
 	}
 
 	public function actionInTw( $redirect_url = NULL ) {
-		$request_token = $this->twitter->getRequestToken(
+		$this->redirectUrl( $this->twitter->getAuthUrl(
 			$this->link("//processTw")
-		);
-		$session = $this->getContext()->getService("session")->getSection("twitter");
-
-		$session->oauth_token = $token = $request_token['oauth_token'];
-		$session->oauth_token_secret = $request_token['oauth_token_secret'];
-		$session->redirect_url = $redirect_url;
-
-		/* If last connection failed don't display authorization link. */
-		switch ($this->twitter->http_code) {
-			case 200:
-				/* Build authorize URL and redirect user to Twitter. */
-				$url = $this->twitter->getAuthorizeURL( $token, TRUE );
-				$this->redirectUrl( $url );
-				break;
-			default:
-				/* Show notification if something went wrong. */
-				$this->flashMessage('Could not connect to Twitter.', "error");
-				$this->redirect("in");
-		}
+		) );
 	}
 
 	public function actionProcessTw( $oauth_token, $oauth_verifier ) {
-		$session = $this->getContext()->getService("session")->getSection("twitter");
 
-		$redirect_url = $session->redirect_url;
-
-		if ( $oauth_token !== $session->oauth_token ) {
-			$this->flashMessage("Athentication error: token is too old", "error");
+		try {
+			$this->twitter->verifyAuthentication( $oauth_token, $oauth_verifier );
+			$oAuthIdentity = $this->twitter->getIdentity( );
+		} catch ( OAuthException $e ) {
+			$this->flashMessage("Omlouváme se, ale tvoje přihlášení se nepovedlo. Zkus to znovu, nebo nám dej vědět.", "error");
 			$this->redirect("in");
 		}
 
-		$params = $this->getContext()->getParameters();
-
-		/* Create TwitteroAuth object with app key/secret
-		* and token key/secret from default phase */
-		$twitter = new \TwitterOAuth(
-			$params["twitter"]["appConfig"]["key"],
-			$params["twitter"]["appConfig"]["secret"],
-			$session->oauth_token,
-			$session->oauth_token_secret
-		);
-
-		/* Request access tokens from twitter */
-		$access_token = $twitter->getAccessToken($oauth_verifier);
-
-		/* Save the access tokens */
-		$session->access_token = $access_token;
-
-		/* Remove no longer needed request tokens */
-		unset($session->oauth_token);
-		unset($session->oauth_token_secret);
-
-		if (200 != $twitter->http_code) {
-			/* Save HTTP status for error dialog on connnect page.*/
-			$this->flashMessage("Autentication error: get access token failed.", "error");
-			$this->redirect("in");
-		}
-
-		$user_id = $access_token['user_id'];
-
-		$conferee = $this->getUserRegistration( 'tw', $user_id );
+		$conferee = $this->getUserRegistration( 'tw', $oAuthIdentity->plartformId );
 		$profile = $this->getUserIdentity( $conferee );
 
 		if( ! $profile ) {
-
-			$content = $twitter->get('account/verify_credentials');
-
 			$id = hash("crc32b", uniqid("fb", TRUE));
+			$name = $oAuthIdentity->name;
+			$email = $oAuthIdentity->email;
+			$picture_url = $oAuthIdentity->getPictureUrl();
 
-			if (property_exists($content, "error")) {
-				$this->flashMessage("Twitter error: " . $content->error, "error");
-				$this->redirect("in");
-			} else {
-
-				//Fix id type
-				$content->id = (string) $content->id;
-
-				$profile = $this->buildProfile(
-					$id,
-					$content->name,
-					NULL,
-					$content->profile_image_url_https,
-					'tw',
-					$content
-				);
-			}
+			$profile = $oAuthIdentity->toArray();
+			$profile['id'] = $id;
 		}
 
-		$this->user->login(array('id'=>$profile['id'], 'data'=>$profile));
+		$identity = new Identity( $profile['id'], NULL, $profile );
+		$this->user->login( $identity );
 
 		if( $conferee ) {
 			$identity = $this->user->identity;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Facebook;
+namespace App\OAuth;
 
-use App\SessionStarter,
+use Nette\Http\Session,
 	App\OAuth\Identity,
 	App\OAuth\AuthenticationException,
 	Nette\Diagnostics\Debugger,
@@ -13,13 +13,13 @@ use App\SessionStarter,
 	Facebook\FacebookRedirectLoginHelper;
 
 
-class OAuth
+class Facebook implements IClient
 {
 	const PLATFORM_ID = 'fb';
-	private $sessionStarter;
+	private $session;
 
-	public function __construct( $appConfig, SessionStarter $sessionStarter ) {
-		$this->sessionStarter = $sessionStarter;
+	public function __construct( $appConfig, Session $session ) {
+		$this->session = $session->getSection( self::PLATFORM_ID );
 
 		$appId = $appConfig[ 'appId' ];
 		$appSecret = $appConfig[ 'secret' ];
@@ -27,14 +27,14 @@ class OAuth
 	}
 
 	public function getAuthUrl( $redirectUrl, array $scope = array() ) {
-		$this->sessionStarter->start();
+		$this->session->redirectUrl = $redirectUrl;
 
 		$client = new FacebookRedirectLoginHelper( $redirectUrl );
 		return $client->getLoginUrl( $scope );
 	}
 
-	public function getIdentity( $redirectUrl ) {
-		$this->sessionStarter->start();
+	public function getIdentity() {
+		$redirectUrl = $this->session->redirectUrl;
 
 		$client = new FacebookRedirectLoginHelper( $redirectUrl );
 

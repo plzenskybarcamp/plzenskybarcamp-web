@@ -18,8 +18,11 @@ parameters:
 			allowSignedRequest: false
 	twitter:
 		appConfig:
-			key: "soXP3BhRN7zaKmaMNgKG1w"
-			secret: "cTr6trEjVlWzj7P3OLuMu22BdwUINaERZHD3dca8"
+			consumerKey: "soXP3BhRN7zaKmaMNgKG1w"
+			consumerSecret: "cTr6trEjVlWzj7P3OLuMu22BdwUINaERZHD3dca8"
+			singleUserToken: "2313976212-ji2Iw2Vl8qmLwB82rC6HTspSHTxBVYiDkV7UdBc"
+			singleUserTokenSecret: "Cg2FioaKxgKA6j2CkPObHj7psmMzQtVBjfeNrKSOEOrr1"
+
 
 php:
 	date.timezone: Europe/Prague
@@ -45,6 +48,6 @@ services:
 	router: @App\RouterFactory::createRouter
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)
-	FacebookLogin: App\Facebook\OAuth(%facebook.appConfig%)
-	twitterOAuth: TwitterOAuth(%twitter.appConfig.key%, %twitter.appConfig.secret%)
+	FacebookLogin: App\OAuth\Facebook(%facebook.appConfig%)
+	TwitterLogin: App\OAuth\Twitter(%twitter.appConfig%)
 	developFlag: App\Components\DevelopFlag(%app.is_develop%)
