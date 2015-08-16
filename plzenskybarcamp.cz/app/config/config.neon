@@ -18,10 +18,10 @@ parameters:
 			allowSignedRequest: false
 	twitter:
 		appConfig:
-			consumerKey: "soXP3BhRN7zaKmaMNgKG1w"
-			consumerSecret: "cTr6trEjVlWzj7P3OLuMu22BdwUINaERZHD3dca8"
-			singleUserToken: "2313976212-ji2Iw2Vl8qmLwB82rC6HTspSHTxBVYiDkV7UdBc"
-			singleUserTokenSecret: "Cg2FioaKxgKA6j2CkPObHj7psmMzQtVBjfeNrKSOEOrr1"
+			consumerKey: "dfVzCOu644SEDA1RIktT9oYJu"
+			consumerSecret: "NJtmHPVocZhobqH2JEfdnXvKMSkBIP7oyoz4llw53l92fJWr3R"
+			singleUserToken: "2313976212-tProoTRPLAzJne1jPgGedXJY8uOWlNkVYDBhbhQ"
+			singleUserTokenSecret: "rHSQsI8vE5WlW1PED6n7qbS9CNEqVLxvPY5nFgdZAjHy7"
 
 
 php:
