@@ -114,7 +114,11 @@ class Registration {
 	}
 
 	public function getConferrees( $limit = 0 ) {
-		return $this->findCoferrees()
+		return $this->getFilteredConferrees( array(), $limit );
+	}
+
+	public function getFilteredConferrees( $condition, $limit = 0 ) {
+		return $this->findCoferrees( $condition )
 			->sort( array('created_date' => -1) )
 			->limit( $limit );
 	}

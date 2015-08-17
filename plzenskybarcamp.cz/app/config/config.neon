@@ -32,8 +32,8 @@ parameters:
 		appConfig:
 			consumerKey: "dfVzCOu644SEDA1RIktT9oYJu"
 			consumerSecret: "NJtmHPVocZhobqH2JEfdnXvKMSkBIP7oyoz4llw53l92fJWr3R"
-			singleUserToken: "2313976212-tProoTRPLAzJne1jPgGedXJY8uOWlNkVYDBhbhQ"
-			singleUserTokenSecret: "rHSQsI8vE5WlW1PED6n7qbS9CNEqVLxvPY5nFgdZAjHy7"
+			singleUserToken: "2313976212-lppgIN4Gm5Gp2Y9fw9HTVIgEkmoacN5OBuQwd8h"
+			singleUserTokenSecret: "EoXmd63IBgbLKNNBrcywBvEoizwiuDS6Jxt5P5N59aPz6"
 
 
 php:
@@ -60,8 +60,8 @@ services:
 	router: @App\RouterFactory::createRouter
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)
-	FacebookLogin: App\OAuth\Facebook(%facebook.appConfig%)
-	TwitterLogin: App\OAuth\Twitter(%twitter.appConfig%)
+	facebook: App\OAuth\Facebook(%facebook.appConfig%)
+	twitter: App\OAuth\Twitter(%twitter.appConfig%)
 	aws: App\Aws\Aws(%aws.sdk%)
 	s3: App\Aws\s3Storage(%aws.s3Storage%)
 	developFlag: App\Components\DevelopFlag(%app.is_develop%)

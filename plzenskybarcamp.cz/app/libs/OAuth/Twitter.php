@@ -16,13 +16,20 @@ class Twitter implements IClient
 	private $client;
 	private $session;
 
+	private $appConfig;
+
 	private $accessToken;
 
 	public function __construct( $appConfig, Session $session ) {
 		$consumerKey = $appConfig[ 'consumerKey' ];
 		$consumerSecret = $appConfig[ 'consumerSecret' ];
+		$this->appConfig = $appConfig;
 		$this->client = new TwitterOAuth( $consumerKey, $consumerSecret );
 		$this->session = $session->getSection( self::PLATFORM_ID );
+	}
+
+	public function singleUserMode() {
+		$this->client->setOAuthToken($this->appConfig['singleUserToken'], $this->appConfig['singleUserTokenSecret']);
 	}
 
 	public function getAuthUrl( $redirectUrl, array $scope = array() ) {
@@ -85,6 +92,11 @@ class Twitter implements IClient
 
 		return $identity;
 	}
+
+	public function get( $query, $params ) {
+		return $this->client->get( $query, $params );
+	}
+
 
 	private function object_to_array($object) {
 		if (is_object($object)) {
