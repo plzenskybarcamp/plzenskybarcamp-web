@@ -22,7 +22,8 @@
 		"php": "~5.5",
 		"nette/nette": "~2.1.0",
 		"kertz/twitteroauth": "dev-master",
-		"facebook/php-sdk-v4": "~4.0"
+		"facebook/php-sdk-v4": "~4.0",
+		"aws/aws-sdk-php": "^3.2"
 	},
 	"require-dev": {
 		"nette/tester": "~1.0.0"
