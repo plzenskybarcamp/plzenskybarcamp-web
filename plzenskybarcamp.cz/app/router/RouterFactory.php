@@ -5,7 +5,7 @@ namespace App;
 use Nette,
 	Nette\Application\Routers\RouteList,
 	Nette\Application\Routers\Route,
-	Nette\Application\Routers\SimpleRouter;
+	Nette\Application\Routers\CliRouter;
 
 
 /**
@@ -17,7 +17,30 @@ class RouterFactory
 	/**
 	 * @return \Nette\Application\IRouter
 	 */
-	public function createRouter()
+	public function createRouter( $consoleMode )
+	{
+		if( $consoleMode ) {
+			return $this->createCliRouter();
+		}
+		else {
+			return $this->createHttpRouter();
+		}
+
+	}
+
+	/**
+	 * @return \Nette\Application\IRouter
+	 */
+	public function createCliRouter()
+	{
+		$router = new RouteList('Cli');
+		$router[] = new CliRouter();
+		return $router;
+	}
+	/**
+	 * @return \Nette\Application\IRouter
+	 */
+	public function createHttpRouter()
 	{
 		$router = new RouteList();
 		$router[] = new Route('partneri', 'Homepage:partners');

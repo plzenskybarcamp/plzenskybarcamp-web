@@ -57,7 +57,7 @@ services:
 	- App\Authenticator
 	- App\RouterFactory
 	- App\SessionStarter
-	router: @App\RouterFactory::createRouter
+	router: @App\RouterFactory::createRouter(%consoleMode%)
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)
 	facebook: App\OAuth\Facebook(%facebook.appConfig%)
