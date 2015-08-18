@@ -84,4 +84,11 @@ class Facebook implements IClient
 
 		return $identity;
 	}
+
+	public function getAppToken() {
+		$params = array(
+			'grant_type' => 'client_credentials'
+		);
+		return \Facebook\Entities\AccessToken::requestAccessToken($params);
+	}
 }

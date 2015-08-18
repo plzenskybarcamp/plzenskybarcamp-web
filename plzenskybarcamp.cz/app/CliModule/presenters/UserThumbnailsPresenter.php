@@ -6,17 +6,61 @@ use Nette,
 	Nette\Diagnostics\Debugger,
 	App\Model,
 	Nette\Application\Responses\TextResponse,
-	App\OAuth\Twitter;
+	App\OAuth\Twitter,
+	App\OAuth\Facebook,
+	Facebook\FacebookSession,
+	Facebook\FacebookRequest;
 
 class UserThumbnailsPresenter extends Nette\Application\UI\Presenter
 {
 	private $registrationModel;
 	private $twitter;
+	private $facebook;
 
-	public function __construct( Model\Registration $registrationModel, Twitter $twitter ) {
+	public function __construct( Model\Registration $registrationModel, Twitter $twitter, Facebook $facebook ) {
 		$this->registrationModel = $registrationModel;
 		$this->twitter = $twitter;
+		$this->facebook = $facebook;
 	}
+
+	public function renderFixFacebook() {
+		$accessToken = $this->facebook->getAppToken();
+		$session = new FacebookSession($accessToken);
+
+		$users = $this->registrationModel->getFilteredConferrees(array('picture_mirror'=>FALSE, 'identity.platform.fb.id'=>array('$ne'=>NULL)));
+		foreach ($users as $value) {
+			$id = $value['identity']['platform']['fb']['id'];
+			$response = (new FacebookRequest(
+				$session, 'GET', '/' . $id . '/picture', array(
+				'width' => 200,
+				'height'=> 200,
+				'redirect'=>false
+			)
+			))->execute()->getGraphObject();
+			$url = $response->getProperty('url');
+			if(!$url){
+				echo "Invalid image for $id\n";
+				die();
+			}
+			$image = $this->tryDown($url);
+			if($image) {
+				$file = \App\Aws\S3Object::createFromString( $image['body'], $image['type'])
+					->setCacheControl('+ 1 year')
+					->addMetadata('Origin-Url',$url);
+				$token = base64_encode(dechex(crc32(uniqid())));
+				$url = $this->getContext()->getService('s3')->putObject($file, "2015/pictures/profiles/fb-profile-$id-$token");
+
+				if($url) {
+					$this->registrationModel->updateConferree( $value['_id'], array('picture_url' => $url, 'picture_mirror'=>TRUE) );
+				}
+				echo "Saved: $url\n";
+			}
+			else {
+				echo "Invalid image for $id\n";
+			}
+		}
+	}
+
 
 	public function renderFixTwitter() {
 		$this->twitter->singleUserMode();
