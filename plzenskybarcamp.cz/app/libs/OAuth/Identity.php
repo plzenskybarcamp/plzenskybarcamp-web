@@ -42,14 +42,14 @@ class Identity extends Object {
 		$this->setBaseData( $data );
 		$this->setPlatform( $platform );
 		$this->setAccessToken( $platform, $this->getRequired( $data, "access_tokens.$platform" ) );
-		$this->setPlatformData( $platform, $this->getRequired( $data, "platform.$platform" ) );
+		$this->setPlatformData( $platform, $this->getRequired( $data, "platforms.$platform" ) );
 	}
 
 	public function toArray() {
 		$data = $this->getBaseData();
 		$data['current_platform'] = $this->getPlatform();
 		$data['access_tokens'] = $this->getAllAccessTokens();
-		$data['platform'] = $this->getAllPlatformData();
+		$data['platforms'] = $this->getAllPlatformData();
 		return $data;
 	}
 
