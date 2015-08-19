@@ -88,7 +88,7 @@ class S3Object {
 			$this->data[ 'CacheControl' ] = "public, max-age=$cache";
 		}
 		elseif( is_string( $cache ) && preg_match('/^\s*\+/', $cache ) ) {
-			$this->data[ 'CacheControl' ] = strtotime( $cache, 0 );
+			$this->data[ 'CacheControl' ] = "public, max-age=" . strtotime( $cache, 0 );
 		}
 		else {
 			$this->data[ 'CacheControl' ] = $cache;
