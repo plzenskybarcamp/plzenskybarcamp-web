@@ -33,4 +33,10 @@ class HomepagePresenter extends BasePresenter
 
 		return new Main( $this, $name, $this->registrationModel, $this->configModel, $token );
 	}
+
+	public function renderNoTrack() {
+		setcookie('DoNotGaTrack', '1', time()+(60*60*24*60), '/', $_SERVER['HTTP_HOST'], TRUE, FALSE);
+		$this->flashMessage('DEVELOPER MODE: Your browser is now excluded from Google Analytics tracking');
+		$this->redirect('Homepage:');
+	}
 }

@@ -71,6 +71,8 @@ class RouterFactory
 		$router[] = new Route('2015/arduino-day', 'Homepage:arduinoDay');
 		$router[] = new Route('arduino-day', 'Homepage:arduinoDay', Route::ONE_WAY);
 
+		$router[] = new Route('no-track', 'Homepage:noTrack');
+
 		$router[] = new Route('2014/<id>[/<subid>]', 'Homepage:year2014');
 
 		$apiRouter = new RouteList('Api');
