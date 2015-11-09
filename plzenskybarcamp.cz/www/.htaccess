@@ -35,9 +35,6 @@
 	AddType font/woff2 .woff2
 </IfModule>
 
-#Apache 2.2 bug #45023 work-around
-FileETag None
-
 <IfModule mod_expires.c>
 	ExpiresActive On
 	ExpiresByType text/html "access plus 1 hour"
@@ -54,4 +51,6 @@ FileETag None
 
 <IfModule mod_headers.c>
 Header set X-XSS-Protection: "1; mode=block; report=/api/log/xss"
+Header set Access-Control-Allow-Origin: "https://plzenskybarcamp.cz"
+Header set Content-Security-Policy: "upgrade-insecure-requests"
 </IfModule>
