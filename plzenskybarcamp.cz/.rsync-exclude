@@ -1,0 +1,4 @@
+.rsync-exclude
+log/
+temp/
+config.local.neon
