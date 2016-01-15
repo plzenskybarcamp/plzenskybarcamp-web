@@ -1,4 +1,6 @@
+.git
 .rsync-exclude
-log/
-temp/
-config.local.neon
+/deploy.sh
+/app/config/config.local.neon
+/log/
+/temp/
