@@ -13,7 +13,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
 	public function beforeRender() {
-		$this->template->host = $this->context->httpRequest->url->host;
+		$this->template->host = $this->context->getService('httpRequest')->url->host;
 
 		$this->template->isDevelop = $this->getContext()->getService("developFlag")->isDevelop();
 	}

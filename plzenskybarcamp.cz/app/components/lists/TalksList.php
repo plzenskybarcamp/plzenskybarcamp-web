@@ -25,8 +25,8 @@ class TalksList extends Control {
 		}
 		$talks = $this->registrationModel->getTalks( $sort );
 		$this->template->ranking = $ranking;
-		$this->template->talks = $talks;
-		$this->template->talksCount = $talks->count();
+		$this->template->talks = $talks->toArray();
+		$this->template->talksCount = count($this->template->talks);
 		$this->template->currentUser = $this->getPresenter()->getUser();
 		$this->template->render();
 	}

@@ -6,11 +6,14 @@ class Config {
 
 	private $configCollection;
 	private $configs;
+	private $defaultOptions;
+
 
 	public function __construct( $mongoConfig ) {
-		$client = new \MongoClient( $mongoConfig['host'] );
-		$database = $client->$mongoConfig['db'];
-		$this->configCollection = $database->config;
+		$manager = new \MongoDB\Driver\Manager( $mongoConfig['uri'] );
+		$dbName = $mongoConfig['database'];
+		$this->configCollection = new \MongoDB\Collection($manager, "$dbName.config");
+		$this->defaultOptions = [ 'typeMap' => [ 'root' => 'array', 'document' => 'array' ] ];
 	}
 
 	private function loadConfigs( $force = FALSE ) {
@@ -18,9 +21,9 @@ class Config {
 			return;
 		}
 
-		$result = $this->configCollection->find( array(  ) );
+		$result = $this->configCollection->find( [], $this->defaultOptions );
 
-		$configs = array();
+		$configs = [];
 
 		foreach( $result as $document ) {
 			$configs[ $document[ '_id' ] ] = $document[ 'value' ];
@@ -45,13 +48,12 @@ class Config {
 
 		$this->configs[ $id ] = $value;
 
-		$this->configCollection->update(
-			array( '_id' => $id ),
-			array(
+		$this->configCollection->replaceOne(
+			[ '_id' => $id ],
+			[
 				'_id' => $id,
 				'value' => $value,
-			),
-			array( 'upsert' => TRUE )
+			]
 		);
 	}
 

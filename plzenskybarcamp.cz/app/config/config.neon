@@ -8,8 +8,8 @@ parameters:
 	app:
 		is_develop: false
 	mongo:
-		host: 'localhost:27017'
-		db: 'barcamp'
+		uri: 'mongodb://127.0.0.1:27017'
+		database: 'barcamp'
 	aws:
 		sdk:
 			#arn:aws:iam::667215285126:user/plzenskybarcamp-web

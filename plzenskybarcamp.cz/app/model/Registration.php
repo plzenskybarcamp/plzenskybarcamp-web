@@ -6,17 +6,21 @@ class Registration {
 
 	private $confereeCollection;
 	private $talkCollection;
+	private $tokenCollection;
+	private $defaultOptions;
 
 	const TOKEN_EXCEPTION_NOTFOUND = 1000;
 	const TOKEN_EXCEPTION_INVALID = 1001;
 	const TOKEN_EXCEPTION_EXPIRED = 1002;
 
 	public function __construct( $mongoConfig ) {
-		$client = new \MongoClient( $mongoConfig['host'] );
-		$database = $client->$mongoConfig['db'];
-		$this->confereeCollection = $database->conferee;
-		$this->talkCollection = $database->talk;
-		$this->tokenCollection = $database->token;
+		$manager = new \MongoDB\Driver\Manager( $mongoConfig['uri'] );
+		$dbName = $mongoConfig['database'];
+		$this->confereeCollection = new \MongoDB\Collection($manager, "$dbName.conferee");
+		$this->talkCollection = new \MongoDB\Collection($manager, "$dbName.talk");
+		$this->tokenCollection = new \MongoDB\Collection($manager, "$dbName.token");
+		$this->defaultOptions = [ 'typeMap' => [ 'root' => 'array', 'document' => 'array' ] ];
+
 	}
 
 	public function updateConferree( $userId, array $data ) {
@@ -28,18 +32,16 @@ class Registration {
 	}
 
 	public function findCoferree( $userId ) {
-		$data = $this->findCoferrees( array( '_id' => $userId ) );
-		return $data->getNext();
+		return $this->confereeCollection->findOne( [ '_id' => $userId ], $this->defaultOptions );
 	}
 
 	public function findCoferreeByPlatform( $platform, $userId ) {
 		if(!preg_match('/^[a-z]+$/Di', $platform)) {
-			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid platform parameter.");
+			throw new \Nette\InvalidArgumentException("Secure issue: Invalid platform parameter.");
 		}
 
 		$path = "identity.platforms.$platform.id";
-		$data = $this->findCoferrees( array( $path => $userId ) );
-		return $data->getNext();
+		return $this->confereeCollection->findOne( [ $path => $userId ], $this->defaultOptions );
 	}
 
 	public function createTalk( $userId, array $data ) {
@@ -58,14 +60,14 @@ class Registration {
 	}
 
 	public function findTalk( $talkId ) {
-		return $this->talkCollection->find( array( '_id' => $talkId ) )->getNext();
+		return $this->talkCollection->findOne( [ '_id' => $talkId ], $this->defaultOptions );
 	}
 
-	public function getTalks( $sort = NULL ) {
-		if(!is_array($sort)) {
-			$sort = array('created_date' => 1 );
+	public function getTalks( $sort = [] ) {
+		if(!$sort) {
+			$sort = [ 'created_date' => 1 ];
 		}
-		return $this->talkCollection->find()->sort( $sort );
+		return $this->talkCollection->find( [], [ 'sort'=> $sort ] + $this->defaultOptions );
 	}
 
 	public function addLinkToTalk( $talkId, $groupField, array $data ) {
@@ -108,19 +110,34 @@ class Registration {
 	}
 
 	public function getSpeakers( $limit = 0 ) {
-		return $this->findCoferrees( array( 'talk' => array( '$ne' => null ) ) )
-			->sort( array('talk.created_date' => -1) )
-			->limit( $limit );
+		return $this->findCoferrees(
+			[ 'talk' => [ '$ne' => NULL ] ],
+			[
+				'sort' => [ 'talk.created_date' => -1 ],
+				'limit' => $limit,
+			]
+		);
 	}
 
 	public function getConferrees( $limit = 0 ) {
-		return $this->getFilteredConferrees( array(), $limit );
+		return $this->getFilteredConferrees( [], $limit );
+	}
+
+	public function countConferrees( ) {
+		return $this->confereeCollection->count(
+			[],
+			$this->defaultOptions
+		);
 	}
 
 	public function getFilteredConferrees( $condition, $limit = 0 ) {
-		return $this->findCoferrees( $condition )
-			->sort( array('created_date' => -1) )
-			->limit( $limit );
+		return $this->findCoferrees(
+			$condition,
+			[
+				'sort' => [ 'created_date' => -1 ],
+				'limit' => $limit,
+			]
+		);
 	}
 
 	public function getVotesCount( $talkId ) {
@@ -168,7 +185,7 @@ class Registration {
 
 	public function validateVipToken( $tokenId ) {
 		$token = $this->getVipToken( $tokenId );
-		
+
 		$invalidateReasonTitle = NULL;
 		$invalidity = $this->getVipTokenInvalidity( $token, $invalidateReasonTitle );
 		if( $invalidity ) {
@@ -200,8 +217,11 @@ class Registration {
 		return $this->tokenCollection->find( $condition );
 	}
 
-	private function findCoferrees( $condition = array() ) {
-		return $this->confereeCollection->find( $condition );
+	private function findCoferrees( $filter = [], $options = [] ) {
+		return $this->confereeCollection->find(
+			$filter,
+			$options + $this->defaultOptions
+		);
 	}
 
 	private function updateConferreeByCondition( $condition, array $data ) {

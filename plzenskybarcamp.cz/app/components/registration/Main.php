@@ -27,7 +27,7 @@ class Main extends Control {
 
 	private function createControlTemplate() {
 		$registrationCapatity = $this->configModel->getConfig( 'registrationCapatity', 0 );
-		$registreredUsers = $this->registrationModel->getConferrees()->count();
+		$registreredUsers = $this->registrationModel->countConferrees();
 
 		$canBeRegistered = ( $registrationCapatity - $registreredUsers ) > 0;
 		if( ! $canBeRegistered && $this->token ) {
