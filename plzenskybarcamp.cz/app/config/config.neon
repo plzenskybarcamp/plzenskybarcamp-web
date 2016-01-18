@@ -63,5 +63,5 @@ services:
 	facebook: App\OAuth\Facebook(%facebook.appConfig%)
 	twitter: App\OAuth\Twitter(%twitter.appConfig%)
 	aws: App\Aws\Aws(%aws.sdk%)
-	s3: App\Aws\s3Storage(%aws.s3Storage%)
+	s3: App\Aws\S3Storage(%aws.s3Storage%)
 	developFlag: App\Components\DevelopFlag(%app.is_develop%)

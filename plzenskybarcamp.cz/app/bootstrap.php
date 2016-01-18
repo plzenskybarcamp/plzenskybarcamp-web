@@ -6,17 +6,15 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
 
-//$configurator->setDebugMode(TRUE);  // debug mode MUST NOT be enabled on production server
-Nette\Diagnostics\Debugger::$emailSnooze = 3600;
+//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
 $configurator->enableDebugger(__DIR__ . '/../log', 'pan@jakubboucek.cz');
 
 $configurator->setTempDirectory(__DIR__ . '/../temp');
-if(!file_exists(__DIR__ . '/../temp/sessions')) mkdir(__DIR__ . '/../temp/sessions');
+
+if(!file_exists(__DIR__ . '/../temp/sessions')) { mkdir(__DIR__ . '/../temp/sessions'); }
 
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)
-	->addDirectory(__DIR__ . '/../vendor/others')
-	->addDirectory(__DIR__ . '/../vendor/facebook')
 	->register();
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
