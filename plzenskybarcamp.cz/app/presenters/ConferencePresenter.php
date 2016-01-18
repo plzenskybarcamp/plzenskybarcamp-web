@@ -33,6 +33,9 @@ class ConferencePresenter extends BasePresenter
 		parent::startup();
 		$userId = $this->getUser()->getId();
 
+		$this->flashMessage('Promiň, přednášky zatím nemáme připravené.');
+		$this->redirect(302, 'Homepage:');
+
 		if($userId) {
 			$this->conferree = $this->registrationModel->findCoferree( $userId );
 		}
