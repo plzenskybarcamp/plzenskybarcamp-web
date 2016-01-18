@@ -1,6 +1,0 @@
-parameters:
-	app:
-		is_develop: true
-	mongo:
-		db: 'barcamp_develop'
-

@@ -16,8 +16,8 @@ parameters:
 			version: latest
 			region: eu-west-1
 			credentials:
-				key: 'AKIAIHLPOFMETYUS4CEQ'
-				secret: 'BAialdx1P6/Mb0CtGq27xGgB9U1UUIkvGmwO7i7k'
+				key: 'AKIAJNGXPRDE5WABGA5Q'
+				secret: 'put_your_key'
 		s3Storage:
 			bucket: plzenskybarcamp
 			basePath: ''
@@ -25,15 +25,15 @@ parameters:
 	facebook:
 		appConfig:
 			appId: '504432792996629'
-			secret: 'ed0af56bc4baabe2e821461e30e5435a'
+			secret: 'put_your_key'
 			fileUpload: false
 			allowSignedRequest: false
 	twitter:
 		appConfig:
-			consumerKey: "dfVzCOu644SEDA1RIktT9oYJu"
-			consumerSecret: "NJtmHPVocZhobqH2JEfdnXvKMSkBIP7oyoz4llw53l92fJWr3R"
-			singleUserToken: "2313976212-lppgIN4Gm5Gp2Y9fw9HTVIgEkmoacN5OBuQwd8h"
-			singleUserTokenSecret: "EoXmd63IBgbLKNNBrcywBvEoizwiuDS6Jxt5P5N59aPz6"
+			consumerKey: "VOGQDP1RaH8KTNNkT9ulDOa8j"
+			consumerSecret: "put_your_key"
+			singleUserToken: "2313976212-R1xN8JxtkkvTDfpWO2mGHvBZm4V0R5fwlBvVxmQ"
+			singleUserTokenSecret: "put_your_key"
 
 
 php:
