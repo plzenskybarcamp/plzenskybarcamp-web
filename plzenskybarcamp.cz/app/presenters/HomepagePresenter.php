@@ -39,4 +39,6 @@ class HomepagePresenter extends BasePresenter
 		$this->flashMessage('DEVELOPER MODE: Your browser is now excluded from Google Analytics tracking');
 		$this->redirect('Homepage:');
 	}
+
+	
 }
