@@ -12,7 +12,7 @@ class Config {
 	public function __construct( $mongoConfig ) {
 		$manager = new \MongoDB\Driver\Manager( $mongoConfig['uri'] );
 		$dbName = $mongoConfig['database'];
-		$this->configCollection = new \MongoDB\Collection($manager, "$dbName.config");
+		$this->configCollection = new \MongoDB\Collection($manager, $dbName, 'config');
 		$this->defaultOptions = [ 'typeMap' => [ 'root' => 'array', 'document' => 'array' ] ];
 	}
 
