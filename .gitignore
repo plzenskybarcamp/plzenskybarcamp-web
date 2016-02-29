@@ -1,9 +1,9 @@
-plzenskybarcamp.cz/log/*
-plzenskybarcamp.cz/temp/*
-!plzenskybarcamp.cz/temp/sessions/.gitignore
-!plzenskybarcamp.cz/temp/.htaccess
-plzenskybarcamp.cz/vendor/*
-!plzenskybarcamp.cz/vendor/others
+/log/*
+/temp/*
+!/temp/sessions/.gitignore
+!/temp/.htaccess
+/vendor/*
+!/vendor/others
 
 .DS_Store
 !.gitignore

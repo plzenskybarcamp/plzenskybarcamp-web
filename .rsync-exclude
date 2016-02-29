@@ -1,4 +1,5 @@
 .git
+.gitignore
 .rsync-exclude
 /deploy.sh
 /app/config/config.local.neon
