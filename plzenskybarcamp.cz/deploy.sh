@@ -12,7 +12,7 @@ echo "Replace file permissions…"
 $SSH sudo fixwww.sh $REMOTE_DIR
 
 echo "Remove temporary files…"
-#$SSH find $REMOTE_DIR/temp -mindepth 2 -type f -delete
+$SSH find $REMOTE_DIR/temp -mindepth 2 -type f -delete
 
 echo -n "Remove nette email-sent marker… "
 ssh sbl /bin/bash << EOF
