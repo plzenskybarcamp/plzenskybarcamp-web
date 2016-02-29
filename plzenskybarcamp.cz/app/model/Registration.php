@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use MongoDB\Model\UTCDateTimeConverter;
+
 class Registration {
 
 	private $confereeCollection;
@@ -46,9 +48,9 @@ class Registration {
 
 	public function createTalk( $userId, array $data ) {
 		$data['_id'] = hash("crc32b", uniqid("talk", TRUE));
-		$data['created_date'] = new \MongoDate( time() );
+		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();
 		$speaker = $this->findCoferree( $userId );
-		$this->talkCollection->insert( $data );
+		$this->talkCollection->insertOne( $data );
 		$this->syncTalkWithSpeaker( $userId, $data );
 		$this->syncSpeakerWithTalk( $data['_id'], $speaker );
 	}
@@ -72,7 +74,7 @@ class Registration {
 
 	public function addLinkToTalk( $talkId, $groupField, array $data ) {
 		$linkId = hash("crc32b", uniqid("link", TRUE));
-		$data['created_date'] = new \MongoDate( time() );
+		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();
 
 		if( ! preg_match( '/^[_a-z0-9]+$/iD', $groupField )) {
 			throw new \Nette\InvalidArgumentException("Secure issuie: Invalid mongo groupField parameter.");
@@ -146,7 +148,7 @@ class Registration {
 	}
 
 	public function addVote( $talkId, $userId ) {
-		$this->talkCollection->update(
+		$this->talkCollection->updateOne(
 			array( '_id' => $talkId ),
 			array(
 				'$push' => array( 'votes' => $userId ),
@@ -156,7 +158,7 @@ class Registration {
 	}
 
 	public function removeVote( $talkId, $userId ) {
-		$this->talkCollection->update(
+		$this->talkCollection->updateOne(
 			array( '_id' => $talkId ),
 			array(
 				'$pull' => array( 'votes' => $userId ),
@@ -172,15 +174,15 @@ class Registration {
 	public function createVipToken( array $data ) {
 		$token = hash("sha1", uniqid("vip", TRUE));
 		$data['_id'] = $token;
-		$data['created_date'] = new \MongoDate( time() );
-		$data['expired_date'] = ( isset($data['expired_date']) ? new \MongoDate($data['expired_date']) : NULL );
+		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();
+		$data['expired_date'] = (isset($data['expired_date']) ? (new UTCDateTimeConverter( $data['expired_date'] ))->toMongo() : NULL );
 		$data['valid'] = true;
-		$this->tokenCollection->insert( $data );
+		$this->tokenCollection->insertOne( $data );
 		return $token;
 	}
 
 	public function invalideVipToken( $token ) {
-		$this->tokenCollection->update( array('_id'=>$token), array('$set'=>array('valid'=>false))  );
+		$this->tokenCollection->updateOne( array('_id'=>$token), array('$set'=>array('valid'=>false))  );
 	}
 
 	public function validateVipToken( $tokenId ) {
@@ -196,15 +198,15 @@ class Registration {
 	public function getVipTokenInvalidity( $token, &$invalidateReasonTitle = NULL ) {
 		if( ! $token ) {
 			$invalidateReasonTitle = "Token not found";
-			return SELF::TOKEN_EXCEPTION_NOTFOUND;
+			return self::TOKEN_EXCEPTION_NOTFOUND;
 		}
 		if( ! isset( $token['valid'] ) || !$token['valid'] ) {
 			$invalidateReasonTitle = "Token invalid";
-			return SELF::TOKEN_EXCEPTION_INVALID;
+			return self::TOKEN_EXCEPTION_INVALID;
 		}
-		if( isset( $token['expired_date'] ) && $token['expired_date']->sec < time() ) {
+		if( isset( $token['expired_date'] ) && (new UTCDateTimeConverter($token['expired_date']))->toTimestamp() < time() ) {
 			$invalidateReasonTitle = "Token expired";
-			return SELF::TOKEN_EXCEPTION_EXPIRED;
+			return self::TOKEN_EXCEPTION_EXPIRED;
 		}
 		return FALSE; //No invalidity
 	}
@@ -213,8 +215,8 @@ class Registration {
 		return $this->findVipTokens( array( "_id"=>$token ) )->getNext();
 	}
 
-	public function findVipTokens( $condition = array() ) {
-		return $this->tokenCollection->find( $condition );
+	public function findVipTokens( $condition = array(), $options = array() ) {
+		return $this->tokenCollection->find( $condition, $options );
 	}
 
 	private function findCoferrees( $filter = [], $options = [] ) {
@@ -225,12 +227,12 @@ class Registration {
 	}
 
 	private function updateConferreeByCondition( $condition, array $data ) {
-		return $this->confereeCollection->update( $condition,
+		return $this->confereeCollection->updateOne( $condition,
 			array( '$set' => $data ), array( 'upsert' => true ) );
 	}
 
 	private function updateTalkByCondition( $condition, array $data, $updateModifier = '$set' ) {
-		return $this->talkCollection->update( $condition,
+		return $this->talkCollection->updateOne( $condition,
 			array( $updateModifier => $data ), array( 'upsert' => true ) );
 	}
 

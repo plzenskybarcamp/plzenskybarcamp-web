@@ -5,7 +5,8 @@ namespace App\AdminModule\Presenters;
 use Nette,
 	App\Model,
     Nette\Application\UI\Form,
-    App\Components\BootstrapizeForm;
+    App\Components\BootstrapizeForm,
+    MongoDB\Model\UTCDateTimeConverter;
 
 
   class UsersPresenter extends BasePresenter
@@ -18,6 +19,7 @@ use Nette,
     }
 
     public function renderList( ) {
+        $this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
         $this->template->users = $this->registrationModel->getConferrees();
     }
     public function actionCsv( ) {
@@ -34,7 +36,7 @@ use Nette,
                 $user['email'],
                 $fname,
                 $lname,
-                ( $user['created_date'] ? date( 'Y-m-d H:i:s',  $user['created_date']->sec) : NULL ),
+                ( $user['created_date'] ? (new UTCDateTimeConverter($user['created_date']))->format('Y-m-d H:i:s') : NULL ),
                 ( $user['lunch'] ? "Ano" : "Ne"),
                 ( $user['afterparty'] ? "Ano" : "Ne"),
                 ( $user['bio'] ),

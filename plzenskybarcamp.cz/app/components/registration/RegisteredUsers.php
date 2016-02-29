@@ -20,8 +20,8 @@ class RegisteredUsers extends Control {
 	
 	public function render( $title ) {
 		$this->template->setFile( __DIR__ . '/templates/registeredUsers.latte');
-		$this->template->users = $this->registrationModel->getConferrees(12);
-		$this->template->usersCount = $this->template->users->count();
+		$this->template->users = $this->registrationModel->getConferrees(12)->toArray();
+		$this->template->usersCount = count($this->template->users);
 		$this->template->title = $title;
 		$this->template->render();
 	}

@@ -22,7 +22,7 @@
 			{ifset $user[identity][platforms][tw][screen_name]}<a href="https://twitter.com/{$user[identity][platforms][tw][screen_name]}" title="Prihlášen Twitterem"><span class="label label-default"><span class="fa fa-twitter"></span></span></a>{/ifset}
 			{ifset $user[vip_token]}<a href="{link Vip:list token=>$user[vip_token]}" title="VIP token"><span class="label label-default"><span class="fa fa-external-link"></span></span></a>{/ifset}
 		</td>
-		<td>{@$user['created_date']->sec|date:"d. m. Y H:i:s"}</td>
+		<td>{@$user['created_date']|mongoFormat:"d. m. Y H:i:s"}</td>
 		<td>
 			{if $user[lunch]}<span class="label label-default" title="Dá si oběd"><span class="fa fa-foursquare"></span></span>{/if}
 			{if $user[afterparty]}<span class="label label-default" title="Účastní se afterparty"><span class="fa fa-beer"></span></span>{/if}

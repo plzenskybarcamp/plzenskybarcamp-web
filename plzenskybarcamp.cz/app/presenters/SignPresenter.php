@@ -9,7 +9,8 @@ use Nette,
 	App\OAuth\Facebook,
 	App\OAuth\Twitter,
 	App\OAuth\Exception as OAuthException,
-	App\OAuth\AuthenticationException;
+	App\OAuth\AuthenticationException,
+	MongoDB\Model\MongoDbSanitizer;
 
 
 /**
@@ -121,7 +122,7 @@ class SignPresenter extends BasePresenter
 		$conferee = $this->registration->findCoferreeByPlatform( $platform, $id );
 
 		if( isset( $conferee[ 'identity' ] ) ) {
-			return $conferee;
+			return MongoDbSanitizer::sanitizeDocument( $conferee );
 		}
 		else return NULL;
 	}

@@ -2,8 +2,10 @@
 
 namespace App\Components\Registration;
 
-use Nette\Application\UI\Control;
-use Nette\Application\UI\Form;
+use Nette\Application\UI\Control,
+	Nette\Application\UI\Form,
+	MongoDB\Model\UTCDateTimeConverter,
+	MongoDB\Model\MongoDbSanitizer;
 
 class UserRegistration extends Control {
 
@@ -20,7 +22,7 @@ class UserRegistration extends Control {
 		$this->registrationModel = $registrationModel;
 		$this->token = $token;
 	}
-	
+
 	public function render() {
 		$this->template->setFile( __DIR__ . '/templates/userRegistration.latte' );
 		$this->template->render();
@@ -80,7 +82,7 @@ class UserRegistration extends Control {
 
 
 		$user = $this->getPresenter()->getUser();
-		$values['created_date'] = new \MongoDate( time() );
+		$values['created_date'] = (new UTCDateTimeConverter())->toMongo();
 		$values['picture_url'] = $user->getIdentity()->picture_url;
 		$values['identity'] = $user->getIdentity()->data;
 		$values['vip_token'] = $this->token;
@@ -92,7 +94,7 @@ class UserRegistration extends Control {
 		}
 
 		$conferee = $this->registrationModel->findCoferree( $user->getId() );
-		$user->getIdentity()->conferee = $conferee;
+		$user->getIdentity()->conferee = MongoDbSanitizer::sanitizeDocument( $conferee );
 	}
 
 }

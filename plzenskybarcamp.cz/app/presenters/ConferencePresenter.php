@@ -9,7 +9,8 @@ use Nette,
 	Nette\Application\UI\Form,
 	App\Components\Lists\UsersList,
 	App\Components\Lists\TalksList,
-	Nette\Application\Responses\JsonResponse;
+	Nette\Application\Responses\JsonResponse,
+	MongoDB\Model\MongoDbSanitizer;
 
 
 class ConferencePresenter extends BasePresenter
@@ -32,9 +33,6 @@ class ConferencePresenter extends BasePresenter
 	public function startup() {
 		parent::startup();
 		$userId = $this->getUser()->getId();
-
-		$this->flashMessage('Promiň, přednášky zatím nemáme připravené.');
-		$this->redirect(302, 'Homepage:');
 
 		if($userId) {
 			$this->conferree = $this->registrationModel->findCoferree( $userId );
@@ -114,6 +112,7 @@ class ConferencePresenter extends BasePresenter
 			$this->redirect('Homepage:default');
 		}
 		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
+		$this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
 		$this->template->conferree = $this->conferree;
 		$this->template->talk = isset( $this->conferree['talk'] )? $this->conferree['talk'] : NULL;
 	}
@@ -178,10 +177,10 @@ class ConferencePresenter extends BasePresenter
 		$identity = $this->getUser()->identity;
 
 		$conferee = $this->registrationModel->findCoferree( $userId );
-		$identity->conferee = $conferee;
+		$identity->conferee = MongoDbSanitizer::sanitizeDocument( $conferee );
 
 		if( isset( $conferee['talk'] ) ) {
-			$identity->talk = $conferee['talk'];
+			$identity->talk = MongoDbSanitizer::sanitizeDocument( $conferee['talk'] );
 		}
 	}
 

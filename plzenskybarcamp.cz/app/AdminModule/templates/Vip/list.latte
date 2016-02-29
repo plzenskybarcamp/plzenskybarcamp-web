@@ -36,8 +36,8 @@
 		<td>{$token['name']}</td>
 		<td><a href="{link this token=>$token['_id']}">{$token['_id']|truncate:16}</a></td>
 		<td><strong n:tag-if="$token['invalidity']">{$token['validation']}</strong></td>
-		<td>{$token['created_date']->sec|date:"d. m. Y H:i:s"}</td>
-		<td>{ifset $token['expired_date']}{$token['expired_date']->sec|date:"d. m. Y H:i:s"}{else}-{/ifset}</td>
+		<td>{$token['created_date']|mongoFormat:"d. m. Y H:i:s"}</td>
+		<td>{ifset $token['expired_date']}{$token['expired_date']|mongoFormat:"d. m. Y H:i:s"}{else}-{/ifset}</td>
 		<td>{if !$token['invalidity']}<a href="{link invalidate token=>$token['_id']}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Zneplatnit</a>{/if}</td>
 	</tr>
 </table>

@@ -18,7 +18,9 @@ use Nette,
     }
 
     public function renderList( $token = NULL ) {
-        $tokensCursor = $this->registrationModel->findVipTokens()->sort(array('created_date'=>-1));
+        $this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
+
+        $tokensCursor = $this->registrationModel->findVipTokens([], ['sort'=>['created_date'=>-1]]);
 
         $this->template->currentToken = NULL;
         $this->template->tokens = array();

@@ -2,8 +2,9 @@
 
 namespace App\Components\Registration;
 
-use Nette\Application\UI\Control;
-use Nette\Application\UI\Form;
+use Nette\Application\UI\Control,
+	Nette\Application\UI\Form,
+	MongoDB\Model\MongoDbSanitizer;
 
 class SpeakerRegistration extends Control {
 
@@ -53,7 +54,7 @@ class SpeakerRegistration extends Control {
 		$this->registrationModel->updateConferree( $userId, $speaker );
 
 		$conferee = $this->registrationModel->findCoferree( $user->getId() );
-		$user->getIdentity()->talk = $conferee['talk'];
+		$user->getIdentity()->talk = MongoDbSanitizer::sanitizeDocument( $conferee['talk'] );
 
 	}
 
