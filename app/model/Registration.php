@@ -72,6 +72,13 @@ class Registration {
 		return $this->talkCollection->find( [], [ 'sort'=> $sort ] + $this->defaultOptions );
 	}
 
+	public function countTalks( ) {
+		return $this->talkCollection->count(
+			[],
+			$this->defaultOptions
+		);
+	}
+
 	public function addLinkToTalk( $talkId, $groupField, array $data ) {
 		$linkId = hash("crc32b", uniqid("link", TRUE));
 		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();

@@ -17,11 +17,11 @@ class RegisteredUsers extends Control {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
 	}
-	
+
 	public function render( $title ) {
 		$this->template->setFile( __DIR__ . '/templates/registeredUsers.latte');
 		$this->template->users = $this->registrationModel->getConferrees(12)->toArray();
-		$this->template->usersCount = count($this->template->users);
+		$this->template->usersCount = $this->registrationModel->countConferrees();
 		$this->template->title = $title;
 		$this->template->render();
 	}

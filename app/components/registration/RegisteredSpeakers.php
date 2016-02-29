@@ -17,11 +17,11 @@ class RegisteredSpeakers extends Control {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
 	}
-	
+
 	public function render( $title ) {
 		$this->template->setFile( __DIR__ . '/templates/registeredSpeaker.latte');
 		$this->template->speakers = $this->registrationModel->getSpeakers(12)->toArray();
-		$this->template->speakersCount = count($this->template->speakers);
+		$this->template->speakersCount = $this->registrationModel->countTalks();
 		$this->template->title = $title;
 		$this->template->render();
 	}
