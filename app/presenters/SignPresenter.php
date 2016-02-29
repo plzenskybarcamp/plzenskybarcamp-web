@@ -44,6 +44,7 @@ class SignPresenter extends BasePresenter
 			$oAuthIdentity = $this->facebook->getIdentity( );
 		} catch ( AuthenticationException $e ) {
 			$this->flashMessage("Omlouváme se, ale tvoje přihlášení se nepovedlo. Zkus to znovu, nebo nám dej vědět.", "error");
+			$this->flashMessage(['event'=>'flash-message','action'=>'login-fail','label'=>$e->getMessage()], "dataLayer-push");
 			$this->redirect("in");
 		}
 
@@ -76,6 +77,7 @@ class SignPresenter extends BasePresenter
 			$oAuthIdentity = $this->twitter->getIdentity( );
 		} catch ( OAuthException $e ) {
 			$this->flashMessage("Omlouváme se, ale tvoje přihlášení se nepovedlo. Zkus to znovu, nebo nám dej vědět.", "error");
+			$this->flashMessage(['event'=>'flash-message','action'=>'login-fail','label'=>$e->getMessage()], "dataLayer-push");
 			$this->redirect("in");
 		}
 
@@ -99,18 +101,23 @@ class SignPresenter extends BasePresenter
 		$identity = new Identity( $profile['id'], NULL, $profile );
 		$this->user->login( $identity );
 
+		$eventLabel = '';
 		if( $conferee ) {
 			$identity = $this->user->identity;
 			$identity->conferee = $conferee;
 			$identity->talk = $this->getUserTalk( $conferee );
 			$this->flashMessage("Vítej zpět, ty jsi už registrovaný, tešíme se na Tebe v Plzni", "success");
+			$eventLabel = 'registered';
 		}
 		elseif($this->config->getConfig( 'isRegistrationOpen', FALSE )) {
 			$this->flashMessage("Yep. Pro účast se nezapomeň ještě registrovat tlačítkem „Potvrzuji svou účast“", "success");
+			$eventLabel = 'ready-to-register';
 		}
 		else {
 			$this->flashMessage("Jsi přihlášen, ale registrace na Barcamp ještě nejsou otevřeny, vydrž :)", "success");
+			$eventLabel = 'registration-closed';
 		}
+		$this->flashMessage(['event'=>'flash-message','action'=>'login-success','label'=>$eventLabel], "dataLayer-push");
 
 		$this->redirect("Homepage:default");
 	}
@@ -156,6 +163,7 @@ class SignPresenter extends BasePresenter
 	{
 		$this->getUser()->logout( TRUE );
 		$this->flashMessage('Jsi odhlášen');
+		$this->flashMessage(['event'=>'flash-message','action'=>'logout-success'], "dataLayer-push");
 		$this->redirect('Homepage:default');
 	}
 

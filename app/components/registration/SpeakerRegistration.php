@@ -36,6 +36,8 @@ class SpeakerRegistration extends Control {
 
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 
+		$form['submit']->getControlPrototype()->class('track-click')->id = 'submit-speaker-registration';
+
 		return $form;
 	}
 

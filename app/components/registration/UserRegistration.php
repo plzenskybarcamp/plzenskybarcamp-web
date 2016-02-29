@@ -46,6 +46,8 @@ class UserRegistration extends Control {
 		$form->addSubmit( 'submit', 'Odeslat registraci' );
 		$form->onSuccess[] = array( $this, 'processRegistration' );
 
+		$form['submit']->getControlPrototype()->class('track-click')->id = 'submit-user-registration';
+
 		return $form;
 	}
 

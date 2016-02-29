@@ -28,6 +28,7 @@ class VipPresenter extends BasePresenter
 		}
 		catch( Model\InvalidTokenException $e) {
 			$this->flashMessage("Omlouváme se, ale Váš VIP token je neplatný.", 'error');
+			$this->flashMessage(['event'=>'flash-message','action'=>'vip-token-invalid'], "dataLayer-push");
 			$this->redirect('Homepage:default');
 		}
 
@@ -35,6 +36,7 @@ class VipPresenter extends BasePresenter
 		$session->token = $token;
 
 		$this->flashMessage("Tvůj VIP token byl přijat a můžeš se registrovat kliknutím na „Chci přijít“" , 'success');
+		$this->flashMessage(['event'=>'flash-message','action'=>'vip-token-accepted'], "dataLayer-push");
 		$this->redirect('Homepage:default');
 	}
 

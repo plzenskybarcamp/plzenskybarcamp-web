@@ -69,8 +69,10 @@ var commitForms = function(forms) {
     var commitForm = function(form) {
         return ajaxPost(form).then(function(res) {
             if (!res.updated) {
+                trackEvent( "process-ended", "profile-update-failed" );
                 return $.Deferred().reject('Během uloženi došlo k chybě').promise();
             }
+            trackEvent( "process-ended", "profile-update-success" );
             return 'Změny byly úspěšně uloženy';
         });
     }
@@ -149,6 +151,7 @@ var registerVotes = function(container) {
                     e.stopPropagation();
                     statuses.text('Ukládám…').addClass('show');
                     processSubmit(!checkins[talkId], talkId).done(function(count){
+                        trackEvent( "talk-vote", "vote-list", talkId );
                         statuses.text('Uloženo')
                         setTimeout(function(){statuses.removeClass('show');}, 1000);
                         voteCount.html(count);
@@ -184,6 +187,7 @@ var registerVotesDetail = function(container) {
     var voted = $(".voted", container);
     box.click(function(e) {
         processSubmit(!isChecked, talkId).done(function(count){
+            trackEvent( "talk-vote", "vote-detail", talkId );
             voteCount.html(count);
             isChecked = !isChecked
             box.prop('checked', isChecked);
@@ -279,3 +283,11 @@ function logError(details) {
 //    contentType: 'application/json; charset=utf-8'
   });
 };
+
+function trackEvent( eventName, action, label ) {
+    dataLayer.push({
+        'event': eventName,
+        'action': action,
+        'label': label
+    });
+}
