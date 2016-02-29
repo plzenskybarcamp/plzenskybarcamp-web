@@ -212,7 +212,7 @@ class Registration {
 	}
 
 	public function getVipToken( $token ) {
-		return $this->findVipTokens( array( "_id"=>$token ) )->getNext();
+		return $this->tokenCollection->findOne( [ "_id"=>$token ] );
 	}
 
 	public function findVipTokens( $condition = array(), $options = array() ) {
