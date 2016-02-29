@@ -5,6 +5,7 @@ namespace App\Presenters;
 use Nette,
 	App\Model,
 	App\Model\Registration,
+	App\Model\Config,
 	App\Components\Registration\Identity,
 	App\OAuth\Facebook,
 	App\OAuth\Twitter,
@@ -22,11 +23,13 @@ class SignPresenter extends BasePresenter
 	private $facebook;
 	private $twitter;
 	private $registration;
+	private $config;
 
-	public function __construct( Facebook $facebook, Twitter $twitter, Registration $registration ){
+	public function __construct( Facebook $facebook, Twitter $twitter, Registration $registration, Config $config ){
 		$this->facebook = $facebook;
 		$this->twitter = $twitter;
 		$this->registration = $registration;
+		$this->config = $config;
 	}
 
 	public function actionInFb( $redirect = NULL ) {
@@ -57,20 +60,7 @@ class SignPresenter extends BasePresenter
 			$profile['id'] = $id;
 		}
 
-		$identity = new Identity( $profile['id'], NULL, $profile );
-		$this->user->login( $identity );
-
-		if( $conferee ) {
-			$identity = $this->user->identity;
-			$identity->conferee = $conferee;
-			$identity->talk = $this->getUserTalk( $conferee );
-			$this->flashMessage("Vítej zpět, ty jsi už registrovaný, tešíme se na Tebe v Plzni", "success");
-		}
-		else {
-			$this->flashMessage("Yep. Pro účast se nezapomeň ještě registrovat tlačítkem „Potvrzuji svou účast“", "success");
-		}
-
-		$this->redirect("Homepage:default");
+		$this->finishSignIn( $conferee, $profile );
 	}
 
 	public function actionInTw( $redirect_url = NULL ) {
@@ -102,6 +92,10 @@ class SignPresenter extends BasePresenter
 			$profile['id'] = $id;
 		}
 
+		$this->finishSignIn( $conferee, $profile );
+	}
+
+	private function finishSignIn( $conferee, $profile ) {
 		$identity = new Identity( $profile['id'], NULL, $profile );
 		$this->user->login( $identity );
 
@@ -111,8 +105,11 @@ class SignPresenter extends BasePresenter
 			$identity->talk = $this->getUserTalk( $conferee );
 			$this->flashMessage("Vítej zpět, ty jsi už registrovaný, tešíme se na Tebe v Plzni", "success");
 		}
-		else {
+		elseif($this->config->getConfig( 'isRegistrationOpen', FALSE )) {
 			$this->flashMessage("Yep. Pro účast se nezapomeň ještě registrovat tlačítkem „Potvrzuji svou účast“", "success");
+		}
+		else {
+			$this->flashMessage("Jsi přihlášen, ale registrace na Barcamp ještě nejsou otevřeny, vydrž :)", "success");
 		}
 
 		$this->redirect("Homepage:default");
