@@ -6,10 +6,10 @@
 	<div class="well well-lg">
 		<div class="row">
 			<div n:class="$currentToken['invalidity'] ? 'has-error', 'col-md-9'">
-				<input type="text" class="form-control input-lg" id="copydata" value="{link //:Vip:useToken token=>$currentToken['_id']}" autofocus>
+				<input type="text" class="form-control input-lg" id="copydata" value="{link //:Vip:useToken token=>$currentToken['_id']}" autofocus readonly>
 			</div>
 			<div class="col-md-3">
-				<button type="button" class="btn  input-lg btn-block" id="copy" disabled><span class="glyphicon glyphicon-link"></span> Copy</button>
+				<button type="button" class="btn btn-primary input-lg btn-block clipboard" data-clipboard-target="#copydata"><span class="glyphicon glyphicon-link"></span> Copy</button>
 			</div>
 		</div>
 	</div>
