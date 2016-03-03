@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.15.5",
+            "version": "3.15.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e6d8b291b45009b310a174bcabad3de1c864e176"
+                "reference": "599824c35ce324efb55d17dba4ecaf121f7bec94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e6d8b291b45009b310a174bcabad3de1c864e176",
-                "reference": "e6d8b291b45009b310a174bcabad3de1c864e176",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/599824c35ce324efb55d17dba4ecaf121f7bec94",
+                "reference": "599824c35ce324efb55d17dba4ecaf121f7bec94",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-02-25 22:52:38"
+            "time": "2016-03-02 00:38:23"
         },
         {
             "name": "facebook/php-sdk-v4",
