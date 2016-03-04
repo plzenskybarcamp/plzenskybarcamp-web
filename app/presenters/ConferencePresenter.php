@@ -17,6 +17,7 @@ class ConferencePresenter extends BasePresenter
 {
 
 	private $registrationModel;
+	private $configModel;
 
 	private $conferree;
 
@@ -24,8 +25,9 @@ class ConferencePresenter extends BasePresenter
 
 	private $userForm;
 
-	public function __construct( Model\Registration $registrationModel ) {
+	public function __construct( Model\Registration $registrationModel, Model\Config $configModel ) {
 		$this->registrationModel = $registrationModel;
+		$this->configModel = $configModel;
 		$this->speakerForm = new SpeakerRegistration( $this, 'speaker', $registrationModel );
 		$this->userForm = new UserRegistration( $this, 'user', $registrationModel );
 	}
@@ -67,10 +69,17 @@ class ConferencePresenter extends BasePresenter
 	}
 
 	public function renderTalks() {
-		$this->template->ranking=TRUE;
+		$this->template->ranking=FALSE;
+		if( ! $this->configModel->getConfig('isVotingOpen')
+				&& $this->configModel->getConfig('isVoteShows') ) {
+			$this->template->ranking=TRUE;
+		}
 	}
 
 	public function renderTalksRanking() {
+		if( ! $this->configModel->getConfig('isVotingOpen') ) {
+			$this->redirect('talks');
+		}
 		$this->setView('talks');
 		$this->template->ranking=TRUE;
 	}
@@ -104,6 +113,9 @@ class ConferencePresenter extends BasePresenter
 		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
 		$this->template->talk = $talk;
 		$this->template->speaker = $talk['speaker'];
+		$this->template->isVotingOpen = $this->configModel->getConfig('isVotingOpen');
+		$this->template->isVoteShows = $this->configModel->getConfig('isVoteShows');
+
 	}
 
 	public function renderProfil( $talkId ) {
@@ -165,7 +177,7 @@ class ConferencePresenter extends BasePresenter
 	}
 
 	public function createComponentTalks( $name ) {
-		return new TalksList( $this, $name, $this->registrationModel );
+		return new TalksList( $this, $name, $this->registrationModel, $this->configModel );
 	}
 
 	public function createComponentUsers( $name ) {

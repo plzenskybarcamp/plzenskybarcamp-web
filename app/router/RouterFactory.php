@@ -52,7 +52,7 @@ class RouterFactory
 		$router[] = new Route('profil', 'Conference:profil');
 		$router[] = new Route('ucastnici', 'Conference:visitors');
 		$router[] = new Route('prednasky', 'Conference:talks');
-		$router[] = new Route('prednasky/zebricek', 'Conference:talks', Route::ONE_WAY);
+		$router[] = new Route('prednasky/zebricek', 'Conference:talksRanking');
 		$router[] = new Route('2016/prednasky', 'Conference:talks', Route::ONE_WAY);
 		$router[] = new Route('2015/prednasky', 'Conference:talks', Route::ONE_WAY);
 		$router[] = new Route('2016/prednasky/<talkId>', 'Conference:talksDetail');

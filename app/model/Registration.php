@@ -158,7 +158,7 @@ class Registration {
 		$this->talkCollection->updateOne(
 			array( '_id' => $talkId ),
 			array(
-				'$push' => array( 'votes' => $userId ),
+				'$addToSet' => array( 'votes' => $userId ),
 				'$inc' => array( 'votes_count' => 1 )
 			)
 		);
@@ -174,8 +174,21 @@ class Registration {
 		);
 	}
 
+	public function isVoted( $talkId, $userId ) {
+		return (bool) $this->talkCollection->count(
+			[
+				'_id' => $talkId,
+				'votes' => [ '$in' => [ $userId ] ],
+			]
+		);
+	}
+
 	public function hasTalk( $talkId ) {
-		return $this->talkCollection->find( array( '_id' => $talkId ) )->hasNext();
+		return (bool) $this->talkCollection->count(
+			[
+				'_id' => $talkId
+			]
+		);
 	}
 
 	public function createVipToken( array $data ) {
