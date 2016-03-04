@@ -115,10 +115,11 @@ class ConferencePresenter extends BasePresenter
 		$this->template->speaker = $talk['speaker'];
 		$this->template->isVotingOpen = $this->configModel->getConfig('isVotingOpen');
 		$this->template->isVoteShows = $this->configModel->getConfig('isVoteShows');
+		$this->template->isTalkLocationShows = $this->configModel->getConfig('isTalkLocationShows');
 
 	}
 
-	public function renderProfil( $talkId ) {
+	public function renderProfil(  ) {
 		if( ! $this->conferree ) {
 			$this->flashMessage('Omlouváme se, ale profil návštěvníka je dostupný až po registraci', 'error');
 			$this->redirect('Homepage:default');

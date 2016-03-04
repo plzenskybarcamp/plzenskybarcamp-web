@@ -38,6 +38,7 @@ use Nette,
             ->addRule(Form::INTEGER, 'Must be number')
             ->addRule(Form::RANGE, 'Number must be between %d and %d', array(1,9999))
             ->setRequired('Must be valid number.');
+        $form->addCheckbox( 'isTalkLocationShows', 'Zobrazit umístění přednášky');
         $form->addSubmit( 'send', 'Uložit');
 
         $form->setDefaults( array(
@@ -46,6 +47,7 @@ use Nette,
             'isVotingOpen' => $this->configModel->getConfig( 'isVotingOpen', FALSE ),
             'isVoteShows' => $this->configModel->getConfig( 'isVoteShows', FALSE ),
             'talksCapatity' => $this->configModel->getConfig( 'talksCapatity', 20 ),
+            'isTalkLocationShows' => $this->configModel->getConfig( 'isTalkLocationShows', FALSE ),
         ) );
 
         $form->onSuccess[] = array( $this, 'processSwitches');
@@ -61,6 +63,7 @@ use Nette,
         $this->setConfig( 'isVotingOpen', $values['isVotingOpen'] );
         $this->setConfig( 'isVoteShows', $values['isVoteShows'] );
         $this->setConfig( 'talksCapatity', $values['talksCapatity'] );
+        $this->setConfig( 'isTalkLocationShows', $values['isTalkLocationShows'] );
 
         $this->flashMessage('OK, sucessfull saved.', 'success');
         $this->redirect( 'this' );
