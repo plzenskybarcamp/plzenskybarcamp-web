@@ -150,21 +150,27 @@ var registerVotes = function(container) {
                     e.preventDefault();
                     e.stopPropagation();
                     statuses.text('Ukládám…').addClass('show');
-                    processSubmit(!checkins[talkId], talkId).done(function(count){
-                        trackEvent( "talk-vote", "vote-list", talkId );
-                        statuses.text('Uloženo')
-                        setTimeout(function(){statuses.removeClass('show');}, 1000);
-                        voteCount.html(count);
-                        checkins[talkId] = !checkins[talkId]
-                        $.each(boxs, function(index, box){
-                            box.prop('checked', checkins[talkId]);
+                    processSubmit(!checkins[talkId], talkId)
+                        .done(function(count){
+                            trackEvent( "talk-vote", "vote-list", talkId, (checkins[talkId] ? -1 : 1) );
+                            statuses.text('Uloženo')
+                            setTimeout(function(){statuses.removeClass('show');}, 1000);
+                            voteCount.html(count);
+                            checkins[talkId] = !checkins[talkId]
+                            $.each(boxs, function(index, box){
+                                box.prop('checked', checkins[talkId]);
+                            });
+                            if (checkins[talkId]) {
+                                trHeadElement.addClass('voted-for')
+                            } else {
+                                trHeadElement.removeClass('voted-for')
+                            }
+                        })
+                        .fail(function(){
+                            trackEvent( "talk-vote", "vote-list-fail", talkId );
+                            statuses.text('Chyba, neuložilo se :-(')
+                            setTimeout(function(){statuses.removeClass('show');}, 5000);
                         });
-                        if (checkins[talkId]) {
-                            trHeadElement.addClass('voted-for')
-                        } else {
-                            trHeadElement.removeClass('voted-for')
-                        }
-                    });
                 }
             })(talkId, boxs, $('.votes_count', elem), elem.prev()));
         });
@@ -187,7 +193,7 @@ var registerVotesDetail = function(container) {
     var voted = $(".voted", container);
     box.click(function(e) {
         processSubmit(!isChecked, talkId).done(function(count){
-            trackEvent( "talk-vote", "vote-detail", talkId );
+            trackEvent( "talk-vote", "vote-detail", talkId, (isChecked ? -1 : 1) );
             voteCount.html(count);
             isChecked = !isChecked
             box.prop('checked', isChecked);
@@ -284,10 +290,11 @@ function logError(details) {
   });
 };
 
-function trackEvent( eventName, action, label ) {
+function trackEvent( eventName, action, label, value ) {
     dataLayer.push({
         'event': eventName,
         'action': action,
-        'label': label
+        'label': label,
+        'value': value
     });
 }

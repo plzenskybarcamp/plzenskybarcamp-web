@@ -7,11 +7,16 @@
 
 
 <p class="user-list-user-count">Registrovaných přednášek: <strong>{$talksCount}</strong></p>
+<p n:if="$isVotingOpen"  class="talk-list-ranging-switcher">
+    <a href="{plink Conference:talks}" n:class="!$ranking ? 'active'">Hlasování</a>
+    /
+    <a href="{plink Conference:talksRanking}" n:class="$ranking ? 'active'">Průběžné výsledky</a>
+</p>
 <table class="table-list {if !$ranking}not-{/if}ranking" id="talks-list" data-action-add="{link addVote!}" data-action-remove="{link removeVote!}">
 <tbody>
 {foreach $talks as $talk}
     {var $speaker = $talk['speaker']}
-    <tr class="talks-head {if !$ranking && @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $iterator->getCounter() == 20} last-in{/if}{if $iterator->getCounter() > 20} under-line{/if}" id="talk_{$talk['_id']}" data-id="{$talk['_id']}">
+    <tr class="talks-head {if $isVoteShows}{if !$ranking && @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $iterator->getCounter() == $talksCapatity} last-in{/if}{if $iterator->getCounter() > $talksCapatity} under-line{/if}{/if}" id="talk_{$talk['_id']}" data-id="{$talk['_id']}">
 
         <td class="first-td">
             <a href="{plink Conference:talksDetail talkId => $talk['_id']}">
@@ -21,8 +26,23 @@
         </td>
         <td class="second-td"><a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a></td>
         <td class="third-td"><span class="crop">{$talk['description']}</span></td>
-        <td class="fourth-td">
-            {if !$ranking}
+        <td n:if="$isVoteShows" class="fourth-td">
+            {if !$ranking && $isVotingOpen}
+                {block #vote}
+                    {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
+                        <div class="vote-out">
+                            <input class="vote"
+                            data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}"
+                            type="checkbox"
+                            {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                            <div class="status-box"></div>
+                        </div>
+                    {elseif $user->isLoggedIn()}
+                        <p>Hlasovat mohou jen registrovaní</p>
+                    {else}
+                        <p><a href="/login">Přihlaš se</a> a&nbsp;hlasuj!</p>
+                    {/if}
+                {/block}
             {else}
                 {block #votes_count}
                     <span>
@@ -32,7 +52,7 @@
             {/if}
         </td>
     </tr>
-    <tr class="talks-detail {if $iterator->getCounter() == 20} last-in{/if}{if $iterator->getCounter() > 20} under-line{/if}" data-id="{$talk['_id']}">
+    <tr class="talks-detail {if $iterator->getCounter() == $talksCapatity} last-in{/if}{if $iterator->getCounter() > $talksCapatity} under-line{/if}" data-id="{$talk['_id']}">
 
         <td colspan="4" class="table-list-sub-wrap">
             <table class="table-list table-list-sub">
@@ -48,9 +68,10 @@
                             {!$talk['purpose']|escape|nl2br}
                         </p>
                     </td>
-                    <td class="fourth-td">
-                        {* include #vote *}
+                    <td n:if="$isVoteShows" class="fourth-td">
+                        {include #vote}
                         {include #votes_count}
+                    </td>
                 </tr>
             </table>
         </td>

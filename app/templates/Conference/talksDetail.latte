@@ -84,10 +84,25 @@ hranic{/block}
             </div>*}
             <p class="bio"><strong>Bio:</strong> {$speaker['bio']}</p>
 
-            <div class="voting-detail">
+            <div class="voting-detail"
+                data-id="{$talk['_id']}"
+                data-action-add="/prednasky?do=talks-addVote"
+                data-action-remove="/prednasky?do=talks-removeVote">
 
+                {if $isVoteShows}
                 <p>Stav hlasování: <span id="votes-count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</span> hlasů</p>
+                {if $isVotingOpen}
+                {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
+                    <label for="vote">Hlasuj: </label>
+                    <input class="vote-detail" id="vote" type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
+                {elseif $user->isLoggedIn()}
+                    <p>Hlasovat mohou jen registrovaní</p>
+                {else}
+                    <p><a href="/login">Přihlaš se</a> a&nbsp;hlasuj!</p>
+                {/if}
+                {/if}
                 <span {if !@in_array($user->getId(), $talk['votes'])}style="display:none"{/if} class="border-tb voted">Dal jsi svůj hlas</span>{* // Stav pro zaškrtnutý checkbox - zahlasováno *}
+                {/if}
             </div>
 
         </div>

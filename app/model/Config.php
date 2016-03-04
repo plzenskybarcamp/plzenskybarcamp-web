@@ -48,12 +48,13 @@ class Config {
 
 		$this->configs[ $id ] = $value;
 
-		$this->configCollection->replaceOne(
+		$this->configCollection->findOneAndReplace(
 			[ '_id' => $id ],
 			[
 				'_id' => $id,
 				'value' => $value,
-			]
+			],
+			[ 'upsert'=> TRUE ]
 		);
 	}
 
