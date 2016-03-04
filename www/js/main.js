@@ -264,10 +264,12 @@ $(document).ready(function() {
         if (_$this.hasClass('active-detail')) {
             _$detailTrHeadCurrent.show();
             _$detailTrCurrent.hide();
+            trackEvent( "talk-list-click", "list-expand", _id );
             history.replaceState({}, document.title, location.href.replace(/#.*/, ''));
         } else {
             _$detailTrHeadCurrent.hide();
             _$detailTrCurrent.addClass('active-detail').show();
+            trackEvent( "talk-list-click", "list-collapse", _id );
             history.replaceState({}, document.title, "#talk_" + _id);
         }
     });
@@ -292,7 +294,7 @@ function logError(details) {
 
 function trackEvent( eventName, action, label, value ) {
     dataLayer.push({
-        'event': eventName,
+        'event': 'bcp-'  +eventName,
         'action': action,
         'label': label,
         'value': value

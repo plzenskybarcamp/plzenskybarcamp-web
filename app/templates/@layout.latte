@@ -81,7 +81,7 @@
             </nav>
             {foreach $flashes as $flash}
                 {if $flash->type == 'dataLayer-push'}
-                    <script>dataLayer.push({$flash->message});</script>
+                    <script>dataLayer.push({=['event'=>'bcp-'.$flash->message['event']] + $flash->message});</script>
                 {else}
                     <div class="flash {$flash->type}">{$flash->message}</div>
                 {/if}
