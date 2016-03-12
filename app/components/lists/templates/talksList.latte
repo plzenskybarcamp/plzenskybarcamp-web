@@ -16,7 +16,7 @@
 <tbody>
 {foreach $talks as $talk}
     {var $speaker = $talk['speaker']}
-    <tr class="talks-head {if $isVoteShows}{if !$ranking && @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $iterator->getCounter() == $talksCapatity} last-in{/if}{if $iterator->getCounter() > $talksCapatity} under-line{/if}{/if}" id="talk_{$talk['_id']}" data-id="{$talk['_id']}">
+    <tr class="talks-head {if $isVoteShows}{if !$ranking && @in_array($user->getId(), $talk['votes'])} voted-for{/if}{if $ranking && $iterator->getCounter() == $talksCapatity} last-in{/if}{if $ranking && $iterator->getCounter() > $talksCapatity} under-line{/if}{/if}" id="talk_{$talk['_id']}" data-id="{$talk['_id']}">
 
         <td class="first-td">
             <a href="{plink Conference:talksDetail talkId => $talk['_id']}">
@@ -52,7 +52,7 @@
             {/if}
         </td>
     </tr>
-    <tr class="talks-detail {if $iterator->getCounter() == $talksCapatity} last-in{/if}{if $iterator->getCounter() > $talksCapatity} under-line{/if}" data-id="{$talk['_id']}">
+    <tr class="talks-detail {if $ranking && $iterator->getCounter() == $talksCapatity} last-in{/if}{if $ranking && $iterator->getCounter() > $talksCapatity} under-line{/if}" data-id="{$talk['_id']}">
 
         <td colspan="4" class="table-list-sub-wrap">
             <table class="table-list table-list-sub">
