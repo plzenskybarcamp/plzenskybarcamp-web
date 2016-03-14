@@ -1,6 +1,6 @@
 parameters:
 	app:
-		is_develop: true
+		is_develop: false
 	mongo:
-		db: 'barcamp_develop'
+		db: 'barcamp_2014'
 

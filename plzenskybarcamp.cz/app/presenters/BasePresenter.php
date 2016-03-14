@@ -24,6 +24,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->template->fbLogoutLink = $fb->getLogoutUrl($logoutParams);
 
 		$this->template->isDevelop = $this->getContext()->getService("developFlag")->isDevelop();
+		$this->template->basePath = "https://d32gpbkjyl921a.cloudfront.net/public/2014";
+
 	}
 
 	public function handleLogin( $platform, $redirect_url ) {

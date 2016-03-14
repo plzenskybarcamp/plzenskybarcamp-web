@@ -20,17 +20,17 @@ class RouterFactory
 	public function createRouter()
 	{
 		$router = new RouteList();
-		$router[] = new Route('partneri', 'Homepage:partners');
-		$router[] = new Route('kudy-kam', 'Homepage:location');
-		$router[] = new Route('informace', 'Homepage:info');
-		$router[] = new Route('napsali-o-nas', 'Homepage:written');
-		$router[] = new Route('kontakt', 'Homepage:contact');
+		$router[] = new Route('2014/partneri', 'Homepage:partners');
+		$router[] = new Route('2014/kudy-kam', 'Homepage:location');
+		$router[] = new Route('2014/informace', 'Homepage:info');
+		$router[] = new Route('2014/napsali-o-nas', 'Homepage:written');
+		$router[] = new Route('2014/kontakt', 'Homepage:contact');
 		$router[] = new Route('profil', 'Conference:profil');
-		$router[] = new Route('ucastnici', 'Conference:visitors');
-		$router[] = new Route('prednasky', 'Conference:talks');
-		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail');
-		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
-		$router[] = new Route('program[/<action>]', 'Program:list');
+		$router[] = new Route('2014/ucastnici', 'Conference:visitors');
+		$router[] = new Route('2014/prednasky', 'Conference:talks');
+		$router[] = new Route('2014/prednasky/<talkId>', 'Conference:talksDetail');
+		$router[] = new Route('2014/plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
+		$router[] = new Route('2014/program[/<action>]', 'Program:list');
 		$router[] = new Route('login', 'Sign:in');
 		$router[] = new Route('logout', 'Sign:out');
 		$router[] = new Route('login/facebook', 'Sign:inFb');
