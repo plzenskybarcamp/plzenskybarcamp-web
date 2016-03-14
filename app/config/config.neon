@@ -21,7 +21,7 @@ parameters:
 		s3Storage:
 			bucket: plzenskybarcamp
 			basePath: ''
-			baseUrl: https://d32gpbkjyl921a.cloudfront.net
+			baseUrl: https://cdn.plzenskybarcamp.cz
 	facebook:
 		appConfig:
 			appId: '504432792996629'
