@@ -64,6 +64,7 @@
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         {*<li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="2014">2014</a></li>*}
                         <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
+                        <li><a href="https://blog.plzenskybarcamp.cz/" target="_blank" data-hover="Blog">Blog</a></li>
                     </ul>
                     <ul class="info-navigation">
                         {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-button" class="track-click">Přihlásit</a></li>{/if}
@@ -124,6 +125,7 @@
                     </div>
                     <ul class="navigation">
                         <li n:if="$user->isLoggedIn()"><a href="{link Sign:out}" data-hover="Odhlásit" id="logout-button" class="track-click">Odhlásit</a></li>
+                        <li><a href="https://blog.plzenskybarcamp.cz/" target="_blank" data-hover="Blog">Blog</a></li>
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         <li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
                         <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastnící">Účastnící</a></li>
