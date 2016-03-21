@@ -70,6 +70,7 @@ class RouterFactory
 		$router[] = new Route('login/process/facebook', 'Sign:processFb');
 		$router[] = new Route('login/process/twitter', 'Sign:processTw');
 		$router[] = new Route('/vip/<token>', 'Vip:useToken');
+		$router[] = new Route('2014[/<path .+>]', 'Archive:2014');
 
 		$router[] = new Route('2015/arduino-day', 'Homepage:arduinoDay');
 		$router[] = new Route('arduino-day', 'Homepage:arduinoDay', Route::ONE_WAY);
