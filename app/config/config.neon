@@ -57,6 +57,7 @@ services:
 	- App\Authenticator
 	- App\RouterFactory
 	- App\SessionStarter
+	- App\Model\ArchiveLoader(@s3, @cacheStorage)
 	router: @App\RouterFactory::createRouter(%consoleMode%)
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)

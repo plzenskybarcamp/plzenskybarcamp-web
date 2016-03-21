@@ -36,6 +36,17 @@ class S3Storage {
 		return $this->path2Url( $path );
 	}
 
+	public function getObject( $path ) {
+		$key = $this->path2Key( $path );
+		$object = array(
+			'Bucket' => $this->appConfig[ 'bucket' ],
+			'Key' => $key,
+		);
+		$result = $this->getS3()->getObject( $object );
+
+		return new S3Object( $result );
+	}
+
 	public function getS3() {
 		if( ! $this->_s3) {
 			$this->_s3 = $this->aws->s3;
