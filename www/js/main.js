@@ -2,6 +2,7 @@
 //@koala-prepend "libs/jquery.scrollTo-1.4.14.js"
 //@koala-prepend "libs/jquery.smooth-scroll-1.5.5.js"
 //@koala-prepend "libs/jquery.tooltipster-3.3.0.js"
+//@koala-prepend "libs/jquery.lazyload-rev-d14e809.js"
 //@koala-prepend "libs/lightbox-2.7.1.js"
 //@koala-prepend "libs/netteForms.js"
 
@@ -277,6 +278,13 @@ $(document).ready(function() {
         $(location.hash).click();
     }
 });
+
+    $(function() {
+        $("img.lazy").lazyload({
+            effect : "fadeIn"
+        });
+    });
+
 })();
 
 function logError(details) {
