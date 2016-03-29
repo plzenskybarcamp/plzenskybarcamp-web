@@ -36,6 +36,28 @@ class S3Storage {
 		return $this->path2Url( $path );
 	}
 
+	public function copyObject( $sourceObject, $sourcePath, $path ) {
+		if( $sourceObject instanceof S3Object) {
+			$object = $sourceObject->toArray();
+		}
+		else {
+			$object = $sourceObject;
+		}
+
+		$bucket = $this->appConfig[ 'bucket' ];
+		$sourceKey = $this->path2Key( $sourcePath );
+		$key = $this->path2Key( $path );
+		$object = $object + array(
+			'Bucket' => $bucket,
+			'CopySource' => $bucket . '/' . $sourceKey,
+			'Key' => $key,
+		);
+
+		$result = $this->getS3()->copyObject( $object );
+
+		return $this->path2Url( $path );
+	}
+
 	public function getObject( $path ) {
 		$key = $this->path2Key( $path );
 		$object = array(
@@ -43,6 +65,17 @@ class S3Storage {
 			'Key' => $key,
 		);
 		$result = $this->getS3()->getObject( $object );
+
+		return new S3Object( $result );
+	}
+
+	public function headObject( $path ) {
+		$key = $this->path2Key( $path );
+		$object = array(
+			'Bucket' => $this->appConfig[ 'bucket' ],
+			'Key' => $key,
+		);
+		$result = $this->getS3()->headObject( $object );
 
 		return new S3Object( $result );
 	}

@@ -56,8 +56,7 @@ class S3Object {
 	}
 
 	public function __set( $name, $value ) {
-		$this[ $name ] = $value;
-		return $this;
+		$this->data[ $name ] = $value;
 	}
 
 	public function __get( $name ) {

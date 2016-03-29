@@ -9,8 +9,6 @@ class S3StorageListResult {
 	private $result;
 
 	public function __construct( $s3ListResult ) {
-		$this->validateResult( $s3ListResult );
-
 		$this->result = $s3ListResult;
 	}
 
@@ -31,11 +29,5 @@ class S3StorageListResult {
 			}
 		}
 		return $prefixes;
-	}
-
-	private function validateResult( $result ) {
-		if( ! $result instanceof \Guzzle\Service\Resource\Model ) {
-			throw new \InvalidArgumentException( 'Argument is not valid Response from ListObject command' );
-		}
 	}
 }
