@@ -20,7 +20,7 @@
         <meta property="og:url" content="{link //this}">
         <meta property="og:description" content="{include metaDescription}">
         <meta property="og:locale" content="cs_CZ">
-        <meta property="og:image" content="{$baseUri}/images/barcamp-og.png">
+        <meta property="og:image" content="{$basePath}/images/barcamp-og.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="300">
         <meta property="og:image:height" content="300">
@@ -28,10 +28,13 @@
 
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?v1426447760">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?v1426447760">
-        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-
+        <link rel="shortcut icon" href="{$basePath}/images/favicon.ico">
+        <script>
+            dataLayer = [{ isArchive:true, archiveYear:2015 }];
+        </script>
         {block scripts}
         <script src="{$basePath}/js/main.min.js?v1426447760" async></script>
+        <script src="https://plzenskybarcamp.cz/js/archive.js" async></script>
         {/block}
         {block head}{/block}
     </head>
@@ -61,18 +64,6 @@
                         {*<li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="2014">2014</a></li>*}
                         <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
                     </ul>
-                    <ul class="info-navigation">
-                        {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-buton">Přihlásit</a></li>{/if}
-                        {* {if $user->isLoggedIn()}<li><a href="{$fbLogoutLink}" id="logout-buton">Odhlásit</a></li>{/if}*}
-                        {if $user->isLoggedIn()}
-                            <li>
-                                <img n:ifset="$user->identity->picture_url" class="user-pic user-pic-s25" src="{$user->identity->picture_url}">
-                                <a href="{link Conference:profil}" n:tag-if="$user->identity->isRegistered()" id="logout-buton">
-                                    {$user->identity->name|truncate:20}
-                                </a>
-                            </li>
-                        {/if}
-                    </ul>
                 </div>
             </nav>
             <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
@@ -80,7 +71,7 @@
 
             <div class="inner information">
                 <span class="logo">
-                    <a href="{link //Homepage:default}"><img src="{$baseUri}/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp 2014"></a>
+                    <a href="{link //Homepage:default}"><img src="{$basePath}/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp 2014"></a>
                 </span>
                 <h1>{block h1}<meta itemprop="name" content="Plzeňský Barcamp 2015">Plzeňský Barcamp 2015{/block}</h1>
                 <time datetime="2015-03-28" itemprop="startDate" content="2015-03-28">28. března 2015</time>
@@ -122,6 +113,5 @@
                 </div>
             </div>
         </footer>
-
     </body>
 </html>

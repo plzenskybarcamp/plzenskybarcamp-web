@@ -43,23 +43,23 @@ class RouterFactory
 	public function createHttpRouter()
 	{
 		$router = new RouteList();
-		$router[] = new Route('partneri', 'Homepage:partners');
-		$router[] = new Route('kudy-kam', 'Homepage:location');
-		$router[] = new Route('informace', 'Homepage:info');
-		$router[] = new Route('napsali-o-nas', 'Homepage:written');
-		$router[] = new Route('kontakt', 'Homepage:contact');
+		$router[] = new Route('2015/partneri', 'Homepage:partners');
+		$router[] = new Route('2015/kudy-kam', 'Homepage:location');
+		$router[] = new Route('2015/informace', 'Homepage:info');
+		$router[] = new Route('2015/napsali-o-nas', 'Homepage:written');
+		$router[] = new Route('2015/kontakt', 'Homepage:contact');
 		$router[] = new Route('profil', 'Conference:profil');
-		$router[] = new Route('ucastnici', 'Conference:visitors');
-		$router[] = new Route('prednasky', 'Conference:talks');
-		$router[] = new Route('prednasky/zebricek', 'Conference:talks', Route::ONE_WAY);
+		$router[] = new Route('2015/ucastnici', 'Conference:visitors');
+		$router[] = new Route('2015/prednasky', 'Conference:talks');
+		$router[] = new Route('2015/prednasky/zebricek', 'Conference:talks', Route::ONE_WAY);
 		$router[] = new Route('2015/prednasky', 'Conference:talks', Route::ONE_WAY);
 		$router[] = new Route('2015/prednasky/<talkId>', 'Conference:talksDetail');
-		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail', Route::ONE_WAY);
-		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
-		$router[] = new Route('privacy-policy', 'Homepage:privacyPolicy');
-		$router[] = new Route('terms', 'Homepage:terms');
+		$router[] = new Route('2015/prednasky/<talkId>', 'Conference:talksDetail', Route::ONE_WAY);
+		$router[] = new Route('2015/plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
+		$router[] = new Route('2015/privacy-policy', 'Homepage:privacyPolicy');
+		$router[] = new Route('2015/terms', 'Homepage:terms');
 		$router[] = new Route('2015/program[/<action>]', 'Program:list');
-		$router[] = new Route('program[/<action>]', 'Program:list', Route::ONE_WAY);
+		$router[] = new Route('2015/program[/<action>]', 'Program:list', Route::ONE_WAY);
 		$router[] = new Route('login', 'Sign:in');
 		$router[] = new Route('logout', 'Sign:out');
 		$router[] = new Route('login/facebook', 'Sign:inFb');

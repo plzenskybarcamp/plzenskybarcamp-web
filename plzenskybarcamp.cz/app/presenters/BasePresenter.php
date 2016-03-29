@@ -16,6 +16,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->template->host = $this->context->httpRequest->url->host;
 
 		$this->template->isDevelop = $this->getContext()->getService("developFlag")->isDevelop();
+		$this->template->basePath = "https://cdn.plzenskybarcamp.cz/public/2015";
+
 	}
 
 }
