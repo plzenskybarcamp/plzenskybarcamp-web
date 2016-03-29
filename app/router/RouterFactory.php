@@ -54,14 +54,11 @@ class RouterFactory
 		$router[] = new Route('prednasky', 'Conference:talks');
 		$router[] = new Route('prednasky/zebricek', 'Conference:talksRanking');
 		$router[] = new Route('2016/prednasky', 'Conference:talks', Route::ONE_WAY);
-		$router[] = new Route('2015/prednasky', 'Conference:talks', Route::ONE_WAY);
 		$router[] = new Route('2016/prednasky/<talkId>', 'Conference:talksDetail');
-		$router[] = new Route('2015/prednasky/<talkId>', 'Conference:talksDetail', Route::ONE_WAY);
 		$router[] = new Route('prednasky/<talkId>', 'Conference:talksDetail', Route::ONE_WAY);
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
 		$router[] = new Route('privacy-policy', 'Homepage:privacyPolicy');
 		$router[] = new Route('terms', 'Homepage:terms');
-		$router[] = new Route('2015/program[/<action>]', 'Program:list');
 		$router[] = new Route('program[/<action>]', 'Program:list', Route::ONE_WAY);
 		$router[] = new Route('login', 'Sign:in');
 		$router[] = new Route('logout', 'Sign:out');
@@ -71,13 +68,9 @@ class RouterFactory
 		$router[] = new Route('login/process/twitter', 'Sign:processTw');
 		$router[] = new Route('/vip/<token>', 'Vip:useToken');
 		$router[] = new Route('2014[/<path .+>]', 'Archive:2014');
-
-		$router[] = new Route('2015/arduino-day', 'Homepage:arduinoDay');
-		$router[] = new Route('arduino-day', 'Homepage:arduinoDay', Route::ONE_WAY);
+		$router[] = new Route('2015[/<path .+>]', 'Archive:2015');
 
 		$router[] = new Route('no-track', 'Homepage:noTrack');
-
-		$router[] = new Route('2014/<id>[/<subid>]', 'Homepage:year2014');
 
 		$apiRouter = new RouteList('Api');
 		$apiRouter[] = new Route('api/log/<action>', 'Log:');
