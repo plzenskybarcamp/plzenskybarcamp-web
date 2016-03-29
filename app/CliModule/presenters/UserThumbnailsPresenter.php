@@ -7,6 +7,7 @@ use Nette,
 	Nette\Diagnostics\Debugger,
 	App\Model,
 	Nette\Application\Responses\TextResponse,
+	App\Aws\S3Object,
 	App\OAuth\Twitter,
 	App\OAuth\Facebook,
 	Facebook\FacebookSession,
@@ -23,6 +24,29 @@ class UserThumbnailsPresenter extends Nette\Application\UI\Presenter
 		$this->twitter = $twitter;
 		$this->facebook = $facebook;
 	}
+
+	public function renderMoveProfileImages() {
+		$s3 = $this->getContext()->getService('s3');
+
+		$list = $s3->listObjects('2015/pictures/profiles/')->getObjects();
+
+
+		foreach( $list as $item ) {
+			$key = $item['Key'];
+			$path = $s3->path2Key($item['Key']);
+			$object = $s3->headObject($path);
+
+			$copyOpbject = new S3Object();
+			$copyOpbject->ContentType = $object->ContentType;
+			$copyOpbject->setCacheControl('+ 1 year');
+			$copyOpbject->MetadataDirective = 'REPLACE';
+			foreach ($object->Metadata as $key => $value) {
+				$copyOpbject->addMetadata($key, $value);
+			}
+			echo $s3->copyObject( $copyOpbject, $path, "public/$path") . "\n";
+		}
+	}
+
 
 	public function renderFixFacebook() {
 		$accessToken = $this->facebook->getAppToken();
