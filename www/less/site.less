@@ -806,16 +806,6 @@ iframe[seamless]{
 			width: 990px!important;
 		}
 
-		ul {
-			width: 67%;
-			padding: 0;
-			margin: 0;
-
-			li:last-child {
-				padding-right: 0;
-			}
-		}
-
 		.info-navigation {
 			width: 32%;
 			text-align: left;
@@ -835,10 +825,30 @@ iframe[seamless]{
 			}
 		}
 
-		.navigation li {
-			padding-left: 18px;
-			padding-right: 0;
-			float: right;
+		.archive {
+			width: 67%;
+			padding: 0;
+			margin: 0;
+			display: inline-block;
+
+			span {
+				float: right;
+				margin-bottom: 10px;
+			}
+
+			ul {
+				padding: 0;
+				margin: 0;
+				float: right;
+
+				li {
+					padding-left: 18px;
+					padding-right: 0;
+					float: left;
+					list-style: none;
+					text-transform: uppercase;
+				}
+			}
 		}
 	}
 }

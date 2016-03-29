@@ -123,15 +123,23 @@
                     <div class="info-navigation">
                         <p>Plzeňský Barcamp <a href="{link Homepage:contact}#organizatori" class="tooltip pilsen" title="Organizují: Jiří „Kolda“ Kolařík, Denisa Wágnerojc, Veronika Grékojc, Petr Landsmanojc a Jakub Boučkojc">organizují KWGLB</a></p>
                     </div>
-                    <ul class="navigation">
+                    
+                    <div class="archive">
+                        <ul>
+                            <li><a href="{link Archive:2014}" data-hover="Archiv ročníku 2014">2014</a></li>
+                            <li><a href="{link Archive:2015}" data-hover="Archiv ročníku 2015">2015</a></li>
+                        </ul>
+                        <span>Předchozí ročníky:</span>
+                    </div>
+                    {*<ul class="navigation">
                         <li n:if="$user->isLoggedIn()"><a href="{link Sign:out}" data-hover="Odhlásit" id="logout-button" class="track-click">Odhlásit</a></li>
                         <li><a href="https://blog.plzenskybarcamp.cz/" target="_blank" data-hover="Blog">Blog</a></li>
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         <li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
                         <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastnící">Účastnící</a></li>
                         <li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Přednášky">Přednášky</a></li>
-                        {*<li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>*}
-                    </ul>
+                        <li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>
+                    </ul>*}
                 </div>
             </div>
         </footer>
