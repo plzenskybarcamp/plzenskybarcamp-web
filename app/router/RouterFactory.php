@@ -71,7 +71,7 @@ class RouterFactory
 		$router[] = new Route('2015[/<path .+>]', 'Archive:2015');
 
 		$router[] = new Route('no-track', 'Homepage:noTrack');
-		$router[] = new Route('s/<key>', 'Shortlink:go');
+		$router[] = new Route('s/<key [a-z0-9]+>[-<utm [a-z0-9]+>]', 'Shortlink:go');
 
 		$apiRouter = new RouteList('Api');
 		$apiRouter[] = new Route('api/log/<action>', 'Log:');

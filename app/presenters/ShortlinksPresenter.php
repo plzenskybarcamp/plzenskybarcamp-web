@@ -20,10 +20,10 @@ class ShortlinkPresenter extends BasePresenter
 		$this->shortlinkModel = $shortlinkModel;
 	}
 
-	public function actionGo( $key )
+	public function actionGo( $key, $utm = NULL )
 	{
 		try {
-			$url = $this->shortlinkModel->getUrl( $key );
+			$url = $this->shortlinkModel->getUrl( $key, $utm );
 		}
 		catch( ShortlinkNotFoundException $e) {
 			throw new BadRequestException( "Shortlink \"$key\" not found", 404, $e );

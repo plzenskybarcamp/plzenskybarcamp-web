@@ -17,14 +17,20 @@ class Shortlink {
 	}
 
 
-	public function getUrl( $key ) {
+	public function getUrl( $key, $utm = NULL ) {
 		$shorlink = $this->configCollection->findOne( ['_id' => $key], $this->defaultOptions );
 
 		if( !$shorlink ) {
 			throw new ShortlinkNotFoundException();
 		}
 
-		return $shorlink['url'];
+		$url = $shorlink['url'];
+
+		if( $utm && isset( $shorlink['utm'][ $utm ] ) ) {
+			$url .= ( strpos( $url, '?' ) !== FALSE ? '&' : '?' ) . $shorlink['utm'][ $utm ];
+		}
+
+		return $url;
 	}
 
 }
