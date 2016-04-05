@@ -61,6 +61,7 @@ services:
 	router: @App\RouterFactory::createRouter(%consoleMode%)
 	registrationModel: App\Model\Registration(%mongo%)
 	configModel: App\Model\Config(%mongo%)
+	shortlinkModel: App\Model\Shortlink(%mongo%)
 	facebook: App\OAuth\Facebook(%facebook.appConfig%)
 	twitter: App\OAuth\Twitter(%twitter.appConfig%)
 	aws: App\Aws\Aws(%aws.sdk%)
