@@ -9,6 +9,10 @@ hranic{/block}
     <div class="inner">
         <h2>{$talk['title']}</h2>
         <div id="talk-detail" class="clearfix">
+            <p n:if="isset($talk['disabled']) && $talk['disabled']" class="red">
+                Pozor: Přednáška byla zrušena a nebude se konat!
+                {ifset $talk['disabled_reason']}<br>Důvod: {$talk['disabled_reason']}.{/ifset}
+            </p>
             <p>{!$talk['description']|escape|nl2br}</p>
 
             <h3>Komu je přednáška určena?</h3>

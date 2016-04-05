@@ -25,7 +25,7 @@ class TalksList extends Control {
 		if( $ranking ) {
 			$sort = array( 'votes_count' => -1 );
 		}
-		$talks = $this->registrationModel->getTalks( $sort );
+		$talks = $this->registrationModel->getTalks( NULL, $sort );
 		$this->template->ranking = $ranking;
 		$this->template->talks = $talks->toArray();
 		$this->template->talksCount = count($this->template->talks);

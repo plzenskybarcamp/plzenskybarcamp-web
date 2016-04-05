@@ -19,11 +19,11 @@ use Nette,
     }
 
     public function renderList( ) {
-        $this->template->talks = $this->registrationModel->getTalks();
+        $this->template->talks = $this->registrationModel->getTalks( [] );
     }
 
     public function actionCsv( ) {
-        $talks = $this->registrationModel->getTalks();;
+        $talks = $this->registrationModel->getTalks( [] );
 
         ob_start();
         $df = fopen("php://output", 'w');

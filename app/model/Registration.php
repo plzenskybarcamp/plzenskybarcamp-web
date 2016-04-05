@@ -65,16 +65,22 @@ class Registration {
 		return $this->talkCollection->findOne( [ '_id' => $talkId ], $this->defaultOptions );
 	}
 
-	public function getTalks( $sort = [] ) {
+	public function getTalks( $filter = NULL, $sort = [] ) {
+		if(is_null($filter)) {
+			$filter = [ 'disabled' => [ '$ne' => TRUE ] ];
+		}
+
 		if(!$sort) {
 			$sort = [ 'created_date' => 1 ];
 		}
-		return $this->talkCollection->find( [], [ 'sort'=> $sort ] + $this->defaultOptions );
+
+		return $this->talkCollection->find( $filter, [ 'sort'=> $sort ] + $this->defaultOptions );
 	}
 
 	public function countTalks( ) {
+		$filter = [ 'disabled' => [ '$ne' => TRUE ] ];
 		return $this->talkCollection->count(
-			[],
+			$filter,
 			$this->defaultOptions
 		);
 	}
