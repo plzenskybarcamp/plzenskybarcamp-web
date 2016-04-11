@@ -50,7 +50,7 @@
         })(window,document,'script','dataLayer','GTM-PW7QW8');</script>
         <script> document.documentElement.className += ' js'</script>
 
-        {if $isDevelop}<div id="is_debug_flag"></div>{/if}
+        {if isset($isDevelop) && $isDevelop}<div id="is_debug_flag"></div>{/if}
 
         <header class="main-header dark">
             <nav class="main-navigation">
