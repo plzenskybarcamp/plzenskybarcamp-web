@@ -16,6 +16,13 @@
 	RewriteCond %{REQUEST_URI} !^/.well-known/
 	RewriteRule /\.|^\. - [F]
 
+	# remove invalid utm #promoteam 2016
+	RewriteCond %{QUERY_STRING} utm_campaign=Barkemp%202016
+	RewriteRule .* /? [R=307,L,NE]
+
+	RewriteCond %{QUERY_STRING} ^utm_qrv$
+	RewriteRule (.*) /$1?utm_source=visacky&utm_medium=qr&utm_campaign=users-visacky-2016&utm_term=qrv [R=307,L,NE]
+
 	# front controller
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
