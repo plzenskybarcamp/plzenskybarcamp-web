@@ -1017,7 +1017,7 @@ iframe[seamless]{
 	.size(180,180);
 	.border-radius(90px);
 }
-#timetable {
+#timetable, #timetable-workshop {
 	width: 100%;
 	border-spacing: 20px;
 
@@ -1033,7 +1033,7 @@ iframe[seamless]{
 	.prg-text td {
 		background: #F3F3F3;
 	}
-	.katedrala, .pivovar, .podzemi, .skodovka, .peklo, .sokolovna {
+	.katedrala, .pivovar, .podzemi, .skodovka, .peklo, .sokolovna, .andelicek, .sady, .strouha {
 		text-align: center;
 		padding: 15px 10px;
 
@@ -1050,7 +1050,7 @@ iframe[seamless]{
 		}
 	}
 
-	.katedrala-txt, .pivovar-txt, .podzemi-txt,.skodovka-txt, .peklo-txt, .sokolovna-txt {
+	.katedrala-txt, .pivovar-txt, .podzemi-txt,.skodovka-txt, .peklo-txt, .sokolovna-txt, .andelicek-txt, .sady-txt, .strouha-txt  {
 		font-size: 130%;
 		font-family: "open_sanssemibold";
 		width: 225px;
@@ -1074,7 +1074,18 @@ iframe[seamless]{
 	td.sokolovna a, td.sokolovna-txt {
 		color: #228089;
 	}
-	.podzemi-txt, .peklo-txt, .sokolovna-txt {
+	td.andelicek a, td.andelicek-txt {
+		color: #cfb444;
+	}
+	td.sady a, td.sady-txt {
+		color: #AE1EB5;
+	}
+	td.strouha a, td.strouha-txt {
+		color: #0CD4DD;
+	}
+
+
+	.podzemi-txt, .peklo-txt, .sokolovna-txt, .andelicek-txt, .sady-txt, .strouha-txt {
 		span {
 			display: block;
 			font-style: normal;
@@ -1084,7 +1095,7 @@ iframe[seamless]{
 		}
 	}
 	
-	.katedrala-lbl, .pivovar-lbl, .skodovka-lbl, .podzemi-lbl, .peklo-lbl, .sokolovna-lbl, .workshop-lbl, .arduino-lbl {
+	.katedrala-lbl, .pivovar-lbl, .skodovka-lbl, .podzemi-lbl, .peklo-lbl, .sokolovna-lbl, .workshop-lbl, .arduino-lbl, .andelicek-lbl, .sady-lbl, .strouha-lbl {
 	    padding: 3px 5px;
 	    font-size: 70%;
 	    color: #fff;
@@ -1116,8 +1127,21 @@ iframe[seamless]{
 	.arduino-lbl {
 		background-color: #999;
 	}
+	.andelicek-lbl {
+		background-color: #cfb444;
+	}
+	.sady-lbl {
+		background-color: #AE1EB5;
+	}
+	.strouha-lbl {
+		background-color: #0CD4DD;
+	}
+}
 
-
+#timetable-workshop {
+	.katedrala-txt, .pivovar-txt, .podzemi-txt,.skodovka-txt, .peklo-txt, .sokolovna-txt, .andelicek-txt, .sady-txt, .strouha-txt  {
+			width: 180px;
+		}
 }
 
 
