@@ -27,7 +27,7 @@ use Nette,
 
         ob_start();
         $df = fopen("php://output", 'w');
-        fputcsv($df, array("E-mail", "Jméno", "Příjmení", "Registrace", "Oběd", "Afterparty", "Bio"), ",", '"');
+        fputcsv($df, array("E-mail", "Jméno", "Příjmení", "Bio", "Photo", "Registrace", "Oběd", "Afterparty", "Bio"), ",", '"');
         foreach ($users as $user) {
             $names = explode(" ", $user['name'], 2);
             $fname = $names[0];
@@ -36,6 +36,8 @@ use Nette,
                 $user['email'],
                 $fname,
                 $lname,
+                $user['bio'],
+                $user['picture_url'],
                 ( $user['created_date'] ? (new UTCDateTimeConverter($user['created_date']))->format('Y-m-d H:i:s') : NULL ),
                 ( $user['lunch'] ? "Ano" : "Ne"),
                 ( $user['afterparty'] ? "Ano" : "Ne"),

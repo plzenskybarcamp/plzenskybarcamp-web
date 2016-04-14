@@ -28,15 +28,21 @@ use Nette,
 
         ob_start();
         $df = fopen("php://output", 'w');
-        fputcsv($df, array("ID", "Název", "Speaker", "E-mail", "Popis", "Pro koho je určena"), ",", '"');
+        fputcsv($df, array("ID", "Název", "Speaker", "Bio", "Photo", "E-mail", "Web", "Popis", "Pro koho je určena", "Od", "Do", "Kde"), ",", '"');
         foreach ($talks as $talk) {
             @fputcsv($df, array(
                 $talk['_id'],
                 $talk['title'],
                 $talk['speaker']['name'],
+                $talk['speaker']['bio'],
+                $talk['speaker']['picture_url'],
                 $talk['speaker']['email'],
+                $talk['speaker']['web'],
                 $talk['description'],
                 $talk['purpose'],
+                $talk['time_from'],
+                $talk['time_to'],
+                $talk['place'],
             ), ",", '"');
         }
         fclose($df);
