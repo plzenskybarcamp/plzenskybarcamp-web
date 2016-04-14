@@ -59,7 +59,7 @@ class RouterFactory
 		$router[] = new Route('plzenakovo-slovnicek-pojmu', 'Homepage:vocabulary');
 		$router[] = new Route('privacy-policy', 'Homepage:privacyPolicy');
 		$router[] = new Route('terms', 'Homepage:terms');
-		$router[] = new Route('program', 'Program:list', Route::ONE_WAY);
+		$router[] = new Route('program', 'Program:list');
 		$router[] = new Route('login', 'Sign:in');
 		$router[] = new Route('logout', 'Sign:out');
 		$router[] = new Route('login/facebook', 'Sign:inFb');
