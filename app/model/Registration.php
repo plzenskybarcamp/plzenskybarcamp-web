@@ -85,6 +85,26 @@ class Registration {
 		);
 	}
 
+	public function addTimeToTalk( $talkId, array $data ) {
+
+		$this->updateTalk( $talkId, array(
+			'time_from' => $data['time_from'],
+			'time_to' => $data['time_to'],
+			'place' => $data['place'],
+		) );
+
+	}
+
+	public function removeTimeFromTalk( $talkId ) {
+
+		$this->updateTalk( $talkId, array(
+			'time_from' => "",
+			'time_to' => "",
+			'place' => "",
+		), '$unset' );
+
+	}
+
 	public function addLinkToTalk( $talkId, $groupField, array $data ) {
 		$linkId = hash("crc32b", uniqid("link", TRUE));
 		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();

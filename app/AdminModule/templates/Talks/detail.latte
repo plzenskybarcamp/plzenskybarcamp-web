@@ -4,6 +4,55 @@
 <div class="row">
 	<div class="col-sm-4 col-sm-push-8 text-right">
 		<a href="{link :Conference:talksDetail 'talkId' => $talkId}" class="btn btn-primary" target="_blank"><span class="glyphicon glyphicon-globe"></span> Zobrazit web</a>
+	</div>
+	<div class="col-sm-8 col-sm-pull-4">
+		<h2>Detaily přednášky</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-condensed table-content-sized">
+			<tr>
+				<th>ID</th>
+				<td>{$talk['_id']}</td>
+			</tr>
+			<tr>
+				<th>Název</th>
+				<td>{$talk['title']}</td>
+			</tr>
+			<tr>
+				<th>Přednášející</th>
+				<td>
+					<img src="{$talk['speaker']['picture_url']}" class="img-circle" height="20">
+					{$talk['speaker']['name']}
+					(ID: {$talk['speaker']['_id']})
+					<a href="mailto:{$talk['speaker']['email']}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-envelope"></span></a>
+				</td>
+			</tr>
+			<tr>
+				<th>Konání přednášky</th>
+				<td>
+				{ifset $talk['time_from']}
+				<span class="glyphicon glyphicon-ok-sign text-success"></span>
+				Od {$talk['time_from']} do {$talk['time_to']} v místnsti {$talk['place']}
+				<a n:href="editTime 'talkId' => $talkId" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Upravit čas</a>
+				<a n:href="removeTime 'talkId' => $talkId" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Smazat čas</a>
+				{else}
+				<span class="glyphicon glyphicon-remove-sign text-danger"></span>
+				Nekoná se
+				<a n:href="editTime 'talkId' => $talkId" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span> Zadat čas</a>
+				{/ifset}
+				</td>
+			</tr>
+			<tr>
+				<th>Registrováno</th>
+				<td>{$talk['created_date']|mongoFormat:"j.n.Y H:i:s"}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-4 col-sm-push-8 text-right">
 		<a href="{link addLink 'type'=>'presentations', 'talkId' => $talkId}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Přidat prezentaci</a>
 	</div>
 	<div class="col-sm-8 col-sm-pull-4">

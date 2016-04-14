@@ -6,7 +6,8 @@ use Nette,
 	App\Model,
     Nette\Application\UI\Form,
     Nette\Templating\FileTemplate,
-    App\Components\BootstrapizeForm;
+    App\Components\BootstrapizeForm,
+    MongoDB\Model\MongoDbSanitizer;
 
 
   class TalksPresenter extends BasePresenter
@@ -67,8 +68,41 @@ use Nette,
             throw new Nette\Application\BadRequestException( 'Talks not found', '404');
         }
 
+        $this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
+
         $this->template->talk = $talk;
         $this->template->talkId = $talkId;
+    }
+
+    public function renderEditTime( $talkId ) {
+        $talk = $this->registrationModel->findTalk( $talkId );
+        if ( ! $talk ) {
+            throw new Nette\Application\BadRequestException( 'Talks not found', '404');
+        }
+
+        $this[ 'timeEditForm' ]->setDefaults( array( 'talkId' => $talkId ) );
+        $this->template->pageTitle = 'Přidat časy konání k přednášce';
+        $this->template->talkTitle = $talk['title'];
+
+        if( isset( $talk[ 'time_from' ] ) ) {
+            $this->template->pageTitle = 'Upravit časy konání k přednášce';
+            $this[ 'timeEditForm' ]->setDefaults( array(
+                'time_from' => $talk['time_from'],
+                'time_to' => $talk['time_to'],
+                'place' => $talk['place'],
+            ));
+        }
+    }
+
+    public function renderRemoveTime( $talkId ) {
+        $talk = $this->registrationModel->findTalk( $talkId );
+        if ( ! $talk ) {
+            throw new Nette\Application\BadRequestException( 'Talks not found', '404');
+        }
+
+        $this[ 'timeRemoveForm' ]->setDefaults( array( 'talkId' => $talkId ) );
+        $this->template->pageTitle = 'Odstranit časy konání od přednášce?';
+        $this->template->talkTitle = $talk['title'];
     }
 
     private function createLinkEditTemplate() {
@@ -172,6 +206,66 @@ use Nette,
         $this->redirect('detail', array('talkId'=>$talkId) );
     }
 
+public function createComponentTimeEditForm() {
+        $form = new Form();
+
+        $form->addHidden( 'talkId' );
+        $form->addText( 'time_from', 'Počátek přednášky')
+            ->setType('time')
+            ->setDefaultValue('00:00:00')
+            ->setRequired('Počátek přednášky musí být zadán')
+            ->setAttribute('autofocus');
+        $form->addText( 'time_to', 'Konec přednášky')
+            ->setType('time')
+            ->setDefaultValue('00:00:00')
+            ->setRequired('Konec přednášky musí být zadán');
+        $form->addText( 'place', 'Místnost')
+            ->setRequired('Mísntost musí být zadána');
+        $form->addSubmit( 'save', 'Uložit');
+        $form->addSubmit( 'cancel', 'Storno');
+
+        $form->onSuccess[] = array( $this, 'processTimeEditForm');
+        BootstrapizeForm::bootstrapize( $form );
+        return $form;
+    }
+
+    public function processTimeEditForm( $form ) {
+        try {
+            $values = $form->getValues( TRUE );
+
+            $talkId = $values[ 'talkId' ];
+
+            if ( ! $form['save']->isSubmittedBy()) {
+                $this->flashMessage('Operace stornována', 'warning');
+                $this->redirect( 'detail', array( 'talkId' => $talkId) );
+            }
+
+            if( ! $talkId ) {
+                throw new FormValidationException( "Interní chyba formuláře: Neplatné ID přednášky" );
+            }
+
+            $values['time_from'] = $this->parseTime($values['time_from']);
+            $values['time_to'] = $this->parseTime($values['time_to']);
+
+            $this->registrationModel->addTimeToTalk( $talkId, $values );
+
+            $this->flashMessage( 'Čas byl nastaven', 'success');
+            $this->redirect('detail', array('talkId'=>$talkId) );
+        }
+        catch( FormValidationException $e ) {
+            $form->addError( $e->getMessage() );
+        }
+    }
+
+    private function parseTime( $time ) {
+        if( preg_match('/^(\d\d:\d\d)(?::\d\d)?$/', $time, $matches) ) {
+            return $matches[1];
+        }
+        else {
+            throw new FormValidationException("Time $time is invalid format", 1);
+        }
+    }
+
     public function createComponentLinkRemoveForm() {
         $form = new Form();
 
@@ -219,6 +313,49 @@ use Nette,
         $this->redirect('detail', array('talkId'=>$talkId) );
     }
 
- 
+    public function createComponentTimeRemoveForm() {
+        $form = new Form();
+
+        $form->addHidden( 'talkId' );
+        $form->addSubmit( 'yes', 'Ano, opravdu smazat')
+            ->getControlPrototype()->class[] = 'btn-danger';
+        $form->addSubmit( 'cancel', 'Storno')
+            ->getControlPrototype()->class[] = 'btn-info';
+
+        $form->addProtection("Selhalo bezpečnostní ověření, pošlete formulář znovu", 120);
+
+        $form->onSuccess[] = array( $this, 'processTimeRemoveForm');
+        BootstrapizeForm::bootstrapize( $form );
+        return $form;
+    }
+
+    public function processTimeRemoveForm( $form ) {
+        try {
+            $values = $form->getValues( TRUE );
+
+            $talkId = $values[ 'talkId' ];
+
+            if ( ! $form['yes']->isSubmittedBy()) {
+                $this->flashMessage('Operace stornována', 'warning');
+                $this->redirect( 'detail', array( 'talkId' => $talkId) );
+            }
+
+            if( ! $talkId ) {
+                throw new FormValidationException( "Interní chyba formuláře: Neplatné ID přednášky" );
+            }
+
+            $this->registrationModel->removeTimeFromTalk( $talkId );
+            $this->flashMessage( 'Čas byl smazán', 'success' );
+
+            $this->redirect('detail', array('talkId'=>$talkId) );
+        }
+        catch( FormValidationException $e ) {
+            $form->addError( $e->getMessage() );
+        }
+
+    }
+
 }
+
+class FormValidationException extends \Exception {}
 
