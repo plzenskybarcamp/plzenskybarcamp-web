@@ -24,6 +24,4 @@ if(file_exists(__DIR__ . '/config/config.local.neon')) {
 
 $container = $configurator->createContainer();
 
-Route::$defaultFlags |= ($container->getService('httpRequest')->isSecured() ? Route::SECURED : 0);
-
 return $container;
