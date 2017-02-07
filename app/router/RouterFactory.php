@@ -76,6 +76,7 @@ class RouterFactory
 		$router[] = new Route('/vip/<token>', 'Vip:useToken');
 		$router[] = new Route('2014[/<path .+>]', 'Archive:2014');
 		$router[] = new Route('2015[/<path .+>]', 'Archive:2015');
+		$router[] = new Route('2016[/<path .+>]', 'Archive:2016');
 
 		$router[] = new Route('no-track', 'Homepage:noTrack');
 		$router[] = new Route('s/<key [a-z0-9]+>[-<utm [a-z0-9]+>]', 'Shortlink:go');
