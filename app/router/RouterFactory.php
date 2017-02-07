@@ -43,6 +43,7 @@ class RouterFactory
 	public function createHttpRouter()
 	{
 		$router = new RouteList();
+		$router[] = new Route('2016', 'Homepage:default', Route::ONE_WAY);
 		$router[] = new Route('2016/partneri', 'Homepage:partners');
 		$router[] = new Route('partneri', 'Homepage:partners', Route::ONE_WAY);
 		$router[] = new Route('2016/informace', 'Homepage:info');
