@@ -68,6 +68,16 @@ class ConferencePresenter extends BasePresenter
 		return $url . ( strpos( $url, '?' ) !== false ? '&' : '?' ) . $postfix;
 	}
 
+	public function actionTalks() {
+		$this->flashMessage('Promiň, přednášky ještě nejsou vypsané');
+		$this->redirect(302, 'Homepage:');
+	}
+
+	public function actionVisitors() {
+		$this->flashMessage('Promiň, ještě nebylo spuštěno přihlašování');
+		$this->redirect(302, 'Homepage:');
+	}
+
 	public function renderTalks() {
 		$this->template->ranking=FALSE;
 		if( ! $this->configModel->getConfig('isVotingOpen')
