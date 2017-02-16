@@ -897,7 +897,7 @@ iframe[seamless]{
 			margin-bottom: 15px;
 			display: block;
 		}
-		input[type="text"], textarea {
+		input[type="text"], input[type="email"], textarea {
 			position: relative;
 			width: 458px;
 			font-family: "open_sansregular"; font-size: 20px; color: @grayForm;
@@ -914,6 +914,9 @@ iframe[seamless]{
 			font-size: 1em;
 		}
 
+		input[type="checkbox"] {
+			margin-right: 20px;
+		}
 		input:required, input.required,
 		textarea:required, textarea.required {
 			background: transparent url(../images/required-star.png) 480px 7px no-repeat;
