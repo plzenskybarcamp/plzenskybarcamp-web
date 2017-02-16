@@ -97,7 +97,7 @@ class UserRegistration extends Control {
 		$values['vip_token'] = $this->token;
 		$this->registrationModel->updateConferree( $user->getId(), $values );
 		if($this->sns) {
-			$this->sns->publish([$values]);
+			$this->sns->publish(["registration"=>$values]);
 		}
 
 		if($this->token) {
