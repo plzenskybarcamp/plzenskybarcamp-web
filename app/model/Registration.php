@@ -20,7 +20,7 @@ class Registration {
 		$dbName = $mongoConfig['database'];
 		$this->confereeCollection = new \MongoDB\Collection($manager, $dbName, 'conferee');
 		$this->talkCollection = new \MongoDB\Collection($manager, $dbName, 'talk');
-		$this->tokenCollection = new \MongoDB\Collection($manager, $dbName, 'token');
+		$this->tokenCollection = new \MongoDB\Collection($manager, $dbName, 'vip_token');
 		$this->defaultOptions = [ 'typeMap' => [ 'root' => 'array', 'document' => 'array' ] ];
 
 	}
