@@ -1,6 +1,7 @@
 .git
 .gitignore
 .rsync-exclude
+/node_modules/
 /deploy.sh
 /app/config/config.local.neon
 /log/

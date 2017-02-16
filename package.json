@@ -1,0 +1,16 @@
+{
+  "name": "plzenskybarcamp-web",
+  "author": {
+    "name": "Jakub Bouček",
+    "email": "pan@jakubboucek.cz",
+    "url": "https://jakub-boucek.cz/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.org/jakubboucek/plzenskybarcamp-web.git"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-less": "^1.4.0"
+  }
+}
