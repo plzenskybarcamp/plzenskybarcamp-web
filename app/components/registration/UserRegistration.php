@@ -53,7 +53,8 @@ class UserRegistration extends Control {
 
 	public function addUsersFields( $container ) {
 		$container->addText( 'name', 'Jméno a příjmení' )
-			->addRule(Form::FILLED, 'Jméno musí být vyplněno');
+			->addRule(Form::FILLED, 'Jméno musí být vyplněno')
+			->setOption('description', 'Tvoje jméno a profilovka ze sociální sítě bude veřejně viditelná v seznamu účastníků');
 		$container->addText( 'twitter', 'Twitter' )
 			->setAttribute('placeholder', '@DavidGrudl');
 		$container->addText( 'email', 'E-mail')
@@ -62,10 +63,12 @@ class UserRegistration extends Control {
 			->setAttribute('placeholder', 'grudl@gmail.com')
 			->setOption('description', 'Email nebude nikde zveřejněn');
 		$container->addTextArea( 'bio', 'Bio – aneb napiš nám pár slov o sobě' )
-			->setOption('description', 'Můžete doplnit také později ve svém profilu')
+			->setOption('description', 'Bio je veřejně viditelné v seznamu účastníků')
 			->addRule(Form::FILLED, 'Prosím, nenechávej Bio prázdné a napiš nám o sobě něco.');
-		$container->addCheckbox( 'lunch', 'Mám mimo drobného občerstvení zájem také o oběd (cca 100Kč)' );
+		$container->addCheckbox( 'lunch', 'Mám zájem o oběd (cca 100 Kč)' );
 		$container->addCheckbox( 'afterparty', 'Zúčastním se afterparty v centru Plzně' );
+		$container->addCheckbox( 'allow_mail', 'Zašlete mi před akcí e-mail s instrukcemi' )
+			->setDefaultValue( TRUE );
 		return $container;
 	}
 
