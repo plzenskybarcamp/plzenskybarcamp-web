@@ -22,6 +22,8 @@ parameters:
 			bucket: plzenskybarcamp
 			basePath: ''
 			baseUrl: https://cdn.plzenskybarcamp.cz
+		snsRegister:
+			topicArn: 'arn:aws:sns:eu-west-1:667215285126:bcp-register'
 	facebook:
 		appConfig:
 			appId: '504432792996629'
@@ -65,4 +67,5 @@ services:
 	twitter: App\OAuth\Twitter(%twitter.appConfig%)
 	aws: App\Aws\Aws(%aws.sdk%)
 	s3: App\Aws\S3Storage(%aws.s3Storage%)
+	sns: App\Aws\SnsPublisher(%aws.snsRegister%)
 	developFlag: App\Components\DevelopFlag(%app.is_develop%)

@@ -13,12 +13,15 @@ class Main extends Control {
 
 	private $token;
 
+	private $sns;
 
-	public function __construct( $parent, $name, $registrationModel, $configModel, $token ) {
+
+	public function __construct( $parent, $name, $registrationModel, $configModel, $token, $sns ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
 		$this->configModel = $configModel;
 		$this->token = $token;
+		$this->sns = $sns;
 	}
 	
 	public function render() {
@@ -58,7 +61,7 @@ class Main extends Control {
 
 	public function createComponentRegistration( $name ) {
 		return $this->compliteRegistration(
-			new UserRegistration( $this, $name, $this->registrationModel, $this->token )
+			new UserRegistration( $this, $name, $this->registrationModel, $this->token, $this->sns )
 		);
 	}
 

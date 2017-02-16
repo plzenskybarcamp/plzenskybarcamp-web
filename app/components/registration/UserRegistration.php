@@ -17,10 +17,13 @@ class UserRegistration extends Control {
 
 	private $token;
 
-	public function __construct( $parent, $name, $registrationModel, $token = NULL ) {
+	private $sns;
+
+	public function __construct( $parent, $name, $registrationModel, $token = NULL, $sns = NULL ) {
 		parent::__construct( $parent, $name );
 		$this->registrationModel = $registrationModel;
 		$this->token = $token;
+		$this->sns = $sns;
 	}
 
 	public function render() {
@@ -93,6 +96,9 @@ class UserRegistration extends Control {
 		$values['identity'] = $user->getIdentity()->data;
 		$values['vip_token'] = $this->token;
 		$this->registrationModel->updateConferree( $user->getId(), $values );
+		if($this->sns) {
+			$this->sns->publish([$values]);
+		}
 
 		if($this->token) {
 			$this->registrationModel->invalideVipToken($token);

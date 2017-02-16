@@ -18,6 +18,10 @@ class Aws extends Object {
 		return $this->getAwsInstance()->createS3();
 	}
 
+	public function getSns() {
+		return $this->getAwsInstance()->createSns();
+	}
+
 	public function getAwsInstance() {
 		if( ! $this->awsInstance) {
 			$this->awsInstance = new Sdk( $this->appConfig );
