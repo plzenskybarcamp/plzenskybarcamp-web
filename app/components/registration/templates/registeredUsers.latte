@@ -1,9 +1,9 @@
 <div>
 	<h3><a href="{plink Conference:visitors}">{$usersCount} {$title}</a></h3>
 	<ul class="list-inline">
-		<li n:foreach="$users as $user">
-			<span class="tooltip" title="{$user['name']}">
-				<img class="user-pic" src="{$user['picture_url']}" alt="{$user['name']}">
+		<li n:foreach="$users as $oneUser">
+			<span class="tooltip" title="{$oneUser['name']}">
+				<img class="user-pic" src="{$oneUser['picture_url']}" alt="{$oneUser['name']}">
 			</span>
 		</li>
 	</ul>

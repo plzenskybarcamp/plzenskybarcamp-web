@@ -52,7 +52,7 @@ class SignPresenter extends BasePresenter
 		$profile = $this->getUserIdentity( $conferee );
 
 		if( ! $profile ) {
-			$id = hash("crc32b", uniqid("fb", TRUE));
+			$id = $this->registration->generateId();
 			$name = $oAuthIdentity->name;
 			$email = $oAuthIdentity->email;
 			$picture_url = $oAuthIdentity->getPictureUrl();
@@ -85,7 +85,7 @@ class SignPresenter extends BasePresenter
 		$profile = $this->getUserIdentity( $conferee );
 
 		if( ! $profile ) {
-			$id = hash("crc32b", uniqid("fb", TRUE));
+			$id = $this->registration->generateId();
 			$name = $oAuthIdentity->name;
 			$email = $oAuthIdentity->email;
 			$picture_url = $oAuthIdentity->getPictureUrl();

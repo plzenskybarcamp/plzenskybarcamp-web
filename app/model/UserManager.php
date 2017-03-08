@@ -84,7 +84,7 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 		if( ! $platform_profile) {
 			throw new Nette\Security\AuthenticationException('User info request failed');
 		}
-		$id = hash("crc32b", uniqid("fb", TRUE));
+		$id = $this->registration->generateId();
 		$name = @$platform_profile['name'];
 		$email = @$platform_profile['email'];
 

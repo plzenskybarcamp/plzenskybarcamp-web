@@ -25,6 +25,14 @@ class Registration {
 
 	}
 
+	public function generateId() {
+		return hash("crc32b", uniqid(rand(), TRUE));
+	}
+
+	public function isId( $id ) {
+		return preg_match( '/^[a-f0-9]{8}$/i', $id );
+	}
+
 	public function updateConferree( $userId, array $data ) {
 		$this->updateConferreeByCondition( array( '_id' => $userId ), $data );
 		$conferee = $this->findCoferree( $userId );
@@ -47,7 +55,7 @@ class Registration {
 	}
 
 	public function createTalk( $userId, array $data ) {
-		$data['_id'] = hash("crc32b", uniqid("talk", TRUE));
+		$data['_id'] = $this->generateId();
 		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();
 		$speaker = $this->findCoferree( $userId );
 		$this->talkCollection->insertOne( $data );
@@ -106,7 +114,7 @@ class Registration {
 	}
 
 	public function addLinkToTalk( $talkId, $groupField, array $data ) {
-		$linkId = hash("crc32b", uniqid("link", TRUE));
+		$linkId = $ths->generateId();
 		$data['created_date'] = (new UTCDateTimeConverter())->toMongo();
 
 		if( ! preg_match( '/^[_a-z0-9]+$/iD', $groupField )) {

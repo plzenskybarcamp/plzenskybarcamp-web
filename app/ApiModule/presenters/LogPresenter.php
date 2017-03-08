@@ -29,7 +29,7 @@ class LogPresenter extends Nette\Application\UI\Presenter
 		);
 		Debugger::log(json_encode($log), Debugger::ERROR);
 
-		$this->sendFakeSignedResponse();
+		$this->sendSuccessResponse();
 	}
 
 	public function renderJsError() {
@@ -43,7 +43,7 @@ class LogPresenter extends Nette\Application\UI\Presenter
 		);
 		Debugger::log(json_encode($log), Debugger::ERROR);
 
-		$this->sendFakeSignedResponse();
+		$this->sendSuccessResponse();
 	}
 
 	private function itemsFrom( $var, array $names ) {
@@ -61,15 +61,10 @@ class LogPresenter extends Nette\Application\UI\Presenter
 		return NULL;
 	}
 
-	private function sendFakeSignedResponse() {
-		$string = "";
-		for($i=0;$i<rand(60,80);$i++) {
-			$string .= chr(rand(0,255));
-		}
+	private function sendSuccessResponse() {
 		$output = array(
 			'success'=>true,
-			'logged_time'=>time(),
-			'signature'=>base64_encode($string),
+			'logged_time'=>time()
 		);
 		$this->getPresenter()->sendResponse( new JsonResponse( $output ) );
 	}

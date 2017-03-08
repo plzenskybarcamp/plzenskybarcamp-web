@@ -81,6 +81,7 @@ class RouterFactory
 
 		$apiRouter = new RouteList('Api');
 		$apiRouter[] = new Route('api/log/<action>', 'Log:');
+		$apiRouter[] = new Route('api/user/<action>', 'User:');
 		$router[] = $apiRouter;
 
 		$adminRouter = new RouteList('Admin');

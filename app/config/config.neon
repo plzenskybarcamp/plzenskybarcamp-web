@@ -61,6 +61,7 @@ services:
 	- App\Model\ArchiveLoader(@s3, @cacheStorage)
 	router: @App\RouterFactory::createRouter(%consoleMode%)
 	registrationModel: App\Model\Registration(%mongo%)
+	bearerModel: App\Model\BearerToken(%mongo%)
 	configModel: App\Model\Config(%mongo%)
 	shortlinkModel: App\Model\Shortlink(%mongo%)
 	facebook: App\OAuth\Facebook(%facebook.appConfig%)
