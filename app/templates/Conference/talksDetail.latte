@@ -10,7 +10,7 @@ hranic{/block}
         <h2>{$talk['title']}</h2>
         <div id="talk-detail" class="clearfix">
             <p n:if="isset($talk['disabled']) && $talk['disabled']" class="red">
-                Pozor: Přednáška byla zrušena a nekonala se!
+                Přednáška byla zrušena a nekoná se
                 {ifset $talk['disabled_reason']}<br>Důvod: {$talk['disabled_reason']}.{/ifset}
             </p>
             <p>{!$talk['description']|escape|nl2br}</p>
@@ -20,9 +20,9 @@ hranic{/block}
 
             {if $isTalkLocationShows}
             {ifset $talk['place']}
-                <h3>Kdy přednáška proběhla?</h3>
+                <h3>Kdy přednáška proběhne?</h3>
                 <p>
-                    Přednáška byla v místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.<br>
+                    Přednáška bude v místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.<br>
                     Podívej se na kompletní <a n:href="Program:list">program</a>.
                 </p>
             {else}
@@ -97,7 +97,7 @@ hranic{/block}
 
                 {if $isVoteShows}
                 <p>Stav hlasování: <span id="votes-count">{ifset $talk['votes_count']}{$talk['votes_count']}{else}0{/ifset}</span> hlasů</p>
-                {if $isVotingOpen}
+                {if $isVotingOpen && ! (isset($talk['disabled']) && $talk['disabled'])}
                 {if $user->isLoggedIn() && $user->getIdentity()->isRegistered()}
                     <label for="vote">Hlasuj: </label>
                     <input class="vote-detail" id="vote" type="checkbox" data-checked="{if @$talk['votes'] && in_array($user->getId(), $talk['votes'])}true{else}false{/if}" {if @$talk['votes'] && in_array($user->getId(), $talk['votes'])} checked {/if}>
