@@ -73,7 +73,7 @@ class UserThumbnailsPresenter extends Nette\Application\UI\Presenter
 					->setCacheControl('+ 1 year')
 					->addMetadata('Origin-Url',$url);
 				$token = Random::generate('12');
-				$url = $this->getContext()->getService('s3')->putObject($file, "public/2016/pictures/profiles/fb-profile-$id-$token");
+				$url = $this->getContext()->getService('s3')->putObject($file, "public/2017/pictures/profiles/fb-profile-$id-$token");
 
 				if($url) {
 					$this->registrationModel->updateConferree( $value['_id'], array('picture_url' => $url, 'picture_mirror'=>TRUE) );
@@ -110,7 +110,7 @@ class UserThumbnailsPresenter extends Nette\Application\UI\Presenter
 					->addMetadata('Origin-Url',$url);
 				$token = Random::generate('12');
 				$urlname = strtolower($name);
-				$url = $this->getContext()->getService('s3')->putObject($file, "public/2016/pictures/profiles/tw-profile-$urlname-$token");
+				$url = $this->getContext()->getService('s3')->putObject($file, "public/2017/pictures/profiles/tw-profile-$urlname-$token");
 
 				if($url) {
 					$this->registrationModel->updateConferree( $value['_id'], array('picture_url' => $url, 'picture_mirror'=>TRUE) );
