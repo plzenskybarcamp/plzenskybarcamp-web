@@ -146,7 +146,10 @@ class Registration {
 
 	public function getSpeakers( $limit = 0 ) {
 		return $this->findCoferrees(
-			[ 'talk' => [ '$ne' => NULL ] ],
+			[
+				'talk' => [ '$ne' => NULL ],
+				'talk.disabled' => [ '$ne' => TRUE ],
+			],
 			[
 				'sort' => [ 'talk.created_date' => -1 ],
 				'limit' => $limit,
