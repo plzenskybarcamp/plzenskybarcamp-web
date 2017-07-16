@@ -43,15 +43,15 @@ class RouterFactory
 	public function createHttpRouter()
 	{
 		$router = new RouteList();
-		$router[] = new Route('2017', 'Homepage:default', Route::ONE_WAY);
-		$router[] = new Route('2017/partneri', 'Homepage:partners', Route::ONE_WAY);
-		$router[] = new Route('partneri', 'Homepage:partners');
-		$router[] = new Route('2017/informace', 'Homepage:info', Route::ONE_WAY);
-		$router[] = new Route('informace', 'Homepage:info');
-		$router[] = new Route('2017/napsali-o-nas', 'Homepage:written', Route::ONE_WAY);
-		$router[] = new Route('napsali-o-nas', 'Homepage:written');
-		$router[] = new Route('2017/kontakt', 'Homepage:contact', Route::ONE_WAY);
-		$router[] = new Route('kontakt', 'Homepage:contact');
+		$router[] = new Route('2017', 'Homepage:default');
+		$router[] = new Route('2017/partneri', 'Homepage:partners');
+		$router[] = new Route('partneri', 'Homepage:partners', Route::ONE_WAY);
+		$router[] = new Route('2017/informace', 'Homepage:info');
+		$router[] = new Route('informace', 'Homepage:info', Route::ONE_WAY);
+		$router[] = new Route('2017/napsali-o-nas', 'Homepage:written');
+		$router[] = new Route('napsali-o-nas', 'Homepage:written', Route::ONE_WAY);
+		$router[] = new Route('2017/kontakt', 'Homepage:contact');
+		$router[] = new Route('kontakt', 'Homepage:contact', Route::ONE_WAY);
 		$router[] = new Route('profil', 'Conference:profil');
 		$router[] = new Route('2017/ucastnici', 'Conference:visitors');
 		$router[] = new Route('ucastnici', 'Conference:visitors', Route::ONE_WAY);

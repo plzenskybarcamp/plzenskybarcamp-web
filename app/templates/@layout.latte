@@ -60,7 +60,7 @@
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
                     </ul>
-                    <ul class="info-navigation">
+                    {*<ul class="info-navigation">
                         {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-button" class="track-click">Přihlásit</a></li>{/if}
                         {if $user->isLoggedIn()}<li><a href="{link Sign:out}" id="logout-button">Odhlásit</a></li>{/if}
                         {if $user->isLoggedIn()}
@@ -71,7 +71,7 @@
                                 </a>
                             </li>
                         {/if}
-                    </ul>
+                    </ul>*}
                 </div>
             </nav>
             {foreach $flashes as $flash}
@@ -123,6 +123,7 @@
                             <li><a href="{link Archive:2014}" data-hover="Archiv ročníku 2014">2014</a></li>
                             <li><a href="{link Archive:2015}" data-hover="Archiv ročníku 2015">2015</a></li>
                             <li><a href="{link Archive:2016}" data-hover="Archiv ročníku 2016">2016</a></li>
+                            <li><a href="/2017" data-hover="Archiv ročníku 2017">2017</a></li>
                         </ul>
                         <span>Předchozí ročníky:</span>
                     </div>
