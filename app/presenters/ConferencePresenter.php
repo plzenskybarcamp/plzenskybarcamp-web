@@ -49,7 +49,7 @@ class ConferencePresenter extends BasePresenter
 		$matches = NULL;
 		if( preg_match( '~youtu\\.?be(?:\\.com)?/(?:watch\\?v=)?([-_a-z0-9]{8,15})~i', $link[ 'url' ], $matches )) {
 			$link[ 'embed' ] = $this->buildCampainUrl(
-				"//www.youtube.com/embed/$matches[1]",
+				"https://www.youtube.com/embed/$matches[1]",
 				'yt-video-embed',
 				$campainId
 			);
