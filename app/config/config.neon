@@ -16,7 +16,7 @@ parameters:
 			version: latest
 			region: eu-west-1
 			credentials:
-				key: 'AKIAJNGXPRDE5WABGA5Q'
+				key: 'AKIAJ5ISQBDGSTBFFNUQ'
 				secret: 'put_your_key'
 		s3Storage:
 			bucket: plzenskybarcamp
