@@ -35,6 +35,10 @@ class ArchivePresenter extends BasePresenter
 		$this->render( 2016, $path );
 	}
 
+	public function render2017( $path ) {
+		$this->render( 2017, $path );
+	}
+
 	private function render( $vintage, $path ) {
 		$path = $this->preparePath( $path, $vintage );
 		$output = $this->loader->load( $path );
