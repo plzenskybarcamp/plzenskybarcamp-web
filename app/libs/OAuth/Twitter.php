@@ -67,7 +67,7 @@ class Twitter implements IClient
 	}
 
 	public function getIdentity() {
-		$content = $this->client->get('account/verify_credentials', array('include_email'=> TRUE));
+		$content = $this->client->get('account/verify_credentials', array('include_email'=> 'true'));
 
 		if (property_exists($content, "error")) {
 			Debugger::log( "Unable to get user info from Twitter API ($content->error)" );
