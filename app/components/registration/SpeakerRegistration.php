@@ -61,27 +61,31 @@ class SpeakerRegistration extends Control {
 	}
 
 	public function addTalksFields( $container ) {
-		$container->addText( 'title', 'Název přednášky' )
+        /** @var Form $container */
+        $container->addText( 'title', 'Název přednášky' )
 			->addRule(Form::FILLED, 'Název přednášky musí být vyplněn')
 			->setAttribute('placeholder', 'Zadej název přednášky');
 		$container->addTextArea( 'description', 'Popis přednášky' )
 			->addRule(Form::FILLED, 'Popis přednášky musí být vyplněn');
 		$container->addTextArea( 'purpose', 'Komu je určená?' )
 			->addRule(Form::FILLED, 'Komu je přednáška určená musí být vyplněno');
+        $container->addCheckbox( 'allow_publish', 'Souhlasím se zveřejněním mého jména a fotografie na seznamu účastníků.' )
+            ->setRequired('Potřebujeme Tvůj souhlas pro zveřejnění tvých údajů. Bez toho to bohužel nejde.');
 		return $container;
 	}
 
 	public function addUsersFields( $container ) {
+        /** @var Form $container */
 		$container->addText( 'linked', 'LinkedIn' )
-			->setAttribute('placeholder', 'https://www.linkedin.com/in/grudl')
+			->setAttribute('placeholder', 'https://www.linkedin.com/in/example')
 			->addCondition(Form::FILLED)
 				->addRule(Form::URL, "Adresa v LinkedIn nevypadá jako webová adresa, překontroluj to, prosím");
 		$container->addText( 'web', 'Web' )
-			->setAttribute('placeholder', 'https://davidgrudl.com')
+			->setAttribute('placeholder', 'https://www.example.com')
 			->addCondition(Form::FILLED)
 				->addRule(Form::URL, "Adresa v poli Web nevypadá jako webová adresa, překontroluj to, prosím");
 		$container->addText( 'facebook', 'Facebook' )
-			->setAttribute('placeholder', 'https://www.facebook.com/davidgrudl')
+			->setAttribute('placeholder', 'https://www.facebook.com/example')
 			->addCondition(Form::FILLED)
 				->addRule(Form::URL, "Adresa pro Facebook nevypadá jako webová adresa, překontroluj to, prosím");
 

@@ -6,6 +6,7 @@ use Nette\Application\UI\Control,
 	Nette\Application\UI\Form,
 	MongoDB\Model\UTCDateTimeConverter,
 	MongoDB\Model\MongoDbSanitizer;
+use Nette\Utils\Html;
 
 class UserRegistration extends Control {
 
@@ -55,23 +56,35 @@ class UserRegistration extends Control {
 	}
 
 	public function addUsersFields( $container ) {
-		$container->addText( 'name', 'Jméno a příjmení' )
+
+        /** @var Form $container */
+        $container->addText( 'name', 'Jméno a příjmení' )
 			->addRule(Form::FILLED, 'Jméno musí být vyplněno')
-			->setOption('description', 'Tvoje jméno a profilovka ze sociální sítě bude veřejně viditelná v seznamu účastníků');
+			->setOption('description', 'Tvoje jméno a profilovka ze sociální sítě může být veřejně viditelná v seznamu účastníků');
 		$container->addText( 'twitter', 'Twitter' )
-			->setAttribute('placeholder', '@DavidGrudl');
+			->setAttribute('placeholder', '@TvujTwitter');
 		$container->addText( 'email', 'E-mail')
 			->addRule(Form::EMAIL, 'Tenhle e-mail nevypadá jako e-mail, zkuste se na to podívat')
 			->setRequired( 'E-mail musí být vyplněn' )
-			->setAttribute('placeholder', 'grudl@gmail.com')
+			->setAttribute('placeholder', 'email@example.com')
 			->setOption('description', 'Email nebude nikde zveřejněn');
 		$container->addTextArea( 'bio', 'Bio – aneb napiš nám pár slov o sobě' )
 			->setOption('description', 'Bio je veřejně viditelné v seznamu účastníků')
 			->addRule(Form::FILLED, 'Prosím, nenechávej Bio prázdné a napiš nám o sobě něco.');
 		$container->addCheckbox( 'lunch', 'Mám zájem o oběd (cca 130 Kč)' );
 		$container->addCheckbox( 'afterparty', 'Zúčastním se afterparty v centru Plzně' );
-		$container->addCheckbox( 'allow_mail', 'Zašlete mi před akcí e-mail s instrukcemi' )
+		$container->addCheckbox( 'allow_newsletter', 'Chci dostávat informační e-maily ohledně tohoto i následujících ročníků (např.: připomenutí před akcí, informace o partnerech.)' )
 			->setDefaultValue( TRUE );
+		$container->addCheckbox( 'allow_publish', 'Souhlasím se zveřejněním mého jména a fotografie na seznamu účastníků.' )
+			->setDefaultValue( TRUE );
+		$container->addCheckbox(
+		    'consens',
+            Html::el()
+                ->addText('Souhlasím se sběrem os. údajů (')
+                ->addHtml(Html::el('a')->href("https://www.plzenskybarcamp.cz/privacy-policy")->addText('Zásady ochrany osobních údajů'))
+                ->addText(')')
+        )->setRequired('Potřebujeme Tvůj souhlas pro zpracování osobních údajů. Bez toho to bohužel nejde.');
+
 		return $container;
 	}
 
