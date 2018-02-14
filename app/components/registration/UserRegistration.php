@@ -68,7 +68,7 @@ class UserRegistration extends Control {
 		$container->addTextArea( 'bio', 'Bio – aneb napiš nám pár slov o sobě' )
 			->setOption('description', 'Bio je veřejně viditelné v seznamu účastníků')
 			->addRule(Form::FILLED, 'Prosím, nenechávej Bio prázdné a napiš nám o sobě něco.');
-		$container->addCheckbox( 'lunch', 'Mám zájem o oběd (cca 100 Kč)' );
+		$container->addCheckbox( 'lunch', 'Mám zájem o oběd (cca 130 Kč)' );
 		$container->addCheckbox( 'afterparty', 'Zúčastním se afterparty v centru Plzně' );
 		$container->addCheckbox( 'allow_mail', 'Zašlete mi před akcí e-mail s instrukcemi' )
 			->setDefaultValue( TRUE );
