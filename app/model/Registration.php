@@ -161,6 +161,10 @@ class Registration {
 		return $this->getFilteredConferrees( [], $limit );
 	}
 
+	public function getPublicConferrees( $limit = 0 ) {
+		return $this->getFilteredConferrees( [ 'allow_publish' => true], $limit );
+	}
+
 	public function countConferrees( ) {
 		return $this->confereeCollection->count(
 			[],
