@@ -1,7 +1,6 @@
 {block bodyClass}wide{/block}
 {block title}{block h1}{$talk['title']}{/block} - Plzeňský Barcamp{/block}
-{block metaDescription}{$talk['title']} - jedna ze série neotřelých přednášek, které se možná objeví na Plzeňském Barcampu. Přijď a poslechni si čerstvé pohledy na témata bez 
-hranic{/block}
+{block metaDescription}{$talk['description']}{/block}
 {block metaKeywords}přednáška, řečník, záznam, Plzeň, Barcamp, konference, téma, networking, workshop, prezentace, projev{/block}
 {block content}
 
@@ -64,7 +63,7 @@ hranic{/block}
 
         <div id="speaker-detail" class="clearfix">
             <p><strong>{$speaker['name']}</strong></p>
-            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{$speaker['picture_url']|biggerTwitterPicture}" alt="{$speaker['name']}">
+            <img class="user-pic user-pic-s180" n:ifset="$speaker['picture_url']" src="{block ogImage}{$speaker['picture_url']|biggerTwitterPicture}{/block}" alt="{$speaker['name']}">
 
             <div>
                 <ul class="networks">
@@ -75,7 +74,7 @@ hranic{/block}
                         <a href="{$speaker['facebook']}" target="_blank"><i>Facebook</i></a>
                     </li>
                     <li n:if="@$speaker['twitter']" class="tw">
-                        <a href="{$speaker['twitter']|twitterize:"https://twitter.com/"}" target="_blank" title="{$speaker['twitter']|twitterize:"@"}"><i>Twitter</i></a>
+                        <a href="{$speaker['twitter']|twitterize:"https://twitter.com/"}" target="_blank" title="{block creatorTwitterUsername}{$speaker['twitter']|twitterize:"@"}{/block}"><i>Twitter</i></a>
                     </li>
                     <li n:if="@$speaker['linked']" class="ln">
                         <a href="{$speaker['linked']}" target="_blank"><i>LinkedIn</i></a>

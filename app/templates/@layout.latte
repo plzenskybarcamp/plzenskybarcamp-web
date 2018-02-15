@@ -9,21 +9,23 @@
 <!DOCTYPE html>
 <html lang="cs" dir="ltr">
         <meta charset="utf-8">
-        <meta name="description" content="{block metaDescription}Plzeňský Barcamp, 7. 4. 2018, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
+        <meta name="description" content="{block metaDescription|strip|striptags|truncate:300}Plzeňský Barcamp, 7. 4. 2018, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
         <meta name="keywords" content="{block metaKeywords}{/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
 
         <title>{block title|striptags}Plzeňský Barcamp{/block}</title>
 
+        <meta property="og:type" content="website">
         <meta property="og:title" content="{include title|striptags}">
         <meta property="og:site_name" content="Plzeňský Barcamp">
         <meta property="og:url" content="{link //this}">
-        <meta property="og:description" content="{include metaDescription}">
+        <meta property="og:description" content="{include metaDescription|strip|striptags|truncate:300}">
         <meta property="og:locale" content="cs_CZ">
-        <meta property="og:image" content="{$baseUri}/images/barcamp-og.png">
-        <meta property="og:image:type" content="image/png">
-        <meta property="og:image:width" content="300">
-        <meta property="og:image:height" content="300">
+        <meta property="og:image" content="{block ogImage}{$baseUri}/images/barcamp-og.png{/block}">
+        <meta property="fb:app_id" content="504432792996629">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@plzenskybarcamp">
+        <meta name="twitter:creator" content="{block creatorTwitterUsername}@plzenskybarcamp{/block}">
         <meta name="google-site-verification" content="X6TDzyeXmaAgvKo48Ce7DVYd3zyyPBrmE-p2wqX-m1Y">
 
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?v1426447760">
