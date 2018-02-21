@@ -8,22 +8,15 @@
 
     <title>{block title|striptags}Plzeňský Barcamp{/block}</title>
 
-    <link href="{$basePath}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{$basePath}/css/admin.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" rel="stylesheet" crossorigin="anonymous">
-    {block scripts}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js" integrity="sha384-6IvGwMLZzeEDqfqkglJOV5PIsjfAnO7VLUOZKdFasr8OfwhrG5BU1xnrmfYhIJbA" crossorigin="anonymous" async></script>
-    <script src="{$basePath}/js/admin.min.js?v1456840413" async></script>
-    {/block}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js" integrity="sha384-6IvGwMLZzeEDqfqkglJOV5PIsjfAnO7VLUOZKdFasr8OfwhrG5BU1xnrmfYhIJbA" crossorigin="anonymous" defer></script>
+    <script src="{$basePath}/js/libs/netteForms.js" defer></script>
+    <script src="{$basePath}/js/admin.js" defer></script>
   </head>
   <body class="{block bodyClass}{/block}">
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PW7QW8"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>(function(w,d,s,l,i){ w[l]=w[l]||[];w[l].push({ 'gtm.start':
-    new Date().getTime(),event:'gtm.js' });var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PW7QW8');</script>
     <script> document.documentElement.className += ' js'</script>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
