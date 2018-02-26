@@ -39,7 +39,7 @@ use Nette,
                 ( $user['created_date'] ? (new UTCDateTimeConverter($user['created_date']))->format('Y-m-d H:i:s') : NULL ),
                 ( $user['lunch'] ? "Ano" : "Ne"),
                 ( $user['afterparty'] ? "Ano" : "Ne"),
-                ( $user['allow_mail'] ? "Ano" : "Ne"),
+                ( $user['allow_newsletter'] ? "Ano" : "Ne"),
                 ( $user['bio'] ),
             ), ",", '"');
         }
