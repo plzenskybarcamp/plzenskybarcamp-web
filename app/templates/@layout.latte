@@ -28,12 +28,12 @@
         <meta name="twitter:creator" content="{block creatorTwitterUsername}@plzenskybarcamp{/block}">
         <meta name="google-site-verification" content="X6TDzyeXmaAgvKo48Ce7DVYd3zyyPBrmE-p2wqX-m1Y">
 
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?v1426447760">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?v1426447760">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?{filemtime($wwwDir . '/css/style.css')}">
+        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?{filemtime($wwwDir . '/css/print.css')}">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
 
         {block scripts}
-        <script src="{$basePath}/js/main.min.js?v1459198684" async></script>
+        <script src="{$basePath}/js/main.min.js?{filemtime($wwwDir . '/js/main.min.js')}" async></script>
         <script>
             dataLayer = [];
         </script>
