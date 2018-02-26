@@ -34,6 +34,9 @@ abstract class BasePresenter extends \App\Presenters\BasePresenter
 	}
 
     public function beforeRender() {
+        $parameters = $this->context->getParameters();
+        $this->template->wwwDir = $parameters['wwwDir'];
+
         $this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
     }
 
