@@ -163,8 +163,7 @@ use Nette,
         $form->addHidden( 'linkId' );
         $form->addCheckbox( 'is_public', 'Publikováno')
             ->setDefaultValue( TRUE );
-        $form->addText( 'title', 'Nadpis', 40)
-            ->setRequired('Must be valid title.');
+        $form->addText( 'title', 'Nadpis', 40);
         $form->addText( 'url', 'URL', 40)
             ->addRule(Form::URL, 'Must be a valid URL')
             ->setRequired('Must be valid URL.');
