@@ -65,8 +65,11 @@
                         </p>
                     </td>
                     <td n:if="$isVoteShows" class="fourth-td">
-                        {include #vote}
-                        {include #votes_count}
+                        {if !$ranking && $isVotingOpen}
+                            {include #vote}
+                        {else}
+                            {include #votes_count}
+                        {/if}
                     </td>
                 </tr>
             </table>
