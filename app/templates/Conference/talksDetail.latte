@@ -19,10 +19,9 @@
 
             {if $isTalkLocationShows}
             {ifset $talk['place']}
-                <h3>Kdy se přednáška bude konat?</h3>
+                <h3>Kdy a kde přednáška probíhá?</h3>
                 <p>
-                    Přednáška bude v místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>
-                    (<a href="https://script.google.com/macros/s/AKfycbzRVH3PA51rwYk7KklE4MSMbSyIODvHLeLOolIXqwuz0b0VRXXU/exec?talkId={$talk['_id']}" target="_blank" class="tooltip" title="Nechte si zaslat pozvánku do svého Google kalendáře">přidat do kalendáře</a>).<br>
+                    Přednáška je v místnosti <strong>{$talk['place']}</strong> od <strong>{$talk['time_from']} do {$talk['time_to']}</strong>.<br>
                     Podívej se na kompletní <a n:href="Program:list">program</a>.
 
                 </p>
