@@ -11,8 +11,15 @@
 		}
 	],
 	"require": {
-		"php": "~5.5",
-		"nette/nette": "~2.0",
-		"aws/aws-sdk-php": "^3.2"
+		"php": ">=7.2",
+		"aws/aws-sdk-php": "^3.2",
+		"nette/application": "^2.4",
+		"nette/bootstrap": "^2.4",
+		"nette/caching": "^2.5",
+		"nette/http": "^2.4",
+		"nette/robot-loader": "^3.0",
+		"nette/utils": "^2.5",
+		"latte/latte": "^2.4",
+		"tracy/tracy": "^2.5"
 	}
 }
