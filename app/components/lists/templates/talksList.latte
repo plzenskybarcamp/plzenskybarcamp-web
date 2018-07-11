@@ -57,9 +57,9 @@
                     </td>
                     <td colspan="1" class="second-td">
                         <a href="{plink Conference:talksDetail talkId => $talk['_id']}">{$talk['title']}</a>
-                        <p>{!$talk['description']|escape|nl2br}</p>
+                        <p>{$talk['description']|breaklines}</p>
                         <p><strong>Komu je přednáška určena?</strong><br>
-                            {!$talk['purpose']|escape|nl2br}
+                            {$talk['purpose']|breaklines}
                         </p>
                     </td>
                     <td n:if="$isVoteShows" class="fourth-td">

@@ -12,10 +12,10 @@
                 Přednáška byla zrušena a nekoná se
                 {ifset $talk['disabled_reason']}<br>Důvod: {$talk['disabled_reason']}.{/ifset}
             </p>
-            <p>{!$talk['description']|escape|nl2br}</p>
+            <p>{$talk['description']|breaklines}</p>
 
             <h3>Komu je přednáška určena?</h3>
-            <p>{!$talk['purpose']|escape|nl2br}</p>
+            <p>{$talk['purpose']|breaklines}</p>
 
             {if $isTalkLocationShows}
             {ifset $talk['place']}
