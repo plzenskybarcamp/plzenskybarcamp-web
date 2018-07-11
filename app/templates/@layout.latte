@@ -35,7 +35,7 @@
         {block scripts}
         <script src="https://cdn.plzenskybarcamp.cz/public/2018/js/main.min.js?{filemtime($wwwDir . '/js/main.min.js')}" async></script>
         <script>
-            dataLayer = [];
+            dataLayer = [{=[isArchive=>true, archiveYear=>2018]}];
         </script>
         {/block}
         {block head}{/block}
