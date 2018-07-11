@@ -62,18 +62,18 @@
                         <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
                         <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
                     </ul>
-                    <ul class="info-navigation">
-                        {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-button" class="track-click">Přihlásit</a></li>{/if}
-                        {if $user->isLoggedIn()}<li><a href="{link Sign:out}" id="logout-button">Odhlásit</a></li>{/if}
-                        {if $user->isLoggedIn()}
-                            <li>
-                                <img n:ifset="$user->identity->picture_url" class="user-pic user-pic-s25" src="{$user->identity->picture_url}">
-                                <a href="{link Conference:profil}" n:tag-if="$user->identity->isRegistered()">
-                                    {$user->identity->name|truncate:20}
-                                </a>
-                            </li>
-                        {/if}
-                    </ul>
+                    {*<ul class="info-navigation">*}
+                        {*{if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-button" class="track-click">Přihlásit</a></li>{/if}*}
+                        {*{if $user->isLoggedIn()}<li><a href="{link Sign:out}" id="logout-button">Odhlásit</a></li>{/if}*}
+                        {*{if $user->isLoggedIn()}*}
+                            {*<li>*}
+                                {*<img n:ifset="$user->identity->picture_url" class="user-pic user-pic-s25" src="{$user->identity->picture_url}">*}
+                                {*<a href="{link Conference:profil}" n:tag-if="$user->identity->isRegistered()">*}
+                                    {*{$user->identity->name|truncate:20}*}
+                                {*</a>*}
+                            {*</li>*}
+                        {*{/if}*}
+                    {*</ul>*}
                 </div>
             </nav>
             {foreach $flashes as $flash}
