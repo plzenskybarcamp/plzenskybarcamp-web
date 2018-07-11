@@ -8,9 +8,10 @@ use Nette,
     Nette\Templating\FileTemplate,
     App\Components\BootstrapizeForm,
     MongoDB\Model\MongoDbSanitizer;
+use App\Components\Helpers;
 
 
-  class TalksPresenter extends BasePresenter
+class TalksPresenter extends BasePresenter
 {
 
     private $registrationModel;
@@ -68,7 +69,7 @@ use Nette,
             throw new Nette\Application\BadRequestException( 'Talks not found', '404');
         }
 
-        $this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
+        $this->template->getLatte()->addFilter('mongoFormat', [Helpers::class, 'mongoFormat']);
 
         $this->template->talk = $talk;
         $this->template->talkId = $talkId;

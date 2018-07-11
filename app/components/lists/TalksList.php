@@ -4,6 +4,7 @@ namespace App\Components\Lists;
 
 use Nette\Application\UI\Control;
 use Nette\Application\Responses\JsonResponse;
+use App\Components\Helpers;
 
 class TalksList extends Control {
 
@@ -17,8 +18,8 @@ class TalksList extends Control {
 	}
 
 	public function render( $ranking ) {
-		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
-		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
+		$this->template->getLatte()->addFilter('twitterize', [Helpers::class, 'twitterize']);
+		$this->template->getLatte()->addFilter('biggerTwitterPicture', [Helpers::class, 'biggerTwitterPicture']);
 		$this->template->setFile( __DIR__ . '/templates/talksList.latte');
 
 		$sort = NULL;

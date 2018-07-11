@@ -7,9 +7,10 @@ use Nette,
     Nette\Application\UI\Form,
     App\Components\BootstrapizeForm,
     MongoDB\Model\UTCDateTimeConverter;
+use App\Components\Helpers;
 
 
-  class UsersPresenter extends BasePresenter
+class UsersPresenter extends BasePresenter
 {
 
     private $registrationModel;
@@ -19,7 +20,7 @@ use Nette,
     }
 
     public function renderList( ) {
-        $this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
+        $this->template->getLatte()->addFilter('mongoFormat', [Helpers::class, 'mongoFormat']);
         $this->template->users = $this->registrationModel->getConferrees();
     }
     public function actionCsv( ) {

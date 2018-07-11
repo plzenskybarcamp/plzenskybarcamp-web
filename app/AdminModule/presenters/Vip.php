@@ -6,9 +6,10 @@ use Nette,
 	App\Model,
     Nette\Application\UI\Form,
     App\Components\BootstrapizeForm;
+use App\Components\Helpers;
 
 
-  class VipPresenter extends BasePresenter
+class VipPresenter extends BasePresenter
 {
 
     private $registrationModel;
@@ -18,7 +19,7 @@ use Nette,
     }
 
     public function renderList( $token = NULL ) {
-        $this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
+        $this->template->getLatte()->addFilter('mongoFormat', [Helpers::class, 'mongoFormat']);
 
         $tokensCursor = $this->registrationModel->findVipTokens([], ['sort'=>['created_date'=>-1]]);
 

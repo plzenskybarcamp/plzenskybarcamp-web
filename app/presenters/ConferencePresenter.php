@@ -11,6 +11,7 @@ use Nette,
 	App\Components\Lists\TalksList,
 	Nette\Application\Responses\JsonResponse,
 	MongoDB\Model\MongoDbSanitizer;
+use App\Components\Helpers;
 
 
 class ConferencePresenter extends BasePresenter
@@ -110,8 +111,8 @@ class ConferencePresenter extends BasePresenter
 			}
 		}
 
-		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
-		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
+		$this->template->getLatte()->addFilter('twitterize', [Helpers::class, 'twitterize']);
+		$this->template->getLatte()->addFilter('biggerTwitterPicture', [Helpers::class, 'biggerTwitterPicture']);
 		$this->template->talk = $talk;
 		$this->template->speaker = $talk['speaker'];
 		$this->template->isVotingOpen = $this->configModel->getConfig('isVotingOpen');
@@ -125,8 +126,8 @@ class ConferencePresenter extends BasePresenter
 			$this->flashMessage('Omlouváme se, ale profil návštěvníka je dostupný až po registraci', 'error');
 			$this->redirect('Homepage:default');
 		}
-		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
-		$this->template->registerHelper('mongoFormat', array( 'App\Components\Helpers', 'mongoFormat'));
+		$this->template->getLatte()->addFilter('biggerTwitterPicture', [Helpers::class, 'biggerTwitterPicture']);
+		$this->template->getLatte()->addFilter('mongoFormat', [Helpers::class, 'mongoFormat']);
 		$this->template->conferree = $this->conferree;
 		$this->template->talk = isset( $this->conferree['talk'] )? $this->conferree['talk'] : NULL;
 	}
