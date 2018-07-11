@@ -21,19 +21,19 @@
         <meta property="og:url" content="{link //this}">
         <meta property="og:description" content="{include metaDescription|strip|striptags|truncate:300}">
         <meta property="og:locale" content="cs_CZ">
-        <meta property="og:image" content="{block ogImage}{$baseUri}/images/barcamp-og.png{/block}">
+        <meta property="og:image" content="{block ogImage}https://cdn.plzenskybarcamp.cz/public/2018/images/barcamp-og.png{/block}">
         <meta property="fb:app_id" content="504432792996629">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@plzenskybarcamp">
         <meta name="twitter:creator" content="{block creatorTwitterUsername}@plzenskybarcamp{/block}">
         <meta name="google-site-verification" content="X6TDzyeXmaAgvKo48Ce7DVYd3zyyPBrmE-p2wqX-m1Y">
 
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?{filemtime($wwwDir . '/css/style.css')}">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?{filemtime($wwwDir . '/css/print.css')}">
-        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        <link rel="stylesheet" media="screen,projection,tv" href="https://cdn.plzenskybarcamp.cz/public/2018/css/style.css?{filemtime($wwwDir . '/css/style.css')}">
+        <link rel="stylesheet" media="print" href="https://cdn.plzenskybarcamp.cz/public/2018/css/print.css?{filemtime($wwwDir . '/css/print.css')}">
+        <link rel="shortcut icon" href="https://cdn.plzenskybarcamp.cz/public/2018/images/favicon.ico">
 
         {block scripts}
-        <script src="{$basePath}/js/main.min.js?{filemtime($wwwDir . '/js/main.min.js')}" async></script>
+        <script src="https://cdn.plzenskybarcamp.cz/public/2018/js/main.min.js?{filemtime($wwwDir . '/js/main.min.js')}" async></script>
         <script>
             dataLayer = [];
         </script>
@@ -88,7 +88,7 @@
 
             <div class="inner information">
                 <span class="logo">
-                    <a href="{link //Homepage:default}"><img src="{$baseUri}/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp 2014"></a>
+                    <a href="{link //Homepage:default}"><img src="https://cdn.plzenskybarcamp.cz/public/2018/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp 2014"></a>
                 </span>
                 <h1>{block h1}Plzeňský Barcamp 2018{/block}</h1>
                 <time datetime="2018-04-07">7. dubna 2018</time>
