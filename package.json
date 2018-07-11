@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.org/jakubboucek/plzenskybarcamp-web.git"
+    "url": "https://github.org/plzenskybarcamp/plzenskybarcamp-web.git"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

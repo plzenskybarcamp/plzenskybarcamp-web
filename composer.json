@@ -1,21 +1,13 @@
 {
-	"name": "jakubboucek/plzenskybarcamp.cz",
+	"name": "plzenskybarcamp/plzenskybarcamp.cz",
 	"description": "Web Plzeňského Barcampu",
-	"homepage": "http://plzenskybarcamp.cz",
+	"homepage": "https://www.plzenskybarcamp.cz",
 	"type": "project",
-	"license": ["proprietary", "BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"license": ["MIT"],
 	"authors": [
 		{
 			"name": "Jakub Bouček",
 			"email": "pan@jakubboucek.cz"
-		},
-		{
-			"name": "David Grudl",
-			"homepage": "http://davidgrudl.com"
-		},
-		{
-			"name": "Nette Community",
-			"homepage": "http://nette.org/contributors"
 		}
 	],
 	"require": {
