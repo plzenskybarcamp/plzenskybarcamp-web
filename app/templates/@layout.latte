@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="cs" dir="ltr">
         <meta charset="utf-8">
-        <meta name="description" content="{block metaDescription|strip|striptags|truncate:300}Plzeňský Barcamp, 7. 4. 2018, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
+        <meta name="description" content="{block metaDescription|stripHtml|truncate:300}Plzeňský Barcamp, 7. 4. 2018, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
         <meta name="keywords" content="{block metaKeywords}{/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
 
@@ -19,7 +19,7 @@
         <meta property="og:title" content="{include title|striptags}">
         <meta property="og:site_name" content="Plzeňský Barcamp">
         <meta property="og:url" content="{link //this}">
-        <meta property="og:description" content="{include metaDescription|strip|striptags|truncate:300}">
+        <meta property="og:description" content="{include metaDescription|stripHtml|truncate:300}">
         <meta property="og:locale" content="cs_CZ">
         <meta property="og:image" content="{block ogImage}{$baseUri}/images/barcamp-og.png{/block}">
         <meta property="fb:app_id" content="504432792996629">
