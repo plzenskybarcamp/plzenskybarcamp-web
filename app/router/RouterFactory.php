@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Nette\Application\Routers\Route;
@@ -15,7 +17,7 @@ class RouterFactory
     /**
      * @return \Nette\Application\IRouter
      */
-    public static function createRouter()
+    public static function createRouter(): \Nette\Application\IRouter
     {
         return self::createHttpRouter();
     }
@@ -24,7 +26,7 @@ class RouterFactory
     /**
      * @return \Nette\Application\IRouter
      */
-    public static function createHttpRouter()
+    public static function createHttpRouter(): \Nette\Application\IRouter
     {
         $router = new RouteList();
 

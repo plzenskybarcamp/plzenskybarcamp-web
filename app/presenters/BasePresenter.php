@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Presenters;
 
 use App\Model\WebDir;
@@ -20,7 +22,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /**
      *
      */
-    public function beforeRender()
+    public function beforeRender(): void
     {
         $this->template->wwwDir = $this->webDir->getPath();
     }
@@ -29,7 +31,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /**
      * @param WebDir $webDir
      */
-    public function injectImages(WebDir $webDir)
+    public function injectWebdir(WebDir $webDir): void
     {
         $this->webDir = $webDir;
     }

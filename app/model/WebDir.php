@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 /**
@@ -18,18 +20,18 @@ class WebDir
      * WebDir constructor.
      * @param string $wwwDir
      */
-    public function __construct($wwwDir)
+    public function __construct(string $wwwDir)
     {
         $this->wwwDir = $wwwDir;
     }
 
 
     /**
-     * @param string|null $suffix
+     * @param string $suffix
      * @return string
      */
-    public function getPath($suffix = null)
+    public function getPath(string $suffix = ''): string
     {
-        return $this->wwwDir . ($suffix !== null ? DIRECTORY_SEPARATOR . $suffix : '');
+        return $this->wwwDir . ($suffix !== '' ? DIRECTORY_SEPARATOR . $suffix : '');
     }
 }
