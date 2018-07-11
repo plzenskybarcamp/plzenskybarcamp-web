@@ -1,6 +1,5 @@
 <?php
-
-use Nette\Application\Routers\Route;
+declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -11,17 +10,25 @@ $configurator->enableDebugger(__DIR__ . '/../log', 'pan@jakubboucek.cz');
 
 $configurator->setTempDirectory(__DIR__ . '/../temp');
 
-if(!file_exists(__DIR__ . '/../temp/sessions')) { mkdir(__DIR__ . '/../temp/sessions'); }
+checkSessionDirExists();
 
 $configurator->createRobotLoader()
-	->addDirectory(__DIR__)
-	->register();
+    ->addDirectory(__DIR__)
+    ->register();
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-if(file_exists(__DIR__ . '/config/config.local.neon')) {
-	$configurator->addConfig(__DIR__ . '/config/config.local.neon');
+if (file_exists(__DIR__ . '/config/config.local.neon')) {
+    $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 }
 
-$container = $configurator->createContainer();
+return $configurator->createContainer();
 
-return $container;
+function checkSessionDirExists(): void
+{
+    $sessionDir = __DIR__ . '/../temp/sessions';
+    if (!file_exists($sessionDir)) {
+        if (!mkdir($sessionDir) && !is_dir($sessionDir)) {
+            throw new \RuntimeException(sprintf('Session directory "%s" was not created', $sessionDir));
+        }
+    }
+}

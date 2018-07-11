@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Nette,
-	Nette\Application\Routers\RouteList,
-	Nette\Application\Routers\Route,
-	Nette\Application\Routers\CliRouter;
+use Nette\Application\Routers\CliRouter;
+use Nette\Application\Routers\Route;
+use Nette\Application\Routers\RouteList;
 
 
 /**
@@ -14,11 +13,12 @@ use Nette,
 class RouterFactory
 {
 
-	/**
-	 * @return \Nette\Application\IRouter
-	 */
-	public function createRouter( $consoleMode )
-	{
+    /**
+     * @param $consoleMode
+     * @return \Nette\Application\IRouter
+     */
+	public function createRouter( $consoleMode ): \Nette\Application\IRouter
+    {
 		if( $consoleMode ) {
 			return $this->createCliRouter();
 		}
@@ -31,8 +31,8 @@ class RouterFactory
 	/**
 	 * @return \Nette\Application\IRouter
 	 */
-	public function createCliRouter()
-	{
+	public function createCliRouter(): \Nette\Application\IRouter
+    {
 		$router = new RouteList('Cli');
 		$router[] = new CliRouter();
 		return $router;
@@ -40,8 +40,8 @@ class RouterFactory
 	/**
 	 * @return \Nette\Application\IRouter
 	 */
-	public function createHttpRouter()
-	{
+	public function createHttpRouter(): \Nette\Application\IRouter
+    {
 		$router = new RouteList();
 		$router[] = new Route('2018', 'Homepage:default', Route::ONE_WAY);
 		$router[] = new Route('2018/partneri', 'Homepage:partners', Route::ONE_WAY);
@@ -72,10 +72,7 @@ class RouterFactory
 		$router[] = new Route('login/process/facebook', 'Sign:processFb');
 		$router[] = new Route('login/process/twitter', 'Sign:processTw');
 		$router[] = new Route('/vip/<token>', 'Vip:useToken');
-		$router[] = new Route('2014[/<path .+>]', 'Archive:2014');
-		$router[] = new Route('2015[/<path .+>]', 'Archive:2015');
-		$router[] = new Route('2016[/<path .+>]', 'Archive:2016');
-		$router[] = new Route('2017[/<path .+>]', 'Archive:2017');
+		$router[] = new Route('<year 201[4-7]>[/<path .+>]', 'Archive:view');
 
 		$router[] = new Route('no-track', 'Homepage:noTrack');
 		$router[] = new Route('s/<key [a-z0-9]+>[-<utm [a-z0-9]+>]', 'Shortlink:go');

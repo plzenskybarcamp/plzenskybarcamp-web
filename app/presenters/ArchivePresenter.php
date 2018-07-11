@@ -1,12 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Presenters;
 
-use Nette,
-	Nette\Http\IResponse,
-	Nette\Application\BadRequestException,
-	Nette\Application\Responses\TextResponse,
-	App\Model\ArchiveLoader;
+use App\Model\ArchiveLoader;
+use Nette\Application\BadRequestException;
+use Nette\Application\Responses\TextResponse;
 
 
 /**
@@ -15,41 +14,41 @@ use Nette,
 class ArchivePresenter extends BasePresenter
 {
 
-	private $loader;
-	private $response;
+    private $loader;
 
-	public function __construct( ArchiveLoader $loader, IResponse $response ) {
-		$this->loader = $loader;
-		$this->response = $response;
-	}
 
-	public function render2014( $path ) {
-		$this->render( 2014, $path );
-	}
+    public function __construct(ArchiveLoader $loader)
+    {
+        parent::__construct();
 
-	public function render2015( $path ) {
-		$this->render( 2015, $path );
-	}
+        $this->loader = $loader;
+    }
 
-	public function render2016( $path ) {
-		$this->render( 2016, $path );
-	}
 
-	public function render2017( $path ) {
-		$this->render( 2017, $path );
-	}
+    /**
+     * @param string $year
+     * @param string $path
+     * @throws BadRequestException
+     */
+    public function renderView(string $year, string $path = ''): void
+    {
+        $path = $this->preparePath($path, $year);
+        $output = $this->loader->load($path);
+        if ($output['status'] !== 200) {
+            throw new BadRequestException('Cannot load archived page ' . $path, $output['status']);
+        }
+        $this->sendResponse(new TextResponse($output['content']));
+    }
 
-	private function render( $vintage, $path ) {
-		$path = $this->preparePath( $path, $vintage );
-		$output = $this->loader->load( $path );
-		if( $output['status'] != 200 ) {
-			throw new BadRequestException( 'Cannot load archived page ' . $path, $output['status']);
-		}
-		$this->sendResponse( new TextResponse( $output['content'] ) );
-	}
 
-	private function preparePath( $path, $year ) {
-		return "/$year" . rtrim("/$path", '/') . '.html';
+    /**
+     * @param string $path
+     * @param string $year
+     * @return string
+     */
+    private function preparePath(string $path, string $year): string
+    {
+        return "/$year" . rtrim("/$path", '/') . '.html';
 
-	}
+    }
 }

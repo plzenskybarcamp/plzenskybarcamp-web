@@ -2,10 +2,11 @@
 
 namespace App\Aws;
 
-use Aws\Sdk as Sdk,
-	Nette\Object;
+use Aws\Sdk;
+use Nette\SmartObject;
 
-class Aws extends Object {
+class Aws {
+    use SmartObject;
 
 	private $awsInstance;
 	private $appConfig;
@@ -14,15 +15,18 @@ class Aws extends Object {
 		$this->appConfig = $appConfig;
 	}
 
-	public function getS3() {
+	public function getS3(): \Aws\S3\S3Client
+    {
 		return $this->getAwsInstance()->createS3();
 	}
 
-	public function getSns() {
+	public function getSns(): \Aws\Sns\SnsClient
+    {
 		return $this->getAwsInstance()->createSns();
 	}
 
-	public function getAwsInstance() {
+	public function getAwsInstance(): Sdk
+    {
 		if( ! $this->awsInstance) {
 			$this->awsInstance = new Sdk( $this->appConfig );
 		}

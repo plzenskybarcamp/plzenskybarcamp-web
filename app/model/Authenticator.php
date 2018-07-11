@@ -2,23 +2,20 @@
 
 namespace App;
 
-use Nette,
-	Nette\Utils\Strings,
-	App\Model;
+use App\Components\Registration\Identity;
+use Nette;
 
 
 /**
  * Users management.
  */
-class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator
+class Authenticator implements Nette\Security\IAuthenticator
 {
+    public function authenticate(array $credentials): Identity
+    {
+        $id = $credentials[0]['id'];
+        $data = $credentials[0]['data'];
 
-	public function authenticate(array $credentials) {
-		$id = $credentials[0]['id'];
-		$data = $credentials[0]['data'];
-
-		$identity = new \App\Components\Registration\Identity($id, NULL, $data);
-
-		return $identity;
-	}
+        return new Identity($id, null, $data);
+    }
 }

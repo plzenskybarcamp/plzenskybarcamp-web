@@ -2,96 +2,174 @@
 
 namespace App\Aws;
 
-class S3Object {
+/**
+ * Class S3Object
+ * @package App\Aws
+ * @property string $ACL Possible values: 'private', 'public-read', 'public-read-write', 'authenticated-read', 'bucket-owner-read', 'bucket-owner-full-control'
+ * @property \Psr\Http\Message\StreamableInterface $Body
+ * @property string $Bucket REQUIRED
+ * @property string $CacheControl
+ * @property string $ContentDisposition
+ * @property string $ContentEncoding
+ * @property string $ContentLanguage
+ * @property int $ContentLength
+ * @property string $ContentSHA256
+ * @property string $ContentType
+ * @property integer|string|\DateTime $Expires
+ * @property string $GrantFullControl
+ * @property string $GrantRead
+ * @property string $GrantReadACP
+ * @property string $GrantWriteACP
+ * @property string $Key REQUIRED
+ * @property array<string> $Metadata
+ * @property $RequestPayer
+ * @property string $SSECustomerAlgorithm
+ * @property string $SSECustomerKey
+ * @property string $SSECustomerKeyMD5
+ * @property string $SSEKMSKeyId
+ * @property string $ServerSideEncryption Possible values: 'AES256, 'aws:kms'
+ * @property string $SourceFile
+ * @property string $StorageClass 'STANDARD', 'REDUCED_REDUNDANCY', 'LT'
+ * @property string $WebsiteRedirectLocation
+ */
+class S3Object
+{
+    /**
+     * @var array
+     */
+    private $data;
 
-	private $data;
-	/*
-	'ACL' => 'private|public-read|public-read-write|authenticated-read|bucket-owner-read|bucket-owner-full-control',
-    'Body' => <Psr\Http\Message\StreamableInterface>,
-    'Bucket' => '<string>', // REQUIRED
-    'CacheControl' => '<string>',
-    'ContentDisposition' => '<string>',
-    'ContentEncoding' => '<string>',
-    'ContentLanguage' => '<string>',
-    'ContentLength' => <integer>,
-    'ContentSHA256' => '<string>',
-    'ContentType' => '<string>',
-    'Expires' => <integer || string || DateTime>,
-    'GrantFullControl' => '<string>',
-    'GrantRead' => '<string>',
-    'GrantReadACP' => '<string>',
-    'GrantWriteACP' => '<string>',
-    'Key' => '<string>', // REQUIRED
-    'Metadata' => ['<string>', ...],
-    'RequestPayer' => 'requester',
-    'SSECustomerAlgorithm' => '<string>',
-    'SSECustomerKey' => '<string>',
-    'SSECustomerKeyMD5' => '<string>',
-    'SSEKMSKeyId' => '<string>',
-    'ServerSideEncryption' => 'AES256|aws:kms',
-    'SourceFile' => '<string>',
-    'StorageClass' => 'STANDARD|REDUCED_REDUNDANCY|LT',
-    'WebsiteRedirectLocation' => '<string>',
-    */
 
-	public function __construct( $data = array() ) {
-		$this->data = $data;
-	}
+    /**
+     * S3Object constructor.
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        $this->data = $data;
+    }
 
-	public static function createFromFile( $fileName, $contentType = NULL ) {
-		if( $contentType === NULL ) {
-			$contentType = GuzzleHttp\Psr7\mimetype_from_filename( $fileName );
-		}
-		return new self(array(
-			'SourceFile' => $fileName,
-			'ContentType' => $contentType,
-		));
-	}
 
-	public static function createFromString( $body, $contentType ) {
-		return new self(array(
-			'Body' => $body,
-			'ContentType' => $contentType,
-		));
-	}
+    /**
+     * @param $fileName
+     * @param null $contentType
+     * @return S3Object
+     */
+    public static function createFromFile($fileName, $contentType = null): S3Object
+    {
+        if ($contentType === null) {
+            $contentType = self::detectMimeType($fileName);
+        }
+        return new self(array(
+            'SourceFile' => $fileName,
+            'ContentType' => $contentType,
+        ));
+    }
 
-	public function __set( $name, $value ) {
-		$this->data[ $name ] = $value;
-	}
 
-	public function __get( $name ) {
-		if( isset( $this->data[ $name ] ) ) {
-			return $this->data[ $name ];
-		}
-		return NULL;
-	}
+    /**
+     * @param $body
+     * @param $contentType
+     * @return S3Object
+     */
+    public static function createFromString($body, $contentType): S3Object
+    {
+        return new self(array(
+            'Body' => $body,
+            'ContentType' => $contentType,
+        ));
+    }
 
-	public function toArray( ) {
-		return $this->data;
-	}
 
-	public function addMetadata( $header, $value ) {
-		$this->data['Metadata'][ $header ] = $value;
-		return $this;
-	}
+    /**
+     * @param $fileName
+     * @return string|bool
+     */
+    private static function detectMimeType($fileName)
+    {
+        return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
+    }
 
-	public function getMetadata( $header ) {
-		return $this->data['Metadata'][ $header ];
-	}
 
-	public function setCacheControl( $cache ) {
-		if( !$cache ) {
-			$this->data[ 'CacheControl' ] = "private, max-age=0, no-cache";
-		}
-		elseif( is_numeric( $cache ) ) {
-			$this->data[ 'CacheControl' ] = "public, max-age=$cache";
-		}
-		elseif( is_string( $cache ) && preg_match('/^\s*\+/', $cache ) ) {
-			$this->data[ 'CacheControl' ] = "public, max-age=" . strtotime( $cache, 0 );
-		}
-		else {
-			$this->data[ 'CacheControl' ] = $cache;
-		}
-		return $this;
-	}
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value): void
+    {
+        $this->data[$name] = $value;
+    }
+
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (isset($this->data[$name])) {
+            return $this->data[$name];
+        }
+        return null;
+    }
+
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name): bool
+    {
+        return isset($this->data[$name]);
+    }
+
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->data;
+    }
+
+
+    /**
+     * @param $header
+     * @param $value
+     * @return S3Object
+     */
+    public function addMetadata($header, $value): S3Object
+    {
+        $this->data['Metadata'][$header] = $value;
+        return $this;
+    }
+
+
+    /**
+     * @param $header
+     * @return string
+     */
+    public function getMetadata($header): string
+    {
+        return $this->data['Metadata'][$header];
+    }
+
+
+    /**
+     * @param $cache
+     * @return S3Object
+     */
+    public function setCacheControl($cache): S3Object
+    {
+        if (!$cache) {
+            $this->data['CacheControl'] = 'private, max-age=0, no-cache';
+        } elseif (is_numeric($cache)) {
+            $this->data['CacheControl'] = "public, max-age=$cache";
+        } elseif (\is_string($cache) && preg_match('/^\s*\+/', $cache)) {
+            $this->data['CacheControl'] = 'public, max-age=' . strtotime($cache, 0);
+        } else {
+            $this->data['CacheControl'] = $cache;
+        }
+        return $this;
+    }
 }

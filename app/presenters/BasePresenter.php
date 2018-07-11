@@ -2,8 +2,7 @@
 
 namespace App\Presenters;
 
-use Nette,
-	App\Model;
+use Nette;
 
 
 /**
@@ -11,12 +10,12 @@ use Nette,
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
-
-	public function beforeRender() {
+    public function beforeRender()
+    {
         $parameters = $this->context->getParameters();
         $this->template->wwwDir = $parameters['wwwDir'];
 
-		$this->template->isDevelop = $this->getContext()->getService("developFlag")->isDevelop();
-	}
+        $this->template->isDevelop = $this->getContext()->getService("developFlag")->isDevelop();
+    }
 
 }
