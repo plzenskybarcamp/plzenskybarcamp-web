@@ -2,40 +2,42 @@
 
 namespace App\Aws;
 
+/**
+ * Class S3Object
+ * @package App\Aws
+ * @property string $ACL Possible values: 'private', 'public-read', 'public-read-write', 'authenticated-read', 'bucket-owner-read', 'bucket-owner-full-control'
+ * @property \Psr\Http\Message\StreamableInterface $Body
+ * @property string $Bucket REQUIRED
+ * @property string $CacheControl
+ * @property string $ContentDisposition
+ * @property string $ContentEncoding
+ * @property string $ContentLanguage
+ * @property int $ContentLength
+ * @property string $ContentSHA256
+ * @property string $ContentType
+ * @property integer|string|\DateTime $Expires
+ * @property string $GrantFullControl
+ * @property string $GrantRead
+ * @property string $GrantReadACP
+ * @property string $GrantWriteACP
+ * @property string $Key REQUIRED
+ * @property array<string> $Metadata
+ * @property $RequestPayer
+ * @property string $SSECustomerAlgorithm
+ * @property string $SSECustomerKey
+ * @property string $SSECustomerKeyMD5
+ * @property string $SSEKMSKeyId
+ * @property string $ServerSideEncryption Possible values: 'AES256, 'aws:kms'
+ * @property string $SourceFile
+ * @property string $StorageClass 'STANDARD', 'REDUCED_REDUNDANCY', 'LT'
+ * @property string $WebsiteRedirectLocation
+ */
+
 class S3Object
 {
 
     private $data;
 
-
-    /*
-    'ACL' => 'private|public-read|public-read-write|authenticated-read|bucket-owner-read|bucket-owner-full-control',
-    'Body' => <Psr\Http\Message\StreamableInterface>,
-    'Bucket' => '<string>', // REQUIRED
-    'CacheControl' => '<string>',
-    'ContentDisposition' => '<string>',
-    'ContentEncoding' => '<string>',
-    'ContentLanguage' => '<string>',
-    'ContentLength' => <integer>,
-    'ContentSHA256' => '<string>',
-    'ContentType' => '<string>',
-    'Expires' => <integer || string || DateTime>,
-    'GrantFullControl' => '<string>',
-    'GrantRead' => '<string>',
-    'GrantReadACP' => '<string>',
-    'GrantWriteACP' => '<string>',
-    'Key' => '<string>', // REQUIRED
-    'Metadata' => ['<string>', ...],
-    'RequestPayer' => 'requester',
-    'SSECustomerAlgorithm' => '<string>',
-    'SSECustomerKey' => '<string>',
-    'SSECustomerKeyMD5' => '<string>',
-    'SSEKMSKeyId' => '<string>',
-    'ServerSideEncryption' => 'AES256|aws:kms',
-    'SourceFile' => '<string>',
-    'StorageClass' => 'STANDARD|REDUCED_REDUNDANCY|LT',
-    'WebsiteRedirectLocation' => '<string>',
-    */
 
     public function __construct($data = array())
     {
@@ -46,7 +48,7 @@ class S3Object
     public static function createFromFile($fileName, $contentType = null)
     {
         if ($contentType === null) {
-            $contentType = GuzzleHttp\Psr7\mimetype_from_filename($fileName);
+            $contentType = self::detectMimeType($fileName);
         }
         return new self(array(
             'SourceFile' => $fileName,
@@ -54,6 +56,10 @@ class S3Object
         ));
     }
 
+    private static function detectMimeType($fileName)
+    {
+        return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
+    }
 
     public static function createFromString($body, $contentType)
     {

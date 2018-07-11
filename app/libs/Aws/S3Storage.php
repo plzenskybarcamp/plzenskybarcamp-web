@@ -98,7 +98,7 @@ class S3Storage
 
     public function getMimeType($fileName)
     {
-        return \Guzzle\Http\Mimetypes::getInstance()->fromFilename($fileName);
+        return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
     }
 
 
