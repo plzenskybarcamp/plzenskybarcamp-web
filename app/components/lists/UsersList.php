@@ -4,6 +4,7 @@ namespace App\Components\Lists;
 
 use App\Model\Registration;
 use Nette\Application\UI\Control;
+use App\Components\Helpers;
 
 class UsersList extends Control {
 
@@ -14,8 +15,8 @@ class UsersList extends Control {
 	}
 
 	public function render() {
-		$this->template->registerHelper('twitterize', array( 'App\Components\Helpers', 'twitterize'));
-		$this->template->registerHelper('biggerTwitterPicture', array( 'App\Components\Helpers', 'biggerTwitterPicture'));
+		$this->template->getLatte()->addFilter('twitterize', [Helpers::class, 'twitterize']);
+		$this->template->getLatte()->addFilter('biggerTwitterPicture', [Helpers::class, 'biggerTwitterPicture']);
 		$this->template->setFile( __DIR__ . '/templates/usersList.latte');
 		$users = $this->registrationModel->getPublicConferrees();
 		$count = $this->registrationModel->countConferrees();
