@@ -23,24 +23,8 @@ class ArchivePresenter extends BasePresenter
 		$this->response = $response;
 	}
 
-	public function render2014( $path ) {
-		$this->render( 2014, $path );
-	}
-
-	public function render2015( $path ) {
-		$this->render( 2015, $path );
-	}
-
-	public function render2016( $path ) {
-		$this->render( 2016, $path );
-	}
-
-	public function render2017( $path ) {
-		$this->render( 2017, $path );
-	}
-
-	private function render( $vintage, $path ) {
-		$path = $this->preparePath( $path, $vintage );
+	public function renderDefault( $year, $path ) {
+		$path = $this->preparePath( $path, $year );
 		$output = $this->loader->load( $path );
 		if( $output['status'] != 200 ) {
 			throw new BadRequestException( 'Cannot load archived page ' . $path, $output['status']);

@@ -2,8 +2,8 @@
 
 namespace App\Presenters;
 
-use Nette,
-	App\Model;
+use App\Model\WebDir;
+use Nette;
 
 
 /**
@@ -11,12 +11,26 @@ use Nette,
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
+    /**
+     * @var WebDir
+     */
+    private $webDir;
 
-	public function beforeRender() {
-        $parameters = $this->context->getParameters();
-        $this->template->wwwDir = $parameters['wwwDir'];
 
-		$this->template->isDevelop = $this->getContext()->getService("developFlag")->isDevelop();
-	}
+    /**
+     *
+     */
+    public function beforeRender()
+    {
+        $this->template->wwwDir = $this->webDir->getPath();
+    }
 
+
+    /**
+     * @param WebDir $webDir
+     */
+    public function injectImages(WebDir $webDir)
+    {
+        $this->webDir = $webDir;
+    }
 }

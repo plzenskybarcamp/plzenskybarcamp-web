@@ -10,24 +10,7 @@
 <html lang="cs" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="description" content="{block metaDescription|stripHtml|truncate:300}Plzeňský Barcamp, 7. 4. 2018, Vědeckotechnický park Plzeň. Nezisková akce plná přednášek, opravdový fajnšmekři z oboru, ale i laici a lidi, co se chtějí dovědět něco nového.{/block}">
-        <meta name="keywords" content="{block metaKeywords}{/block}">
-        <meta name="robots" content="{$robots}" n:ifset="$robots">
-
         <title>{block title|striptags}Plzeňský Barcamp{/block}</title>
-
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="{include title|striptags}">
-        <meta property="og:site_name" content="Plzeňský Barcamp">
-        <meta property="og:url" content="{link //this}">
-        <meta property="og:description" content="{include metaDescription|stripHtml|truncate:300}">
-        <meta property="og:locale" content="cs_CZ">
-        <meta property="og:image" content="{block ogImage}{$baseUri}/images/barcamp-og.png{/block}">
-        <meta property="fb:app_id" content="504432792996629">
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@plzenskybarcamp">
-        <meta name="twitter:creator" content="{block creatorTwitterUsername}@plzenskybarcamp{/block}">
-        <meta name="google-site-verification" content="X6TDzyeXmaAgvKo48Ce7DVYd3zyyPBrmE-p2wqX-m1Y">
 
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css?{filemtime($wwwDir . '/css/style.css')}">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css?{filemtime($wwwDir . '/css/print.css')}">
@@ -48,32 +31,13 @@
     </head>
 
     <body class="{block bodyClass}{/block}">
-        {if isset($isDevelop) && $isDevelop}<div id="is_debug_flag"></div>{/if}
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PW7QW8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <header class="main-header dark">
             <nav class="main-navigation">
                 <div class="inner">
                     <ul class="navigation">
-                        <li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a class="home" href="{link //Homepage:default}" data-hover="Úvod">Úvod</a></li>
-                        <li {ifCurrent Program:list}class="active"{/ifCurrent}><a href="{link Program:list}" data-hover="Program">Program</a></li>
-                        <li {ifCurrent Conference:talks}class="active"{/ifCurrent}{ifCurrent Conference:talksRanking}class="active"{/ifCurrent}{ifCurrent Conference:talksDetail}class="active"{/ifCurrent}><a href="{link Conference:talks}" data-hover="Přednášky">Přednášky</a></li>
-                        <li {ifCurrent Conference:visitors}class="active"{/ifCurrent}{ifCurrent Conference:profil}class="active"{/ifCurrent}><a href="{link Conference:visitors}" data-hover="Účastníci">Účastnící</a></li>
-                        <li {ifCurrent Homepage:partners}class="active"{/ifCurrent}><a href="{link Homepage:partners}" data-hover="Partneří">Partneří</a></li>
-                        <li {ifCurrent Homepage:contact}class="active"{/ifCurrent}><a href="{link Homepage:contact}" data-hover="Kontakt">Kontakt</a></li>
-                        <li {ifCurrent Homepage:vocabulary}class="active"{/ifCurrent}><a href="{link Homepage:vocabulary}" data-hover="Plzeňština ?"><span class="tooltip pilsen" title="Copa jsou tyhle divoký názvy? To je Koldovo druhej rodnej jazyk…">Plzeňština ?</span></a></li>
-                    </ul>
-                    <ul class="info-navigation">
-                        {if !$user->isLoggedIn()}<li><a href="{link Sign:in}" id="login-button" class="track-click">Přihlásit</a></li>{/if}
-                        {if $user->isLoggedIn()}<li><a href="{link Sign:out}" id="logout-button">Odhlásit</a></li>{/if}
-                        {if $user->isLoggedIn()}
-                            <li>
-                                <img n:ifset="$user->identity->picture_url" class="user-pic user-pic-s25" src="{$user->identity->picture_url}">
-                                <a href="{link Conference:profil}" n:tag-if="$user->identity->isRegistered()">
-                                    {$user->identity->name|truncate:20}
-                                </a>
-                            </li>
-                        {/if}
+                        <li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a class="home" href="{$baseUri}" data-hover="Úvod">Úvod</a></li>
                     </ul>
                 </div>
             </nav>
@@ -83,20 +47,14 @@
                 {else}
                     <div class="flash {$flash->type}">{$flash->message}</div>
                 {/if}
-
             {/foreach}
 
 
             <div class="inner information">
                 <span class="logo">
-                    <a href="{link //Homepage:default}"><img src="{$baseUri}/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp 2014"></a>
+                    <a href="{$baseUri}"><img src="{$baseUri}/images/plzensky_barcamp_logo.png" alt="Plzeňský Barcamp"></a>
                 </span>
                 <h1>{block h1}Plzeňský Barcamp 2018{/block}</h1>
-                <time datetime="2018-04-07">7. dubna 2018</time>
-                {ifCurrent Homepage:default}
-                    <p class="venue"><a href="{link Homepage:default}#kdepa-to-bude">Vědeckotechnický park Plzeň</a></p>
-                    <p class="hashtag"><a href="https://twitter.com/search?q=%23barcampCZ&amp;f=realtime" target="_blank">#BarcampCZ</a></p>
-                {/ifCurrent}
             </div>
         </header>
 
@@ -118,53 +76,12 @@
             <div class="main-navigation dark">
                 <div class="inner">
                     <div class="info-navigation">
-                        <p>Plzeňský Barcamp <a href="{link Homepage:contact}#organizatori" class="tooltip pilsen" title="Organizují: Kolda &amp; Endis Kolaříkojc, Veronika &amp; Petr Landsmanojc, Kuba Boučkojc">organizují KLB</a></p>
                     </div>
                     
                     <div class="archive">
-                        <ul>
-                            <li><a href="{link Archive:2014}" data-hover="Archiv ročníku 2014">2014</a></li>
-                            <li><a href="{link Archive:2015}" data-hover="Archiv ročníku 2015">2015</a></li>
-                            <li><a href="{link Archive:2016}" data-hover="Archiv ročníku 2016">2016</a></li>
-                            <li><a href="{link Archive:2017}" data-hover="Archiv ročníku 2017">2017</a></li>
-                        </ul>
-                        <span>Předchozí ročníky:</span>
                     </div>
                 </div>
             </div>
         </footer>
-        {ifCurrent Homepage:default}
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Event",
-            "name": "Plzeňský Barcamp 2018",
-            "startDate" : "2018-04-07T09:00",
-            "url" : "https://www.plzenskybarcamp.cz/",
-            "location" : {
-                "@type" : "Place",
-                "sameAs" : "http://www.vtpplzen.cz/kde-nas-najdete/kde-nas-najdete.aspx",
-                "name" : "Vědeckotechnický park Plzeň",
-                "address" : {
-                    "@type" : "PostalAddress",
-                    "streetAddress" : "Teslova 3",
-                    "addressLocality" : "Plzeň",
-                    "postalCode" : "301 00"
-                },
-                "geo" : {
-                    "@type" : "GeoCoordinates",
-                    "latitude" : 49.723765,
-                    "longitude" :  13.336145
-                }
-            },
-            "offers" : {
-                "@type" : "Offer",
-                "price" : 0,
-                "priceCurrency" : "CZK",
-                "url" : "https://www.plzenskybarcamp.cz/"
-            }
-        }
-        </script>
-        {/ifCurrent}
     </body>
 </html>
