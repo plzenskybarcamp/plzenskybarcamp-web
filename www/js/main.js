@@ -1,11 +1,3 @@
-//@koala-prepend "libs/jquery-2.1.3.js"
-//@koala-prepend "libs/jquery.scrollTo-1.4.14.js"
-//@koala-prepend "libs/jquery.smooth-scroll-1.5.5.js"
-//@koala-prepend "libs/jquery.tooltipster-3.3.0.js"
-//@koala-prepend "libs/jquery.lazyload-rev-d14e809.js"
-//@koala-prepend "libs/lightbox-2.7.1.js"
-//@koala-prepend "libs/netteForms.js"
-
 (function() {
 var registerForm = function(container, nextContainer) {
     $('#registration').on('click', container + ' .registration-button', function(e) {
@@ -286,19 +278,6 @@ $(document).ready(function() {
     });
 
 })();
-
-function logError(details) {
-  $.ajax({
-    type: 'POST',
-    url: 'https://' + location.host + '/api/log/js-error',
-    data: {
-        context: navigator.userAgent,
-        details: details,
-        referer: location.href,
-    },
-//    contentType: 'application/json; charset=utf-8'
-  });
-};
 
 function trackEvent( eventName, action, label, value ) {
     dataLayer.push({
